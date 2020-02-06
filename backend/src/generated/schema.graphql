@@ -2,6 +2,21 @@
 ### Do not make changes to this file directly
 
 
+scalar DateTime
+
+type Order {
+  createdAt: DateTime!
+  createdBy: User!
+  number: Int!
+  updatedAt: DateTime!
+}
+
 type Query {
-  ok: Boolean!
+  getAllOrders: [Order!]!
+}
+
+type User {
+  email: String!
+  id: String!
+  name: String
 }
