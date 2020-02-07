@@ -26,6 +26,7 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Mutation: {};
   Order: prisma.Order;
   Query: {};
   User: prisma.User;
@@ -41,6 +42,9 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createOrder: NexusGenRootTypes['Order']; // Order!
+  }
   Order: { // field return type
     createdAt: any; // DateTime!
     createdBy: NexusGenRootTypes['User']; // User!
@@ -58,6 +62,11 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createOrder: { // args
+      number: number; // Int!
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -65,7 +74,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Order" | "Query" | "User";
+export type NexusGenObjectNames = "Mutation" | "Order" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 

@@ -1,5 +1,5 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
-import { makeSchema, objectType } from 'nexus';
+import { makeSchema, objectType, intArg } from 'nexus';
 
 const User = objectType({
   name: 'User',
@@ -32,8 +32,32 @@ const Query = objectType({
   },
 });
 
+const Mutation = objectType({
+  name: 'Mutation',
+  definition(t) {
+    t.field('createOrder', {
+      type: 'Order',
+      args: {
+        number: intArg({ nullable: false }),
+      },
+      resolve: (_, { number }, ctx) => {
+        return ctx.prisma.order.create({
+          data: {
+            number,
+            createdBy: {
+              connect: {
+                id: '123',
+              },
+            },
+          },
+        });
+      },
+    });
+  },
+});
+
 export const schema = makeSchema({
-  types: [Query, User, Order],
+  types: [Query, User, Order, Mutation],
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: __dirname + '/generated/schema.graphql',

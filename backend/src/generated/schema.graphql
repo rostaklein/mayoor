@@ -4,6 +4,10 @@
 
 scalar DateTime
 
+type Mutation {
+  createOrder(number: Int!): Order!
+}
+
 type Order {
   createdAt: DateTime!
   createdBy: User!
