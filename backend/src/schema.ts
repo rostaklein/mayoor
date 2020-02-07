@@ -40,7 +40,9 @@ const Mutation = objectType({
       args: {
         number: intArg({ nullable: false }),
       },
-      resolve: (_, { number }, ctx) => {
+      resolve: async (_, { number }, ctx) => {
+        const a = await ctx.user.getCurrentUser();
+        console.log(a);
         return ctx.prisma.order.create({
           data: {
             number,

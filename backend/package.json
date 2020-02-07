@@ -22,10 +22,13 @@
     "@prisma/client": "^2.0.0-preview021",
     "graphql": "^14.6.0",
     "graphql-yoga": "1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.6.2",
     "nexus": "^0.12.0-rc.9",
     "nexus-prisma": "^0.9.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.3.7",
     "@types/node": "12.12.26",
     "@types/ws": "6.0.4",
     "prisma2": "2.0.0-preview021",
