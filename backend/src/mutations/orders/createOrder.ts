@@ -10,6 +10,15 @@ export const CreateOrder = objectType({
       },
       resolve: async (_, { number }, ctx) => {
         const user = await ctx.user.getCurrentUser();
+
+        const existingOrder = await ctx.prisma.order.findOne({
+          where: { number },
+        });
+
+        if (existingOrder) {
+          throw new Error(`Order number ${number} already exists`);
+        }
+
         return ctx.prisma.order.create({
           data: {
             number,

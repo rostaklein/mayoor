@@ -11,10 +11,13 @@ export const issueToken = (userDetails: UserDetails): string => {
   });
 };
 
-const verifyToken = (token: string) =>
+const getCurrentUserByToken = (token: string | undefined) =>
   new Promise<UserDetails>((resolve, reject) => {
     if (!process.env.CLIENT_SECRET) {
       throw new Error('No client secret provided in ENV.');
+    }
+    if (!token) {
+      throw new Error('No token provided');
     }
     jwt.verify(token, process.env.CLIENT_SECRET, (err, decoded) => {
       if (err || !decoded) {
@@ -26,24 +29,11 @@ const verifyToken = (token: string) =>
     });
   });
 
-const getCurrentUserByToken = async (token: string): Promise<UserDetails> => {
-  try {
-    return await verifyToken(token);
-  } catch (err) {
-    console.error(err);
-    throw new Error('You must be logged in to do this');
-  }
-};
-
 export const getUserContext = (
   contextParameters: ContextParameters,
 ): UserContext => {
   const { request } = contextParameters;
   const token = request.headers.authorization;
-
-  if (!token) {
-    throw new Error('No token provided');
-  }
 
   return { getCurrentUser: () => getCurrentUserByToken(token) };
 };
