@@ -2,10 +2,16 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 scalar DateTime
 
 type Mutation {
   createOrder(number: Int!): Order!
+  login(email: String!, password: String!): AuthPayload!
 }
 
 type Order {

@@ -1,6 +1,18 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import { makeSchema, objectType, intArg } from 'nexus';
 
+import { Login } from './mutations/login';
+
+require('dotenv').config();
+
+const AuthPayload = objectType({
+  name: 'AuthPayload',
+  definition(t) {
+    t.string('token');
+    t.field('user', { type: 'User' });
+  },
+});
+
 const User = objectType({
   name: 'User',
   definition(t) {
@@ -32,7 +44,7 @@ const Query = objectType({
   },
 });
 
-const Mutation = objectType({
+const CreateOrder = objectType({
   name: 'Mutation',
   definition(t) {
     t.field('createOrder', {
@@ -42,7 +54,6 @@ const Mutation = objectType({
       },
       resolve: async (_, { number }, ctx) => {
         const a = await ctx.user.getCurrentUser();
-        console.log(a);
         return ctx.prisma.order.create({
           data: {
             number,
@@ -58,8 +69,13 @@ const Mutation = objectType({
   },
 });
 
+const Mutation = {
+  CreateOrder,
+  Login,
+};
+
 export const schema = makeSchema({
-  types: [Query, User, Order, Mutation],
+  types: [Query, User, Order, Mutation, AuthPayload],
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: __dirname + '/generated/schema.graphql',

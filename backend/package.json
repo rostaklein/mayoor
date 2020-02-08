@@ -20,10 +20,10 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^2.0.0-preview021",
+    "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
     "graphql-yoga": "1.18.3",
     "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^1.6.2",
     "nexus": "^0.12.0-rc.9",
     "nexus-prisma": "^0.9.1"
   },

@@ -26,6 +26,10 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  AuthPayload: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Mutation: {};
   Order: prisma.Order;
   Query: {};
@@ -42,8 +46,13 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Mutation: { // field return type
     createOrder: NexusGenRootTypes['Order']; // Order!
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -66,6 +75,10 @@ export interface NexusGenArgTypes {
     createOrder: { // args
       number: number; // Int!
     }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
   }
 }
 
@@ -74,7 +87,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Order" | "Query" | "User";
+export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Order" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 
