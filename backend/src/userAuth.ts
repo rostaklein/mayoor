@@ -17,7 +17,7 @@ const getKey: jwt.GetPublicKeyOrSecret = (header, cb) => {
 };
 
 const options: jwt.VerifyOptions = {
-  audience: 'vDmBaRYf0qMhvhXoSKNh3CaChFf5JXzJ',
+  audience: 'kralovskytisk',
   issuer: `https://rostaklein.eu.auth0.com/`,
   algorithms: ['RS256'],
 };
