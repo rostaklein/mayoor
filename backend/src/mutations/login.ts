@@ -1,4 +1,5 @@
 import { stringArg, mutationField } from 'nexus';
+import { compare } from 'bcrypt';
 import { issueToken } from '../auth';
 
 export const Login = mutationField('login', {
@@ -14,7 +15,9 @@ export const Login = mutationField('login', {
       throw new Error('User not found');
     }
 
-    if (user.password !== password) {
+    const isPasswordValid = await compare(password, user.password);
+
+    if (!isPasswordValid) {
       throw new Error('Incorrect password');
     }
 

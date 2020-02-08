@@ -51,8 +51,8 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
-    createOrder: NexusGenRootTypes['Order']; // Order!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -72,11 +72,13 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createOrder: { // args
-      number: number; // Int!
-    }
     login: { // args
       email: string; // String!
+      password: string; // String!
+    }
+    register: { // args
+      email: string; // String!
+      name?: string | null; // String
       password: string; // String!
     }
   }

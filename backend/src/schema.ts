@@ -1,7 +1,7 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import { makeSchema, objectType, intArg } from 'nexus';
 
-import { Login } from './mutations/login';
+import { Mutations } from './mutations';
 
 require('dotenv').config();
 
@@ -69,13 +69,8 @@ const CreateOrder = objectType({
   },
 });
 
-const Mutation = {
-  CreateOrder,
-  Login,
-};
-
 export const schema = makeSchema({
-  types: [Query, User, Order, Mutation, AuthPayload],
+  types: [Query, User, Order, Mutations, AuthPayload],
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: __dirname + '/generated/schema.graphql',
