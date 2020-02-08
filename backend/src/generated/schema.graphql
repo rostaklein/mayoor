@@ -10,6 +10,7 @@ type AuthPayload {
 scalar DateTime
 
 type Mutation {
+  createOrder(number: Int!): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!
 }

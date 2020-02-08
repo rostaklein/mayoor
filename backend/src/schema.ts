@@ -44,31 +44,6 @@ const Query = objectType({
   },
 });
 
-const CreateOrder = objectType({
-  name: 'Mutation',
-  definition(t) {
-    t.field('createOrder', {
-      type: 'Order',
-      args: {
-        number: intArg({ nullable: false }),
-      },
-      resolve: async (_, { number }, ctx) => {
-        const a = await ctx.user.getCurrentUser();
-        return ctx.prisma.order.create({
-          data: {
-            number,
-            createdBy: {
-              connect: {
-                id: '123',
-              },
-            },
-          },
-        });
-      },
-    });
-  },
-});
-
 export const schema = makeSchema({
   types: [Query, User, Order, Mutations, AuthPayload],
   plugins: [nexusPrismaPlugin()],
