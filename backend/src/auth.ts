@@ -33,7 +33,7 @@ export const getUserContext = (
   contextParameters: ContextParameters,
 ): UserContext => {
   const { request } = contextParameters;
-  const token = request.headers.authorization;
+  const token = request.headers.authorization?.replace('Bearer ', '');
 
   return { getCurrentUser: () => getCurrentUserByToken(token) };
 };

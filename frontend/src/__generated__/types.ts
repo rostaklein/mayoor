@@ -30,6 +30,25 @@ export interface LoginMutationVariables {
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL query operation: MeQuery
+// ====================================================
+
+export interface MeQuery_me {
+  __typename: "User";
+  id: string;
+  name: string | null;
+  email: string;
+}
+
+export interface MeQuery {
+  me: MeQuery_me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Button, InputGroup, Callout } from '@blueprintjs/core';
 import { useMutation } from 'react-apollo';
@@ -9,18 +9,11 @@ import {
 	LoginMutation as LoginMutationType,
 	LoginMutationVariables,
 } from '../../__generated__/types';
+import { CenteredWrapper } from '../CenteredWrapper/CenteredWrapper';
 
-import { LoginMutation } from './queries';
+import { LOGIN_MUTATION } from './queries';
 
 const StyledInputGroup = styled(InputGroup)``;
-
-const CenteredWrapper = styled.div`
-	padding: 30px 25px;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
 
 const LoginWrapper = styled.form`
 	width: 240px;
@@ -38,7 +31,7 @@ const ErrorCallout = styled(Callout)`
 
 export const LoginForm: React.FC = () => {
 	const [login, { loading }] = useMutation<LoginMutationType, LoginMutationVariables>(
-		LoginMutation,
+		LOGIN_MUTATION,
 		{
 			errorPolicy: 'all',
 		},
