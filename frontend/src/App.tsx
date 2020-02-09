@@ -3,10 +3,11 @@ import { useQuery } from 'react-apollo';
 import { Spinner } from '@blueprintjs/core';
 
 import { LoginForm } from './components/Login/LoginForm';
-import { ME_QUERY } from './components/login/queries';
+import { ME_QUERY } from './components/Login/queries';
 import { MeQuery } from './__generated__/types';
 import { CenteredWrapper } from './components/CenteredWrapper/CenteredWrapper';
 import { useAppDispatch, useAppState } from './appContext/context';
+import { Logout } from './components/Logout/Logout';
 
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -27,7 +28,11 @@ const App: React.FC = () => {
 	}
 
 	if (currentUser) {
-		return <>{JSON.stringify(currentUser)}</>;
+		return (
+			<>
+				{JSON.stringify(currentUser)} <Logout />
+			</>
+		);
 	}
 
 	return <LoginForm />;
