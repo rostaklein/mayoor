@@ -20,8 +20,8 @@ const CenteredWrapper = styled.div`
 	justify-content: center;
 `;
 
-const LoginWrapper = styled.div`
-	width: 320px;
+const LoginWrapper = styled.form`
+	width: 240px;
 	display: flex;
 	flex-direction: column;
 	${StyledInputGroup} {
@@ -49,32 +49,29 @@ export const LoginForm: React.FC = () => {
 			console.error(err);
 		}
 	};
+
+	const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		submitHandler();
+	};
+
 	return (
 		<CenteredWrapper>
-			<LoginWrapper>
+			<LoginWrapper onSubmit={onFormSubmit}>
 				<StyledInputGroup
 					leftIcon="user"
 					placeholder={'Username'}
-					large
 					fill
 					onChange={onUsernameChange}
 				/>
 				<StyledInputGroup
 					leftIcon="lock"
 					placeholder={'Password'}
-					large
 					fill
 					type="password"
 					onChange={onPasswordChange}
 				/>
-				<Button
-					intent="primary"
-					icon={'log-in'}
-					type="submit"
-					fill
-					large
-					onClick={submitHandler}
-				>
+				<Button intent="primary" icon={'log-in'} type="submit" fill>
 					Log In
 				</Button>
 			</LoginWrapper>

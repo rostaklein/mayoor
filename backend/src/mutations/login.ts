@@ -1,5 +1,6 @@
 import { stringArg, mutationField } from 'nexus';
 import { compare } from 'bcrypt';
+import { ApolloError } from 'apollo-server';
 import { issueToken } from '../auth';
 
 export const Login = mutationField('login', {
@@ -12,13 +13,13 @@ export const Login = mutationField('login', {
     const user = await ctx.prisma.user.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error('User not found');
+      throw new ApolloError('User not found', 'USER_NOT_FOUND');
     }
 
     const isPasswordValid = await compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error('Incorrect password');
+      throw new ApolloError('Incorrect password', 'INVALID_PASSWORD');
     }
 
     const token = issueToken({ email: user.email, id: user.id });
