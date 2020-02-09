@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, InputGroup } from '@blueprintjs/core';
+import { useMutation } from 'react-apollo';
+
+import {
+	LoginMutation as LoginMutationType,
+	LoginMutationVariables,
+} from '../../__generated__/types';
+
+import { LoginMutation } from './queries';
 
 const StyledInputGroup = styled(InputGroup)``;
 
@@ -25,11 +33,21 @@ export const LoginForm: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [login] = useMutation<LoginMutationType, LoginMutationVariables>(LoginMutation);
 	const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUsername(event.target.value);
 	};
 	const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(event.target.value);
+	};
+
+	const submitHandler = async () => {
+		try {
+			const result = await login({ variables: { email: username, password } });
+			console.log(result.data?.login);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 	return (
 		<CenteredWrapper>
@@ -49,7 +67,14 @@ export const LoginForm: React.FC = () => {
 					type="password"
 					onChange={onPasswordChange}
 				/>
-				<Button intent="primary" icon={'log-in'} type="submit" fill large>
+				<Button
+					intent="primary"
+					icon={'log-in'}
+					type="submit"
+					fill
+					large
+					onClick={submitHandler}
+				>
 					Log In
 				</Button>
 			</LoginWrapper>
