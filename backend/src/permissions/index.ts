@@ -5,10 +5,9 @@ const rules = {
   isAuthenticatedUser: rule()(async (parent, args, context: Context) => {
     try {
       await context.user.getCurrentUser();
+      return true;
     } catch (err) {
       return false;
-    } finally {
-      return true;
     }
   }),
   isAdmin: rule()(async (parent, args, context: Context) => {
@@ -22,6 +21,7 @@ export const permissions = shield(
   {
     Query: {
       getAllOrders: rules.isAuthenticatedUser,
+      me: rules.isAuthenticatedUser,
     },
     Mutation: {
       createOrder: rules.isAuthenticatedUser,

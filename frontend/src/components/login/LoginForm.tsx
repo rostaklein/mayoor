@@ -52,9 +52,8 @@ export const LoginForm: React.FC = () => {
 		onSubmit: async ({ username, password }) => {
 			try {
 				const result = await login({ variables: { email: username, password } });
-				console.log(result.data?.login);
-				if (result.errors) {
-					console.log(result.errors);
+				if (result.data?.login) {
+					localStorage.setItem('auth-token', result.data.login.token);
 				}
 			} catch (err) {
 				if (err instanceof ApolloError) {

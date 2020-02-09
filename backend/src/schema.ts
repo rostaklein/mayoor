@@ -2,6 +2,7 @@ import { nexusPrismaPlugin } from 'nexus-prisma';
 import { makeSchema, objectType, intArg } from 'nexus';
 
 import { Mutations } from './mutations';
+import { Queries } from './queries';
 
 require('dotenv').config();
 
@@ -32,20 +33,8 @@ const Order = objectType({
   },
 });
 
-const Query = objectType({
-  name: 'Query',
-  definition(t) {
-    t.list.field('getAllOrders', {
-      type: 'Order',
-      resolve: (_parent, _args, ctx) => {
-        return ctx.prisma.order.findMany();
-      },
-    });
-  },
-});
-
 export const schema = makeSchema({
-  types: [Query, User, Order, Mutations, AuthPayload],
+  types: [User, Order, AuthPayload, Mutations, Queries],
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: __dirname + '/generated/schema.graphql',

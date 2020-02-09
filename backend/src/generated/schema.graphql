@@ -24,6 +24,7 @@ type Order {
 
 type Query {
   getAllOrders: [Order!]!
+  me: User!
 }
 
 type User {

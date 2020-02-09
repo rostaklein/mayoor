@@ -1,6 +1,6 @@
 import { stringArg, mutationField } from 'nexus';
 import { hash } from 'bcrypt';
-import { issueToken } from '../auth';
+import { issueToken } from '../../auth';
 
 export const Register = mutationField('register', {
   type: 'AuthPayload',

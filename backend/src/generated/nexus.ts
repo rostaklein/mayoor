@@ -63,6 +63,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllOrders: NexusGenRootTypes['Order'][]; // [Order!]!
+    me: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
     email: string; // String!
