@@ -6,10 +6,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { client } from './ApolloClient';
+import { AppContextProvider } from './appContext/context';
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
-		<App />
+		<AppContextProvider>
+			<App />
+		</AppContextProvider>
 	</ApolloProvider>,
 	document.getElementById('root'),
 );

@@ -9,6 +9,8 @@
 export interface LoginMutation_login_user {
   __typename: "User";
   name: string | null;
+  id: string;
+  email: string;
 }
 
 export interface LoginMutation_login {

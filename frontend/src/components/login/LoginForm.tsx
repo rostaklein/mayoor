@@ -10,6 +10,7 @@ import {
 	LoginMutationVariables,
 } from '../../__generated__/types';
 import { CenteredWrapper } from '../CenteredWrapper/CenteredWrapper';
+import { useAppDispatch } from '../../appContext/context';
 
 import { LOGIN_MUTATION } from './queries';
 
@@ -30,6 +31,7 @@ const ErrorCallout = styled(Callout)`
 `;
 
 export const LoginForm: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const [login, { loading }] = useMutation<LoginMutationType, LoginMutationVariables>(
 		LOGIN_MUTATION,
 		{
@@ -46,6 +48,7 @@ export const LoginForm: React.FC = () => {
 			try {
 				const result = await login({ variables: { email: username, password } });
 				if (result.data?.login) {
+					dispatch({ type: 'SET_CURRENT_USER', user: { ...result.data.login.user } });
 					localStorage.setItem('auth-token', result.data.login.token);
 				}
 			} catch (err) {

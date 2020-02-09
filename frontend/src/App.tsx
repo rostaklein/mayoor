@@ -6,9 +6,18 @@ import { LoginForm } from './components/login/LoginForm';
 import { ME_QUERY } from './components/login/queries';
 import { MeQuery } from './__generated__/types';
 import { CenteredWrapper } from './components/CenteredWrapper/CenteredWrapper';
+import { useAppDispatch, useAppState } from './appContext/context';
 
 const App: React.FC = () => {
-	const { data, called, loading } = useQuery<MeQuery>(ME_QUERY);
+	const dispatch = useAppDispatch();
+	const { currentUser } = useAppState();
+
+	const { called, loading } = useQuery<MeQuery>(ME_QUERY, {
+		onCompleted: (data) => {
+			dispatch({ type: 'SET_CURRENT_USER', user: { ...data.me } });
+		},
+	});
+
 	if (loading || !called) {
 		return (
 			<CenteredWrapper>
@@ -17,8 +26,8 @@ const App: React.FC = () => {
 		);
 	}
 
-	if (data?.me) {
-		return <>{JSON.stringify(data.me)}</>;
+	if (currentUser) {
+		return <>{JSON.stringify(currentUser)}</>;
 	}
 
 	return <LoginForm />;
