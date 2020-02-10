@@ -1,3 +1,16 @@
 {
-  "plugins": ["emotion"]
+  "plugins": [
+    "emotion",
+    [
+      "i18next-extract",
+      {
+        "locales": ["en", "cs"],
+        "keyAsDefaultValue": true,
+        "keyAsDefaultValueForDerivedKeys": true,
+        "useI18nextDefaultValue": true,
+        "discardOldKeys": true,
+        "outputPath": "./src/translations/{{locale}}/{{ns}}.json"
+      }
+    ]
+  ]
 }

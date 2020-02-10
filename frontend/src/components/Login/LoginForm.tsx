@@ -4,6 +4,7 @@ import { Button, InputGroup, FormGroup } from '@blueprintjs/core';
 import { useMutation } from 'react-apollo';
 import { useFormik, FormikErrors } from 'formik';
 import { ApolloError } from 'apollo-client';
+import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../images/mayoor_logo.svg';
 import {
@@ -38,11 +39,9 @@ type FormValues = {
 
 export const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const { t } = useTranslation();
 	const [login, { loading }] = useMutation<LoginMutationType, LoginMutationVariables>(
 		LOGIN_MUTATION,
-		{
-			errorPolicy: 'all',
-		},
 	);
 
 	const { errors, handleSubmit, values, handleChange, isValid, setErrors, touched } = useFormik<
@@ -55,10 +54,14 @@ export const LoginForm: React.FC = () => {
 		validate: (values) => {
 			const errors: FormikErrors<FormValues> = {};
 			if (!values.password) {
-				errors.password = 'Please, fill in the password.';
+				errors.password = t('empty_password', {
+					defaultValue: 'Please, fill in the password.',
+				});
 			}
 			if (!values.username) {
-				errors.username = 'Please, fill in the username.';
+				errors.username = t('empty_username', {
+					defaultValue: 'Please, fill in the username.',
+				});
 			}
 			return errors;
 		},
@@ -72,10 +75,18 @@ export const LoginForm: React.FC = () => {
 			} catch (err) {
 				if (err instanceof ApolloError) {
 					if (err.graphQLErrors[0].extensions?.code === 'USER_NOT_FOUND') {
-						setErrors({ username: 'User not found' });
+						setErrors({
+							username: t('user_not_found', {
+								defaultValue: 'User not found.',
+							}),
+						});
 					}
 					if (err.graphQLErrors[0].extensions?.code === 'INVALID_PASSWORD') {
-						setErrors({ password: 'Invalid password' });
+						setErrors({
+							password: t('invalid_password', {
+								defaultValue: 'User not found.',
+							}),
+						});
 					}
 				}
 			}
@@ -92,7 +103,7 @@ export const LoginForm: React.FC = () => {
 				>
 					<InputGroup
 						leftIcon="user"
-						placeholder={'Username'}
+						placeholder={t('Username')}
 						name="username"
 						onChange={handleChange}
 						value={values.username}
@@ -104,7 +115,7 @@ export const LoginForm: React.FC = () => {
 				>
 					<InputGroup
 						leftIcon="lock"
-						placeholder={'Password'}
+						placeholder={t('Password')}
 						name="password"
 						type="password"
 						onChange={handleChange}
@@ -119,7 +130,7 @@ export const LoginForm: React.FC = () => {
 					loading={loading}
 					disabled={!isValid}
 				>
-					Log In
+					{t('Log In')}
 				</Button>
 			</LoginWrapper>
 		</CenteredWrapper>

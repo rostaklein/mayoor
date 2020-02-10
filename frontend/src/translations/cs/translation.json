@@ -1,0 +1,9 @@
+{
+  "Log In": "Log In",
+  "Password": "Heslo",
+  "Username": "Username",
+  "empty_password": "Please, fill in the password.",
+  "empty_username": "Please, fill in the username.",
+  "invalid_password": "User not found.",
+  "user_not_found": "User not found."
+}

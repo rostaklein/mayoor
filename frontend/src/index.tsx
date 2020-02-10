@@ -8,6 +8,8 @@ import * as serviceWorker from './serviceWorker';
 import { client } from './ApolloClient';
 import { AppContextProvider } from './appContext/context';
 
+import './i18n';
+
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<AppContextProvider>

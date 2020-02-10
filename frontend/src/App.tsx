@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useQuery } from 'react-apollo';
 import { Spinner, Callout } from '@blueprintjs/core';
 
@@ -8,6 +8,12 @@ import { MeQuery } from './__generated__/types';
 import { CenteredWrapper } from './components/CenteredWrapper/CenteredWrapper';
 import { useAppDispatch, useAppState } from './appContext/context';
 import { Logout } from './components/Logout/Logout';
+
+const CenteredSpinner: React.FC = () => (
+	<CenteredWrapper>
+		<Spinner size={50} />
+	</CenteredWrapper>
+);
 
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -20,11 +26,7 @@ const App: React.FC = () => {
 	});
 
 	if (loading || !called) {
-		return (
-			<CenteredWrapper>
-				<Spinner size={50} />
-			</CenteredWrapper>
-		);
+		return <CenteredSpinner />;
 	}
 
 	if (currentUser) {
@@ -36,12 +38,12 @@ const App: React.FC = () => {
 	}
 
 	return (
-		<>
+		<Suspense fallback={<CenteredSpinner />}>
 			{error?.networkError && (
 				<Callout intent="danger">Could not connect to the backend server</Callout>
 			)}
 			<LoginForm />
-		</>
+		</Suspense>
 	);
 };
 
