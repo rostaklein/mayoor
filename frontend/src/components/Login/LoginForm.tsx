@@ -7,12 +7,10 @@ import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../images/mayoor_logo.svg';
-import {
-	LoginMutation as LoginMutationType,
-	LoginMutationVariables,
-} from '../../__generated__/types';
+import { LoginMutation, LoginMutationVariables } from '../../__generated__/types';
 import { CenteredWrapper } from '../CenteredWrapper/CenteredWrapper';
 import { useAppDispatch } from '../../appContext/context';
+import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 
 import { LOGIN_MUTATION } from './queries';
 
@@ -32,6 +30,12 @@ const Logo = styled.img`
 	margin: 30px auto;
 `;
 
+const LanguageSwitchWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	margin: 15px;
+`;
+
 type FormValues = {
 	username: string;
 	password: string;
@@ -40,9 +44,7 @@ type FormValues = {
 export const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
-	const [login, { loading }] = useMutation<LoginMutationType, LoginMutationVariables>(
-		LOGIN_MUTATION,
-	);
+	const [login, { loading }] = useMutation<LoginMutation, LoginMutationVariables>(LOGIN_MUTATION);
 
 	const { errors, handleSubmit, values, handleChange, isValid, setErrors, touched } = useFormik<
 		FormValues
@@ -132,6 +134,9 @@ export const LoginForm: React.FC = () => {
 				>
 					{t('Log In')}
 				</Button>
+				<LanguageSwitchWrapper>
+					<LanguageSwitch />
+				</LanguageSwitchWrapper>
 			</LoginWrapper>
 		</CenteredWrapper>
 	);

@@ -1,9 +1,9 @@
 {
-  "Log In": "Log In",
+  "Log In": "Přihlásit se",
   "Password": "Heslo",
-  "Username": "Username",
-  "empty_password": "Please, fill in the password.",
-  "empty_username": "Please, fill in the username.",
-  "invalid_password": "User not found.",
-  "user_not_found": "User not found."
+  "Username": "Uživatelské jméno",
+  "empty_password": "Prosím, vyplňte heslo.",
+  "empty_username": "Prosím, vyplňte uživatelské jméno.",
+  "invalid_password": "Špatné heslo.",
+  "user_not_found": "Uživatel nenalezen."
 }
