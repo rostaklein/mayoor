@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { Spinner } from '@blueprintjs/core';
+import { Spinner, Callout } from '@blueprintjs/core';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -13,7 +13,7 @@ const App: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { currentUser } = useAppState();
 
-	const { called, loading } = useQuery<MeQuery>(ME_QUERY, {
+	const { called, loading, error } = useQuery<MeQuery>(ME_QUERY, {
 		onCompleted: (data) => {
 			dispatch({ type: 'SET_CURRENT_USER', user: { ...data.me } });
 		},
@@ -35,7 +35,14 @@ const App: React.FC = () => {
 		);
 	}
 
-	return <LoginForm />;
+	return (
+		<>
+			{error?.networkError && (
+				<Callout intent="danger">Could not connect to the backend server</Callout>
+			)}
+			<LoginForm />
+		</>
+	);
 };
 
 export default App;

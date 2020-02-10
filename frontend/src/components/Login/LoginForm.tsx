@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, InputGroup, Callout } from '@blueprintjs/core';
+import { Button, InputGroup, FormGroup } from '@blueprintjs/core';
 import { useMutation } from 'react-apollo';
-import { useFormik } from 'formik';
+import { useFormik, FormikErrors } from 'formik';
 import { ApolloError } from 'apollo-client';
 
+import LogoImage from '../../images/mayoor_logo.svg';
 import {
 	LoginMutation as LoginMutationType,
 	LoginMutationVariables,
@@ -14,21 +15,26 @@ import { useAppDispatch } from '../../appContext/context';
 
 import { LOGIN_MUTATION } from './queries';
 
-const StyledInputGroup = styled(InputGroup)``;
-
 const LoginWrapper = styled.form`
 	width: 240px;
 	min-height: 180px;
 	display: flex;
 	flex-direction: column;
-	${StyledInputGroup} {
-		margin-bottom: 10px;
-	}
 `;
 
-const ErrorCallout = styled(Callout)`
-	margin-top: 15px;
+const FormGroupStyled = styled(FormGroup)`
+	margin-bottom: 10px;
 `;
+
+const Logo = styled.img`
+	width: 200px;
+	margin: 30px auto;
+`;
+
+type FormValues = {
+	username: string;
+	password: string;
+};
 
 export const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -39,10 +45,22 @@ export const LoginForm: React.FC = () => {
 		},
 	);
 
-	const formik = useFormik({
+	const { errors, handleSubmit, values, handleChange, isValid, setErrors, touched } = useFormik<
+		FormValues
+	>({
 		initialValues: {
 			username: '',
 			password: '',
+		},
+		validate: (values) => {
+			const errors: FormikErrors<FormValues> = {};
+			if (!values.password) {
+				errors.password = 'Please, fill in the password.';
+			}
+			if (!values.username) {
+				errors.username = 'Please, fill in the username.';
+			}
+			return errors;
 		},
 		onSubmit: async ({ username, password }) => {
 			try {
@@ -54,10 +72,10 @@ export const LoginForm: React.FC = () => {
 			} catch (err) {
 				if (err instanceof ApolloError) {
 					if (err.graphQLErrors[0].extensions?.code === 'USER_NOT_FOUND') {
-						formik.setErrors({ username: 'User not found' });
+						setErrors({ username: 'User not found' });
 					}
 					if (err.graphQLErrors[0].extensions?.code === 'INVALID_PASSWORD') {
-						formik.setErrors({ password: 'Invalid password' });
+						setErrors({ password: 'Invalid password' });
 					}
 				}
 			}
@@ -66,31 +84,43 @@ export const LoginForm: React.FC = () => {
 
 	return (
 		<CenteredWrapper>
-			<LoginWrapper onSubmit={formik.handleSubmit}>
-				<StyledInputGroup
-					leftIcon="user"
-					placeholder={'Username'}
-					name="username"
-					onChange={formik.handleChange}
-					value={formik.values.username}
-					intent={formik.errors.username ? 'danger' : 'none'}
-				/>
-				<StyledInputGroup
-					leftIcon="lock"
-					placeholder={'Password'}
-					name="password"
-					type="password"
-					onChange={formik.handleChange}
-					value={formik.values.password}
-				/>
-				<Button intent="primary" icon={'log-in'} type="submit" fill loading={loading}>
+			<LoginWrapper onSubmit={handleSubmit}>
+				<Logo src={LogoImage} />
+				<FormGroupStyled
+					helperText={touched.username && errors.username}
+					intent={touched.username && errors.username ? 'danger' : 'none'}
+				>
+					<InputGroup
+						leftIcon="user"
+						placeholder={'Username'}
+						name="username"
+						onChange={handleChange}
+						value={values.username}
+					/>
+				</FormGroupStyled>
+				<FormGroupStyled
+					helperText={touched.password && errors.password}
+					intent={touched.password && errors.password ? 'danger' : 'none'}
+				>
+					<InputGroup
+						leftIcon="lock"
+						placeholder={'Password'}
+						name="password"
+						type="password"
+						onChange={handleChange}
+						value={values.password}
+					/>
+				</FormGroupStyled>
+				<Button
+					intent={'none'}
+					icon={'log-in'}
+					type="submit"
+					fill
+					loading={loading}
+					disabled={!isValid}
+				>
 					Log In
 				</Button>
-				{!formik.isValid && (
-					<ErrorCallout intent="danger">
-						{formik.errors.password || formik.errors.username}
-					</ErrorCallout>
-				)}
 			</LoginWrapper>
 		</CenteredWrapper>
 	);

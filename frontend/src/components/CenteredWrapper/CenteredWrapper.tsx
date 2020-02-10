@@ -6,4 +6,5 @@ export const CenteredWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #f7f7f7;
 `;
