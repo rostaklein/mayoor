@@ -8,7 +8,7 @@ import { ME_QUERY } from './components/Login/queries';
 import { MeQuery } from './__generated__/types';
 import { CenteredWrapper } from './components/CenteredWrapper/CenteredWrapper';
 import { useAppDispatch, useAppState } from './appContext/context';
-import { Logout } from './components/Logout/Logout';
+import { MainWrapper } from './components/MainWrapper/MainWrapper';
 
 const CenteredSpinner: React.FC = () => (
 	<CenteredWrapper>
@@ -31,11 +31,7 @@ const App: React.FC = () => {
 	}
 
 	if (currentUser) {
-		return (
-			<>
-				{JSON.stringify(currentUser)} <Logout />
-			</>
-		);
+		return <MainWrapper />;
 	}
 
 	return (

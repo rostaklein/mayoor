@@ -10,5 +10,5 @@ export const Logout: React.FC = () => {
 		localStorage.removeItem('auth-token');
 		dispatch({ type: 'SET_CURRENT_USER', user: null });
 	};
-	return <Button onClick={onLogoutClick}>Log Out</Button>;
+	return <Button onClick={onLogoutClick} minimal icon="log-out"></Button>;
 };
