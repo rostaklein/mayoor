@@ -4,6 +4,6 @@
   "Username": "Username",
   "empty_password": "Please, fill in the password.",
   "empty_username": "Please, fill in the username.",
-  "invalid_password": "User not found.",
+  "invalid_password": "Invalid password.",
   "user_not_found": "User not found."
 }

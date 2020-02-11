@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { useQuery } from 'react-apollo';
 import { Spinner, Callout } from '@blueprintjs/core';
+import { hot } from 'react-hot-loader/root';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -47,4 +48,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default App;
+export default hot(App);

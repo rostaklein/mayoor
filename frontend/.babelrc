@@ -11,6 +11,7 @@
         "discardOldKeys": true,
         "outputPath": "./src/translations/{{locale}}/{{ns}}.json"
       }
-    ]
+    ],
+    "react-hot-loader/babel"
   ]
 }
