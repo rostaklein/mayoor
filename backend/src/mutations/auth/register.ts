@@ -16,10 +16,6 @@ export const Register = mutationField('register', {
       throw new Error(`User with email "${email}" already exists`);
     }
 
-    if (!process.env.PWD_SALT) {
-      throw new Error('No password salt provided.');
-    }
-
     const hashedPwd = await hash(password, 10);
 
     const user = await ctx.prisma.user.create({
