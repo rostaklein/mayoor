@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { useQuery } from 'react-apollo';
 import { Spinner, Callout } from '@blueprintjs/core';
 import { hot } from 'react-hot-loader/root';
+import { useTranslation } from 'react-i18next';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -19,6 +20,7 @@ const CenteredSpinner: React.FC = () => (
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { currentUser } = useAppState();
+	const { t } = useTranslation();
 
 	const { called, loading, error } = useQuery<MeQuery>(ME_QUERY, {
 		onCompleted: (data) => {
@@ -37,7 +39,7 @@ const App: React.FC = () => {
 	return (
 		<Suspense fallback={<CenteredSpinner />}>
 			{error?.networkError && (
-				<Callout intent="danger">Could not connect to the backend server</Callout>
+				<Callout intent="danger">{t('Could not connect to the backend server')}</Callout>
 			)}
 			<LoginForm />
 		</Suspense>

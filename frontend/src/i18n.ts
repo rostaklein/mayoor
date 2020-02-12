@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import en from './translations/en/translation.json';
-import cs from './translations/cs/translation.json';
+import en from './locales/en/translation.json';
+import cs from './locales/cs/translation.json';
 
 // not like to use this?
 // have a look at the Quick start guide

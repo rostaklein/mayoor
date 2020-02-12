@@ -39,8 +39,9 @@
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
     "test": "react-app-rewired test",
-    "schema": "apollo client:download-schema --endpoint=http://localhost:4444 ./src/schema.json",
-    "types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=./src/schema.json --target=typescript"
+    "download:schema": "apollo client:download-schema --endpoint=http://localhost:4444 ./src/schema.json",
+    "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=./src/schema.json --target=typescript",
+    "generate:translations": "i18next"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,11 +60,11 @@
   },
   "devDependencies": {
     "babel-plugin-emotion": "^10.0.27",
-    "babel-plugin-i18next-extract": "^0.6.1",
     "customize-cra": "^0.9.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import-alias": "^1.2.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "i18next-parser": "^1.0.2",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
     "react-app-rewired": "^2.1.5",

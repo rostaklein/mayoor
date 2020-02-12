@@ -56,14 +56,10 @@ export const LoginForm: React.FC = () => {
 		validate: (values) => {
 			const errors: FormikErrors<FormValues> = {};
 			if (!values.password) {
-				errors.password = t('empty_password', {
-					defaultValue: 'Please, fill in the password.',
-				});
+				errors.password = t('Please, fill in the password.');
 			}
 			if (!values.username) {
-				errors.username = t('empty_username', {
-					defaultValue: 'Please, fill in the username.',
-				});
+				errors.username = t('Please, fill in the username.');
 			}
 			return errors;
 		},
@@ -78,16 +74,12 @@ export const LoginForm: React.FC = () => {
 				if (err instanceof ApolloError) {
 					if (err.graphQLErrors[0].extensions?.code === 'USER_NOT_FOUND') {
 						setErrors({
-							username: t('user_not_found', {
-								defaultValue: 'User not found.',
-							}),
+							username: t('User not found.'),
 						});
 					}
 					if (err.graphQLErrors[0].extensions?.code === 'INVALID_PASSWORD') {
 						setErrors({
-							password: t('invalid_password', {
-								defaultValue: 'User not found.',
-							}),
+							password: t('Invalid password.'),
 						});
 					}
 				}

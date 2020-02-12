@@ -1,0 +1,17 @@
+{
+  "Could not connect to the backend server": "Nepodařilo se připojit k serveru.",
+  "Please, fill in the password": "Prosím, vyplňte heslo.",
+  "Please, fill in the username": "Prosím, vyplňte uživatelské jméno.",
+  "User not found": "Uživatel nenalezen.",
+  "Invalid password": "Špatné heslo.",
+  "Username": "Uživatelské jméno",
+  "Password": "Heslo",
+  "Log In": "Přihlásit se",
+  "New passwords must match!": "Nové hesla se musí shodovat.",
+  "Password successfully changed": "Heslo úspěšně změněno.",
+  "Old password is incorrect": "Staré heslo není správně.",
+  "Old Password": "Staré heslo",
+  "New Password": "Nové heslo",
+  "Repeat New Password": "Nové heslo znova",
+  "Change password": "Změnit heslo"
+}

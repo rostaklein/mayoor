@@ -1,0 +1,17 @@
+{
+  "Could not connect to the backend server": "Could not connect to the backend server",
+  "Please, fill in the password": "Please, fill in the password.",
+  "Please, fill in the username": "Please, fill in the username.",
+  "User not found": "User not found.",
+  "Invalid password": "Invalid password.",
+  "Username": "Username",
+  "Password": "Password",
+  "Log In": "Log In",
+  "New passwords must match!": "New passwords must match!",
+  "Password successfully changed": "Password successfully changed.",
+  "Old password is incorrect": "Old password is incorrect.",
+  "Old Password": "Old Password",
+  "New Password": "New Password",
+  "Repeat New Password": "Repeat New Password",
+  "Change password": "Change password"
+}
