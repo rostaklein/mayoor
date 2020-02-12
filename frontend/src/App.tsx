@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import { Spinner, Callout } from '@blueprintjs/core';
 import { hot } from 'react-hot-loader/root';
@@ -20,7 +20,12 @@ const CenteredSpinner: React.FC = () => (
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { currentUser } = useAppState();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+
+	const language = localStorage.getItem('default-language');
+	useEffect(() => {
+		i18n.changeLanguage(language || 'en');
+	}, [language]);
 
 	const { called, loading, error } = useQuery<MeQuery>(ME_QUERY, {
 		onCompleted: (data) => {

@@ -4,6 +4,11 @@ import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitch: React.FC = () => {
 	const { i18n } = useTranslation();
+
+	const handleLanguageChange = (language: string) => {
+		localStorage.setItem('default-language', language);
+		i18n.changeLanguage(language);
+	};
 	return (
 		<Popover
 			content={
@@ -14,7 +19,7 @@ export const LanguageSwitch: React.FC = () => {
 					].map(({ code, languageName }) => (
 						<Button
 							key={code}
-							onClick={() => i18n.changeLanguage(code)}
+							onClick={() => handleLanguageChange(code)}
 							disabled={i18n.language === code}
 							small
 						>
