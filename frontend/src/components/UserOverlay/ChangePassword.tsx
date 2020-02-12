@@ -43,7 +43,7 @@ export const ChangePassword: React.FC = () => {
 		validate: (values) => {
 			const errors: FormikErrors<FormValues> = {};
 			if (values.newPassword !== values.newPasswordRepeat) {
-				errors.newPasswordRepeat = t('New passwords must match!');
+				errors.newPasswordRepeat = t('new_passwords_must_match');
 			}
 			return errors;
 		},
@@ -53,7 +53,7 @@ export const ChangePassword: React.FC = () => {
 				Toaster.create({
 					position: Position.TOP,
 				}).show({
-					message: t('Password successfully changed.'),
+					message: t('pwd_changed'),
 					intent: 'success',
 					icon: 'tick',
 				});
@@ -62,7 +62,7 @@ export const ChangePassword: React.FC = () => {
 				if (err instanceof ApolloError) {
 					if (err.graphQLErrors[0].extensions?.code === 'INVALID_PASSWORD') {
 						formik.setErrors({
-							oldPassword: t('Old password is incorrect.'),
+							oldPassword: t('old_pwd_incorrect'),
 						});
 					}
 				}
@@ -91,7 +91,7 @@ export const ChangePassword: React.FC = () => {
 
 	return (
 		<form onSubmit={formik.handleSubmit}>
-			<h4>Change your password</h4>
+			<h4>{t('Change your password')}</h4>
 			{getPasswordField('oldPassword', t('Old Password'))}
 			<NewPasswordLine>
 				{getPasswordField('newPassword', t('New Password'))}
