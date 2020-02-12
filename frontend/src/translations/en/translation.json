@@ -1,9 +1,10 @@
 {
-  "Log In": "Log In",
-  "Password": "Password",
-  "Username": "Username",
+  "Change password": "Change password",
+  "New Password": "New Password",
+  "Old Password": "Old Password",
+  "Repeat New Password": "Repeat New Password",
   "empty_password": "Please, fill in the password.",
-  "empty_username": "Please, fill in the username.",
   "invalid_password": "Invalid password.",
-  "user_not_found": "User not found."
+  "password_change_success": "Password successfully changed.",
+  "passwords_must_match": "New passwords must match!"
 }

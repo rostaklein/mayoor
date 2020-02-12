@@ -1,9 +1,10 @@
 {
-  "Log In": "Přihlásit se",
-  "Password": "Heslo",
-  "Username": "Uživatelské jméno",
+  "Change password": "",
+  "New Password": "",
+  "Old Password": "",
+  "Repeat New Password": "",
   "empty_password": "Prosím, vyplňte heslo.",
-  "empty_username": "Prosím, vyplňte uživatelské jméno.",
   "invalid_password": "Špatné heslo.",
-  "user_not_found": "Uživatel nenalezen."
+  "password_change_success": "Password successfully changed.",
+  "passwords_must_match": "New passwords must match!"
 }

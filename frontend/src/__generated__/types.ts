@@ -51,6 +51,29 @@ export interface MeQuery {
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL mutation operation: ChangePasswordMutation
+// ====================================================
+
+export interface ChangePasswordMutation_changePassword {
+  __typename: "User";
+  id: string;
+  name: string | null;
+}
+
+export interface ChangePasswordMutation {
+  changePassword: ChangePasswordMutation_changePassword;
+}
+
+export interface ChangePasswordMutationVariables {
+  oldPassword: string;
+  newPassword: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

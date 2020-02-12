@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import { Colors, Button } from '@blueprintjs/core';
 
 import LogoImage from '../../images/mayoor_logo.svg';
-import { useAppState } from '../../appContext/context';
 import { Logout } from '../Logout/Logout';
+import { UserOverlay } from '../UserOverlay/UserOverlay';
 
 const BodyWrapper = styled.main`
 	display: flex;
@@ -44,7 +44,6 @@ const StyledNavbar = styled.header`
 `;
 
 export const MainWrapper: React.FC = () => {
-	const { currentUser } = useAppState();
 	return (
 		<BodyWrapper>
 			<Aside>
@@ -54,7 +53,7 @@ export const MainWrapper: React.FC = () => {
 			</Aside>
 			<Main>
 				<StyledNavbar>
-					<Button minimal icon="user" text={currentUser?.name} />
+					<UserOverlay />
 					<Logout />
 				</StyledNavbar>
 				Main
