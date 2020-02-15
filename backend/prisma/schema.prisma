@@ -7,7 +7,7 @@
 // Learn more about connection strings for your DB: https://pris.ly/connection-strings
 datasource db {
   provider = "mysql"
-  url      = "mysql://user:password@localhost:3309/db?schema=public"
+  url      = env("MYSQL_URL")
 }
 
 // Other examples for connection strings are:

@@ -2,8 +2,8 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import { schema } from './schema';
 import { createContext } from './context';
 import { permissions } from './permissions';
-import * as path from 'path';
-import * as express from 'express';
+import path from 'path';
+import express from 'express';
 import { applyMiddleware } from 'graphql-middleware';
 
 const schemaWithMiddleware = applyMiddleware(schema, permissions);
@@ -11,9 +11,10 @@ const schemaWithMiddleware = applyMiddleware(schema, permissions);
 const apolloServer = new ApolloServer({
   schema: schemaWithMiddleware,
   context: createContext,
+  engine: {
+    apiKey: process.env.ENGINE_API_KEY,
+  },
 });
-
-// apolloServer.setGraphQLPath('')
 
 const app = express();
 
@@ -29,5 +30,7 @@ apolloServer.applyMiddleware({ app });
 
 const PORT = process.env.PORT || 4444;
 app.listen(PORT, () => {
-  console.log(`🚀 Server ready at: ${apolloServer.graphqlPath}`);
+  console.log(
+    `🚀 GraphQL server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`,
+  );
 });

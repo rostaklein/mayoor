@@ -10,7 +10,8 @@
     "generate:prisma": "prisma2 generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
     "postinstall": "npm -s run generate",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server"
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
+    "apollo:push": "apollo service:push --endpoint=http://localhost:4444/graphql"
   },
   "keywords": [
     "order",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.2",
     "@types/jsonwebtoken": "^8.3.7",
     "@types/node": "12.12.26",
     "@types/ws": "6.0.4",
