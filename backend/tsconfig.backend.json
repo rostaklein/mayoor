@@ -4,6 +4,8 @@
     "rootDir": "src",
     "lib": ["esnext", "dom"],
     "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "noImplicitAny": true
   },
   "include": ["src/**/*"]
