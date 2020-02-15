@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
-import { ContextParameters } from 'graphql-yoga/dist/types';
 import { UserContext, UserDetails } from './context';
+import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 
 export const issueToken = (userDetails: UserDetails): string => {
   if (!process.env.CLIENT_SECRET) {
@@ -30,10 +30,10 @@ const getCurrentUserByToken = (token: string | undefined) =>
   });
 
 export const getUserContext = (
-  contextParameters: ContextParameters,
+  contextParameters: ExpressContext,
 ): UserContext => {
-  const { request } = contextParameters;
-  const token = request.headers.authorization?.replace('Bearer ', '');
+  const { req } = contextParameters;
+  const token = req.headers.authorization?.replace('Bearer ', '');
 
   return { getCurrentUser: () => getCurrentUserByToken(token) };
 };

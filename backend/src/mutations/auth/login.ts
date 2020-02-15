@@ -1,6 +1,6 @@
 import { stringArg, mutationField } from 'nexus';
 import { compare } from 'bcrypt';
-import { ApolloError } from 'apollo-server';
+import { ApolloError } from 'apollo-server-express';
 import { issueToken } from '../../auth';
 
 export const Login = mutationField('login', {
