@@ -13,12 +13,17 @@ const apolloServer = new ApolloServer({
   context: createContext,
 });
 
-// server.express.use(express.static('../frontend/build'));
-// server.express.get('/react', (req, res) => {
-//   res.sendFile(path.resolve('..', 'frontend', 'build', 'index.html'));
-// });
+// apolloServer.setGraphQLPath('')
 
 const app = express();
+
+app.use(express.static('../frontend/build'));
+app.get('/*', (req, res, next) => {
+  if (req.path === apolloServer.graphqlPath) {
+    next();
+  }
+  res.sendFile(path.resolve('..', 'frontend', 'build', 'index.html'));
+});
 
 apolloServer.applyMiddleware({ app });
 

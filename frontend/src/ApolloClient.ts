@@ -4,7 +4,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const httpLink = new HttpLink({
-	uri: 'http://localhost:4444',
+	uri: process.env.NODE_ENV === 'development' ? 'http://localhost:4444/graphql' : '/graphql',
 });
 
 const authLink = new ApolloLink((operation, forward) => {
