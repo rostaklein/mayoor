@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Colors, Button } from '@blueprintjs/core';
+import { Colors } from '@blueprintjs/core';
 
 import LogoImage from '../../images/mayoor_logo.svg';
 import { Logout } from '../Logout/Logout';
 import { UserOverlay } from '../UserOverlay/UserOverlay';
+import { MainMenu } from '../MainMenu/MainMenu';
 
 const BodyWrapper = styled.main`
 	display: flex;
@@ -14,7 +15,10 @@ const BodyWrapper = styled.main`
 const Aside = styled.aside`
 	flex: 1 0 0;
 	max-width: 230px;
-	background-color: ${Colors.LIGHT_GRAY2};
+	background-color: ${Colors.LIGHT_GRAY5};
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+	position: relative;
+	z-index: 1;
 `;
 
 const Logo = styled.img`
@@ -50,6 +54,7 @@ export const MainWrapper: React.FC = () => {
 				<LogoWrapper>
 					<Logo src={LogoImage} />
 				</LogoWrapper>
+				<MainMenu />
 			</Aside>
 			<Main>
 				<StyledNavbar>
