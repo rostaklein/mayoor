@@ -8,7 +8,7 @@
     "build": "npm -s run clean && npm -s run generate && tsc",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "prisma2 generate",
-    "generate:nexus": "ts-node --transpile-only src/schema",
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema",
     "postinstall": "npm -s run generate",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
     "apollo:push": "apollo service:push --endpoint=http://localhost:4444/graphql"
@@ -20,6 +20,11 @@
   "author": "rostaklein",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.2",
+    "@types/jsonwebtoken": "^8.3.7",
+    "@types/node": "12.12.26",
+    "@types/ws": "6.0.4",
     "@prisma/client": "^2.0.0-preview021",
     "apollo-server-express": "^2.10.1",
     "bcrypt": "^3.0.8",
@@ -30,18 +35,13 @@
     "graphql-shield": "^7.0.11",
     "jsonwebtoken": "^8.5.1",
     "nexus": "^0.12.0-rc.9",
-    "nexus-prisma": "^0.9.1"
+    "nexus-prisma": "^0.9.1",
+    "prisma2": "^2.0.0-preview021",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
   },
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
-    "@types/express": "^4.17.2",
-    "@types/jsonwebtoken": "^8.3.7",
-    "@types/node": "12.12.26",
-    "@types/ws": "6.0.4",
-    "prisma2": "2.0.0-preview021",
-    "ts-node": "8.5.4",
-    "ts-node-dev": "1.0.0-pre.44",
-    "typescript": "3.7.5"
+    "ts-node-dev": "1.0.0-pre.44"
   },
   "prettier": {
     "singleQuote": true,

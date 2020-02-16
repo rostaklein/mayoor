@@ -51,4 +51,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default hot(App);
+export default process.env.NODE_ENV === 'production' ? App : hot(App);
