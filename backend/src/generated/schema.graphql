@@ -2,9 +2,28 @@
 ### Do not make changes to this file directly
 
 
+type Address {
+  city: String
+  id: String!
+  number: String
+  postNumber: String
+  street: String
+}
+
 type AuthPayload {
   token: String!
   user: User!
+}
+
+type Customer {
+  address(after: String, before: String, first: Int, last: Int, skip: Int): [Address!]!
+  email: String
+  id: String!
+  identificationNumber: String
+  name: String
+  personName: String
+  phone: String
+  taxIdentificationNumber: String
 }
 
 scalar DateTime
@@ -19,6 +38,8 @@ type Mutation {
 type Order {
   createdAt: DateTime!
   createdBy: User!
+  customer: Customer
+  id: String!
   number: Int!
   updatedAt: DateTime!
 }

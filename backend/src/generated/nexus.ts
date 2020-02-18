@@ -26,10 +26,12 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Address: prisma.Address;
   AuthPayload: { // root type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
+  Customer: prisma.Customer;
   Mutation: {};
   Order: prisma.Order;
   Query: {};
@@ -46,9 +48,26 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Address: { // field return type
+    city: string | null; // String
+    id: string; // String!
+    number: string | null; // String
+    postNumber: string | null; // String
+    street: string | null; // String
+  }
   AuthPayload: { // field return type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
+  }
+  Customer: { // field return type
+    address: NexusGenRootTypes['Address'][]; // [Address!]!
+    email: string | null; // String
+    id: string; // String!
+    identificationNumber: string | null; // String
+    name: string | null; // String
+    personName: string | null; // String
+    phone: string | null; // String
+    taxIdentificationNumber: string | null; // String
   }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['User']; // User!
@@ -59,6 +78,8 @@ export interface NexusGenFieldTypes {
   Order: { // field return type
     createdAt: any; // DateTime!
     createdBy: NexusGenRootTypes['User']; // User!
+    customer: NexusGenRootTypes['Customer'] | null; // Customer
+    id: string; // String!
     number: number; // Int!
     updatedAt: any; // DateTime!
   }
@@ -74,6 +95,15 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Customer: {
+    address: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+  }
   Mutation: {
     changePassword: { // args
       newPassword: string; // String!
@@ -99,7 +129,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Order" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "Mutation" | "Order" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 
