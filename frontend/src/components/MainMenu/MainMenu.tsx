@@ -3,32 +3,26 @@ import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import { Colors, Icon } from '@blueprintjs/core';
 
-const StyledIcon = styled(Icon)`
-	margin-right: 10px;
-	opacity: 0.3;
-`;
+import { LinkItem } from './LinkItem';
 
 const StyledMenu = styled.ul`
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	> li {
+		&:not(:first-of-type) {
+			margin-top: 10px;
+		}
+	}
 `;
 
-const MenuLinkItem = styled.a`
-	width: 100%;
-	display: inline-block;
-	color: inherit;
-	text-decoration: none;
-	padding: 12px 24px;
-	margin: 2px 0;
-	font-weight: 600;
-	transition: all 0.2s;
-	/* background: ${Colors.LIGHT_GRAY4}; */
-	&:hover {
-		background: ${Colors.LIGHT_GRAY4};
-		color: inherit;
-		text-decoration: none;
-	}
+const CategoryName = styled.div`
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: ${Colors.GRAY4};
+	padding: 5px 15px;
 `;
 
 export const MainMenu: React.FC = () => {
@@ -36,22 +30,15 @@ export const MainMenu: React.FC = () => {
 	return (
 		<StyledMenu>
 			<li>
-				<MenuLinkItem>
-					<StyledIcon icon="automatic-updates" />
-					{t('In Progress')}
-				</MenuLinkItem>
-				<MenuLinkItem>
-					<StyledIcon icon="add" />
-					{t('Add order')}
-				</MenuLinkItem>
-				<MenuLinkItem>
-					<StyledIcon icon="horizontal-bar-chart" />
-					{t('List orders')}
-				</MenuLinkItem>
-				<MenuLinkItem>
-					<StyledIcon icon="people" />
-					{t('Customers')}
-				</MenuLinkItem>
+				<CategoryName>{t('Orders')}</CategoryName>
+				<LinkItem icon="automatic-updates" name={t('In Progress')} />
+				<LinkItem icon="add" name={t('Add order')} />
+				<LinkItem icon="horizontal-bar-chart" name={t('List orders')} />
+			</li>
+			<li>
+				<CategoryName>{t('Customers')}</CategoryName>
+				<LinkItem icon="new-person" name={t('Add customer')} />
+				<LinkItem icon="people" name={t('Customers')} />
 			</li>
 		</StyledMenu>
 	);
