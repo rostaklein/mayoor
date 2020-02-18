@@ -31,14 +31,18 @@ export const MainMenu: React.FC = () => {
 		<StyledMenu>
 			<li>
 				<CategoryName>{t('Orders')}</CategoryName>
-				<LinkItem icon="automatic-updates" name={t('In Progress')} />
-				<LinkItem icon="add" name={t('Add order')} />
-				<LinkItem icon="horizontal-bar-chart" name={t('List orders')} />
+				<LinkItem
+					icon="automatic-updates"
+					name={t('In Progress')}
+					to={'/orders/inprogress'}
+				/>
+				<LinkItem icon="add" name={t('Add order')} to={'/orders/new'} />
+				<LinkItem icon="horizontal-bar-chart" name={t('List orders')} to={'/orders/list'} />
 			</li>
 			<li>
 				<CategoryName>{t('Customers')}</CategoryName>
-				<LinkItem icon="new-person" name={t('Add customer')} />
-				<LinkItem icon="people" name={t('Customers')} />
+				<LinkItem icon="new-person" name={t('Add customer')} to={'/customers/new'} />
+				<LinkItem icon="people" name={t('Customers')} to={'/customers/list'} />
 			</li>
 		</StyledMenu>
 	);
