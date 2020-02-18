@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import { Button, InputGroup, FormGroup } from '@blueprintjs/core';
+import { Button, InputGroup } from '@blueprintjs/core';
 import { useMutation } from 'react-apollo';
 import { useFormik, FormikErrors } from 'formik';
 import { ApolloError } from 'apollo-client';
@@ -13,28 +12,7 @@ import { useAppDispatch } from '../../appContext/context';
 import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 
 import { LOGIN_MUTATION } from './queries';
-
-const LoginWrapper = styled.form`
-	width: 240px;
-	min-height: 180px;
-	display: flex;
-	flex-direction: column;
-`;
-
-const FormGroupStyled = styled(FormGroup)`
-	margin-bottom: 10px;
-`;
-
-const Logo = styled.img`
-	width: 200px;
-	margin: 30px auto;
-`;
-
-const LanguageSwitchWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	margin: 15px;
-`;
+import * as S from './LoginForm.styles';
 
 type FormValues = {
 	username: string;
@@ -89,9 +67,9 @@ export const LoginForm: React.FC = () => {
 
 	return (
 		<CenteredWrapper>
-			<LoginWrapper onSubmit={handleSubmit}>
-				<Logo src={LogoImage} />
-				<FormGroupStyled
+			<S.LoginWrapper onSubmit={handleSubmit}>
+				<S.Logo src={LogoImage} />
+				<S.FormGroupStyled
 					helperText={touched.username && errors.username}
 					intent={touched.username && errors.username ? 'danger' : 'none'}
 				>
@@ -102,8 +80,8 @@ export const LoginForm: React.FC = () => {
 						onChange={handleChange}
 						value={values.username}
 					/>
-				</FormGroupStyled>
-				<FormGroupStyled
+				</S.FormGroupStyled>
+				<S.FormGroupStyled
 					helperText={touched.password && errors.password}
 					intent={touched.password && errors.password ? 'danger' : 'none'}
 				>
@@ -115,7 +93,7 @@ export const LoginForm: React.FC = () => {
 						onChange={handleChange}
 						value={values.password}
 					/>
-				</FormGroupStyled>
+				</S.FormGroupStyled>
 				<Button
 					intent={'none'}
 					icon={'log-in'}
@@ -126,10 +104,10 @@ export const LoginForm: React.FC = () => {
 				>
 					{t('Log In')}
 				</Button>
-				<LanguageSwitchWrapper>
+				<S.LanguageSwitchWrapper>
 					<LanguageSwitch />
-				</LanguageSwitchWrapper>
-			</LoginWrapper>
+				</S.LanguageSwitchWrapper>
+			</S.LoginWrapper>
 		</CenteredWrapper>
 	);
 };

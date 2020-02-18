@@ -21,7 +21,7 @@ export const LanguageSwitch: React.FC = () => {
 							key={code}
 							onClick={() => handleLanguageChange(code)}
 							disabled={i18n.language === code}
-							small
+							minimal
 						>
 							{languageName}
 						</Button>
@@ -29,7 +29,7 @@ export const LanguageSwitch: React.FC = () => {
 				</ControlGroup>
 			}
 			position="bottom"
-			target={<Icon icon="globe" color="gray" />}
+			target={<Button icon="globe" minimal />}
 		/>
 	);
 };
