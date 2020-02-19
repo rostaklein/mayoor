@@ -20,12 +20,13 @@
   "author": "rostaklein",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^2.0.0-preview021",
     "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.17.2",
     "@types/jsonwebtoken": "^8.3.7",
     "@types/node": "12.12.26",
     "@types/ws": "6.0.4",
-    "@prisma/client": "^2.0.0-preview021",
+    "@types/xml2js": "^0.4.5",
     "apollo-server-express": "^2.10.1",
     "bcrypt": "^3.0.8",
     "dotenv": "^8.2.0",
@@ -36,9 +37,11 @@
     "jsonwebtoken": "^8.5.1",
     "nexus": "^0.12.0-rc.9",
     "nexus-prisma": "^0.9.1",
+    "node-fetch": "^2.6.0",
     "prisma2": "^2.0.0-preview021",
     "ts-node": "^8.6.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "ts-node-dev": "1.0.0-pre.44"

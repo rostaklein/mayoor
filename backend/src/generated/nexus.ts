@@ -40,6 +40,14 @@ export interface NexusGenRootTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Customer: prisma.Customer;
+  CustomerHelperInfo: { // root type
+    city?: string | null; // String
+    identificationNumber?: string | null; // String
+    name?: string | null; // String
+    postNumber?: string | null; // String
+    street?: string | null; // String
+    taxIdentificationNumber?: string | null; // String
+  }
   Mutation: {};
   Order: prisma.Order;
   Query: {};
@@ -81,6 +89,14 @@ export interface NexusGenFieldTypes {
     phone: string | null; // String
     taxIdentificationNumber: string | null; // String
   }
+  CustomerHelperInfo: { // field return type
+    city: string | null; // String
+    identificationNumber: string | null; // String
+    name: string | null; // String
+    postNumber: string | null; // String
+    street: string | null; // String
+    taxIdentificationNumber: string | null; // String
+  }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['User']; // User!
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
@@ -98,6 +114,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllOrders: NexusGenRootTypes['Order'][]; // [Order!]!
+    getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
     me: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
@@ -146,6 +163,11 @@ export interface NexusGenArgTypes {
       password: string; // String!
     }
   }
+  Query: {
+    getCustomerHelperInfo: { // args
+      partialIdentificationNumber: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -153,7 +175,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "Mutation" | "Order" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "Mutation" | "Order" | "Query" | "User";
 
 export type NexusGenInputNames = "AddressInput";
 
