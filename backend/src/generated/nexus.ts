@@ -22,6 +22,7 @@ declare global {
 export interface NexusGenInputs {
   AddressInput: { // input type
     city?: string | null; // String
+    isPrimary?: boolean | null; // Boolean
     number?: string | null; // String
     postNumber?: string | null; // String
     state?: string | null; // String
@@ -59,6 +60,7 @@ export interface NexusGenFieldTypes {
   Address: { // field return type
     city: string | null; // String
     id: string; // String!
+    isPrimary: boolean; // Boolean!
     number: string | null; // String
     postNumber: string | null; // String
     street: string | null; // String
@@ -69,10 +71,12 @@ export interface NexusGenFieldTypes {
   }
   Customer: { // field return type
     address: NexusGenRootTypes['Address'][]; // [Address!]!
+    createdBy: NexusGenRootTypes['User']; // User!
     email: string | null; // String
     id: string; // String!
     identificationNumber: string | null; // String
     name: string | null; // String
+    note: string | null; // String
     personName: string | null; // String
     phone: string | null; // String
     taxIdentificationNumber: string | null; // String
@@ -124,6 +128,7 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       identificationNumber?: string | null; // String
       name?: string | null; // String
+      note?: string | null; // String
       personName?: string | null; // String
       phone?: string | null; // String
       taxIdentificationNumber?: string | null; // String

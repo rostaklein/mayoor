@@ -5,6 +5,7 @@
 type Address {
   city: String
   id: String!
+  isPrimary: Boolean!
   number: String
   postNumber: String
   street: String
@@ -12,6 +13,7 @@ type Address {
 
 input AddressInput {
   city: String
+  isPrimary: Boolean
   number: String
   postNumber: String
   state: String
@@ -25,10 +27,12 @@ type AuthPayload {
 
 type Customer {
   address(after: String, before: String, first: Int, last: Int, skip: Int): [Address!]!
+  createdBy: User!
   email: String
   id: String!
   identificationNumber: String
   name: String
+  note: String
   personName: String
   phone: String
   taxIdentificationNumber: String
@@ -38,7 +42,7 @@ scalar DateTime
 
 type Mutation {
   changePassword(newPassword: String!, oldPassword: String!): User!
-  createCustomer(addresses: [AddressInput!], allowedBankPayments: Boolean, email: String, identificationNumber: String, name: String, personName: String, phone: String, taxIdentificationNumber: String): Customer!
+  createCustomer(addresses: [AddressInput!], allowedBankPayments: Boolean, email: String, identificationNumber: String, name: String, note: String, personName: String, phone: String, taxIdentificationNumber: String): Customer!
   createOrder(number: Int!): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!

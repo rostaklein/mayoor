@@ -25,6 +25,7 @@ const Address = objectType({
     t.model.number();
     t.model.city();
     t.model.postNumber();
+    t.model.isPrimary();
   },
 });
 
@@ -38,6 +39,8 @@ const Customer = objectType({
     t.model.identificationNumber();
     t.model.taxIdentificationNumber();
     t.model.personName();
+    t.model.note();
+    t.model.createdBy();
     t.model.address({ type: 'Address' });
   },
 });
@@ -62,6 +65,7 @@ export const AddressInput = inputObjectType({
     t.string('city');
     t.string('state');
     t.string('postNumber');
+    t.boolean('isPrimary');
   },
 });
 
