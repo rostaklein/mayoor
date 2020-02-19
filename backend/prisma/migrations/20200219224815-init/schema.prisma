@@ -29,8 +29,7 @@ generator client {
 // 4. Start using Prisma Client JS in your applicatio
 
 enum Role {
-  USER
-  ADMIN
+  USER ADMIN
 }
 
 model User {
@@ -42,9 +41,39 @@ model User {
 }
 
 model Order {
-  id        String   @id @default(cuid())
-  number    Int      @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String    @id @default(cuid())
+  number    Int       @unique
+  customer  Customer?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   createdBy User
+}
+
+model Customer {
+  id                      String    @id @default(cuid())
+  name                    String?
+  personName              String?
+  phone                   String?
+  email                   String?
+  identificationNumber    String?
+  taxIdentificationNumber String?
+  allowedBankPayments     Boolean   @default(false)
+  address                 Address[]
+  note                    String?
+  createdBy               User
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  street     String?
+  number     String?
+  city       String?
+  state      String?
+  postNumber String?
+  isPrimary  Boolean  @default(false)
+  createdBy  User
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
