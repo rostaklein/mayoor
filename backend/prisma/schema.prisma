@@ -29,8 +29,7 @@ generator client {
 // 4. Start using Prisma Client JS in your applicatio
 
 enum Role {
-  USER
-  ADMIN
+  USER ADMIN
 }
 
 model User {
@@ -60,6 +59,7 @@ model Customer {
   taxIdentificationNumber String?
   allowedBankPayments     Boolean   @default(false)
   address                 Address[]
+  note                    String?
   createdBy               User
   createdAt               DateTime  @default(now())
   updatedAt               DateTime  @updatedAt
@@ -72,6 +72,7 @@ model Address {
   city       String?
   state      String?
   postNumber String?
+  isPrimary  Boolean  @default(false)
   createdBy  User
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
