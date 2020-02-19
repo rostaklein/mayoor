@@ -3,6 +3,7 @@ import { useQuery } from 'react-apollo';
 import { Spinner, Callout } from '@blueprintjs/core';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -38,7 +39,11 @@ const App: React.FC = () => {
 	}
 
 	if (currentUser) {
-		return <MainWrapper />;
+		return (
+			<Router>
+				<MainWrapper />
+			</Router>
+		);
 	}
 
 	const hasBackendError =

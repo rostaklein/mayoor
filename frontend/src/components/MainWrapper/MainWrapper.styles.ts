@@ -40,3 +40,10 @@ export const StyledNavbar = styled.header`
 	background-color: ${Colors.LIGHT_GRAY4};
 	box-shadow: none;
 `;
+
+export const PageTitle = styled.h1`
+	font-size: 18px;
+	color: ${Colors.DARK_GRAY3};
+	margin: 0;
+	padding: 15px 25px;
+`;
