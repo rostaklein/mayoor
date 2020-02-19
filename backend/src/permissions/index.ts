@@ -22,9 +22,12 @@ export const permissions = shield(
     Query: {
       getAllOrders: rules.isAuthenticatedUser,
       me: rules.isAuthenticatedUser,
+      getCustomerHelperInfo: rules.isAuthenticatedUser,
     },
     Mutation: {
       createOrder: rules.isAuthenticatedUser,
+      createCustomer: rules.isAuthenticatedUser,
+      changePassword: rules.isAuthenticatedUser,
       register: rules.isAdmin,
     },
   },
