@@ -20,6 +20,13 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AddressInput: { // input type
+    city?: string | null; // String
+    number?: string | null; // String
+    postNumber?: string | null; // String
+    state?: string | null; // String
+    street?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -45,6 +52,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  AddressInput: NexusGenInputs['AddressInput'];
 }
 
 export interface NexusGenFieldTypes {
@@ -71,6 +79,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['User']; // User!
+    createCustomer: NexusGenRootTypes['Customer']; // Customer!
     createOrder: NexusGenRootTypes['Order']; // Order!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
@@ -109,6 +118,16 @@ export interface NexusGenArgTypes {
       newPassword: string; // String!
       oldPassword: string; // String!
     }
+    createCustomer: { // args
+      addresses?: NexusGenInputs['AddressInput'][] | null; // [AddressInput!]
+      allowedBankPayments?: boolean | null; // Boolean
+      email?: string | null; // String
+      identificationNumber?: string | null; // String
+      name?: string | null; // String
+      personName?: string | null; // String
+      phone?: string | null; // String
+      taxIdentificationNumber?: string | null; // String
+    }
     createOrder: { // args
       number: number; // Int!
     }
@@ -131,7 +150,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "Mutation" | "Order" | "Query" | "User";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "AddressInput";
 
 export type NexusGenEnumNames = never;
 

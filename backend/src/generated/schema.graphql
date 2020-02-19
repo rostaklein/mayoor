@@ -10,6 +10,14 @@ type Address {
   street: String
 }
 
+input AddressInput {
+  city: String
+  number: String
+  postNumber: String
+  state: String
+  street: String
+}
+
 type AuthPayload {
   token: String!
   user: User!
@@ -30,6 +38,7 @@ scalar DateTime
 
 type Mutation {
   changePassword(newPassword: String!, oldPassword: String!): User!
+  createCustomer(addresses: [AddressInput!], allowedBankPayments: Boolean, email: String, identificationNumber: String, name: String, personName: String, phone: String, taxIdentificationNumber: String): Customer!
   createOrder(number: Int!): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!

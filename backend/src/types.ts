@@ -1,4 +1,4 @@
-import { objectType } from 'nexus';
+import { objectType, inputObjectType } from 'nexus';
 
 const AuthPayload = objectType({
   name: 'AuthPayload',
@@ -54,4 +54,22 @@ const Order = objectType({
   },
 });
 
-export const Types = { User, Order, Customer, Address, AuthPayload };
+export const AddressInput = inputObjectType({
+  name: 'AddressInput',
+  definition(t) {
+    t.string('street');
+    t.string('number');
+    t.string('city');
+    t.string('state');
+    t.string('postNumber');
+  },
+});
+
+export const Types = {
+  User,
+  Order,
+  Customer,
+  Address,
+  AuthPayload,
+  AddressInput,
+};
