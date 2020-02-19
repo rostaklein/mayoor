@@ -41,9 +41,12 @@ const App: React.FC = () => {
 		return <MainWrapper />;
 	}
 
+	const hasBackendError =
+		error?.networkError || error?.graphQLErrors[0].extensions?.code === 'INTERNAL_SERVER_ERROR';
+
 	return (
 		<Suspense fallback={<CenteredSpinner />}>
-			{error?.networkError && (
+			{hasBackendError && (
 				<Callout intent="danger">{t('Could not connect to the backend server')}</Callout>
 			)}
 			<LoginForm />
