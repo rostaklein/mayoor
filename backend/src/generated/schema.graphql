@@ -76,6 +76,16 @@ type Order {
   updatedAt: DateTime!
 }
 
+type OrderEdge {
+  cursor: String!
+  node: Order!
+}
+
+type OrdersConnection {
+  edges: [OrderEdge!]!
+  pageInfo: PageInfo!
+}
+
 type PageInfo {
   endCursor: String
   hasNextPage: Boolean!
@@ -85,7 +95,7 @@ type PageInfo {
 
 type Query {
   getAllCustomers(after: String, before: String, first: Int, last: Int): CustomersConnection!
-  getAllOrders: [Order!]!
+  getAllOrders(after: String, before: String, first: Int, last: Int): OrdersConnection!
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   me: User!
 }

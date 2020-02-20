@@ -58,6 +58,14 @@ export interface NexusGenRootTypes {
   }
   Mutation: {};
   Order: prisma.Order;
+  OrderEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Order']; // Order!
+  }
+  OrdersConnection: { // root type
+    edges: NexusGenRootTypes['OrderEdge'][]; // [OrderEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
   PageInfo: { // root type
     endCursor?: string | null; // String
     hasNextPage: boolean; // Boolean!
@@ -134,6 +142,14 @@ export interface NexusGenFieldTypes {
     number: number; // Int!
     updatedAt: any; // DateTime!
   }
+  OrderEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Order']; // Order!
+  }
+  OrdersConnection: { // field return type
+    edges: NexusGenRootTypes['OrderEdge'][]; // [OrderEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
   PageInfo: { // field return type
     endCursor: string | null; // String
     hasNextPage: boolean; // Boolean!
@@ -142,7 +158,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllCustomers: NexusGenRootTypes['CustomersConnection']; // CustomersConnection!
-    getAllOrders: NexusGenRootTypes['Order'][]; // [Order!]!
+    getAllOrders: NexusGenRootTypes['OrdersConnection']; // OrdersConnection!
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
     me: NexusGenRootTypes['User']; // User!
   }
@@ -199,6 +215,12 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
     }
+    getAllOrders: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
     getCustomerHelperInfo: { // args
       partialIdentificationNumber: string; // String!
     }
@@ -210,7 +232,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerEdge" | "CustomerHelperInfo" | "CustomersConnection" | "Mutation" | "Order" | "PageInfo" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerEdge" | "CustomerHelperInfo" | "CustomersConnection" | "Mutation" | "Order" | "OrderEdge" | "OrdersConnection" | "PageInfo" | "Query" | "User";
 
 export type NexusGenInputNames = "AddressInput";
 
