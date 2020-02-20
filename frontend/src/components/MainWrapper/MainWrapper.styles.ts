@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { Colors } from '@blueprintjs/core';
+
+import { Colors } from '../../themeVariables';
 
 export const BodyWrapper = styled.main`
 	display: flex;
@@ -39,6 +40,12 @@ export const StyledNavbar = styled.header`
 	justify-content: flex-end;
 	background-color: ${Colors.LIGHT_GRAY4};
 	box-shadow: none;
+	> button {
+		color: black;
+		:not(:last-of-type) {
+			margin-right: 10px;
+		}
+	}
 `;
 
 export const PageTitle = styled.h1`

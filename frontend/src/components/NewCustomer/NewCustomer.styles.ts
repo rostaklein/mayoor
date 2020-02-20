@@ -1,14 +1,6 @@
 import styled from '@emotion/styled';
+import { Form } from 'antd';
 
-export const Wrapper = styled.div`
+export const StyledForm = styled(Form)`
 	padding: 15px 25px;
-	display: flex;
-`;
-
-export const Half = styled.div`
-	flex: 1;
-`;
-
-export const Row = styled.div`
-	display: flex;
 `;

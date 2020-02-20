@@ -11,7 +11,7 @@ export const UserOverlay: React.FC = () => {
 	const { currentUser } = useAppState();
 	return (
 		<>
-			<Button icon="user" onClick={() => setIsOpen(true)}>
+			<Button icon="user" onClick={() => setIsOpen(true)} type="link">
 				{currentUser?.name}
 			</Button>
 			<Modal

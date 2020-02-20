@@ -1,6 +1,4 @@
 @import '~normalize.css';
-@import '~@blueprintjs/core/lib/css/blueprint.css';
-@import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
 
 html,
 body,
@@ -14,4 +12,10 @@ body,
 
 #root .ant-form-explain {
 	font-size: 12px;
+}
+
+#root h1,
+#root h2,
+#root h3 {
+	font-weight: 700;
 }

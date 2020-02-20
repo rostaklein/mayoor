@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
-import { Colors } from '@blueprintjs/core';
+
+import { Colors } from '../../themeVariables';
 
 import { LinkItem } from './LinkItem';
 
@@ -31,18 +32,14 @@ export const MainMenu: React.FC = () => {
 		<StyledMenu>
 			<li>
 				<CategoryName>{t('Orders')}</CategoryName>
-				<LinkItem
-					icon="automatic-updates"
-					name={t('In Progress')}
-					to={'/orders/inprogress'}
-				/>
-				<LinkItem icon="add" name={t('Add order')} to={'/orders/new'} />
-				<LinkItem icon="horizontal-bar-chart" name={t('List orders')} to={'/orders/list'} />
+				<LinkItem icon="sync" name={t('In Progress')} to={'/orders/inprogress'} />
+				<LinkItem icon="plus-circle" name={t('Add order')} to={'/orders/new'} />
+				<LinkItem icon="file-search" name={t('List orders')} to={'/orders/list'} />
 			</li>
 			<li>
 				<CategoryName>{t('Customers')}</CategoryName>
-				<LinkItem icon="new-person" name={t('Add customer')} to={'/customers/new'} />
-				<LinkItem icon="people" name={t('Customers')} to={'/customers/list'} />
+				<LinkItem icon="user-add" name={t('Add customer')} to={'/customers/new'} />
+				<LinkItem icon="team" name={t('Customers')} to={'/customers/list'} />
 			</li>
 		</StyledMenu>
 	);

@@ -21,4 +21,7 @@ export const LanguageSwitchWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	margin: 15px;
+	button {
+		color: gray;
+	}
 `;

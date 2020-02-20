@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect } from 'react';
 import { useQuery, ApolloProvider } from 'react-apollo';
-import { Spinner, Callout } from '@blueprintjs/core';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Icon, Spin, Alert } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -15,7 +15,7 @@ import { client } from './ApolloClient';
 
 const CenteredSpinner: React.FC = () => (
 	<CenteredWrapper>
-		<Spinner size={50} />
+		<Spin indicator={<Icon type="loading" style={{ fontSize: 48 }} spin />} />
 	</CenteredWrapper>
 );
 
@@ -53,7 +53,13 @@ const App: React.FC = () => {
 	return (
 		<Suspense fallback={<CenteredSpinner />}>
 			{hasBackendError && (
-				<Callout intent="danger">{t('Could not connect to the backend server')}</Callout>
+				<Alert
+					message={t('Could not connect to the backend server')}
+					type="error"
+					showIcon
+					banner
+					closable
+				/>
 			)}
 			<LoginForm />
 		</Suspense>

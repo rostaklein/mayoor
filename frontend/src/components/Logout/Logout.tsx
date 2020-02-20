@@ -14,7 +14,7 @@ export const Logout: React.FC = () => {
 	};
 	return (
 		<Tooltip placement="bottomRight" title={t('Log Out')}>
-			<Button onClick={onLogoutClick} icon="logout" type="ghost" shape="circle" />
+			<Button onClick={onLogoutClick} icon="logout" type="link" shape="circle" />
 		</Tooltip>
 	);
 };

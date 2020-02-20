@@ -1,38 +1,53 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormGroup, InputGroup, Button } from '@blueprintjs/core';
+import { useFormik } from 'formik';
+import { Form, Icon, Input, Button, Row, Col } from 'antd';
 
-import { Wrapper, Half, Row } from './NewCustomer.styles';
+import { StyledForm } from './NewCustomer.styles';
+
+const initialValues = {
+	name: '',
+	identificationNumber: '',
+	taxIdentificationNumber: '',
+};
+
+type FormValues = typeof initialValues;
 
 export const NewCustomer: React.FC = () => {
 	const { t } = useTranslation();
+
+	const formik = useFormik<FormValues>({
+		initialValues,
+		onSubmit: console.log,
+	});
+
+	const getField = (name: keyof FormValues, label: string, icon?: string) => {
+		const errorMessage = formik.touched[name] && formik.errors[name];
+		const status = errorMessage ? 'error' : '';
+		return (
+			<Form.Item validateStatus={status} help={errorMessage}>
+				<Input
+					prefix={icon && <Icon type={icon} />}
+					placeholder={label}
+					name={name}
+					onChange={formik.handleChange}
+					value={formik.values[name]}
+				/>
+			</Form.Item>
+		);
+	};
 	return (
-		<Wrapper>
-			<Half>
-				<FormGroup label={t('Company name')}>
-					<InputGroup placeholder={t('Company name')} />
-				</FormGroup>
-				<Row>
-					<Half>
-						<FormGroup label={t('Identification number')}>
-							<InputGroup
-								placeholder={t('Identification number')}
-								leftIcon="annotation"
-								rightElement={<Button icon="search" intent="primary" />}
-							/>
-						</FormGroup>
-					</Half>
-					<Half>
-						<FormGroup label={t('Tax identification number')}>
-							<InputGroup
-								placeholder={t('Tax identification number')}
-								leftIcon="bank-account"
-							/>
-						</FormGroup>
-					</Half>
-				</Row>
-			</Half>
-			<Half />
-		</Wrapper>
+		<StyledForm onSubmit={formik.handleSubmit}>
+			{getField('name', t('Company name'))}
+			<Row gutter={16}>
+				<Col span={12}>{getField('identificationNumber', t('Identification number'))}</Col>
+				<Col span={12}>
+					{getField('taxIdentificationNumber', t('Tax identification number'))}
+				</Col>
+			</Row>
+			<Button type="primary" htmlType="submit">
+				{t('Add customer')}
+			</Button>
+		</StyledForm>
 	);
 };

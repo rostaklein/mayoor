@@ -1,7 +1,9 @@
 import React from 'react';
-import { IconName, Colors, Icon } from '@blueprintjs/core';
 import styled from '@emotion/styled';
 import { NavLink, NavLinkProps } from 'react-router-dom';
+import { Icon } from 'antd';
+
+import { Colors } from '../../themeVariables';
 
 const StyledIcon = styled(Icon)`
 	margin-right: 10px;
@@ -9,7 +11,8 @@ const StyledIcon = styled(Icon)`
 
 const MenuLinkItem = styled(NavLink)<NavLinkProps<unknown>>`
 	width: 100%;
-	display: inline-block;
+	display: flex;
+	align-items: center;
 	color: inherit;
 	text-decoration: none;
 	padding: 12px 24px;
@@ -17,6 +20,7 @@ const MenuLinkItem = styled(NavLink)<NavLinkProps<unknown>>`
 	font-weight: 600;
 	border-right: solid transparent 5px;
 	transition: all 0.2s;
+	color: ${Colors.DARK_GRAY3};
 	&.active {
 		background: ${Colors.LIGHT_GRAY4};
 		border-color: ${Colors.BLUE4};
@@ -29,7 +33,7 @@ const MenuLinkItem = styled(NavLink)<NavLinkProps<unknown>>`
 `;
 
 interface Props {
-	icon: IconName;
+	icon: string;
 	name: string;
 	to: NavLinkProps<unknown>['to'];
 }
@@ -37,7 +41,7 @@ interface Props {
 export const LinkItem: React.FC<Props> = ({ icon, name, to }) => {
 	return (
 		<MenuLinkItem to={to}>
-			<StyledIcon icon={icon} color={Colors.GRAY3} />
+			<StyledIcon type={icon} />
 			{name}
 		</MenuLinkItem>
 	);

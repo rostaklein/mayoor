@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Popover, Button } from 'antd';
-// import { Button, ControlGroup, Popover } from '@blueprintjs/core';
 import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitch: React.FC = () => {
@@ -34,7 +33,7 @@ export const LanguageSwitch: React.FC = () => {
 			visible={isVisible}
 			onVisibleChange={setIsVisible}
 		>
-			<Button icon="global" shape="circle" type="ghost" />
+			<Button icon="global" shape="circle" type="link" />
 		</Popover>
 	);
 };
