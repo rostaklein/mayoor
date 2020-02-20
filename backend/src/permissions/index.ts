@@ -1,5 +1,6 @@
 import { rule, shield } from 'graphql-shield';
 import { Context } from '../context';
+import { ApolloError } from 'apollo-server-express';
 
 const rules = {
   isAuthenticatedUser: rule()(async (parent, args, context: Context) => {
@@ -31,5 +32,8 @@ export const permissions = shield(
       register: rules.isAdmin,
     },
   },
-  { allowExternalErrors: true },
+  {
+    allowExternalErrors: true,
+    fallbackError: new ApolloError('Not Authorized!', 'NOT_AUTHORIZED'),
+  },
 );
