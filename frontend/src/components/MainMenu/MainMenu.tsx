@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
-import { Colors, Icon } from '@blueprintjs/core';
+import { Colors } from '@blueprintjs/core';
 
 import { LinkItem } from './LinkItem';
 

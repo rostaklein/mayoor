@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ControlGroup, Popover, Icon } from '@blueprintjs/core';
+import { Button, ControlGroup, Popover } from '@blueprintjs/core';
 import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitch: React.FC = () => {
