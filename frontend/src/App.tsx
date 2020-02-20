@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { useQuery } from 'react-apollo';
+import { useQuery, ApolloProvider } from 'react-apollo';
 import { Spinner, Callout } from '@blueprintjs/core';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,9 @@ import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
 import { MeQuery } from './__generated__/types';
 import { CenteredWrapper } from './components/CenteredWrapper/CenteredWrapper';
-import { useAppDispatch, useAppState } from './appContext/context';
+import { useAppDispatch, useAppState, AppContextProvider } from './appContext/context';
 import { MainWrapper } from './components/MainWrapper/MainWrapper';
+import { client } from './ApolloClient';
 
 const CenteredSpinner: React.FC = () => (
 	<CenteredWrapper>
@@ -59,4 +60,12 @@ const App: React.FC = () => {
 	);
 };
 
-export default process.env.NODE_ENV === 'production' ? App : hot(App);
+const AppWithProviders: React.FC = () => (
+	<ApolloProvider client={client}>
+		<AppContextProvider>
+			<App />
+		</AppContextProvider>
+	</ApolloProvider>
+);
+
+export default process.env.NODE_ENV === 'production' ? AppWithProviders : hot(AppWithProviders);
