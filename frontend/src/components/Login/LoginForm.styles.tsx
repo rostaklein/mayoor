@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FormGroup } from '@blueprintjs/core';
+import { Form } from 'antd';
 
 export const LoginWrapper = styled.form`
 	width: 240px;
@@ -8,8 +8,8 @@ export const LoginWrapper = styled.form`
 	flex-direction: column;
 `;
 
-export const FormGroupStyled = styled(FormGroup)`
-	margin-bottom: 10px;
+export const FormItemStyled = styled(Form.Item)`
+	margin-bottom: 5px;
 `;
 
 export const Logo = styled.img`

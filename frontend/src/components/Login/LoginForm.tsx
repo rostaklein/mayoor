@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, InputGroup } from '@blueprintjs/core';
 import { useMutation } from 'react-apollo';
 import { useFormik, FormikErrors } from 'formik';
 import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
+import { Icon, Input, Button } from 'antd';
 
 import LogoImage from '../../images/mayoor_logo.svg';
 import { LoginMutation, LoginMutationVariables } from '../../__generated__/types';
@@ -69,39 +69,32 @@ export const LoginForm: React.FC = () => {
 		<CenteredWrapper>
 			<S.LoginWrapper onSubmit={handleSubmit}>
 				<S.Logo src={LogoImage} />
-				<S.FormGroupStyled
-					helperText={touched.username && errors.username}
-					intent={touched.username && errors.username ? 'danger' : 'none'}
+				<S.FormItemStyled
+					validateStatus={touched.username && errors.username ? 'error' : ''}
+					help={touched.username && errors.username}
 				>
-					<InputGroup
-						leftIcon="user"
+					<Input
+						prefix={<Icon type="user" />}
 						placeholder={t('Username')}
 						name="username"
 						onChange={handleChange}
 						value={values.username}
 					/>
-				</S.FormGroupStyled>
-				<S.FormGroupStyled
-					helperText={touched.password && errors.password}
-					intent={touched.password && errors.password ? 'danger' : 'none'}
+				</S.FormItemStyled>
+				<S.FormItemStyled
+					validateStatus={touched.password && errors.password ? 'error' : ''}
+					help={touched.password && errors.password}
 				>
-					<InputGroup
-						leftIcon="lock"
+					<Input
+						prefix={<Icon type="lock" theme="filled" />}
 						placeholder={t('Password')}
 						name="password"
-						type="password"
 						onChange={handleChange}
 						value={values.password}
+						type="password"
 					/>
-				</S.FormGroupStyled>
-				<Button
-					intent={'none'}
-					icon={'log-in'}
-					type="submit"
-					fill
-					loading={loading}
-					disabled={!isValid}
-				>
+				</S.FormItemStyled>
+				<Button icon="login" loading={loading} disabled={!isValid} htmlType="submit">
 					{t('Log In')}
 				</Button>
 				<S.LanguageSwitchWrapper>

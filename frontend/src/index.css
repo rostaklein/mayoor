@@ -11,3 +11,7 @@ body,
 :focus {
 	outline: none;
 }
+
+#root .ant-form-explain {
+	font-size: 12px;
+}

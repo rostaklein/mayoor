@@ -1,9 +1,11 @@
-import React from 'react';
-import { Button, ControlGroup, Popover } from '@blueprintjs/core';
+import React, { useState } from 'react';
+import { Popover, Button } from 'antd';
+// import { Button, ControlGroup, Popover } from '@blueprintjs/core';
 import { useTranslation } from 'react-i18next';
 
 export const LanguageSwitch: React.FC = () => {
 	const { i18n } = useTranslation();
+	const [isVisible, setIsVisible] = useState(false);
 
 	const handleLanguageChange = (language: string) => {
 		localStorage.setItem('default-language', language);
@@ -12,7 +14,7 @@ export const LanguageSwitch: React.FC = () => {
 	return (
 		<Popover
 			content={
-				<ControlGroup vertical={false}>
+				<Button.Group>
 					{[
 						{ code: 'en', languageName: 'English' },
 						{ code: 'cs', languageName: 'Čeština' },
@@ -21,15 +23,18 @@ export const LanguageSwitch: React.FC = () => {
 							key={code}
 							onClick={() => handleLanguageChange(code)}
 							disabled={i18n.language === code}
-							minimal
 						>
 							{languageName}
 						</Button>
 					))}
-				</ControlGroup>
+				</Button.Group>
 			}
-			position="bottom"
-			target={<Button icon="globe" minimal />}
-		/>
+			trigger="click"
+			placement="bottom"
+			visible={isVisible}
+			onVisibleChange={setIsVisible}
+		>
+			<Button icon="global" shape="circle" type="ghost" />
+		</Popover>
 	);
 };
