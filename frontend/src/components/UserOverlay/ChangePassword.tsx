@@ -1,31 +1,24 @@
 import React from 'react';
-import { FormGroup, InputGroup, Button } from '@blueprintjs/core';
-import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
 import { FormikErrors, useFormik } from 'formik';
 import { ApolloError } from 'apollo-client';
 import { useMutation } from 'react-apollo';
-import { Position, Toaster } from '@blueprintjs/core';
+import { message, Row, Col, Button, Form, Input, Icon } from 'antd';
+import styled from '@emotion/styled';
 
 import { ChangePasswordMutation, ChangePasswordMutationVariables } from '../../__generated__/types';
 
 import { CHANGE_PASSWORD_MUTATION } from './queries';
-
-const NewPasswordLine = styled.div`
-	display: flex;
-	> div {
-		flex: 1;
-		&:first-of-type {
-			margin-right: 20px;
-		}
-	}
-`;
 
 type FormValues = {
 	oldPassword: string;
 	newPassword: string;
 	newPasswordRepeat: string;
 };
+
+const FormItemStyled = styled(Form.Item)`
+	margin-bottom: 5px;
+`;
 
 export const ChangePassword: React.FC = () => {
 	const { t } = useTranslation();
@@ -50,13 +43,7 @@ export const ChangePassword: React.FC = () => {
 		onSubmit: async ({ oldPassword, newPassword }) => {
 			try {
 				await changePassword({ variables: { oldPassword, newPassword } });
-				Toaster.create({
-					position: Position.TOP,
-				}).show({
-					message: t('pwd_changed'),
-					intent: 'success',
-					icon: 'tick',
-				});
+				message.success(t('pwd_changed'));
 				formik.resetForm();
 			} catch (err) {
 				if (err instanceof ApolloError) {
@@ -64,6 +51,8 @@ export const ChangePassword: React.FC = () => {
 						formik.setErrors({
 							oldPassword: t('old_pwd_incorrect'),
 						});
+					} else {
+						message.error(t('error_changing_pwd'));
 					}
 				}
 			}
@@ -72,20 +61,18 @@ export const ChangePassword: React.FC = () => {
 
 	const getPasswordField = (name: keyof FormValues, label: string) => {
 		const errorMessage = formik.touched[name] && formik.errors[name];
-		const intent = errorMessage ? 'danger' : 'none';
+		const status = errorMessage ? 'error' : '';
 		return (
-			<FormGroup label={label} helperText={errorMessage} intent={intent}>
-				<InputGroup
+			<FormItemStyled validateStatus={status} help={errorMessage}>
+				<Input
+					prefix={<Icon type="lock" theme="filled" />}
 					placeholder={label}
-					leftIcon="lock"
-					type="password"
 					name={name}
-					intent={intent}
-					value={formik.values[name]}
 					onChange={formik.handleChange}
-					required
+					value={formik.values[name]}
+					type="password"
 				/>
-			</FormGroup>
+			</FormItemStyled>
 		);
 	};
 
@@ -93,11 +80,13 @@ export const ChangePassword: React.FC = () => {
 		<form onSubmit={formik.handleSubmit}>
 			<h4>{t('Change your password')}</h4>
 			{getPasswordField('oldPassword', t('Old Password'))}
-			<NewPasswordLine>
-				{getPasswordField('newPassword', t('New Password'))}
-				{getPasswordField('newPasswordRepeat', t('Repeat New Password'))}
-			</NewPasswordLine>
-			<Button intent="primary" type="submit" loading={loading}>
+			<Row gutter={16} type="flex">
+				<Col span={12}>{getPasswordField('newPassword', t('New Password'))}</Col>
+				<Col span={12}>
+					{getPasswordField('newPasswordRepeat', t('Repeat New Password'))}
+				</Col>
+			</Row>
+			<Button type="primary" htmlType="submit" loading={loading}>
 				{t('Change password')}
 			</Button>
 		</form>
