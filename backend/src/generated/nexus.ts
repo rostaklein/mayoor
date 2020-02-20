@@ -40,6 +40,10 @@ export interface NexusGenRootTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Customer: prisma.Customer;
+  CustomerEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Customer']; // Customer!
+  }
   CustomerHelperInfo: { // root type
     city?: string | null; // String
     identificationNumber?: string | null; // String
@@ -48,8 +52,18 @@ export interface NexusGenRootTypes {
     street?: string | null; // String
     taxIdentificationNumber?: string | null; // String
   }
+  CustomersConnection: { // root type
+    edges: NexusGenRootTypes['CustomerEdge'][]; // [CustomerEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
   Mutation: {};
   Order: prisma.Order;
+  PageInfo: { // root type
+    endCursor?: string | null; // String
+    hasNextPage: boolean; // Boolean!
+    hasPreviousPage: boolean; // Boolean!
+    startCursor?: string | null; // String
+  }
   Query: {};
   User: prisma.User;
   String: string;
@@ -89,6 +103,10 @@ export interface NexusGenFieldTypes {
     phone: string | null; // String
     taxIdentificationNumber: string | null; // String
   }
+  CustomerEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Customer']; // Customer!
+  }
   CustomerHelperInfo: { // field return type
     city: string | null; // String
     identificationNumber: string | null; // String
@@ -96,6 +114,10 @@ export interface NexusGenFieldTypes {
     postNumber: string | null; // String
     street: string | null; // String
     taxIdentificationNumber: string | null; // String
+  }
+  CustomersConnection: { // field return type
+    edges: NexusGenRootTypes['CustomerEdge'][]; // [CustomerEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
   }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['User']; // User!
@@ -112,7 +134,14 @@ export interface NexusGenFieldTypes {
     number: number; // Int!
     updatedAt: any; // DateTime!
   }
+  PageInfo: { // field return type
+    endCursor: string | null; // String
+    hasNextPage: boolean; // Boolean!
+    hasPreviousPage: boolean; // Boolean!
+    startCursor: string | null; // String
+  }
   Query: { // field return type
+    getAllCustomers: NexusGenRootTypes['CustomersConnection']; // CustomersConnection!
     getAllOrders: NexusGenRootTypes['Order'][]; // [Order!]!
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
     me: NexusGenRootTypes['User']; // User!
@@ -164,6 +193,12 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getAllCustomers: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
     getCustomerHelperInfo: { // args
       partialIdentificationNumber: string; // String!
     }
@@ -175,7 +210,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "Mutation" | "Order" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerEdge" | "CustomerHelperInfo" | "CustomersConnection" | "Mutation" | "Order" | "PageInfo" | "Query" | "User";
 
 export type NexusGenInputNames = "AddressInput";
 

@@ -1,9 +1,4 @@
-import { Me } from './me';
-import { GetAllOrders } from './orders/getAllOrders';
-import { GetCustomerHelperInfo } from './customers/getCustomerHelperInfo';
-
-export const Queries = {
-  Me,
-  GetAllOrders,
-  GetCustomerHelperInfo,
-};
+export * from './me';
+export * from './orders/getAllOrders';
+export * from './customers/getCustomerHelperInfo';
+export * from './customers/getAllCustomers';

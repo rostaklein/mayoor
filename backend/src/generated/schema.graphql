@@ -38,6 +38,11 @@ type Customer {
   taxIdentificationNumber: String
 }
 
+type CustomerEdge {
+  cursor: String!
+  node: Customer!
+}
+
 type CustomerHelperInfo {
   city: String
   identificationNumber: String
@@ -45,6 +50,11 @@ type CustomerHelperInfo {
   postNumber: String
   street: String
   taxIdentificationNumber: String
+}
+
+type CustomersConnection {
+  edges: [CustomerEdge!]!
+  pageInfo: PageInfo!
 }
 
 scalar DateTime
@@ -66,7 +76,15 @@ type Order {
   updatedAt: DateTime!
 }
 
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
 type Query {
+  getAllCustomers(after: String, before: String, first: Int, last: Int): CustomersConnection!
   getAllOrders: [Order!]!
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   me: User!
