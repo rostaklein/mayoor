@@ -55,6 +55,32 @@ export interface MeQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreateCustomerMutation
+// ====================================================
+
+export interface CreateCustomerMutation_createCustomer {
+  __typename: "Customer";
+  name: string | null;
+  personName: string | null;
+  identificationNumber: string | null;
+}
+
+export interface CreateCustomerMutation {
+  createCustomer: CreateCustomerMutation_createCustomer;
+}
+
+export interface CreateCustomerMutationVariables {
+  name?: string | null;
+  personName?: string | null;
+  identificationNumber?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ChangePasswordMutation
 // ====================================================
 
