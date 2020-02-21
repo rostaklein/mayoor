@@ -16,6 +16,7 @@
   "Add customer": "Přidat zákazníka",
   "missing_company_name": "Název firmy musí být vyplněn",
   "customer_created": "Zákazník vytvořen",
+  "customer_created_fail": "Nepodařilo se vytvořit zákazníka.",
   "Company name": "Název firmy",
   "Identification number": "IČO",
   "Tax identification number": "DIČ",

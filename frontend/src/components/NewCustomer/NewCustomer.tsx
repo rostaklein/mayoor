@@ -38,9 +38,14 @@ export const NewCustomer: React.FC = () => {
 			return errors;
 		},
 		onSubmit: async (values) => {
-			await createCustomer({ variables: values });
-			message.success(t('customer_created'));
-			formik.resetForm();
+			try {
+				await createCustomer({ variables: values });
+				message.success(t('customer_created'));
+				formik.resetForm();
+			} catch (err) {
+				console.error(err);
+				message.error(t('customer_created_fail'));
+			}
 		},
 	});
 

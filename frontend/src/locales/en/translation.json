@@ -16,6 +16,7 @@
   "Add customer": "Add customer",
   "missing_company_name": "Company name is required",
   "customer_created": "Customer successfully created",
+  "customer_created_fail": "Failed to create the customer.",
   "Company name": "Company name",
   "Identification number": "Identification number",
   "Tax identification number": "Tax identification number",
