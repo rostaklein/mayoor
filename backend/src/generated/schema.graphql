@@ -25,6 +25,18 @@ type AuthPayload {
   user: User!
 }
 
+input CreateCustomerInput {
+  addresses: [AddressInput!]
+  allowedBankPayments: Boolean
+  email: String
+  identificationNumber: String
+  name: String
+  note: String
+  personName: String
+  phone: String
+  taxIdentificationNumber: String
+}
+
 type Customer {
   address(after: String, before: String, first: Int, last: Int, skip: Int): [Address!]!
   createdBy: User!
@@ -61,7 +73,7 @@ scalar DateTime
 
 type Mutation {
   changePassword(newPassword: String!, oldPassword: String!): User!
-  createCustomer(addresses: [AddressInput!], allowedBankPayments: Boolean, email: String, identificationNumber: String, name: String, note: String, personName: String, phone: String, taxIdentificationNumber: String): Customer!
+  createCustomer(input: CreateCustomerInput!): Customer!
   createOrder(number: Int!): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!

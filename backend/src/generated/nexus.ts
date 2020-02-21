@@ -28,6 +28,17 @@ export interface NexusGenInputs {
     state?: string | null; // String
     street?: string | null; // String
   }
+  CreateCustomerInput: { // input type
+    addresses?: NexusGenInputs['AddressInput'][] | null; // [AddressInput!]
+    allowedBankPayments?: boolean | null; // Boolean
+    email?: string | null; // String
+    identificationNumber?: string | null; // String
+    name?: string | null; // String
+    note?: string | null; // String
+    personName?: string | null; // String
+    phone?: string | null; // String
+    taxIdentificationNumber?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -84,6 +95,7 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   AddressInput: NexusGenInputs['AddressInput'];
+  CreateCustomerInput: NexusGenInputs['CreateCustomerInput'];
 }
 
 export interface NexusGenFieldTypes {
@@ -185,15 +197,7 @@ export interface NexusGenArgTypes {
       oldPassword: string; // String!
     }
     createCustomer: { // args
-      addresses?: NexusGenInputs['AddressInput'][] | null; // [AddressInput!]
-      allowedBankPayments?: boolean | null; // Boolean
-      email?: string | null; // String
-      identificationNumber?: string | null; // String
-      name?: string | null; // String
-      note?: string | null; // String
-      personName?: string | null; // String
-      phone?: string | null; // String
-      taxIdentificationNumber?: string | null; // String
+      input: NexusGenInputs['CreateCustomerInput']; // CreateCustomerInput!
     }
     createOrder: { // args
       number: number; // Int!
@@ -234,7 +238,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerEdge" | "CustomerHelperInfo" | "CustomersConnection" | "Mutation" | "Order" | "OrderEdge" | "OrdersConnection" | "PageInfo" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput";
+export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput";
 
 export type NexusGenEnumNames = never;
 

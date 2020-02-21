@@ -1,9 +1,9 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import { makeSchema } from 'nexus';
 
-import { Mutations } from './mutations';
+import * as Mutations from './mutations';
 import * as Queries from './queries';
-import { Types } from './types';
+import * as Types from './types';
 import { PageInfo } from './utils/connection';
 
 require('dotenv').config();

@@ -1,6 +1,6 @@
 import { objectType, inputObjectType } from 'nexus';
 
-const AuthPayload = objectType({
+export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition(t) {
     t.string('token');
@@ -8,7 +8,7 @@ const AuthPayload = objectType({
   },
 });
 
-const User = objectType({
+export const User = objectType({
   name: 'User',
   definition(t) {
     t.model.id();
@@ -17,7 +17,7 @@ const User = objectType({
   },
 });
 
-const Address = objectType({
+export const Address = objectType({
   name: 'Address',
   definition(t) {
     t.model.id();
@@ -29,7 +29,7 @@ const Address = objectType({
   },
 });
 
-const Customer = objectType({
+export const Customer = objectType({
   name: 'Customer',
   definition(t) {
     t.model.id();
@@ -45,7 +45,7 @@ const Customer = objectType({
   },
 });
 
-const Order = objectType({
+export const Order = objectType({
   name: 'Order',
   definition(t) {
     t.model.id();
@@ -68,12 +68,3 @@ export const AddressInput = inputObjectType({
     t.boolean('isPrimary');
   },
 });
-
-export const Types = {
-  User,
-  Order,
-  Customer,
-  Address,
-  AuthPayload,
-  AddressInput,
-};
