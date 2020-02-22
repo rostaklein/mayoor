@@ -180,6 +180,7 @@ export const NewCustomer: React.FC = () => {
 					<StyledFormItem label={t('Note')}>
 						<Input.TextArea
 							rows={4}
+							name="note"
 							placeholder={t('customer_note_placeholder')}
 							onChange={formik.handleChange}
 						/>

@@ -4,6 +4,57 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetAllCustomers
+// ====================================================
+
+export interface GetAllCustomers_getAllCustomers_edges_node {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
+}
+
+export interface GetAllCustomers_getAllCustomers_edges {
+  __typename: "CustomerEdge";
+  node: GetAllCustomers_getAllCustomers_edges_node;
+  cursor: string;
+}
+
+export interface GetAllCustomers_getAllCustomers_pageInfo {
+  __typename: "PageInfo";
+  startCursor: string | null;
+  endCursor: string | null;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
+
+export interface GetAllCustomers_getAllCustomers {
+  __typename: "CustomersConnection";
+  totalCount: number;
+  edges: GetAllCustomers_getAllCustomers_edges[];
+  pageInfo: GetAllCustomers_getAllCustomers_pageInfo;
+}
+
+export interface GetAllCustomers {
+  getAllCustomers: GetAllCustomers_getAllCustomers;
+}
+
+export interface GetAllCustomersVariables {
+  first?: number | null;
+  last?: number | null;
+  after?: string | null;
+  before?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: LoginMutation
 // ====================================================
 

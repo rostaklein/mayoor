@@ -8,6 +8,7 @@ import { UserOverlay } from '../UserOverlay/UserOverlay';
 import { MainMenu } from '../MainMenu/MainMenu';
 import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 import { NewCustomer } from '../NewCustomer/NewCustomer';
+import { ListCustomers } from '../ListCustomers/ListCustomers';
 
 import * as S from './MainWrapper.styles';
 
@@ -26,7 +27,7 @@ export const MainWrapper: React.FC = () => {
 		{ path: '/orders/new', title: t('Add order') },
 		{ path: '/orders/list', title: t('List orders') },
 		{ path: '/customers/new', title: t('Add customer'), Component: <NewCustomer /> },
-		{ path: '/customers/list', title: t('Customers') },
+		{ path: '/customers/list', title: t('Customers'), Component: <ListCustomers /> },
 	];
 
 	useEffect(() => {
