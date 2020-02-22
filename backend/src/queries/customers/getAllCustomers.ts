@@ -5,6 +5,7 @@ import { getEdgeObjectType, connectionArgs } from '../../utils/connection';
 export const CustomersConnection = objectType({
   name: 'CustomersConnection',
   definition(t) {
+    t.int('totalCount');
     t.field('pageInfo', {
       type: 'PageInfo',
     });
@@ -21,6 +22,13 @@ export const GetAllCustomers = queryField('getAllCustomers', {
   args: connectionArgs,
   nullable: false,
   resolve: async (_parent, args, ctx) => {
-    return findManyCursor(_args => ctx.prisma.customer.findMany(_args), args);
+    const customers = await findManyCursor(
+      _args => ctx.prisma.customer.findMany(_args),
+      args,
+    );
+    return {
+      totalCount: await ctx.prisma.customer.count(),
+      ...customers,
+    };
   },
 });

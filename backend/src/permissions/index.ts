@@ -22,6 +22,7 @@ export const permissions = shield(
   {
     Query: {
       getAllOrders: rules.isAuthenticatedUser,
+      getAllCustomers: rules.isAuthenticatedUser,
       me: rules.isAuthenticatedUser,
       getCustomerHelperInfo: rules.isAuthenticatedUser,
     },

@@ -67,6 +67,7 @@ type CustomerHelperInfo {
 type CustomersConnection {
   edges: [CustomerEdge!]!
   pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 scalar DateTime
@@ -96,6 +97,7 @@ type OrderEdge {
 type OrdersConnection {
   edges: [OrderEdge!]!
   pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type PageInfo {

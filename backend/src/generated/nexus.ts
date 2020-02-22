@@ -66,6 +66,7 @@ export interface NexusGenRootTypes {
   CustomersConnection: { // root type
     edges: NexusGenRootTypes['CustomerEdge'][]; // [CustomerEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
   }
   Mutation: {};
   Order: prisma.Order;
@@ -76,6 +77,7 @@ export interface NexusGenRootTypes {
   OrdersConnection: { // root type
     edges: NexusGenRootTypes['OrderEdge'][]; // [OrderEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
   }
   PageInfo: { // root type
     endCursor?: string | null; // String
@@ -138,6 +140,7 @@ export interface NexusGenFieldTypes {
   CustomersConnection: { // field return type
     edges: NexusGenRootTypes['CustomerEdge'][]; // [CustomerEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
   }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['User']; // User!
@@ -161,6 +164,7 @@ export interface NexusGenFieldTypes {
   OrdersConnection: { // field return type
     edges: NexusGenRootTypes['OrderEdge'][]; // [OrderEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
   }
   PageInfo: { // field return type
     endCursor: string | null; // String
