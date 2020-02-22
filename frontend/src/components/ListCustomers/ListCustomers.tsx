@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/camelcase */
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Table } from 'antd';
+import { Table, Input, Row, Col } from 'antd';
 import { useQuery } from 'react-apollo';
 import { TFunction } from 'i18next';
 import { ColumnProps, PaginationConfig } from 'antd/lib/table';
@@ -13,7 +13,7 @@ import {
 } from '../../__generated__/types';
 
 import { GET_ALL_CUSTOMERS_QUERY } from './queries';
-import { StyledTableWrapper } from './ListCustomers.styles';
+import { StyledTableWrapper, StyledSearch } from './ListCustomers.styles';
 
 const PAGE_SIZE = 15;
 
@@ -44,16 +44,17 @@ export const ListCustomers: React.FC = () => {
 	const { t } = useTranslation();
 	const [currentPageNumber, setCurrentPageNumber] = useState(1);
 	const [selectedItems, setSelectedItems] = useState<string[]>([]);
-	const { data, loading, fetchMore } = useQuery<GetAllCustomers, GetAllCustomersVariables>(
-		GET_ALL_CUSTOMERS_QUERY,
-		{
-			variables: { first: PAGE_SIZE },
-		},
-	);
+	const { data, loading, fetchMore, refetch } = useQuery<
+		GetAllCustomers,
+		GetAllCustomersVariables
+	>(GET_ALL_CUSTOMERS_QUERY, {
+		variables: { first: PAGE_SIZE },
+	});
 
 	const nodes = data?.getAllCustomers.edges.map((edge) => edge.node) ?? [];
 
 	const pagination: PaginationConfig = {
+		current: currentPageNumber,
 		total: data?.getAllCustomers.totalCount,
 		pageSize: PAGE_SIZE,
 		hideOnSinglePage: true,
@@ -94,8 +95,23 @@ export const ListCustomers: React.FC = () => {
 		setSelectedItems(selectedItems.filter((currentId) => currentId !== id));
 	};
 
+	const searchSubmitHandler = (searchValue: string) => {
+		setCurrentPageNumber(1);
+		refetch({ first: PAGE_SIZE });
+	};
+
 	return (
 		<StyledTableWrapper>
+			<Row type="flex" justify="end">
+				<Col xs={24} md={6}>
+					<StyledSearch
+						enterButton
+						placeholder={t('Search customers')}
+						onSearch={searchSubmitHandler}
+					/>
+				</Col>
+			</Row>
+
 			<Table<GetAllCustomers_getAllCustomers_edges_node>
 				columns={getColumns(t)}
 				dataSource={nodes}

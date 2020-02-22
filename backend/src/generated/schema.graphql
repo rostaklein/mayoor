@@ -108,7 +108,7 @@ type PageInfo {
 }
 
 type Query {
-  getAllCustomers(after: String, before: String, first: Int, last: Int): CustomersConnection!
+  getAllCustomers(after: String, before: String, first: Int, last: Int, search: String): CustomersConnection!
   getAllOrders(after: String, before: String, first: Int, last: Int): OrdersConnection!
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   me: User!
