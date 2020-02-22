@@ -9,3 +9,16 @@ export const CREATE_CUSTOMER_MUTATION = gql`
 		}
 	}
 `;
+
+export const GET_CUSTOMER_HELPER_INFO = gql`
+	query GetCustomerHelperInfo($partialIdentificationNumber: String!) {
+		getCustomerHelperInfo(partialIdentificationNumber: $partialIdentificationNumber) {
+			identificationNumber
+			taxIdentificationNumber
+			name
+			city
+			street
+			postNumber
+		}
+	}
+`;

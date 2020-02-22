@@ -79,6 +79,33 @@ export interface CreateCustomerMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetCustomerHelperInfo
+// ====================================================
+
+export interface GetCustomerHelperInfo_getCustomerHelperInfo {
+  __typename: "CustomerHelperInfo";
+  identificationNumber: string | null;
+  taxIdentificationNumber: string | null;
+  name: string | null;
+  city: string | null;
+  street: string | null;
+  postNumber: string | null;
+}
+
+export interface GetCustomerHelperInfo {
+  getCustomerHelperInfo: GetCustomerHelperInfo_getCustomerHelperInfo;
+}
+
+export interface GetCustomerHelperInfoVariables {
+  partialIdentificationNumber: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ChangePasswordMutation
 // ====================================================
 

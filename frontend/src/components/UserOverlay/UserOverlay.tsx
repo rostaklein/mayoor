@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
-import styled from '@emotion/styled';
 
 import { useAppState } from '../../appContext/context';
 

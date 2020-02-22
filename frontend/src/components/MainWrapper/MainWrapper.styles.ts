@@ -17,7 +17,7 @@ export const Aside = styled.aside`
 `;
 
 export const Logo = styled.img`
-	width: 220px;
+	width: 100%;
 	height: 50px;
 `;
 

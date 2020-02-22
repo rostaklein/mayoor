@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useFormik, FormikErrors, FieldArray } from 'formik';
-import { Form, Icon, Input, Button, Row, Col, Divider, message, Checkbox } from 'antd';
-import { useMutation } from 'react-apollo';
+import { useFormik, FormikErrors } from 'formik';
+import { Icon, Input, Button, Row, Col, message, Checkbox } from 'antd';
+import { useMutation, useQuery } from 'react-apollo';
+import { ApolloError } from 'apollo-client';
 
-import { CreateCustomerMutation, CreateCustomerMutationVariables } from '../../__generated__/types';
+import {
+	CreateCustomerMutation,
+	CreateCustomerMutationVariables,
+	GetCustomerHelperInfoVariables,
+	GetCustomerHelperInfo,
+} from '../../__generated__/types';
 
 import { StyledForm, StyledDivider, StyledFormItem } from './NewCustomer.styles';
-import { CREATE_CUSTOMER_MUTATION } from './queries';
+import { CREATE_CUSTOMER_MUTATION, GET_CUSTOMER_HELPER_INFO } from './queries';
 
 const initialValues = {
 	name: '',
@@ -28,6 +34,7 @@ type FormValues = typeof initialValues;
 
 export const NewCustomer: React.FC = () => {
 	const { t } = useTranslation();
+	const [isLoadingHelperInfo, setIsLoadingHelperInfo] = useState(false);
 
 	const [createCustomer, { loading }] = useMutation<
 		CreateCustomerMutation,
@@ -55,12 +62,57 @@ export const NewCustomer: React.FC = () => {
 		},
 	});
 
+	const helperInfoQuery = useQuery<GetCustomerHelperInfo, GetCustomerHelperInfoVariables>(
+		GET_CUSTOMER_HELPER_INFO,
+		{
+			skip: true,
+			onError: console.error,
+		},
+	);
+
+	const queryForHelperInfo = async () => {
+		setIsLoadingHelperInfo(true);
+		try {
+			const {
+				data: { getCustomerHelperInfo },
+			} = await helperInfoQuery.refetch({
+				partialIdentificationNumber: formik.values.identificationNumber,
+			});
+
+			const {
+				taxIdentificationNumber,
+				name,
+				city,
+				street,
+				postNumber,
+			} = getCustomerHelperInfo;
+
+			formik.setValues({
+				...formik.values,
+				taxIdentificationNumber:
+					taxIdentificationNumber || formik.values.taxIdentificationNumber,
+				name: name || formik.values.name,
+			});
+			formik.setFieldValue('addresses.0', { city, street, postNumber });
+		} catch (err) {
+			if (err instanceof ApolloError) {
+				if (err.graphQLErrors[0].extensions?.code === 'INFO_NOT_FOUND') {
+					formik.setErrors({
+						...formik.errors,
+						identificationNumber: t('company_not_found_in_ares'),
+					});
+				}
+			}
+		}
+		setIsLoadingHelperInfo(false);
+	};
+
 	const getField = (name: keyof FormValues, label: string, icon?: string) => {
 		const errorMessage = formik.touched[name] && formik.errors[name];
 		const status = errorMessage ? 'error' : '';
 		const value = formik.values[name];
 		if (typeof value !== 'string') {
-			throw new Error('Cant use regular input for anything else but input.');
+			throw new Error('Cant use regular input for anything else but string.');
 		}
 		return (
 			<StyledFormItem validateStatus={status} help={errorMessage}>
@@ -77,11 +129,25 @@ export const NewCustomer: React.FC = () => {
 	return (
 		<StyledForm onSubmit={formik.handleSubmit}>
 			<Row gutter={32}>
-				<Col xs={24} sm={12}>
+				<Col xs={24} md={12}>
 					{getField('name', t('Company name'), 'contacts')}
 					<Row gutter={16}>
 						<Col span={12}>
-							{getField('identificationNumber', t('Identification number'), 'number')}
+							<StyledFormItem
+								validateStatus={formik.errors.identificationNumber ? 'error' : ''}
+								help={formik.errors.identificationNumber}
+							>
+								<Input.Search
+									name={'identificationNumber'}
+									prefix={<Icon type="number" />}
+									placeholder={t('Identification number')}
+									onSearch={queryForHelperInfo}
+									onChange={formik.handleChange}
+									value={formik.values.identificationNumber}
+									enterButton
+									loading={isLoadingHelperInfo}
+								/>
+							</StyledFormItem>
 						</Col>
 						<Col span={12}>
 							{getField(
@@ -98,7 +164,7 @@ export const NewCustomer: React.FC = () => {
 						<Col span={12}>{getField('phone', t('Phone'), 'phone')}</Col>
 					</Row>
 				</Col>
-				<Col xs={24} sm={12}>
+				<Col xs={24} md={12}>
 					<Checkbox
 						name="allowedBankPayments"
 						onClick={() =>
@@ -123,7 +189,7 @@ export const NewCustomer: React.FC = () => {
 			<Row gutter={32}>
 				{[{ label: t('Shipping address') }, { label: t('Billing address') }].map(
 					({ label }, i) => (
-						<Col xs={24} sm={12} key={i}>
+						<Col xs={24} md={12} key={i}>
 							<StyledDivider orientation="left">{label}</StyledDivider>
 							<StyledFormItem>
 								<Input
