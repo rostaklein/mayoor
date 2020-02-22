@@ -6,6 +6,8 @@
   "Email": "Email",
   "Phone": "Telefon",
   "Showing {{start}}-{{end}} of {{total}} customers": "Zobrazeno {{start}}-{{end}} z celkem {{total}} zákazníků",
+  "Search customers": "Vyhledat zákazníka",
+  "Customers list is empty": "List zákazníků je prázdný",
   "password_required": "Prosím, vyplňte heslo.",
   "username_required": "Prosím, vyplňte uživatelské jméno.",
   "user_not_found": "Uživatel nenalezen.",

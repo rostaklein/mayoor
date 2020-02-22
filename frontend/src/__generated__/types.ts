@@ -47,6 +47,7 @@ export interface GetAllCustomersVariables {
   last?: number | null;
   after?: string | null;
   before?: string | null;
+  search?: string | null;
 }
 
 /* tslint:disable */

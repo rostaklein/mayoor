@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/camelcase */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Table, Input, Row, Col } from 'antd';
+import { Table, Row, Col, Empty } from 'antd';
 import { useQuery } from 'react-apollo';
 import { TFunction } from 'i18next';
 import { ColumnProps, PaginationConfig } from 'antd/lib/table';
@@ -15,7 +15,7 @@ import {
 import { GET_ALL_CUSTOMERS_QUERY } from './queries';
 import { StyledTableWrapper, StyledSearch } from './ListCustomers.styles';
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 10;
 
 const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_edges_node>[] => [
 	{
@@ -97,7 +97,7 @@ export const ListCustomers: React.FC = () => {
 
 	const searchSubmitHandler = (searchValue: string) => {
 		setCurrentPageNumber(1);
-		refetch({ first: PAGE_SIZE });
+		refetch({ first: PAGE_SIZE, search: searchValue });
 	};
 
 	return (
@@ -122,9 +122,17 @@ export const ListCustomers: React.FC = () => {
 				rowSelection={{
 					onSelect: ({ id }, isSelected) => selectHandler(id, isSelected),
 					selectedRowKeys: selectedItems,
-					onSelectAll: (isSelected, selectedRows) => {
+					onSelectAll: (_, selectedRows) => {
 						setSelectedItems(selectedRows.map(({ id }) => id));
 					},
+				}}
+				locale={{
+					emptyText: (
+						<Empty
+							image={Empty.PRESENTED_IMAGE_SIMPLE}
+							description={t('Customers list is empty')}
+						/>
+					),
 				}}
 			/>
 		</StyledTableWrapper>

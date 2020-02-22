@@ -6,6 +6,8 @@
   "Email": "Email",
   "Phone": "Phone",
   "Showing {{start}}-{{end}} of {{total}} customers": "Showing {{start}}-{{end}} of {{total}} customers",
+  "Search customers": "Search customers",
+  "Customers list is empty": "Customers list is empty",
   "password_required": "Please, fill in the password.",
   "username_required": "Please, fill in the username.",
   "user_not_found": "User not found.",
