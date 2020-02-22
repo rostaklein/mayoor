@@ -70,9 +70,7 @@ export interface CreateCustomerMutation {
 }
 
 export interface CreateCustomerMutationVariables {
-  name?: string | null;
-  personName?: string | null;
-  identificationNumber?: string | null;
+  input: CreateCustomerInput;
 }
 
 /* tslint:disable */
@@ -107,6 +105,27 @@ export interface ChangePasswordMutationVariables {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface AddressInput {
+  street?: string | null;
+  number?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postNumber?: string | null;
+  isPrimary?: boolean | null;
+}
+
+export interface CreateCustomerInput {
+  name?: string | null;
+  personName?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  identificationNumber?: string | null;
+  taxIdentificationNumber?: string | null;
+  allowedBankPayments?: boolean | null;
+  note?: string | null;
+  addresses?: AddressInput[] | null;
+}
 
 //==============================================================
 // END Enums and Input Objects
