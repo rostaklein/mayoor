@@ -114,7 +114,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Customer: { // field return type
-    address: NexusGenRootTypes['Address'][]; // [Address!]!
+    addresses: NexusGenRootTypes['Address'][]; // [Address!]!
     allowedBankPayments: boolean; // Boolean!
     createdBy: NexusGenRootTypes['User']; // User!
     email: string | null; // String
@@ -189,7 +189,7 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Customer: {
-    address: { // args
+    addresses: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int

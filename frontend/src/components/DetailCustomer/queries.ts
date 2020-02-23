@@ -11,7 +11,7 @@ export const GET_CUSTOMER = gql`
 			phone
 			note
 			allowedBankPayments
-			address {
+			addresses {
 				isPrimary
 				street
 				city

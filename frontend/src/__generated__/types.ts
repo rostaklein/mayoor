@@ -4,6 +4,44 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetCustomer
+// ====================================================
+
+export interface GetCustomer_getCustomer_addresses {
+  __typename: "Address";
+  isPrimary: boolean;
+  street: string | null;
+  city: string | null;
+  postNumber: string | null;
+}
+
+export interface GetCustomer_getCustomer {
+  __typename: "Customer";
+  name: string | null;
+  identificationNumber: string | null;
+  taxIdentificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
+  note: string | null;
+  allowedBankPayments: boolean;
+  addresses: GetCustomer_getCustomer_addresses[];
+}
+
+export interface GetCustomer {
+  getCustomer: GetCustomer_getCustomer | null;
+}
+
+export interface GetCustomerVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetAllCustomers
 // ====================================================
 

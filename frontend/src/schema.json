@@ -730,7 +730,7 @@
             "deprecationReason": null
           },
           {
-            "name": "address",
+            "name": "addresses",
             "description": null,
             "args": [
               {
