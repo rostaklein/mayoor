@@ -39,6 +39,7 @@ input CreateCustomerInput {
 
 type Customer {
   address(after: String, before: String, first: Int, last: Int, skip: Int): [Address!]!
+  allowedBankPayments: Boolean!
   createdBy: User!
   email: String
   id: String!

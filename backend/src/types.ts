@@ -38,6 +38,7 @@ export const Customer = objectType({
     t.model.phone();
     t.model.identificationNumber();
     t.model.taxIdentificationNumber();
+    t.model.allowedBankPayments();
     t.model.personName();
     t.model.note();
     t.model.createdBy();

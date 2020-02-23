@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../images/mayoor_logo.svg';
@@ -9,6 +9,7 @@ import { MainMenu } from '../MainMenu/MainMenu';
 import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 import { NewCustomer } from '../NewCustomer/NewCustomer';
 import { ListCustomers } from '../ListCustomers/ListCustomers';
+import { DetailCustomer } from '../DetailCustomer/DetailCustomer';
 
 import * as S from './MainWrapper.styles';
 
@@ -28,6 +29,11 @@ export const MainWrapper: React.FC = () => {
 		{ path: '/orders/list', title: t('List orders') },
 		{ path: '/customers/new', title: t('Add customer'), Component: <NewCustomer /> },
 		{ path: '/customers/list', title: t('Customers'), Component: <ListCustomers /> },
+		{
+			path: '/customers/:id',
+			title: t('Customer detail'),
+			Component: <DetailCustomer />,
+		},
 	];
 
 	useEffect(() => {
@@ -59,7 +65,6 @@ export const MainWrapper: React.FC = () => {
 							{Component}
 						</Route>
 					))}
-					<Redirect from="/" to="/orders/inprogress" />
 				</Switch>
 			</S.Main>
 		</S.BodyWrapper>

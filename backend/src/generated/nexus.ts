@@ -115,6 +115,7 @@ export interface NexusGenFieldTypes {
   }
   Customer: { // field return type
     address: NexusGenRootTypes['Address'][]; // [Address!]!
+    allowedBankPayments: boolean; // Boolean!
     createdBy: NexusGenRootTypes['User']; // User!
     email: string | null; // String
     id: string; // String!

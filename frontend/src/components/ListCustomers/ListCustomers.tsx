@@ -1,10 +1,11 @@
 /* eslint-disable  @typescript-eslint/camelcase */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Table, Row, Col, Empty } from 'antd';
+import { Table, Row, Col, Empty, Button } from 'antd';
 import { useQuery } from 'react-apollo';
 import { TFunction } from 'i18next';
 import { ColumnProps, PaginationConfig } from 'antd/lib/table';
+import { Link } from 'react-router-dom';
 
 import {
 	GetAllCustomers,
@@ -20,23 +21,43 @@ const PAGE_SIZE = 10;
 const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_edges_node>[] => [
 	{
 		title: t('Company name'),
+		ellipsis: true,
 		dataIndex: 'name',
 	},
 	{
 		title: t('Identification number'),
+		width: 150,
+		ellipsis: true,
 		dataIndex: 'identificationNumber',
 	},
 	{
 		title: t('Contact person name'),
+		width: 250,
+		ellipsis: true,
 		dataIndex: 'personName',
 	},
 	{
 		title: t('Email'),
+		width: 150,
+		ellipsis: true,
 		dataIndex: 'email',
 	},
 	{
 		title: t('Phone'),
+		width: 150,
+		ellipsis: true,
 		dataIndex: 'phone',
+	},
+	{
+		key: 'actions',
+		width: 50,
+		render: (_, record) => {
+			return (
+				<Link to={`/customers/${record.id}`}>
+					<Button icon="right-circle" type="link"></Button>
+				</Link>
+			);
+		},
 	},
 ];
 
