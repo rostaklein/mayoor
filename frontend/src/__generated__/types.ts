@@ -14,6 +14,7 @@ export interface GetCustomer_getCustomer_createdBy {
 
 export interface GetCustomer_getCustomer_addresses {
   __typename: "Address";
+  id: string;
   isPrimary: boolean;
   street: string | null;
   city: string | null;
@@ -22,6 +23,7 @@ export interface GetCustomer_getCustomer_addresses {
 
 export interface GetCustomer_getCustomer {
   __typename: "Customer";
+  id: string;
   name: string | null;
   identificationNumber: string | null;
   taxIdentificationNumber: string | null;
@@ -42,6 +44,54 @@ export interface GetCustomer {
 
 export interface GetCustomerVariables {
   id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateCustomer
+// ====================================================
+
+export interface UpdateCustomer_updateCustomer_createdBy {
+  __typename: "User";
+  name: string | null;
+}
+
+export interface UpdateCustomer_updateCustomer_addresses {
+  __typename: "Address";
+  id: string;
+  isPrimary: boolean;
+  street: string | null;
+  city: string | null;
+  postNumber: string | null;
+}
+
+export interface UpdateCustomer_updateCustomer {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+  taxIdentificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
+  note: string | null;
+  allowedBankPayments: boolean;
+  createdBy: UpdateCustomer_updateCustomer_createdBy;
+  createdAt: any;
+  updatedAt: any;
+  addresses: UpdateCustomer_updateCustomer_addresses[];
+}
+
+export interface UpdateCustomer {
+  updateCustomer: UpdateCustomer_updateCustomer;
+}
+
+export interface UpdateCustomerVariables {
+  input: UpdateCustomerInput;
 }
 
 /* tslint:disable */
@@ -227,6 +277,46 @@ export interface ChangePasswordMutationVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL fragment: CustomerDetails
+// ====================================================
+
+export interface CustomerDetails_createdBy {
+  __typename: "User";
+  name: string | null;
+}
+
+export interface CustomerDetails_addresses {
+  __typename: "Address";
+  id: string;
+  isPrimary: boolean;
+  street: string | null;
+  city: string | null;
+  postNumber: string | null;
+}
+
+export interface CustomerDetails {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+  taxIdentificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
+  note: string | null;
+  allowedBankPayments: boolean;
+  createdBy: CustomerDetails_createdBy;
+  createdAt: any;
+  updatedAt: any;
+  addresses: CustomerDetails_addresses[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
@@ -250,6 +340,29 @@ export interface CreateCustomerInput {
   allowedBankPayments?: boolean | null;
   note?: string | null;
   addresses?: AddressInput[] | null;
+}
+
+export interface UpdateAddressInput {
+  id?: string | null;
+  street?: string | null;
+  number?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postNumber?: string | null;
+  isPrimary?: boolean | null;
+}
+
+export interface UpdateCustomerInput {
+  id?: string | null;
+  name?: string | null;
+  personName?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  identificationNumber?: string | null;
+  taxIdentificationNumber?: string | null;
+  allowedBankPayments?: boolean | null;
+  note?: string | null;
+  addresses?: UpdateAddressInput[] | null;
 }
 
 //==============================================================

@@ -28,7 +28,7 @@ export type UserFormValues = {
 
 type Props = {
 	initialValues: UserFormValues;
-	onSubmit: (values: UserFormValues) => Promise<void>;
+	onSubmit: (values: UserFormValues, resetForm: () => void) => Promise<void>;
 	submitButton: React.ReactNode;
 };
 
@@ -46,8 +46,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 			return errors;
 		},
 		onSubmit: async (values) => {
-			await props.onSubmit(values);
-			formik.resetForm();
+			await props.onSubmit(values, formik.resetForm);
 		},
 	});
 
@@ -181,6 +180,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 							name="note"
 							placeholder={t('customer_note_placeholder')}
 							onChange={formik.handleChange}
+							value={formik.values.note || ''}
 						/>
 					</StyledFormItem>
 				</Col>

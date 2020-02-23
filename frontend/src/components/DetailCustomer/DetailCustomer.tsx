@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-apollo';
-import { Button, Spin, Tag, Descriptions, Icon } from 'antd';
+import { useQuery, useMutation } from 'react-apollo';
+import { Button, Spin, Tag, Descriptions, Icon, message } from 'antd';
 import styled from '@emotion/styled';
 
-import { GetCustomer, GetCustomerVariables } from '../../__generated__/types';
+import {
+	GetCustomer,
+	GetCustomerVariables,
+	UpdateCustomer,
+	UpdateCustomerVariables,
+} from '../../__generated__/types';
 import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { useDateFormatter } from '../../locales/useDateFormatter';
 
-import { GET_CUSTOMER } from './queries';
+import { GET_CUSTOMER, UPDATE_CUSTOMER } from './queries';
 
 const StyledDescriptions = styled(Descriptions)`
 	padding: 0 25px;
@@ -31,12 +36,52 @@ export const DetailCustomer: React.FC = () => {
 		variables: { id: routeParams.id },
 	});
 
+	const [updateCustomer, { loading }] = useMutation<UpdateCustomer, UpdateCustomerVariables>(
+		UPDATE_CUSTOMER,
+	);
+
 	useEffect(() => {
 		document.title = `${data?.getCustomer?.name} | mayoor`;
 	}, [data?.getCustomer]);
 
 	const submitHandler = async (values: UserFormValues) => {
-		console.log(values);
+		try {
+			const {
+				name,
+				identificationNumber,
+				taxIdentificationNumber,
+				personName,
+				email,
+				phone,
+				note,
+				allowedBankPayments,
+				addresses,
+			} = values;
+
+			await updateCustomer({
+				variables: {
+					input: {
+						id: routeParams.id,
+						name,
+						identificationNumber,
+						taxIdentificationNumber,
+						personName,
+						email,
+						phone,
+						note,
+						allowedBankPayments,
+						addresses: data?.getCustomer?.addresses.map((addr, i) => {
+							const { street, city, postNumber, isPrimary } = addresses[i];
+							return { id: addr.id, street, city, postNumber, isPrimary };
+						}),
+					},
+				},
+			});
+			message.success(t('customer_updated'));
+		} catch (err) {
+			console.error(err);
+			message.error(t('customer_update_fail'));
+		}
 	};
 
 	if (!data || !data.getCustomer) {
@@ -61,7 +106,12 @@ export const DetailCustomer: React.FC = () => {
 			<CustomerForm
 				onSubmit={submitHandler}
 				submitButton={
-					<Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
+					<Button
+						type="primary"
+						htmlType="submit"
+						loading={loading}
+						style={{ marginTop: 10 }}
+					>
 						{t('Save customer')}
 					</Button>
 				}

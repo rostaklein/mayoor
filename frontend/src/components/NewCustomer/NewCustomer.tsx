@@ -32,10 +32,11 @@ export const NewCustomer: React.FC = () => {
 		CreateCustomerMutationVariables
 	>(CREATE_CUSTOMER_MUTATION);
 
-	const submitHandler = async (values: UserFormValues) => {
+	const submitHandler = async (values: UserFormValues, resetForm: () => void) => {
 		try {
 			await createCustomer({ variables: { input: values } });
 			message.success(t('customer_created'));
+			resetForm();
 		} catch (err) {
 			console.error(err);
 			message.error(t('customer_created_fail'));
