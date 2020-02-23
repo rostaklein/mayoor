@@ -12,6 +12,7 @@ import {
 	GetAllCustomersVariables,
 	GetAllCustomers_getAllCustomers_edges_node,
 } from '../../__generated__/types';
+import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 
 import { GET_ALL_CUSTOMERS_QUERY } from './queries';
 import { StyledTableWrapper, StyledSearch } from './ListCustomers.styles';
@@ -122,40 +123,43 @@ export const ListCustomers: React.FC = () => {
 	};
 
 	return (
-		<StyledTableWrapper>
-			<Row type="flex" justify="end">
-				<Col xs={24} md={6}>
-					<StyledSearch
-						enterButton
-						placeholder={t('Search customers')}
-						onSearch={searchSubmitHandler}
-					/>
-				</Col>
-			</Row>
-
-			<Table<GetAllCustomers_getAllCustomers_edges_node>
-				columns={getColumns(t)}
-				dataSource={nodes}
-				pagination={pagination}
-				loading={loading}
-				rowKey={(record) => record.id}
-				size="middle"
-				rowSelection={{
-					onSelect: ({ id }, isSelected) => selectHandler(id, isSelected),
-					selectedRowKeys: selectedItems,
-					onSelectAll: (_, selectedRows) => {
-						setSelectedItems(selectedRows.map(({ id }) => id));
-					},
-				}}
-				locale={{
-					emptyText: (
-						<Empty
-							image={Empty.PRESENTED_IMAGE_SIMPLE}
-							description={t('Customers list is empty')}
+		<>
+			<PageTitle>{t('Customers')}</PageTitle>
+			<StyledTableWrapper>
+				<Row type="flex" justify="end">
+					<Col xs={24} md={6}>
+						<StyledSearch
+							enterButton
+							placeholder={t('Search customers')}
+							onSearch={searchSubmitHandler}
 						/>
-					),
-				}}
-			/>
-		</StyledTableWrapper>
+					</Col>
+				</Row>
+
+				<Table<GetAllCustomers_getAllCustomers_edges_node>
+					columns={getColumns(t)}
+					dataSource={nodes}
+					pagination={pagination}
+					loading={loading}
+					rowKey={(record) => record.id}
+					size="middle"
+					rowSelection={{
+						onSelect: ({ id }, isSelected) => selectHandler(id, isSelected),
+						selectedRowKeys: selectedItems,
+						onSelectAll: (_, selectedRows) => {
+							setSelectedItems(selectedRows.map(({ id }) => id));
+						},
+					}}
+					locale={{
+						emptyText: (
+							<Empty
+								image={Empty.PRESENTED_IMAGE_SIMPLE}
+								description={t('Customers list is empty')}
+							/>
+						),
+					}}
+				/>
+			</StyledTableWrapper>
+		</>
 	);
 };
