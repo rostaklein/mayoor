@@ -175,6 +175,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllCustomers: NexusGenRootTypes['CustomersConnection']; // CustomersConnection!
     getAllOrders: NexusGenRootTypes['OrdersConnection']; // OrdersConnection!
+    getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
     me: NexusGenRootTypes['User']; // User!
   }
@@ -229,6 +230,9 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+    }
+    getCustomer: { // args
+      id: string; // ID!
     }
     getCustomerHelperInfo: { // args
       partialIdentificationNumber: string; // String!
