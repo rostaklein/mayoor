@@ -39,6 +39,27 @@ export interface NexusGenInputs {
     phone?: string | null; // String
     taxIdentificationNumber?: string | null; // String
   }
+  UpdateAddressInput: { // input type
+    city?: string | null; // String
+    id?: string | null; // ID
+    isPrimary?: boolean | null; // Boolean
+    number?: string | null; // String
+    postNumber?: string | null; // String
+    state?: string | null; // String
+    street?: string | null; // String
+  }
+  UpdateCustomerInput: { // input type
+    addresses?: NexusGenInputs['UpdateAddressInput'][] | null; // [UpdateAddressInput!]
+    allowedBankPayments?: boolean | null; // Boolean
+    email?: string | null; // String
+    id?: string | null; // ID
+    identificationNumber?: string | null; // String
+    name?: string | null; // String
+    note?: string | null; // String
+    personName?: string | null; // String
+    phone?: string | null; // String
+    taxIdentificationNumber?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -98,6 +119,8 @@ export interface NexusGenRootTypes {
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   AddressInput: NexusGenInputs['AddressInput'];
   CreateCustomerInput: NexusGenInputs['CreateCustomerInput'];
+  UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
+  UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
 }
 
 export interface NexusGenFieldTypes {
@@ -151,6 +174,7 @@ export interface NexusGenFieldTypes {
     createOrder: NexusGenRootTypes['Order']; // Order!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    updateCustomer: NexusGenRootTypes['Customer']; // Customer!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -219,6 +243,9 @@ export interface NexusGenArgTypes {
       name?: string | null; // String
       password: string; // String!
     }
+    updateCustomer: { // args
+      input: NexusGenInputs['UpdateCustomerInput']; // UpdateCustomerInput!
+    }
   }
   Query: {
     getAllCustomers: { // args
@@ -250,7 +277,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerEdge" | "CustomerHelperInfo" | "CustomersConnection" | "Mutation" | "Order" | "OrderEdge" | "OrdersConnection" | "PageInfo" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput";
+export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput" | "UpdateAddressInput" | "UpdateCustomerInput";
 
 export type NexusGenEnumNames = never;
 

@@ -71,3 +71,16 @@ export const AddressInput = inputObjectType({
     t.boolean('isPrimary');
   },
 });
+
+export const UpdateAddressInput = inputObjectType({
+  name: 'UpdateAddressInput',
+  definition(t) {
+    t.id('id');
+    t.string('street');
+    t.string('number');
+    t.string('city');
+    t.string('state');
+    t.string('postNumber');
+    t.boolean('isPrimary');
+  },
+});

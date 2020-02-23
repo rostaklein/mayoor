@@ -81,6 +81,7 @@ type Mutation {
   createOrder(number: Int!): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!
+  updateCustomer(input: UpdateCustomerInput!): Customer!
 }
 
 type Order {
@@ -116,6 +117,29 @@ type Query {
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   me: User!
+}
+
+input UpdateAddressInput {
+  city: String
+  id: ID
+  isPrimary: Boolean
+  number: String
+  postNumber: String
+  state: String
+  street: String
+}
+
+input UpdateCustomerInput {
+  addresses: [UpdateAddressInput!]
+  allowedBankPayments: Boolean
+  email: String
+  id: ID
+  identificationNumber: String
+  name: String
+  note: String
+  personName: String
+  phone: String
+  taxIdentificationNumber: String
 }
 
 type User {
