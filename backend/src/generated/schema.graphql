@@ -40,6 +40,7 @@ input CreateCustomerInput {
 type Customer {
   addresses(after: String, before: String, first: Int, last: Int, skip: Int): [Address!]!
   allowedBankPayments: Boolean!
+  createdAt: DateTime!
   createdBy: User!
   email: String
   id: String!
@@ -49,6 +50,7 @@ type Customer {
   personName: String
   phone: String
   taxIdentificationNumber: String
+  updatedAt: DateTime!
 }
 
 type CustomerEdge {

@@ -116,6 +116,7 @@ export interface NexusGenFieldTypes {
   Customer: { // field return type
     addresses: NexusGenRootTypes['Address'][]; // [Address!]!
     allowedBankPayments: boolean; // Boolean!
+    createdAt: any; // DateTime!
     createdBy: NexusGenRootTypes['User']; // User!
     email: string | null; // String
     id: string; // String!
@@ -125,6 +126,7 @@ export interface NexusGenFieldTypes {
     personName: string | null; // String
     phone: string | null; // String
     taxIdentificationNumber: string | null; // String
+    updatedAt: any; // DateTime!
   }
   CustomerEdge: { // field return type
     cursor: string; // String!

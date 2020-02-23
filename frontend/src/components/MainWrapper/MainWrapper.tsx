@@ -61,8 +61,7 @@ export const MainWrapper: React.FC = () => {
 				<Switch>
 					{routes.map(({ path, title, Component }) => (
 						<Route path={path} key={path}>
-							<S.PageTitle>{title}</S.PageTitle>
-							{Component}
+							{Component ? Component : <S.PageTitle>{title}</S.PageTitle>}
 						</Route>
 					))}
 				</Switch>

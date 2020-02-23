@@ -11,6 +11,11 @@ export const GET_CUSTOMER = gql`
 			phone
 			note
 			allowedBankPayments
+			createdBy {
+				name
+			}
+			createdAt
+			updatedAt
 			addresses {
 				isPrimary
 				street

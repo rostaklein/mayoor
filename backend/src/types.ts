@@ -42,6 +42,8 @@ export const Customer = objectType({
     t.model.personName();
     t.model.note();
     t.model.createdBy();
+    t.model.createdAt();
+    t.model.updatedAt();
     t.model.address({ type: 'Address', alias: 'addresses' });
   },
 });

@@ -5,6 +5,7 @@ import { useMutation } from 'react-apollo';
 
 import { CreateCustomerMutation, CreateCustomerMutationVariables } from '../../__generated__/types';
 import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
+import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 
 import { CREATE_CUSTOMER_MUTATION } from './queries';
 
@@ -42,19 +43,22 @@ export const NewCustomer: React.FC = () => {
 	};
 
 	return (
-		<CustomerForm
-			onSubmit={submitHandler}
-			initialValues={initialValues}
-			submitButton={
-				<Button
-					type="primary"
-					htmlType="submit"
-					loading={loading}
-					style={{ marginTop: 10 }}
-				>
-					{t('Add customer')}
-				</Button>
-			}
-		/>
+		<>
+			<PageTitle>{t('Add customer')}</PageTitle>
+			<CustomerForm
+				onSubmit={submitHandler}
+				initialValues={initialValues}
+				submitButton={
+					<Button
+						type="primary"
+						htmlType="submit"
+						loading={loading}
+						style={{ marginTop: 10 }}
+					>
+						{t('Add customer')}
+					</Button>
+				}
+			/>
+		</>
 	);
 };

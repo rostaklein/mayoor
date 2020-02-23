@@ -7,6 +7,11 @@
 // GraphQL query operation: GetCustomer
 // ====================================================
 
+export interface GetCustomer_getCustomer_createdBy {
+  __typename: "User";
+  name: string | null;
+}
+
 export interface GetCustomer_getCustomer_addresses {
   __typename: "Address";
   isPrimary: boolean;
@@ -25,6 +30,9 @@ export interface GetCustomer_getCustomer {
   phone: string | null;
   note: string | null;
   allowedBankPayments: boolean;
+  createdBy: GetCustomer_getCustomer_createdBy;
+  createdAt: any;
+  updatedAt: any;
   addresses: GetCustomer_getCustomer_addresses[];
 }
 
