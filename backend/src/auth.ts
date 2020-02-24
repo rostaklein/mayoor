@@ -7,7 +7,7 @@ export const issueToken = (userDetails: UserDetails): string => {
     throw new Error('No client secret provided in ENV.');
   }
   return jwt.sign(userDetails, process.env.CLIENT_SECRET, {
-    expiresIn: 86400, // expires in 24 hours
+    expiresIn: 43200, // expires in 12 hours
   });
 };
 

@@ -3,7 +3,7 @@ import { useQuery, ApolloProvider } from 'react-apollo';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Icon, Spin, Alert } from 'antd';
+import { Icon, Spin, Alert, message } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -30,6 +30,13 @@ const App: React.FC = () => {
 	}, [language]);
 
 	const { called, loading, error } = useQuery<MeQuery>(ME_QUERY, {
+		onError: (err) => {
+			const token = localStorage.getItem('auth-token');
+			if (token && err.graphQLErrors[0].extensions?.code === 'NOT_AUTHORIZED') {
+				localStorage.removeItem('auth-token');
+				message.error(t('inactivity_logged_out'));
+			}
+		},
 		onCompleted: (data) => {
 			dispatch({ type: 'SET_CURRENT_USER', user: { ...data.me } });
 		},

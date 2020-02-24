@@ -1,4 +1,5 @@
 {
+  "inactivity_logged_out": "We have logged you out for security reasons.",
   "Could not connect to the backend server": "Could not connect to the backend server",
   "missing_company_name": "Company name is required",
   "Identification number required for the search": "Identification number required for the search",
@@ -25,6 +26,7 @@
   "Last Updated At": "Last Updated At",
   "Save customer": "Save customer",
   "Showing {{start}}-{{end}} of {{total}} customers": "Showing {{start}}-{{end}} of {{total}} customers",
+  "Customers": "Customers",
   "Search customers": "Search customers",
   "Customers list is empty": "Customers list is empty",
   "password_required": "Please, fill in the password.",
@@ -39,7 +41,6 @@
   "In Progress": "In Progress",
   "Add order": "Add order",
   "List orders": "List orders",
-  "Customers": "Customers",
   "Add customer": "Add customer",
   "Customer detail": "Customer detail",
   "customer_created": "Customer successfully created",

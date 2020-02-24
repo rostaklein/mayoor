@@ -1,4 +1,5 @@
 {
+  "inactivity_logged_out": "Z bezpečnostních důvodů jsme Vás odhlásili.",
   "Could not connect to the backend server": "Nepodařilo se připojit k serveru.",
   "missing_company_name": "Název firmy musí být vyplněn",
   "Identification number required for the search": "Identification number required for the search",
@@ -25,6 +26,7 @@
   "Last Updated At": "Naposledy změněno",
   "Save customer": "Uložit změny",
   "Showing {{start}}-{{end}} of {{total}} customers": "Zobrazeno {{start}}-{{end}} z celkem {{total}} zákazníků",
+  "Customers": "Zákazníci",
   "Search customers": "Vyhledat zákazníka",
   "Customers list is empty": "List zákazníků je prázdný",
   "password_required": "Prosím, vyplňte heslo.",
@@ -39,7 +41,6 @@
   "In Progress": "Rozpracované",
   "Add order": "Přidat objednávku",
   "List orders": "Všechny objednávky",
-  "Customers": "Zákazníci",
   "Add customer": "Přidat zákazníka",
   "Customer detail": "Detail zákazníka",
   "customer_created": "Zákazník vytvořen",
