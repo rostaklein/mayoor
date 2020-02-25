@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
-import { Button, Spin, Tag, Descriptions, Icon, message } from 'antd';
+import { Button, Tag, Descriptions, Icon, message, Skeleton } from 'antd';
 import styled from '@emotion/styled';
 
 import {
@@ -85,7 +85,7 @@ export const DetailCustomer: React.FC = () => {
 	};
 
 	if (!data || !data.getCustomer) {
-		return <Spin />;
+		return <Skeleton active />;
 	}
 
 	return (
