@@ -70,6 +70,7 @@ type CustomerPaginated {
 scalar DateTime
 
 type Mutation {
+  addOrderItem(input: OrderItemInput!, orderId: ID): OrderItem!
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createOrder(customerId: ID, note: String, number: Int!, totalPrice: Float, totalTax: Float): Order!
@@ -83,8 +84,37 @@ type Order {
   createdBy: User!
   customer: Customer
   id: String!
+  items(after: String, before: String, first: Int, last: Int, skip: Int): [OrderItem!]!
+  note: String
   number: Int!
+  shippedAt: DateTime
+  totalPrice: Float!
+  totalTax: Float!
   updatedAt: DateTime!
+  urgency: Int!
+}
+
+type OrderItem {
+  createdAt: DateTime!
+  createdBy: User!
+  height: Float
+  id: String!
+  name: String
+  pieces: Int
+  totalPrice: Float!
+  totalTax: Float!
+  updatedAt: DateTime!
+  width: Float
+}
+
+input OrderItemInput {
+  height: Float
+  materialId: ID
+  name: String
+  pieces: Int
+  totalPrice: Float!
+  totalTax: Float!
+  width: Float
 }
 
 type OrderPaginated {

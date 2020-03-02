@@ -39,6 +39,15 @@ export interface NexusGenInputs {
     phone?: string | null; // String
     taxIdentificationNumber?: string | null; // String
   }
+  OrderItemInput: { // input type
+    height?: number | null; // Float
+    materialId?: string | null; // ID
+    name?: string | null; // String
+    pieces?: number | null; // Int
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    width?: number | null; // Float
+  }
   UpdateAddressInput: { // input type
     city?: string | null; // String
     id?: string | null; // ID
@@ -86,6 +95,7 @@ export interface NexusGenRootTypes {
   }
   Mutation: {};
   Order: prisma.Order;
+  OrderItem: prisma.OrderItem;
   OrderPaginated: { // root type
     items: NexusGenRootTypes['Order'][]; // [Order!]!
     totalCount: number; // Int!
@@ -103,6 +113,7 @@ export interface NexusGenRootTypes {
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   AddressInput: NexusGenInputs['AddressInput'];
   CreateCustomerInput: NexusGenInputs['CreateCustomerInput'];
+  OrderItemInput: NexusGenInputs['OrderItemInput'];
   UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
   UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
 }
@@ -148,6 +159,7 @@ export interface NexusGenFieldTypes {
     totalCount: number; // Int!
   }
   Mutation: { // field return type
+    addOrderItem: NexusGenRootTypes['OrderItem']; // OrderItem!
     changePassword: NexusGenRootTypes['User']; // User!
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
     createOrder: NexusGenRootTypes['Order']; // Order!
@@ -160,8 +172,26 @@ export interface NexusGenFieldTypes {
     createdBy: NexusGenRootTypes['User']; // User!
     customer: NexusGenRootTypes['Customer'] | null; // Customer
     id: string; // String!
+    items: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
+    note: string | null; // String
     number: number; // Int!
+    shippedAt: any | null; // DateTime
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
     updatedAt: any; // DateTime!
+    urgency: number; // Int!
+  }
+  OrderItem: { // field return type
+    createdAt: any; // DateTime!
+    createdBy: NexusGenRootTypes['User']; // User!
+    height: number | null; // Float
+    id: string; // String!
+    name: string | null; // String
+    pieces: number | null; // Int
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    updatedAt: any; // DateTime!
+    width: number | null; // Float
   }
   OrderPaginated: { // field return type
     items: NexusGenRootTypes['Order'][]; // [Order!]!
@@ -192,6 +222,10 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    addOrderItem: { // args
+      input: NexusGenInputs['OrderItemInput']; // OrderItemInput!
+      orderId?: string | null; // ID
+    }
     changePassword: { // args
       newPassword: string; // String!
       oldPassword: string; // String!
@@ -219,6 +253,15 @@ export interface NexusGenArgTypes {
       input: NexusGenInputs['UpdateCustomerInput']; // UpdateCustomerInput!
     }
   }
+  Order: {
+    items: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+  }
   Query: {
     getAllCustomers: { // args
       first?: number | null; // Int
@@ -243,9 +286,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Mutation" | "Order" | "OrderPaginated" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput" | "UpdateAddressInput" | "UpdateCustomerInput";
+export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput" | "OrderItemInput" | "UpdateAddressInput" | "UpdateCustomerInput";
 
 export type NexusGenEnumNames = never;
 

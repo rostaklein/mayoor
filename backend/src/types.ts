@@ -53,10 +53,32 @@ export const Order = objectType({
   definition(t) {
     t.model.id();
     t.model.number();
+    t.model.customer();
+    t.model.items();
+    t.model.totalPrice();
+    t.model.totalTax();
+    t.model.shippedAt();
+    t.model.note();
+    t.model.urgency();
     t.model.createdBy();
     t.model.createdAt();
     t.model.updatedAt();
-    t.model.customer({ type: 'Customer' });
+  },
+});
+
+export const OrderItem = objectType({
+  name: 'OrderItem',
+  definition(t) {
+    t.model.id();
+    t.model.name();
+    t.model.width();
+    t.model.height();
+    t.model.pieces();
+    t.model.totalPrice();
+    t.model.totalTax();
+    t.model.createdBy();
+    t.model.createdAt();
+    t.model.updatedAt();
   },
 });
 
