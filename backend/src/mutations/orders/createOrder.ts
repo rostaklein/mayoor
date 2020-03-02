@@ -1,5 +1,6 @@
-import { objectType, intArg, floatArg, stringArg, idArg } from 'nexus';
+import { objectType, intArg, floatArg, stringArg, idArg, arg } from 'nexus';
 import { UserInputError } from 'apollo-server-express';
+import { OrderItemInput } from './addOrderItem';
 
 export const CreateOrder = objectType({
   name: 'Mutation',
@@ -12,6 +13,7 @@ export const CreateOrder = objectType({
         totalTax: floatArg(),
         note: stringArg(),
         customerId: idArg(),
+        items: arg({ type: OrderItemInput, list: true }),
       },
       resolve: async (_, args, ctx) => {
         const user = await ctx.user.getCurrentUser();

@@ -235,6 +235,7 @@ export interface NexusGenArgTypes {
     }
     createOrder: { // args
       customerId?: string | null; // ID
+      items?: NexusGenInputs['OrderItemInput'][] | null; // [OrderItemInput!]
       note?: string | null; // String
       number: number; // Int!
       totalPrice?: number | null; // Float

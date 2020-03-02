@@ -73,7 +73,7 @@ type Mutation {
   addOrderItem(input: OrderItemInput!, orderId: ID): OrderItem!
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
-  createOrder(customerId: ID, note: String, number: Int!, totalPrice: Float, totalTax: Float): Order!
+  createOrder(customerId: ID, items: [OrderItemInput!], note: String, number: Int!, totalPrice: Float, totalTax: Float): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!
   updateCustomer(input: UpdateCustomerInput!): Customer!
