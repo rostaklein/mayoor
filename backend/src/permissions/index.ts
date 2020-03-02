@@ -3,6 +3,9 @@ import { Context } from '../context';
 import { ApolloError } from 'apollo-server-express';
 
 const rules = {
+  notProtected: rule()(() => {
+    return true;
+  }),
   isAuthenticatedUser: rule()(async (parent, args, context: Context) => {
     try {
       await context.user.getCurrentUser();
@@ -21,15 +24,11 @@ const rules = {
 export const permissions = shield(
   {
     Query: {
-      getAllOrders: rules.isAuthenticatedUser,
-      getAllCustomers: rules.isAuthenticatedUser,
-      me: rules.isAuthenticatedUser,
-      getCustomerHelperInfo: rules.isAuthenticatedUser,
+      '*': rules.isAuthenticatedUser,
     },
     Mutation: {
-      createOrder: rules.isAuthenticatedUser,
-      createCustomer: rules.isAuthenticatedUser,
-      changePassword: rules.isAuthenticatedUser,
+      '*': rules.isAuthenticatedUser,
+      login: rules.notProtected,
       register: rules.isAdmin,
     },
   },
