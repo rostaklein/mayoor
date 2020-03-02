@@ -46,9 +46,10 @@
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
     "test": "react-app-rewired test",
+    "generate": "npm run download:schema && generate:types && npm run download:schema",
     "download:schema": "apollo client:download-schema --endpoint=http://localhost:4444/graphql ./src/schema.json",
     "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=./src/schema.json --target=typescript",
-    "generate:translations": "i18next"
+    "extract:translations": "i18next"
   },
   "eslintConfig": {
     "extends": "react-app"

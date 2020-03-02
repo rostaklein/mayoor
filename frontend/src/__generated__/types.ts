@@ -103,7 +103,7 @@ export interface UpdateCustomerVariables {
 // GraphQL query operation: GetAllCustomers
 // ====================================================
 
-export interface GetAllCustomers_getAllCustomers_edges_node {
+export interface GetAllCustomers_getAllCustomers_items {
   __typename: "Customer";
   id: string;
   name: string | null;
@@ -113,25 +113,10 @@ export interface GetAllCustomers_getAllCustomers_edges_node {
   phone: string | null;
 }
 
-export interface GetAllCustomers_getAllCustomers_edges {
-  __typename: "CustomerEdge";
-  node: GetAllCustomers_getAllCustomers_edges_node;
-  cursor: string;
-}
-
-export interface GetAllCustomers_getAllCustomers_pageInfo {
-  __typename: "PageInfo";
-  startCursor: string | null;
-  endCursor: string | null;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
-
 export interface GetAllCustomers_getAllCustomers {
-  __typename: "CustomersConnection";
+  __typename: "CustomerPaginated";
   totalCount: number;
-  edges: GetAllCustomers_getAllCustomers_edges[];
-  pageInfo: GetAllCustomers_getAllCustomers_pageInfo;
+  items: GetAllCustomers_getAllCustomers_items[];
 }
 
 export interface GetAllCustomers {
@@ -140,9 +125,7 @@ export interface GetAllCustomers {
 
 export interface GetAllCustomersVariables {
   first?: number | null;
-  last?: number | null;
-  after?: string | null;
-  before?: string | null;
+  skip?: number | null;
   search?: string | null;
 }
 

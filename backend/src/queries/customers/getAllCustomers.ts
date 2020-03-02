@@ -1,26 +1,10 @@
-import { queryField, objectType, stringArg } from 'nexus';
-import { findManyCursor } from '../../utils/findManyCursor';
-import { getEdgeObjectType, connectionArgs } from '../../utils/connection';
+import { queryField, stringArg } from 'nexus';
 import { FindManyCustomerArgs } from '@prisma/client';
-
-export const CustomersConnection = objectType({
-  name: 'CustomersConnection',
-  definition(t) {
-    t.int('totalCount');
-    t.field('pageInfo', {
-      type: 'PageInfo',
-    });
-    t.list.field('edges', {
-      type: 'CustomerEdge',
-    });
-  },
-});
-
-export const CustomerEdge = getEdgeObjectType('Customer');
+import { paginationArgs, getPaginatedObjectType } from '../../utils/pagination';
 
 export const GetAllCustomers = queryField('getAllCustomers', {
-  type: 'CustomersConnection',
-  args: { ...connectionArgs, search: stringArg({ required: false }) },
+  type: getPaginatedObjectType('Customer'),
+  args: { ...paginationArgs, search: stringArg({ required: false }) },
   nullable: false,
   resolve: async (_parent, { search, ...args }, ctx) => {
     const searchWhereArg: FindManyCustomerArgs['where'] = {
@@ -39,18 +23,13 @@ export const GetAllCustomers = queryField('getAllCustomers', {
       where,
     });
 
-    const customers = await findManyCursor(
-      _args =>
-        ctx.prisma.customer.findMany({
-          ..._args,
-          where,
-        }),
-
-      args,
-    );
+    const customers = await ctx.prisma.customer.findMany({
+      ...args,
+      where,
+    });
     return {
       totalCount: allCustomers.length,
-      ...customers,
+      items: customers,
     };
   },
 });

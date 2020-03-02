@@ -53,11 +53,6 @@ type Customer {
   updatedAt: DateTime!
 }
 
-type CustomerEdge {
-  cursor: String!
-  node: Customer!
-}
-
 type CustomerHelperInfo {
   city: String
   identificationNumber: String
@@ -67,9 +62,8 @@ type CustomerHelperInfo {
   taxIdentificationNumber: String
 }
 
-type CustomersConnection {
-  edges: [CustomerEdge!]!
-  pageInfo: PageInfo!
+type CustomerPaginated {
+  items: [Customer!]!
   totalCount: Int!
 }
 
@@ -93,27 +87,14 @@ type Order {
   updatedAt: DateTime!
 }
 
-type OrderEdge {
-  cursor: String!
-  node: Order!
-}
-
-type OrdersConnection {
-  edges: [OrderEdge!]!
-  pageInfo: PageInfo!
+type OrderPaginated {
+  items: [Order!]!
   totalCount: Int!
 }
 
-type PageInfo {
-  endCursor: String
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-}
-
 type Query {
-  getAllCustomers(after: String, before: String, first: Int, last: Int, search: String): CustomersConnection!
-  getAllOrders(after: String, before: String, first: Int, last: Int): OrdersConnection!
+  getAllCustomers(first: Int, search: String, skip: Int): CustomerPaginated!
+  getAllOrders(first: Int, skip: Int): OrderPaginated!
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   me: User!

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import {
 	GetAllCustomers,
 	GetAllCustomersVariables,
-	GetAllCustomers_getAllCustomers_edges_node,
+	GetAllCustomers_getAllCustomers_items,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 
@@ -19,7 +19,7 @@ import { StyledTableWrapper, StyledSearch } from './ListCustomers.styles';
 
 const PAGE_SIZE = 10;
 
-const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_edges_node>[] => [
+const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_items>[] => [
 	{
 		title: t('Company name'),
 		ellipsis: true,
@@ -73,7 +73,7 @@ export const ListCustomers: React.FC = () => {
 		variables: { first: PAGE_SIZE },
 	});
 
-	const nodes = data?.getAllCustomers.edges.map((edge) => edge.node) ?? [];
+	const items = data?.getAllCustomers.items ?? [];
 
 	const pagination: PaginationConfig = {
 		current: currentPageNumber,
@@ -87,19 +87,9 @@ export const ListCustomers: React.FC = () => {
 				end: range[1],
 			}),
 		onChange: (newPageNumber) => {
-			let variables: GetAllCustomersVariables;
-			if (newPageNumber > currentPageNumber) {
-				variables = { first: PAGE_SIZE, after: data?.getAllCustomers.pageInfo.endCursor };
-			} else {
-				variables = {
-					first: PAGE_SIZE,
-					before: data?.getAllCustomers.pageInfo.startCursor,
-				};
-			}
 			setCurrentPageNumber(newPageNumber);
-
 			fetchMore({
-				variables,
+				variables: { first: PAGE_SIZE, skip: (newPageNumber - 1) * PAGE_SIZE },
 				updateQuery: (_, { fetchMoreResult }) => {
 					if (!fetchMoreResult) {
 						throw new Error('Failed to load more');
@@ -136,9 +126,9 @@ export const ListCustomers: React.FC = () => {
 					</Col>
 				</Row>
 
-				<Table<GetAllCustomers_getAllCustomers_edges_node>
+				<Table<GetAllCustomers_getAllCustomers_items>
 					columns={getColumns(t)}
-					dataSource={nodes}
+					dataSource={items}
 					pagination={pagination}
 					loading={loading}
 					rowKey={(record) => record.id}
