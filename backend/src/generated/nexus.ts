@@ -200,7 +200,11 @@ export interface NexusGenArgTypes {
       input: NexusGenInputs['CreateCustomerInput']; // CreateCustomerInput!
     }
     createOrder: { // args
+      customerId?: string | null; // ID
+      note?: string | null; // String
       number: number; // Int!
+      totalPrice?: number | null; // Float
+      totalTax?: number | null; // Float
     }
     login: { // args
       email: string; // String!

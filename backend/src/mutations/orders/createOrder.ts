@@ -1,4 +1,5 @@
-import { objectType, intArg } from 'nexus';
+import { objectType, intArg, floatArg, stringArg, idArg } from 'nexus';
+import { UserInputError } from 'apollo-server-express';
 
 export const CreateOrder = objectType({
   name: 'Mutation',
@@ -7,21 +8,37 @@ export const CreateOrder = objectType({
       type: 'Order',
       args: {
         number: intArg({ nullable: false }),
+        totalPrice: floatArg(),
+        totalTax: floatArg(),
+        note: stringArg(),
+        customerId: idArg(),
       },
-      resolve: async (_, { number }, ctx) => {
+      resolve: async (_, args, ctx) => {
         const user = await ctx.user.getCurrentUser();
 
         const existingOrder = await ctx.prisma.order.findOne({
-          where: { number },
+          where: { number: args.number },
         });
 
         if (existingOrder) {
-          throw new Error(`Order number ${number} already exists`);
+          throw new UserInputError(
+            `Order number ${args.number} already exists`,
+          );
         }
 
         return ctx.prisma.order.create({
           data: {
-            number,
+            number: args.number,
+            totalPrice: args.totalPrice || 0,
+            totalTax: args.totalTax || 0,
+            note: args.note,
+            customer: args.customerId
+              ? {
+                  connect: {
+                    id: args.customerId,
+                  },
+                }
+              : undefined,
             createdBy: {
               connect: {
                 id: user.id,
