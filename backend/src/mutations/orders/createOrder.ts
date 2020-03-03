@@ -34,6 +34,7 @@ export const CreateOrder = objectType({
             totalPrice: args.totalPrice || 0,
             totalTax: args.totalTax || 0,
             note: args.note,
+            status: 'new',
             customer: args.customerId
               ? {
                   connect: {
