@@ -6,8 +6,8 @@
 // The `url` field must contain the connection string to your DB.
 // Learn more about connection strings for your DB: https://pris.ly/connection-strings
 datasource db {
-  provider = "mysql"
-  url      = env("MYSQL_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // Other examples for connection strings are:
@@ -28,13 +28,10 @@ generator client {
 // 3. Run `prisma2 generate` to generate Prisma Client JS
 // 4. Start using Prisma Client JS in your applicatio
 
-enum Role {
-  USER ADMIN
-}
 
 model User {
   id       String  @id @default(cuid())
-  role     Role    @default(USER)
+  role     String
   email    String  @unique
   password String
   name     String?
@@ -49,10 +46,6 @@ model Material {
   createdBy User
 }
 
-enum OrderStatus {
-  NEW ONHOLD PRINTING PROCESSING SHIPPED CANCELED DONE
-}
-
 model Order {
   id         String      @id @default(cuid())
   number     Int         @unique
@@ -63,7 +56,7 @@ model Order {
   note       String?
   items      OrderItem[]
   urgency    Int         @default(0)
-  status     OrderStatus @default(NEW)
+  status     String
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   createdBy  User
