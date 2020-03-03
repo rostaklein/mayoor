@@ -19,7 +19,7 @@ export const Register = mutationField('register', {
     const hashedPwd = await hash(password, 10);
 
     const user = await ctx.prisma.user.create({
-      data: { password: hashedPwd, name, email },
+      data: { password: hashedPwd, name, email, role: 'USER' },
     });
 
     const token = issueToken({ email: user.email, id: user.id });
