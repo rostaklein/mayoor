@@ -6,6 +6,7 @@ import { useMutation } from 'react-apollo';
 import { CreateCustomerMutation, CreateCustomerMutationVariables } from '../../__generated__/types';
 import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
+import { GET_ALL_CUSTOMERS_QUERY } from '../ListCustomers/queries';
 
 import { CREATE_CUSTOMER_MUTATION } from './queries';
 
@@ -34,7 +35,10 @@ export const NewCustomer: React.FC = () => {
 
 	const submitHandler = async (values: UserFormValues, resetForm: () => void) => {
 		try {
-			await createCustomer({ variables: { input: values } });
+			await createCustomer({
+				variables: { input: values },
+				refetchQueries: [{ query: GET_ALL_CUSTOMERS_QUERY }],
+			});
 			message.success(t('customer_created'));
 			resetForm();
 		} catch (err) {
