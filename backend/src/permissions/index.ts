@@ -31,6 +31,8 @@ export const permissions = shield(
       login: rules.notProtected,
       register: rules.isAdmin,
       createMaterial: rules.isAdmin,
+      updateMaterial: rules.isAdmin,
+      deleteMaterial: rules.isAdmin,
     },
   },
   {
