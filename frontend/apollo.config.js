@@ -3,7 +3,7 @@ module.exports = {
 		includes: ['./src/**/*.ts', './src/**/*.tsx'],
 		service: {
 			name: 'mayoor',
-			localSchemaFile: './frontend/src/schema.json',
+			url: 'http://localhost:4444/graphql',
 		},
 	},
 };
