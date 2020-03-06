@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { Colors } from '../../themeVariables';
+import { useAppState } from '../../appContext/context';
 
 import { LinkItem } from './LinkItem';
 
@@ -28,6 +29,7 @@ const CategoryName = styled.div`
 
 export const MainMenu: React.FC = () => {
 	const { t } = useTranslation();
+	const { currentUser } = useAppState();
 	return (
 		<StyledMenu>
 			<li>
@@ -41,6 +43,12 @@ export const MainMenu: React.FC = () => {
 				<LinkItem icon="user-add" name={t('Add customer')} to={'/customers/new'} />
 				<LinkItem icon="team" name={t('Customers')} to={'/customers/list'} />
 			</li>
+			{currentUser?.isAdmin && (
+				<li>
+					<CategoryName>{t('Administration')}</CategoryName>
+					<LinkItem icon="file-text" name={t('Material')} to={'/materials'} />
+				</li>
+			)}
 		</StyledMenu>
 	);
 };

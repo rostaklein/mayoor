@@ -10,6 +10,7 @@ import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 import { NewCustomer } from '../NewCustomer/NewCustomer';
 import { ListCustomers } from '../ListCustomers/ListCustomers';
 import { DetailCustomer } from '../DetailCustomer/DetailCustomer';
+import { MaterialEdit } from '../Material/MaterialEdit';
 
 import * as S from './MainWrapper.styles';
 
@@ -34,6 +35,7 @@ export const MainWrapper: React.FC = () => {
 			title: t('Customer detail'),
 			Component: <DetailCustomer />,
 		},
+		{ path: '/materials', title: t('Material'), Component: <MaterialEdit /> },
 	];
 
 	useEffect(() => {

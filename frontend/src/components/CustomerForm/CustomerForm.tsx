@@ -7,7 +7,7 @@ import { ApolloError } from 'apollo-client';
 
 import { GetCustomerHelperInfoVariables, GetCustomerHelperInfo } from '../../__generated__/types';
 import { GET_CUSTOMER_HELPER_INFO } from '../NewCustomer/queries';
-import { StyledFormItem, StyledForm, StyledDivider } from '../NewCustomer/NewCustomer.styles';
+import { StyledFormItem, StyledForm, StyledDivider } from '../SharedStyles/Form.styles';
 
 export type UserFormValues = {
 	name: string | null;

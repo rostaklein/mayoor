@@ -13,9 +13,9 @@ import {
 	GetAllCustomers_getAllCustomers_items,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
+import { StyledTableWrapper, StyledSearch } from '../SharedStyles/Table.styles';
 
 import { GET_ALL_CUSTOMERS_QUERY } from './queries';
-import { StyledTableWrapper, StyledSearch } from './ListCustomers.styles';
 
 const PAGE_SIZE = 10;
 

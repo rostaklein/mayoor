@@ -143,6 +143,7 @@ export interface LoginMutation_login_user {
   name: string | null;
   id: string;
   email: string;
+  role: string;
 }
 
 export interface LoginMutation_login {
@@ -179,6 +180,27 @@ export interface MeQuery_me {
 
 export interface MeQuery {
   me: MeQuery_me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetAllMaterials
+// ====================================================
+
+export interface GetAllMaterials_getAllMaterials {
+  __typename: "Material";
+  id: string;
+  name: string;
+  price: number;
+  updatedAt: any;
+}
+
+export interface GetAllMaterials {
+  getAllMaterials: GetAllMaterials_getAllMaterials[];
 }
 
 /* tslint:disable */

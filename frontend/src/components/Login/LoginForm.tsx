@@ -45,7 +45,13 @@ export const LoginForm: React.FC = () => {
 			try {
 				const result = await login({ variables: { email: username, password } });
 				if (result.data?.login) {
-					dispatch({ type: 'SET_CURRENT_USER', user: { ...result.data.login.user } });
+					dispatch({
+						type: 'SET_CURRENT_USER',
+						user: {
+							...result.data.login.user,
+							isAdmin: result.data.login.user.role === 'ADMIN',
+						},
+					});
 					localStorage.setItem('auth-token', result.data.login.token);
 				}
 			} catch (err) {
