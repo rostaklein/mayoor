@@ -220,6 +220,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllCustomers: NexusGenRootTypes['CustomerPaginated']; // CustomerPaginated!
+    getAllMaterials: NexusGenRootTypes['Material'][]; // [Material!]!
     getAllOrders: NexusGenRootTypes['OrderPaginated']; // OrderPaginated!
     getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!

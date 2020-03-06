@@ -145,6 +145,7 @@ type OrderPaginated {
 
 type Query {
   getAllCustomers(first: Int, search: String, skip: Int): CustomerPaginated!
+  getAllMaterials: [Material!]!
   getAllOrders(first: Int, skip: Int): OrderPaginated!
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
