@@ -32,7 +32,11 @@ const App: React.FC = () => {
 	const { called, loading, error } = useQuery<MeQuery>(ME_QUERY, {
 		onError: (err) => {
 			const token = localStorage.getItem('auth-token');
-			if (token && err.graphQLErrors[0].extensions?.code === 'NOT_AUTHORIZED') {
+			if (
+				token &&
+				err.graphQLErrors.length &&
+				err.graphQLErrors[0].extensions?.code === 'NOT_AUTHORIZED'
+			) {
 				localStorage.removeItem('auth-token');
 				message.error(t('inactivity_logged_out'));
 			}
@@ -57,7 +61,9 @@ const App: React.FC = () => {
 	}
 
 	const hasBackendError =
-		error?.networkError || error?.graphQLErrors[0].extensions?.code === 'INTERNAL_SERVER_ERROR';
+		error?.networkError ||
+		error?.graphQLErrors.length === 0 ||
+		error?.graphQLErrors[0].extensions?.code === 'INTERNAL_SERVER_ERROR';
 
 	return (
 		<Suspense fallback={<CenteredSpinner />}>
