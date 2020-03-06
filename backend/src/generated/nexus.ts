@@ -181,9 +181,11 @@ export interface NexusGenFieldTypes {
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
     createMaterial: NexusGenRootTypes['Material']; // Material!
     createOrder: NexusGenRootTypes['Order']; // Order!
+    deleteMaterial: NexusGenRootTypes['Material']; // Material!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateCustomer: NexusGenRootTypes['Customer']; // Customer!
+    updateMaterial: NexusGenRootTypes['Material']; // Material!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -263,6 +265,9 @@ export interface NexusGenArgTypes {
       totalPrice?: number | null; // Float
       totalTax?: number | null; // Float
     }
+    deleteMaterial: { // args
+      id: string; // ID!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
@@ -274,6 +279,11 @@ export interface NexusGenArgTypes {
     }
     updateCustomer: { // args
       input: NexusGenInputs['UpdateCustomerInput']; // UpdateCustomerInput!
+    }
+    updateMaterial: { // args
+      id: string; // ID!
+      name?: string | null; // String
+      price?: number | null; // Float
     }
   }
   Order: {

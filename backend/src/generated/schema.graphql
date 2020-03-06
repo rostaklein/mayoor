@@ -88,9 +88,11 @@ type Mutation {
   createCustomer(input: CreateCustomerInput!): Customer!
   createMaterial(name: String!, price: Float!): Material!
   createOrder(customerId: ID, items: [OrderItemInput!], note: String, number: Int!, totalPrice: Float, totalTax: Float): Order!
+  deleteMaterial(id: ID!): Material!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!
   updateCustomer(input: UpdateCustomerInput!): Customer!
+  updateMaterial(id: ID!, name: String, price: Float): Material!
 }
 
 type Order {
