@@ -179,4 +179,5 @@ type User {
   email: String!
   id: String!
   name: String
+  role: String!
 }

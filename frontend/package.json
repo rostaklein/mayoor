@@ -17,6 +17,7 @@
     "@types/react-helmet": "^5.0.15",
     "@types/react-router-dom": "^5.1.3",
     "antd": "^3.26.11",
+    "apollo": "^2.25.0",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-link": "^1.2.13",
@@ -47,8 +48,7 @@
     "eject": "react-app-rewired eject",
     "test": "react-app-rewired test",
     "generate": "npm run download:schema && generate:types && npm run download:schema",
-    "download:schema": "apollo client:download-schema --endpoint=http://localhost:4444/graphql ./src/schema.json",
-    "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=./src/schema.json --target=typescript",
+    "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=../backend/src/generated/schema.graphql --target=typescript",
     "extract:translations": "i18next"
   },
   "eslintConfig": {
