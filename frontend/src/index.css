@@ -17,3 +17,7 @@ body,
 #root h3 {
 	font-weight: 700;
 }
+
+#root .ant-form label {
+	font-size: 12px;
+}

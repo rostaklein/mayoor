@@ -2,7 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import { Input, Icon } from 'antd';
 
-import { StyledFormItem } from '../SharedStyles/Form.styles';
+import { StyledFormItem } from './Form.styles';
 
 type FieldProps = {
 	name: string;
@@ -17,6 +17,9 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name }) => {
 	const getValue = () => {
 		if (typeof value === 'string') {
 			return value;
+		}
+		if (typeof value === 'number') {
+			return String(value);
 		}
 		return '';
 	};

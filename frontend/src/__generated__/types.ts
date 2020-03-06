@@ -209,6 +209,33 @@ export interface GetAllMaterials {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UpdateMaterial
+// ====================================================
+
+export interface UpdateMaterial_updateMaterial {
+  __typename: "Material";
+  id: string;
+  name: string;
+  price: number;
+  updatedAt: any;
+}
+
+export interface UpdateMaterial {
+  updateMaterial: UpdateMaterial_updateMaterial;
+}
+
+export interface UpdateMaterialVariables {
+  id: string;
+  name?: string | null;
+  price?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateCustomerMutation
 // ====================================================
 

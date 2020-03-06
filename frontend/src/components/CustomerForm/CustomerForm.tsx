@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { FormikErrors, Formik } from 'formik';
 import { Icon, Input, Row, Col, Checkbox } from 'antd';
 
-import { StyledFormItem, StyledForm, StyledDivider } from '../SharedStyles/Form.styles';
+import { StyledFormItem, StyledForm, StyledDivider } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
 
 import { IdentificationNumberInput } from './IdentificationNumberInput';
@@ -47,7 +47,8 @@ export const CustomerForm: React.FC<Props> = (props) => {
 				}
 				return errors;
 			}}
-			render={({ values, setFieldValue, handleChange }) => (
+		>
+			{({ values, setFieldValue, handleChange }) => (
 				<StyledForm>
 					<Row gutter={32}>
 						<Col xs={24} md={12}>
@@ -148,6 +149,6 @@ export const CustomerForm: React.FC<Props> = (props) => {
 					{props.submitButton}
 				</StyledForm>
 			)}
-		></Formik>
+		</Formik>
 	);
 };
