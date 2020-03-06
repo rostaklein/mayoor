@@ -174,6 +174,7 @@ export interface MeQuery_me {
   id: string;
   name: string | null;
   email: string;
+  role: string;
 }
 
 export interface MeQuery {
@@ -305,47 +306,47 @@ export interface CustomerDetails {
 //==============================================================
 
 export interface AddressInput {
-  street?: string | null;
-  number?: string | null;
   city?: string | null;
-  state?: string | null;
-  postNumber?: string | null;
   isPrimary?: boolean | null;
+  number?: string | null;
+  postNumber?: string | null;
+  state?: string | null;
+  street?: string | null;
 }
 
 export interface CreateCustomerInput {
-  name?: string | null;
-  personName?: string | null;
-  phone?: string | null;
+  addresses?: AddressInput[] | null;
+  allowedBankPayments?: boolean | null;
   email?: string | null;
   identificationNumber?: string | null;
-  taxIdentificationNumber?: string | null;
-  allowedBankPayments?: boolean | null;
+  name?: string | null;
   note?: string | null;
-  addresses?: AddressInput[] | null;
+  personName?: string | null;
+  phone?: string | null;
+  taxIdentificationNumber?: string | null;
 }
 
 export interface UpdateAddressInput {
-  id?: string | null;
-  street?: string | null;
-  number?: string | null;
   city?: string | null;
-  state?: string | null;
-  postNumber?: string | null;
+  id?: string | null;
   isPrimary?: boolean | null;
+  number?: string | null;
+  postNumber?: string | null;
+  state?: string | null;
+  street?: string | null;
 }
 
 export interface UpdateCustomerInput {
+  addresses?: UpdateAddressInput[] | null;
+  allowedBankPayments?: boolean | null;
+  email?: string | null;
   id?: string | null;
+  identificationNumber?: string | null;
   name?: string | null;
+  note?: string | null;
   personName?: string | null;
   phone?: string | null;
-  email?: string | null;
-  identificationNumber?: string | null;
   taxIdentificationNumber?: string | null;
-  allowedBankPayments?: boolean | null;
-  note?: string | null;
-  addresses?: UpdateAddressInput[] | null;
 }
 
 //==============================================================

@@ -6,6 +6,7 @@ export type User = {
 	name: string | null;
 	id: string;
 	email: string;
+	isAdmin: boolean;
 };
 
 export type AppState = {

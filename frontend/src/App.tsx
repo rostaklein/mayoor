@@ -43,7 +43,11 @@ const App: React.FC = () => {
 		},
 		onCompleted: (data) => {
 			if (data) {
-				dispatch({ type: 'SET_CURRENT_USER', user: { ...data.me } });
+				const { id, name, email, role } = data.me;
+				dispatch({
+					type: 'SET_CURRENT_USER',
+					user: { id, name, email, isAdmin: role === 'ADMIN' },
+				});
 			}
 		},
 	});
