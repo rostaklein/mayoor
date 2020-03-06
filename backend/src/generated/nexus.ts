@@ -181,6 +181,7 @@ export interface NexusGenFieldTypes {
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
     createMaterial: NexusGenRootTypes['Material']; // Material!
     createOrder: NexusGenRootTypes['Order']; // Order!
+    deleteCustomer: NexusGenRootTypes['Customer']; // Customer!
     deleteMaterial: NexusGenRootTypes['Material']; // Material!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
@@ -264,6 +265,9 @@ export interface NexusGenArgTypes {
       number: number; // Int!
       totalPrice?: number | null; // Float
       totalTax?: number | null; // Float
+    }
+    deleteCustomer: { // args
+      id: string; // ID!
     }
     deleteMaterial: { // args
       id: string; // ID!

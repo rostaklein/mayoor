@@ -7,7 +7,7 @@ export * from './orders/addOrderItem';
 
 export * from './customers/createCustomer';
 export * from './customers/updateCustomer';
-export * from './customers/updateCustomer';
+export * from './customers/deleteCustomer';
 
 export * from './material/createMaterial';
 export * from './material/updateMaterial';
