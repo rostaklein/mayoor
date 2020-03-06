@@ -28,6 +28,9 @@ export interface NexusGenInputs {
     state?: string | null; // String
     street?: string | null; // String
   }
+  AddressWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
   CreateCustomerInput: { // input type
     addresses?: NexusGenInputs['AddressInput'][] | null; // [AddressInput!]
     allowedBankPayments?: boolean | null; // Boolean
@@ -47,6 +50,9 @@ export interface NexusGenInputs {
     totalPrice: number; // Float!
     totalTax: number; // Float!
     width?: number | null; // Float
+  }
+  OrderItemWhereUniqueInput: { // input type
+    id?: string | null; // String
   }
   UpdateAddressInput: { // input type
     city?: string | null; // String
@@ -93,6 +99,7 @@ export interface NexusGenRootTypes {
     items: NexusGenRootTypes['Customer'][]; // [Customer!]!
     totalCount: number; // Int!
   }
+  Material: prisma.Material;
   Mutation: {};
   Order: prisma.Order;
   OrderItem: prisma.OrderItem;
@@ -112,8 +119,10 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   AddressInput: NexusGenInputs['AddressInput'];
+  AddressWhereUniqueInput: NexusGenInputs['AddressWhereUniqueInput'];
   CreateCustomerInput: NexusGenInputs['CreateCustomerInput'];
   OrderItemInput: NexusGenInputs['OrderItemInput'];
+  OrderItemWhereUniqueInput: NexusGenInputs['OrderItemWhereUniqueInput'];
   UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
   UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
 }
@@ -158,10 +167,19 @@ export interface NexusGenFieldTypes {
     items: NexusGenRootTypes['Customer'][]; // [Customer!]!
     totalCount: number; // Int!
   }
+  Material: { // field return type
+    createdAt: any; // DateTime!
+    createdBy: NexusGenRootTypes['User']; // User!
+    id: string; // String!
+    name: string; // String!
+    price: number; // Float!
+    updatedAt: any; // DateTime!
+  }
   Mutation: { // field return type
     addOrderItem: NexusGenRootTypes['OrderItem']; // OrderItem!
     changePassword: NexusGenRootTypes['User']; // User!
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
+    createMaterial: NexusGenRootTypes['Material']; // Material!
     createOrder: NexusGenRootTypes['Order']; // Order!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
@@ -214,8 +232,8 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Customer: {
     addresses: { // args
-      after?: string | null; // String
-      before?: string | null; // String
+      after?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
+      before?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
       skip?: number | null; // Int
@@ -232,6 +250,10 @@ export interface NexusGenArgTypes {
     }
     createCustomer: { // args
       input: NexusGenInputs['CreateCustomerInput']; // CreateCustomerInput!
+    }
+    createMaterial: { // args
+      name: string; // String!
+      price: number; // Float!
     }
     createOrder: { // args
       customerId?: string | null; // ID
@@ -256,8 +278,8 @@ export interface NexusGenArgTypes {
   }
   Order: {
     items: { // args
-      after?: string | null; // String
-      before?: string | null; // String
+      after?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
+      before?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
       skip?: number | null; // Int
@@ -287,9 +309,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput" | "OrderItemInput" | "UpdateAddressInput" | "UpdateCustomerInput";
+export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "UpdateAddressInput" | "UpdateCustomerInput";
 
 export type NexusGenEnumNames = never;
 

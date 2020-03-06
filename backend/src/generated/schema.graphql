@@ -20,6 +20,10 @@ input AddressInput {
   street: String
 }
 
+input AddressWhereUniqueInput {
+  id: String
+}
+
 type AuthPayload {
   token: String!
   user: User!
@@ -38,7 +42,7 @@ input CreateCustomerInput {
 }
 
 type Customer {
-  addresses(after: String, before: String, first: Int, last: Int, skip: Int): [Address!]!
+  addresses(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int, skip: Int): [Address!]!
   allowedBankPayments: Boolean!
   createdAt: DateTime!
   createdBy: User!
@@ -69,10 +73,20 @@ type CustomerPaginated {
 
 scalar DateTime
 
+type Material {
+  createdAt: DateTime!
+  createdBy: User!
+  id: String!
+  name: String!
+  price: Float!
+  updatedAt: DateTime!
+}
+
 type Mutation {
   addOrderItem(input: OrderItemInput!, orderId: ID): OrderItem!
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
+  createMaterial(name: String!, price: Float!): Material!
   createOrder(customerId: ID, items: [OrderItemInput!], note: String, number: Int!, totalPrice: Float, totalTax: Float): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!
@@ -84,7 +98,7 @@ type Order {
   createdBy: User!
   customer: Customer
   id: String!
-  items(after: String, before: String, first: Int, last: Int, skip: Int): [OrderItem!]!
+  items(after: OrderItemWhereUniqueInput, before: OrderItemWhereUniqueInput, first: Int, last: Int, skip: Int): [OrderItem!]!
   note: String
   number: Int!
   shippedAt: DateTime
@@ -115,6 +129,10 @@ input OrderItemInput {
   totalPrice: Float!
   totalTax: Float!
   width: Float
+}
+
+input OrderItemWhereUniqueInput {
+  id: String
 }
 
 type OrderPaginated {
