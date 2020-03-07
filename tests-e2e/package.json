@@ -1,14 +1,17 @@
 {
-  "name": "mayoor-e2e2-tests",
+  "name": "mayoor-e2e-tests",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:dev": "cypress open"
+    "test": "docker-compose up -d && npm run db:migrate",
+    "test:dev": "cypress open",
+    "db:migrate": "cd ../backend && DATABASE_URL=postgresql://user:pwd@localhost:54321/db prisma2 migrate up --experimental"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^4.1.0"
+    "cypress": "^4.1.0",
+    "prisma2": "^2.0.0-preview023"
   }
 }

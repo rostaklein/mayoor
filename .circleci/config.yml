@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/tests-e2e
+    machine:
+      docker_layer_caching: false
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd tests-e2e && make e2e
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - master

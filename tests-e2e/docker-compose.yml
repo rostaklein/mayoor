@@ -1,0 +1,36 @@
+version: '3.2'
+services:
+  db-test:
+    image: postgres
+    restart: always
+    ports:
+      - '54321:5432'
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pwd
+  adminer-test:
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: pgsql
+      ADMINER_DEFAULT_DB_HOST: db
+      ADMINER_DEFAULT_DB_NAME: db
+    ports:
+      - 8090:8080
+  backend:
+    build:
+      context: ../backend
+      args:
+        database_url: postgresql://user:pwd@db-test:5432/db
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgresql://user:pwd@db-test:5432/db
+    ports:
+      - 8080:8080
+    volumes:
+      # share everything BUT node_modules from the host
+      - ./backend:/api
+      - /api/node_modules
+    depends_on:
+      - db-test
