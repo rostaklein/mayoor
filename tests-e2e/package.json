@@ -1,0 +1,14 @@
+{
+  "name": "mayoor-e2e2-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:dev": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^4.1.0"
+  }
+}
