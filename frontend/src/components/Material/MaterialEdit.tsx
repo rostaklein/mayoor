@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
 import { Row, Col, Button, Popconfirm } from 'antd';
 import { Formik, FormikErrors } from 'formik';
+import { TFunction } from 'i18next';
 
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import {
@@ -19,6 +20,18 @@ import { FormInput } from '../FormItem/FormInput';
 
 import { GET_ALL_MATERIALS, UPDATE_MATERIAL, DELETE_MATERIAL } from './queries';
 import { MaterialEditWrapper } from './MaterialEdit.styles';
+import { MaterialCreate } from './MaterialCreate';
+
+export const getFormikValidate = (t: TFunction) => (values: { name: string; price: number }) => {
+	const errors: FormikErrors<{ name: string; price: number }> = {};
+	if (!values.name) {
+		errors.name = t('material_name_empty');
+	}
+	if (!values.price) {
+		errors.price = t('material_price_empty');
+	}
+	return errors;
+};
 
 export const MaterialEdit: React.FC = () => {
 	const { t } = useTranslation();
@@ -74,16 +87,7 @@ export const MaterialEdit: React.FC = () => {
 								});
 								setCurrentlyLoading(null);
 							}}
-							validate={(values) => {
-								const errors: FormikErrors<GetAllMaterials_getAllMaterials> = {};
-								if (!values.name) {
-									errors.name = t('material_name_empty');
-								}
-								if (!values.price) {
-									errors.price = t('material_price_empty');
-								}
-								return errors;
-							}}
+							validate={getFormikValidate(t)}
 						>
 							{({ handleSubmit, status }) => (
 								<Row gutter={18}>
@@ -105,7 +109,6 @@ export const MaterialEdit: React.FC = () => {
 											style={{ width: '100%' }}
 										>
 											{t('Save')}
-											{status}
 										</Button>
 									</Col>
 									<Col sm={1}>
@@ -125,6 +128,7 @@ export const MaterialEdit: React.FC = () => {
 							)}
 						</Formik>
 					))}
+					<MaterialCreate />
 				</MaterialEditWrapper>
 			</StyledForm>
 		</>

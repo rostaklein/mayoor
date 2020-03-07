@@ -258,6 +258,32 @@ export interface DeleteMaterialVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreateMaterial
+// ====================================================
+
+export interface CreateMaterial_createMaterial {
+  __typename: "Material";
+  id: string;
+  name: string;
+  price: number;
+  updatedAt: any;
+}
+
+export interface CreateMaterial {
+  createMaterial: CreateMaterial_createMaterial;
+}
+
+export interface CreateMaterialVariables {
+  name: string;
+  price: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateCustomerMutation
 // ====================================================
 

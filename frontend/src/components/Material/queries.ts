@@ -29,3 +29,14 @@ export const DELETE_MATERIAL = gql`
 		}
 	}
 `;
+
+export const CREATE_MATERIAL = gql`
+	mutation CreateMaterial($name: String!, $price: Float!) {
+		createMaterial(name: $name, price: $price) {
+			id
+			name
+			price
+			updatedAt
+		}
+	}
+`;
