@@ -85,6 +85,7 @@ export const LoginForm: React.FC = () => {
 						name="username"
 						onChange={handleChange}
 						value={values.username}
+						data-test-id="login-username"
 					/>
 				</S.FormItemStyled>
 				<S.FormItemStyled
@@ -98,9 +99,16 @@ export const LoginForm: React.FC = () => {
 						onChange={handleChange}
 						value={values.password}
 						type="password"
+						data-test-id="login-password"
 					/>
 				</S.FormItemStyled>
-				<Button icon="login" loading={loading} disabled={!isValid} htmlType="submit">
+				<Button
+					icon="login"
+					loading={loading}
+					disabled={!isValid}
+					htmlType="submit"
+					data-test-id="login-submit-button"
+				>
 					{t('Log In')}
 				</Button>
 				<S.LanguageSwitchWrapper>
