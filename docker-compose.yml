@@ -18,9 +18,9 @@ services:
       ADMINER_DEFAULT_DB_NAME: db
     ports:
       - 8090:8080
-  backend:
+  app:
     build:
-      context: ../backend
+      context: .
       args:
         database_url: postgresql://user:pwd@db-test:5432/db
     environment:
@@ -30,7 +30,9 @@ services:
       - 8080:8080
     volumes:
       # share everything BUT node_modules from the host
-      - ./backend:/api
-      - /api/node_modules
+      - .:/backend
+      - /backend/node_modules
+      - .:/frontend
+      - /frontend/node_modules
     depends_on:
       - db-test

@@ -7,7 +7,12 @@ ENV DATABASE_URL=$database_url
 
 RUN echo $DATABASE_URL
 
-ADD ./ /opt/app
+COPY ./frontend /opt/frontend
+WORKDIR /opt/frontend
+RUN npm i \
+    && npm run build
+
+ADD ./backend /opt/app
 WORKDIR /opt/app
 
 USER root

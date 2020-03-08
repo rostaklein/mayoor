@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  cypress:
+    image: 'cypress/included:3.2.0'
+    entrypoint: /scripts/wait_for_it.sh app:8080 -- cypress run
+    environment:
+      - CYPRESS_baseUrl=http://app:8080
+    working_dir: /e2e
+    volumes:
+      - ./tests-e2e:/e2e
+      - ./scripts:/scripts
