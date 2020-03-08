@@ -48,8 +48,8 @@ export const CustomerForm: React.FC<Props> = (props) => {
 				return errors;
 			}}
 		>
-			{({ values, setFieldValue, handleChange }) => (
-				<StyledForm>
+			{({ values, setFieldValue, handleChange, handleSubmit }) => (
+				<StyledForm onSubmit={handleSubmit}>
 					<Row gutter={32}>
 						<Col xs={24} md={12}>
 							<FormInput name="name" label={t('Company name')} icon="contacts" />
