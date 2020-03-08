@@ -15,4 +15,6 @@ async function seed() {
   console.log(createdAdminUser);
 }
 
-seed();
+seed().then(() => {
+  process.exit();
+});
