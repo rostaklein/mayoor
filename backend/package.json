@@ -11,7 +11,10 @@
     "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema",
     "postinstall": "npm -s run generate",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
-    "apollo:push": "apollo service:push --endpoint=http://localhost:4444/graphql"
+    "apollo:push": "apollo service:push --endpoint=http://localhost:4444/graphql",
+    "database:migrate": "prisma2 migrate up --experimental",
+    "database:seed": "ts-node ./prisma/seed.ts",
+    "start:full": "npm run database:migrate && npm run database:seed && npm run start"
   },
   "keywords": [
     "order",
