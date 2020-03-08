@@ -20,6 +20,7 @@ USER root
 RUN rm -rf node_modules \
     && npm i -g --unsafe-perm prisma2@latest  \
     && npm install \
+    && npm run build \
     && chown -R node /opt/app
 
 RUN prisma2 generate
