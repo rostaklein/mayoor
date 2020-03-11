@@ -8,9 +8,10 @@ type FieldProps = {
 	name: string;
 	label: string;
 	icon?: string;
+	withLabel?: boolean;
 };
 
-export const FormInput: React.FC<FieldProps> = ({ icon, label, name }) => {
+export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }) => {
 	const [{ value, onChange }, { touched, error }] = useField(name);
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
@@ -25,6 +26,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name }) => {
 	};
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>
+			{withLabel && <label>{label}</label>}
 			<Input
 				prefix={icon && <Icon type={icon} />}
 				placeholder={label}
