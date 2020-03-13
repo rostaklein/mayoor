@@ -1,6 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
+import {
+	SyncOutlined,
+	PlusCircleOutlined,
+	FileSearchOutlined,
+	UserAddOutlined,
+	TeamOutlined,
+	FileTextOutlined,
+} from '@ant-design/icons';
 
 import { Colors } from '../../themeVariables';
 import { useAppState } from '../../appContext/context';
@@ -34,19 +42,31 @@ export const MainMenu: React.FC = () => {
 		<StyledMenu>
 			<li>
 				<CategoryName>{t('Orders')}</CategoryName>
-				<LinkItem icon="sync" name={t('In Progress')} to={'/orders/inprogress'} />
-				<LinkItem icon="plus-circle" name={t('Add order')} to={'/orders/new'} />
-				<LinkItem icon="file-search" name={t('List orders')} to={'/orders/list'} />
+				<LinkItem
+					icon={<SyncOutlined />}
+					name={t('In Progress')}
+					to={'/orders/inprogress'}
+				/>
+				<LinkItem icon={<PlusCircleOutlined />} name={t('Add order')} to={'/orders/new'} />
+				<LinkItem
+					icon={<FileSearchOutlined />}
+					name={t('List orders')}
+					to={'/orders/list'}
+				/>
 			</li>
 			<li>
 				<CategoryName>{t('Customers')}</CategoryName>
-				<LinkItem icon="user-add" name={t('Add customer')} to={'/customers/new'} />
-				<LinkItem icon="team" name={t('Customers')} to={'/customers/list'} />
+				<LinkItem
+					icon={<UserAddOutlined />}
+					name={t('Add customer')}
+					to={'/customers/new'}
+				/>
+				<LinkItem icon={<TeamOutlined />} name={t('Customers')} to={'/customers/list'} />
 			</li>
 			{currentUser?.isAdmin && (
 				<li>
 					<CategoryName>{t('Administration')}</CategoryName>
-					<LinkItem icon="file-text" name={t('Material')} to={'/materials'} />
+					<LinkItem icon={<FileTextOutlined />} name={t('Material')} to={'/materials'} />
 				</li>
 			)}
 		</StyledMenu>

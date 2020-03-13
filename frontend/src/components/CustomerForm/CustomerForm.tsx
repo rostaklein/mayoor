@@ -1,7 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikErrors, Formik } from 'formik';
-import { EnvironmentOutlined, HomeOutlined, NumberOutlined } from '@ant-design/icons';
+import {
+	EnvironmentOutlined,
+	HomeOutlined,
+	NumberOutlined,
+	HddOutlined,
+	UserOutlined,
+	MailOutlined,
+	PhoneOutlined,
+	ContactsOutlined,
+} from '@ant-design/icons';
 import { Input, Row, Col, Checkbox } from 'antd';
 
 import { StyledFormItem, StyledForm, StyledDivider } from '../FormItem/Form.styles';
@@ -53,7 +62,11 @@ export const CustomerForm: React.FC<Props> = (props) => {
 				<StyledForm onSubmit={handleSubmit}>
 					<Row gutter={32}>
 						<Col xs={24} md={12}>
-							<FormInput name="name" label={t('Company name')} icon="contacts" />
+							<FormInput
+								name="name"
+								label={t('Company name')}
+								icon={<ContactsOutlined />}
+							/>
 							<Row gutter={16}>
 								<Col span={12}>
 									<IdentificationNumberInput />
@@ -62,7 +75,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 									<FormInput
 										name="taxIdentificationNumber"
 										label={t('Tax identification number')}
-										icon="hdd"
+										icon={<HddOutlined />}
 									/>
 								</Col>
 							</Row>
@@ -70,14 +83,22 @@ export const CustomerForm: React.FC<Props> = (props) => {
 							<FormInput
 								name="personName"
 								label={t('Contact person name')}
-								icon="user"
+								icon={<UserOutlined />}
 							/>
 							<Row gutter={16}>
 								<Col span={12}>
-									<FormInput name="email" label={t('Email')} icon="mail" />
+									<FormInput
+										name="email"
+										label={t('Email')}
+										icon={<MailOutlined />}
+									/>
 								</Col>
 								<Col span={12}>
-									<FormInput name="phone" label={t('Phone')} icon="phone" />
+									<FormInput
+										name="phone"
+										label={t('Phone')}
+										icon={<PhoneOutlined />}
+									/>
 								</Col>
 							</Row>
 						</Col>

@@ -1,13 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink, NavLinkProps } from 'react-router-dom';
-import { Icon } from '@ant-design/compatible';
 
 import { Colors } from '../../themeVariables';
-
-const StyledIcon = styled(Icon)`
-	margin-right: 10px;
-`;
 
 const MenuLinkItem = styled(NavLink)<NavLinkProps<unknown>>`
 	width: 100%;
@@ -30,10 +25,13 @@ const MenuLinkItem = styled(NavLink)<NavLinkProps<unknown>>`
 		color: inherit;
 		text-decoration: none;
 	}
+	.anticon {
+		margin-right: 10px;
+	}
 `;
 
 interface Props {
-	icon: string;
+	icon: React.ReactNode;
 	name: string;
 	to: NavLinkProps<unknown>['to'];
 }
@@ -41,7 +39,7 @@ interface Props {
 export const LinkItem: React.FC<Props> = ({ icon, name, to }) => {
 	return (
 		<MenuLinkItem to={to}>
-			<StyledIcon type={icon} />
+			{icon}
 			{name}
 		</MenuLinkItem>
 	);

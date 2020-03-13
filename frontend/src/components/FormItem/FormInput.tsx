@@ -1,6 +1,5 @@
 import React from 'react';
 import { useField } from 'formik';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Input } from 'antd';
 
 import { StyledFormItem } from './Form.styles';
@@ -8,7 +7,7 @@ import { StyledFormItem } from './Form.styles';
 type FieldProps = {
 	name: string;
 	label: string;
-	icon?: string;
+	icon?: React.ReactNode;
 	withLabel?: boolean;
 };
 
@@ -29,7 +28,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }
 		<StyledFormItem validateStatus={status} help={errorMessage}>
 			{withLabel && <label>{label}</label>}
 			<Input
-				prefix={icon && <LegacyIcon type={icon} />}
+				prefix={icon && icon}
 				placeholder={label}
 				name={name}
 				onChange={onChange}

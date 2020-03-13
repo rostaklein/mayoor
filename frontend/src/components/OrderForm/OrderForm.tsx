@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikErrors, Formik } from 'formik';
 import { Row, Col } from 'antd';
+import { NumberOutlined } from '@ant-design/icons';
 
 import { StyledForm } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
@@ -44,7 +45,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 							<FormInput
 								name="number"
 								label={t('Order number')}
-								icon="number"
+								icon={<NumberOutlined />}
 								withLabel
 							/>
 						</Col>
