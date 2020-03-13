@@ -5,8 +5,9 @@ import { RightCircleOutlined } from '@ant-design/icons';
 import { Table, Row, Col, Empty, Button } from 'antd';
 import { useQuery } from 'react-apollo';
 import { TFunction } from 'i18next';
-import { ColumnProps, PaginationConfig } from 'antd/lib/table';
+import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
+import { PaginationConfig } from 'antd/lib/pagination';
 
 import {
 	GetAllCustomers,
@@ -55,10 +56,10 @@ const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_i
 		width: 50,
 		render: (_, record) => {
 			return (
-                <Link to={`/customers/${record.id}`}>
+				<Link to={`/customers/${record.id}`}>
 					<Button icon={<RightCircleOutlined />} type="link"></Button>
 				</Link>
-            );
+			);
 		},
 	},
 ];
@@ -117,7 +118,7 @@ export const ListCustomers: React.FC = () => {
 		<>
 			<PageTitle>{t('Customers')}</PageTitle>
 			<StyledTableWrapper>
-				<Row type="flex" justify="end">
+				<Row justify="end">
 					<Col xs={24} md={6}>
 						<StyledSearch
 							enterButton

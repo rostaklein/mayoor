@@ -14,8 +14,8 @@ export const Logout: React.FC = () => {
 		dispatch({ type: 'SET_CURRENT_USER', user: null });
 	};
 	return (
-        <Tooltip placement="bottomRight" title={t('Log Out')}>
+		<Tooltip placement="bottomRight" title={t('Log Out')}>
 			<Button onClick={onLogoutClick} icon={<LogoutOutlined />} type="link" shape="circle" />
 		</Tooltip>
-    );
+	);
 };

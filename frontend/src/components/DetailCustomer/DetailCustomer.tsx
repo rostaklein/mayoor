@@ -89,33 +89,35 @@ export const DetailCustomer: React.FC = () => {
 		return <Skeleton active />;
 	}
 
-	return <>
-        <PageTitle>{data.getCustomer.name}</PageTitle>
-        <StyledDescriptions>
-            <Descriptions.Item label={t('Created By')}>
-                <UserOutlined />
-                {data.getCustomer.createdBy.name}
-            </Descriptions.Item>
-            <Descriptions.Item label={t('Created At')}>
-                <CalendarOutlined /> {f(data.getCustomer.createdAt, 'datetime')}
-            </Descriptions.Item>
-            <Descriptions.Item label={t('Last Updated At')}>
-                <CalendarOutlined /> {f(data.getCustomer.updatedAt, 'datetime')}
-            </Descriptions.Item>
-        </StyledDescriptions>
-        <CustomerForm
-            onSubmit={submitHandler}
-            submitButton={
-                <Button
-                    type="primary"
-                    htmlType="submit"
-                    loading={loading}
-                    style={{ marginTop: 10 }}
-                >
-                    {t('Save customer')}
-                </Button>
-            }
-            initialValues={data.getCustomer}
-        />
-    </>;
+	return (
+		<>
+			<PageTitle>{data.getCustomer.name}</PageTitle>
+			<StyledDescriptions>
+				<Descriptions.Item label={t('Created By')}>
+					<UserOutlined />
+					{data.getCustomer.createdBy.name}
+				</Descriptions.Item>
+				<Descriptions.Item label={t('Created At')}>
+					<CalendarOutlined /> {f(data.getCustomer.createdAt, 'datetime')}
+				</Descriptions.Item>
+				<Descriptions.Item label={t('Last Updated At')}>
+					<CalendarOutlined /> {f(data.getCustomer.updatedAt, 'datetime')}
+				</Descriptions.Item>
+			</StyledDescriptions>
+			<CustomerForm
+				onSubmit={submitHandler}
+				submitButton={
+					<Button
+						type="primary"
+						htmlType="submit"
+						loading={loading}
+						style={{ marginTop: 10 }}
+					>
+						{t('Save customer')}
+					</Button>
+				}
+				initialValues={data.getCustomer}
+			/>
+		</>
+	);
 };

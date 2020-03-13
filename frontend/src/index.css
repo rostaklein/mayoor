@@ -21,3 +21,7 @@ body,
 #root .ant-form label {
 	font-size: 12px;
 }
+
+#root .ant-col {
+	flex-grow: 1;
+}

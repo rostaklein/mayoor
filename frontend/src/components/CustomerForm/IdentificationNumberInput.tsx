@@ -65,7 +65,7 @@ export const IdentificationNumberInput: React.FC = () => {
 	};
 
 	return (
-        <StyledFormItem validateStatus={error ? 'error' : ''} help={error}>
+		<StyledFormItem validateStatus={error ? 'error' : ''} help={error}>
 			<Input.Search
 				name={'identificationNumber'}
 				prefix={<NumberOutlined />}
@@ -77,5 +77,5 @@ export const IdentificationNumberInput: React.FC = () => {
 				loading={isLoadingHelperInfo}
 			/>
 		</StyledFormItem>
-    );
+	);
 };

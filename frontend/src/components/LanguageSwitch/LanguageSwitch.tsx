@@ -12,7 +12,7 @@ export const LanguageSwitch: React.FC = () => {
 		i18n.changeLanguage(language);
 	};
 	return (
-        <Popover
+		<Popover
 			content={
 				<Button.Group>
 					{[
@@ -36,5 +36,5 @@ export const LanguageSwitch: React.FC = () => {
 		>
 			<Button icon={<GlobalOutlined />} shape="circle" type="link" />
 		</Popover>
-    );
+	);
 };

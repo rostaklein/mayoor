@@ -36,7 +36,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 	const { t } = useTranslation();
 
 	return (
-        <Formik<UserFormValues>
+		<Formik<UserFormValues>
 			initialValues={props.initialValues}
 			onSubmit={async (values, { resetForm }) => {
 				await props.onSubmit(values, resetForm);
@@ -151,5 +151,5 @@ export const CustomerForm: React.FC<Props> = (props) => {
 				</StyledForm>
 			)}
 		</Formik>
-    );
+	);
 };

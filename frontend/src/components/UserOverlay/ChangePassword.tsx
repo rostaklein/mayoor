@@ -66,7 +66,7 @@ export const ChangePassword: React.FC = () => {
 		const errorMessage = formik.touched[name] && formik.errors[name];
 		const status = errorMessage ? 'error' : '';
 		return (
-            <FormItemStyled validateStatus={status} help={errorMessage}>
+			<FormItemStyled validateStatus={status} help={errorMessage}>
 				<Input
 					prefix={<LockFilled />}
 					placeholder={label}
@@ -76,14 +76,14 @@ export const ChangePassword: React.FC = () => {
 					type="password"
 				/>
 			</FormItemStyled>
-        );
+		);
 	};
 
 	return (
 		<form onSubmit={formik.handleSubmit}>
 			<h4>{t('Change your password')}</h4>
 			{getPasswordField('oldPassword', t('Old Password'))}
-			<Row gutter={16} type="flex">
+			<Row gutter={16}>
 				<Col span={12}>{getPasswordField('newPassword', t('New Password'))}</Col>
 				<Col span={12}>
 					{getPasswordField('newPasswordRepeat', t('Repeat New Password'))}

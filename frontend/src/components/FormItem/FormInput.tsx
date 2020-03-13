@@ -26,7 +26,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }
 		return '';
 	};
 	return (
-        <StyledFormItem validateStatus={status} help={errorMessage}>
+		<StyledFormItem validateStatus={status} help={errorMessage}>
 			{withLabel && <label>{label}</label>}
 			<Input
 				prefix={icon && <LegacyIcon type={icon} />}
@@ -36,5 +36,5 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }
 				value={getValue()}
 			/>
 		</StyledFormItem>
-    );
+	);
 };

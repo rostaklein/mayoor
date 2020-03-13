@@ -73,7 +73,7 @@ export const LoginForm: React.FC = () => {
 	});
 
 	return (
-        <CenteredWrapper>
+		<CenteredWrapper>
 			<S.LoginWrapper onSubmit={handleSubmit}>
 				<S.Logo src={LogoImage} />
 				<S.FormItemStyled
@@ -117,5 +117,5 @@ export const LoginForm: React.FC = () => {
 				</S.LanguageSwitchWrapper>
 			</S.LoginWrapper>
 		</CenteredWrapper>
-    );
+	);
 };
