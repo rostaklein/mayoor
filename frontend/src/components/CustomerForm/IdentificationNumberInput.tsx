@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useField, useFormikContext } from 'formik';
-import { Icon, Input } from 'antd';
+import { NumberOutlined } from '@ant-design/icons';
+import { Input } from 'antd';
 import { useQuery } from 'react-apollo';
 import { ApolloError } from 'apollo-client';
 
@@ -64,10 +65,10 @@ export const IdentificationNumberInput: React.FC = () => {
 	};
 
 	return (
-		<StyledFormItem validateStatus={error ? 'error' : ''} help={error}>
+        <StyledFormItem validateStatus={error ? 'error' : ''} help={error}>
 			<Input.Search
 				name={'identificationNumber'}
-				prefix={<Icon type="number" />}
+				prefix={<NumberOutlined />}
 				placeholder={t('Identification number')}
 				onSearch={queryForHelperInfo}
 				onChange={onChange}
@@ -76,5 +77,5 @@ export const IdentificationNumberInput: React.FC = () => {
 				loading={isLoadingHelperInfo}
 			/>
 		</StyledFormItem>
-	);
+    );
 };

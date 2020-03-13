@@ -1,4 +1,5 @@
 import React from 'react';
+import { LogoutOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -13,8 +14,8 @@ export const Logout: React.FC = () => {
 		dispatch({ type: 'SET_CURRENT_USER', user: null });
 	};
 	return (
-		<Tooltip placement="bottomRight" title={t('Log Out')}>
-			<Button onClick={onLogoutClick} icon="logout" type="link" shape="circle" />
+        <Tooltip placement="bottomRight" title={t('Log Out')}>
+			<Button onClick={onLogoutClick} icon={<LogoutOutlined />} type="link" shape="circle" />
 		</Tooltip>
-	);
+    );
 };

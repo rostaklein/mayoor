@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
 
 export const LoginWrapper = styled.form`
 	width: 240px;

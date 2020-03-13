@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink, NavLinkProps } from 'react-router-dom';
-import { Icon } from 'antd';
 
 import { Colors } from '../../themeVariables';
 

@@ -3,7 +3,8 @@ import { useQuery, ApolloProvider } from 'react-apollo';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Icon, Spin, Alert, message } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Alert, message } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
@@ -15,7 +16,7 @@ import { client } from './ApolloClient';
 
 const CenteredSpinner: React.FC = () => (
 	<CenteredWrapper>
-		<Spin indicator={<Icon type="loading" style={{ fontSize: 48 }} spin />} />
+		<Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
 	</CenteredWrapper>
 );
 

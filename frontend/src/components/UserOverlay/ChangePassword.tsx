@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { FormikErrors, useFormik } from 'formik';
 import { ApolloError } from 'apollo-client';
 import { useMutation } from 'react-apollo';
-import { message, Row, Col, Button, Form, Input, Icon } from 'antd';
+import { LockFilled } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { message, Row, Col, Button, Input } from 'antd';
 import styled from '@emotion/styled';
 
 import { ChangePasswordMutation, ChangePasswordMutationVariables } from '../../__generated__/types';
@@ -63,9 +66,9 @@ export const ChangePassword: React.FC = () => {
 		const errorMessage = formik.touched[name] && formik.errors[name];
 		const status = errorMessage ? 'error' : '';
 		return (
-			<FormItemStyled validateStatus={status} help={errorMessage}>
+            <FormItemStyled validateStatus={status} help={errorMessage}>
 				<Input
-					prefix={<Icon type="lock" theme="filled" />}
+					prefix={<LockFilled />}
 					placeholder={label}
 					name={name}
 					onChange={formik.handleChange}
@@ -73,7 +76,7 @@ export const ChangePassword: React.FC = () => {
 					type="password"
 				/>
 			</FormItemStyled>
-		);
+        );
 	};
 
 	return (

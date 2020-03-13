@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GlobalOutlined } from '@ant-design/icons';
 import { Popover, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +12,7 @@ export const LanguageSwitch: React.FC = () => {
 		i18n.changeLanguage(language);
 	};
 	return (
-		<Popover
+        <Popover
 			content={
 				<Button.Group>
 					{[
@@ -33,7 +34,7 @@ export const LanguageSwitch: React.FC = () => {
 			visible={isVisible}
 			onVisibleChange={setIsVisible}
 		>
-			<Button icon="global" shape="circle" type="link" />
+			<Button icon={<GlobalOutlined />} shape="circle" type="link" />
 		</Popover>
-	);
+    );
 };

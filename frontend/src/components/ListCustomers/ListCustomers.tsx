@@ -1,6 +1,7 @@
 /* eslint-disable  @typescript-eslint/camelcase */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { RightCircleOutlined } from '@ant-design/icons';
 import { Table, Row, Col, Empty, Button } from 'antd';
 import { useQuery } from 'react-apollo';
 import { TFunction } from 'i18next';
@@ -54,10 +55,10 @@ const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_i
 		width: 50,
 		render: (_, record) => {
 			return (
-				<Link to={`/customers/${record.id}`}>
-					<Button icon="right-circle" type="link"></Button>
+                <Link to={`/customers/${record.id}`}>
+					<Button icon={<RightCircleOutlined />} type="link"></Button>
 				</Link>
-			);
+            );
 		},
 	},
 ];

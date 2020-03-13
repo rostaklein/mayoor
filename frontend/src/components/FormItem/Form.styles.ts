@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
-import { Form, Divider } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Divider } from 'antd';
 
 import { Colors } from '../../themeVariables';
 

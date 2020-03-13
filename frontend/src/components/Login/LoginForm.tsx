@@ -3,7 +3,8 @@ import { useMutation } from 'react-apollo';
 import { useFormik, FormikErrors } from 'formik';
 import { ApolloError } from 'apollo-client';
 import { useTranslation } from 'react-i18next';
-import { Icon, Input, Button } from 'antd';
+import { LockFilled, LoginOutlined, UserOutlined } from '@ant-design/icons';
+import { Input, Button } from 'antd';
 
 import LogoImage from '../../images/mayoor_logo.svg';
 import { LoginMutation, LoginMutationVariables } from '../../__generated__/types';
@@ -72,7 +73,7 @@ export const LoginForm: React.FC = () => {
 	});
 
 	return (
-		<CenteredWrapper>
+        <CenteredWrapper>
 			<S.LoginWrapper onSubmit={handleSubmit}>
 				<S.Logo src={LogoImage} />
 				<S.FormItemStyled
@@ -80,7 +81,7 @@ export const LoginForm: React.FC = () => {
 					help={touched.username && errors.username}
 				>
 					<Input
-						prefix={<Icon type="user" />}
+						prefix={<UserOutlined />}
 						placeholder={t('Username')}
 						name="username"
 						onChange={handleChange}
@@ -93,7 +94,7 @@ export const LoginForm: React.FC = () => {
 					help={touched.password && errors.password}
 				>
 					<Input
-						prefix={<Icon type="lock" theme="filled" />}
+						prefix={<LockFilled />}
 						placeholder={t('Password')}
 						name="password"
 						onChange={handleChange}
@@ -103,7 +104,7 @@ export const LoginForm: React.FC = () => {
 					/>
 				</S.FormItemStyled>
 				<Button
-					icon="login"
+					icon={<LoginOutlined />}
 					loading={loading}
 					disabled={!isValid}
 					htmlType="submit"
@@ -116,5 +117,5 @@ export const LoginForm: React.FC = () => {
 				</S.LanguageSwitchWrapper>
 			</S.LoginWrapper>
 		</CenteredWrapper>
-	);
+    );
 };

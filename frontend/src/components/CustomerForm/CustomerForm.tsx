@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikErrors, Formik } from 'formik';
-import { Icon, Input, Row, Col, Checkbox } from 'antd';
+import { EnvironmentOutlined, HomeOutlined, NumberOutlined } from '@ant-design/icons';
+import { Input, Row, Col, Checkbox } from 'antd';
 
 import { StyledFormItem, StyledForm, StyledDivider } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
@@ -35,7 +36,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 	const { t } = useTranslation();
 
 	return (
-		<Formik<UserFormValues>
+        <Formik<UserFormValues>
 			initialValues={props.initialValues}
 			onSubmit={async (values, { resetForm }) => {
 				await props.onSubmit(values, resetForm);
@@ -113,7 +114,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 								<StyledFormItem>
 									<Input
 										name={`addresses.${i}.street`}
-										prefix={<Icon type="environment" />}
+										prefix={<EnvironmentOutlined />}
 										placeholder={t('Street')}
 										onChange={handleChange}
 										value={values.addresses[i].street || ''}
@@ -124,7 +125,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 										<StyledFormItem>
 											<Input
 												name={`addresses.${i}.city`}
-												prefix={<Icon type="home" />}
+												prefix={<HomeOutlined />}
 												placeholder={t('City')}
 												onChange={handleChange}
 												value={values.addresses[i].city || ''}
@@ -135,7 +136,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 										<StyledFormItem>
 											<Input
 												name={`addresses.${i}.postNumber`}
-												prefix={<Icon type="number" />}
+												prefix={<NumberOutlined />}
 												placeholder={t('Post Number')}
 												onChange={handleChange}
 												value={values.addresses[i].postNumber || ''}
@@ -150,5 +151,5 @@ export const CustomerForm: React.FC<Props> = (props) => {
 				</StyledForm>
 			)}
 		</Formik>
-	);
+    );
 };
