@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-import { Divider } from 'antd';
+import { Divider, Form } from 'antd';
 
 import { Colors } from '../../themeVariables';
 
-export const StyledForm = styled(Form)`
+export const StyledForm = styled.form`
 	padding: 15px 25px;
 `;
 

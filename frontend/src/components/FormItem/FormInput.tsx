@@ -26,14 +26,16 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }
 	};
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>
-			{withLabel && <label>{label}</label>}
-			<Input
-				prefix={icon && icon}
-				placeholder={label}
-				name={name}
-				onChange={onChange}
-				value={getValue()}
-			/>
+			<>
+				{withLabel && <label>{label}</label>}
+				<Input
+					prefix={icon && icon}
+					placeholder={label}
+					name={name}
+					onChange={onChange}
+					value={getValue()}
+				/>
+			</>
 		</StyledFormItem>
 	);
 };

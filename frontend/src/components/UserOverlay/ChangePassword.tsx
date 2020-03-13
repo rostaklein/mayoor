@@ -4,8 +4,7 @@ import { FormikErrors, useFormik } from 'formik';
 import { ApolloError } from 'apollo-client';
 import { useMutation } from 'react-apollo';
 import { LockFilled } from '@ant-design/icons';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
+import { Form } from 'antd';
 import { message, Row, Col, Button, Input } from 'antd';
 import styled from '@emotion/styled';
 
