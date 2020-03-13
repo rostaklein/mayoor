@@ -7,6 +7,8 @@ import { NumberOutlined } from '@ant-design/icons';
 import { StyledForm } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
 
+import { CustomerPicker } from './CustomerPicker';
+
 export type OrderFormValues = {
 	number: number | null;
 	customer: string | null;
@@ -49,8 +51,10 @@ export const OrderForm: React.FC<Props> = (props) => {
 								withLabel
 							/>
 						</Col>
-						<Col span={6}></Col>
-						<Col span={12}>Customer here</Col>
+						<Col span={8}>
+							<CustomerPicker />
+						</Col>
+						<Col span={10}>{/* <CustomerPicker /> */}</Col>
 					</Row>
 					{props.submitButton}
 				</StyledForm>
