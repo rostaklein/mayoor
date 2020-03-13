@@ -10,10 +10,10 @@ import { FormInput } from '../FormItem/FormInput';
 import { CustomerPicker } from './CustomerPicker';
 
 export type OrderFormValues = {
-	number: number | null;
-	customer: string | null;
-	totalPrice: number;
-	totalTax: number;
+	number: string | null;
+	customerId: string | null;
+	totalPrice: string;
+	totalTax: string;
 	note: string;
 };
 
@@ -39,6 +39,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 				}
 				return errors;
 			}}
+			enableReinitialize
 		>
 			{({ handleSubmit }) => (
 				<StyledForm onSubmit={handleSubmit}>

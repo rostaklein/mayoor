@@ -1,6 +1,18 @@
-import { objectType, intArg, floatArg, stringArg, idArg, arg } from 'nexus';
-import { UserInputError } from 'apollo-server-express';
+import { objectType, arg, inputObjectType } from 'nexus';
+import { UserInputError, ApolloError } from 'apollo-server-express';
 import { OrderItemInput } from './addOrderItem';
+
+export const OrderInput = inputObjectType({
+  name: 'OrderInput',
+  definition(t) {
+    t.int('number', { nullable: false });
+    t.float('totalPrice', { nullable: false });
+    t.float('totalTax', { nullable: false });
+    t.string('note');
+    t.id('customerId');
+    t.field('items', { type: OrderItemInput, list: true });
+  },
+});
 
 export const CreateOrder = objectType({
   name: 'Mutation',
@@ -8,37 +20,33 @@ export const CreateOrder = objectType({
     t.field('createOrder', {
       type: 'Order',
       args: {
-        number: intArg({ nullable: false }),
-        totalPrice: floatArg(),
-        totalTax: floatArg(),
-        note: stringArg(),
-        customerId: idArg(),
-        items: arg({ type: OrderItemInput, list: true }),
+        input: arg({ type: OrderInput, nullable: false }),
       },
-      resolve: async (_, args, ctx) => {
+      resolve: async (_, { input }, ctx) => {
         const user = await ctx.user.getCurrentUser();
 
         const existingOrder = await ctx.prisma.order.findOne({
-          where: { number: args.number },
+          where: { number: input.number },
         });
 
         if (existingOrder) {
-          throw new UserInputError(
-            `Order number ${args.number} already exists`,
+          throw new ApolloError(
+            `Order number ${input.number} already exists`,
+            'ORDER_NUMBER_EXISTS',
           );
         }
 
         return ctx.prisma.order.create({
           data: {
-            number: args.number,
-            totalPrice: args.totalPrice || 0,
-            totalTax: args.totalTax || 0,
-            note: args.note,
+            number: input.number,
+            totalPrice: input.totalPrice || 0,
+            totalTax: input.totalTax || 0,
+            note: input.note,
             status: 'new',
-            customer: args.customerId
+            customer: input.customerId
               ? {
                   connect: {
-                    id: args.customerId,
+                    id: input.customerId,
                   },
                 }
               : undefined,

@@ -338,6 +338,48 @@ export interface GetCustomerHelperInfoVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetHighestOrderNumber
+// ====================================================
+
+export interface GetHighestOrderNumber {
+  getHighestOrderNumber: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: CreateOrder
+// ====================================================
+
+export interface CreateOrder_createOrder_customer {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+}
+
+export interface CreateOrder_createOrder {
+  __typename: "Order";
+  id: string;
+  customer: CreateOrder_createOrder_customer | null;
+}
+
+export interface CreateOrder {
+  createOrder: CreateOrder_createOrder;
+}
+
+export interface CreateOrderVariables {
+  input: OrderInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: FindCustomerQuery
 // ====================================================
 
@@ -476,6 +518,25 @@ export interface CreateCustomerInput {
   personName?: string | null;
   phone?: string | null;
   taxIdentificationNumber?: string | null;
+}
+
+export interface OrderInput {
+  customerId?: string | null;
+  items?: OrderItemInput[] | null;
+  note?: string | null;
+  number: number;
+  totalPrice: number;
+  totalTax: number;
+}
+
+export interface OrderItemInput {
+  height?: number | null;
+  materialId?: string | null;
+  name?: string | null;
+  pieces?: number | null;
+  totalPrice: number;
+  totalTax: number;
+  width?: number | null;
 }
 
 export interface UpdateAddressInput {

@@ -5,9 +5,10 @@ import { UserOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import { useQuery } from 'react-apollo';
 import debounce from 'lodash/debounce';
+import { useField } from 'formik';
 
-import { StyledFormItem } from '../FormItem/Form.styles';
 import { FindCustomerQuery, FindCustomerQueryVariables } from '../../__generated__/types';
+import { StyledFormItem } from '../FormItem/Form.styles';
 
 import { FIND_CUSTOMER_QUERY } from './queries';
 
@@ -21,7 +22,9 @@ const StyledSubName = styled.span`
 
 export const CustomerPicker: React.FC = () => {
 	const { t } = useTranslation();
-	const [val, setVal] = useState<string>('ho');
+	const [{ value }, { touched, error }, { setValue }] = useField('customerId');
+	const errorMessage = touched && error;
+	const status = errorMessage ? 'error' : '';
 
 	const { data, loading, refetch } = useQuery<FindCustomerQuery, FindCustomerQueryVariables>(
 		FIND_CUSTOMER_QUERY,
@@ -38,15 +41,15 @@ export const CustomerPicker: React.FC = () => {
 
 	const customers = data?.getAllCustomers.items ?? [];
 	return (
-		<StyledFormItem>
+		<StyledFormItem validateStatus={status} help={errorMessage}>
 			<label>{t('Customer')}</label>
 			<Select
 				filterOption={false}
-				onChange={(value) => setVal(value)}
+				onChange={(value) => (console.log(value), setValue(value))}
 				placeholder={t('Select a customer')}
 				onSearch={debouncedSearchHandler}
 				showSearch
-				value={val}
+				value={value}
 				loading={loading}
 				allowClear
 				notFoundContent={t('Not found')}

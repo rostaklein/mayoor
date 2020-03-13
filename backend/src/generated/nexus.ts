@@ -42,6 +42,14 @@ export interface NexusGenInputs {
     phone?: string | null; // String
     taxIdentificationNumber?: string | null; // String
   }
+  OrderInput: { // input type
+    customerId?: string | null; // ID
+    items?: NexusGenInputs['OrderItemInput'][] | null; // [OrderItemInput!]
+    note?: string | null; // String
+    number: number; // Int!
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+  }
   OrderItemInput: { // input type
     height?: number | null; // Float
     materialId?: string | null; // ID
@@ -121,6 +129,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   AddressInput: NexusGenInputs['AddressInput'];
   AddressWhereUniqueInput: NexusGenInputs['AddressWhereUniqueInput'];
   CreateCustomerInput: NexusGenInputs['CreateCustomerInput'];
+  OrderInput: NexusGenInputs['OrderInput'];
   OrderItemInput: NexusGenInputs['OrderItemInput'];
   OrderItemWhereUniqueInput: NexusGenInputs['OrderItemWhereUniqueInput'];
   UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
@@ -224,6 +233,7 @@ export interface NexusGenFieldTypes {
     getAllOrders: NexusGenRootTypes['OrderPaginated']; // OrderPaginated!
     getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
+    getHighestOrderNumber: number | null; // Int
     me: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
@@ -261,12 +271,7 @@ export interface NexusGenArgTypes {
       price: number; // Float!
     }
     createOrder: { // args
-      customerId?: string | null; // ID
-      items?: NexusGenInputs['OrderItemInput'][] | null; // [OrderItemInput!]
-      note?: string | null; // String
-      number: number; // Int!
-      totalPrice?: number | null; // Float
-      totalTax?: number | null; // Float
+      input: NexusGenInputs['OrderInput']; // OrderInput!
     }
     deleteCustomer: { // args
       id: string; // ID!
@@ -327,7 +332,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "UpdateAddressInput" | "UpdateCustomerInput";
+export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "UpdateAddressInput" | "UpdateCustomerInput";
 
 export type NexusGenEnumNames = never;
 

@@ -87,7 +87,7 @@ type Mutation {
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createMaterial(name: String!, price: Float!): Material!
-  createOrder(customerId: ID, items: [OrderItemInput!], note: String, number: Int!, totalPrice: Float, totalTax: Float): Order!
+  createOrder(input: OrderInput!): Order!
   deleteCustomer(id: ID!): Customer!
   deleteMaterial(id: ID!): Material!
   login(email: String!, password: String!): AuthPayload!
@@ -109,6 +109,15 @@ type Order {
   totalTax: Float!
   updatedAt: DateTime!
   urgency: Int!
+}
+
+input OrderInput {
+  customerId: ID
+  items: [OrderItemInput!]
+  note: String
+  number: Int!
+  totalPrice: Float!
+  totalTax: Float!
 }
 
 type OrderItem {
@@ -149,6 +158,7 @@ type Query {
   getAllOrders(first: Int, skip: Int): OrderPaginated!
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
+  getHighestOrderNumber: Int
   me: User!
 }
 
