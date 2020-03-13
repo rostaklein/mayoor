@@ -26,6 +26,9 @@ export const GetAllCustomers = queryField('getAllCustomers', {
     const customers = await ctx.prisma.customer.findMany({
       ...args,
       where,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
     return {
       totalCount: allCustomers.length,

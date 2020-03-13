@@ -3,7 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Button, message } from 'antd';
 import { useMutation } from 'react-apollo';
 
-import { CreateCustomerMutation, CreateCustomerMutationVariables } from '../../__generated__/types';
+import {
+	CreateCustomerMutation,
+	CreateCustomerMutationVariables,
+	GetAllCustomers,
+} from '../../__generated__/types';
 import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { GET_ALL_CUSTOMERS_QUERY } from '../ListCustomers/queries';
@@ -37,7 +41,6 @@ export const NewCustomer: React.FC = () => {
 		try {
 			await createCustomer({
 				variables: { input: values },
-				refetchQueries: [{ query: GET_ALL_CUSTOMERS_QUERY }],
 			});
 			message.success(t('customer_created'));
 			resetForm();

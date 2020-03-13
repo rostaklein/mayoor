@@ -289,9 +289,12 @@ export interface CreateMaterialVariables {
 
 export interface CreateCustomerMutation_createCustomer {
   __typename: "Customer";
+  id: string;
   name: string | null;
-  personName: string | null;
   identificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
 }
 
 export interface CreateCustomerMutation {
@@ -424,6 +427,25 @@ export interface CustomerDetails {
   createdAt: any;
   updatedAt: any;
   addresses: CustomerDetails_addresses[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: CustomerFragment
+// ====================================================
+
+export interface CustomerFragment {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
 }
 
 /* tslint:disable */

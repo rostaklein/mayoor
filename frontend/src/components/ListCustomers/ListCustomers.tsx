@@ -73,6 +73,7 @@ export const ListCustomers: React.FC = () => {
 		GetAllCustomersVariables
 	>(GET_ALL_CUSTOMERS_QUERY, {
 		variables: { first: PAGE_SIZE },
+		fetchPolicy: 'network-only',
 	});
 
 	const items = data?.getAllCustomers.items ?? [];

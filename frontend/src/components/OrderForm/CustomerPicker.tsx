@@ -25,6 +25,9 @@ export const CustomerPicker: React.FC = () => {
 
 	const { data, loading, refetch } = useQuery<FindCustomerQuery, FindCustomerQueryVariables>(
 		FIND_CUSTOMER_QUERY,
+		{
+			fetchPolicy: 'network-only',
+		},
 	);
 
 	const searchHandler = (search: string) => {
@@ -52,7 +55,9 @@ export const CustomerPicker: React.FC = () => {
 					<Select.Option key={customer.id} value={customer.id}>
 						<UserOutlined style={{ marginRight: 5 }}></UserOutlined>
 						<span>{customer.name}</span>{' '}
-						<StyledSubName>{customer.identificationNumber}</StyledSubName>
+						{customer.identificationNumber && (
+							<StyledSubName>{customer.identificationNumber}</StyledSubName>
+						)}
 					</Select.Option>
 				))}
 			</Select>

@@ -1,13 +1,14 @@
 import gql from 'graphql-tag';
 
+import { CUSTOMER_FRAGMENT } from '../ListCustomers/queries';
+
 export const CREATE_CUSTOMER_MUTATION = gql`
 	mutation CreateCustomerMutation($input: CreateCustomerInput!) {
 		createCustomer(input: $input) {
-			name
-			personName
-			identificationNumber
+			...CustomerFragment
 		}
 	}
+	${CUSTOMER_FRAGMENT}
 `;
 
 export const GET_CUSTOMER_HELPER_INFO = gql`
