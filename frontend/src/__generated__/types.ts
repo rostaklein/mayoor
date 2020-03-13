@@ -335,6 +335,39 @@ export interface GetCustomerHelperInfoVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: FindCustomerQuery
+// ====================================================
+
+export interface FindCustomerQuery_getAllCustomers_items {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+  personName: string | null;
+  email: string | null;
+  phone: string | null;
+}
+
+export interface FindCustomerQuery_getAllCustomers {
+  __typename: "CustomerPaginated";
+  totalCount: number;
+  items: FindCustomerQuery_getAllCustomers_items[];
+}
+
+export interface FindCustomerQuery {
+  getAllCustomers: FindCustomerQuery_getAllCustomers;
+}
+
+export interface FindCustomerQueryVariables {
+  search?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: ChangePasswordMutation
 // ====================================================
 
