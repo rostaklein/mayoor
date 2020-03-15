@@ -4,7 +4,7 @@ import { Button, message, Spin } from 'antd';
 import { useQuery, useMutation } from 'react-apollo';
 
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
-import { OrderForm, OrderFormValues } from '../OrderForm/OrderForm';
+import { OrderForm, OrderFormValues, OrderFormItem } from '../OrderForm/OrderForm';
 import {
 	GetHighestOrderNumber,
 	CreateOrder,
@@ -13,17 +13,21 @@ import {
 
 import { GET_HIGHEST_ORDER_NUMBER, CREATE_ORDER } from './queries';
 
-export const dummyMaterialItem = {
-	materialId: null,
+export const dummyMaterialItem: OrderFormItem = {
+	materialId: undefined,
 	name: 'test',
 	pieces: 1,
+	width: undefined,
+	height: undefined,
+	totalPrice: undefined,
+	totalTax: undefined,
 };
 
 const getInitialValues = (orderNumber: string | null): OrderFormValues => ({
 	number: orderNumber,
-	customerId: null,
-	totalPrice: '',
-	totalTax: '',
+	customerId: undefined,
+	totalPrice: undefined,
+	totalTax: undefined,
 	note: '',
 	items: [dummyMaterialItem],
 });

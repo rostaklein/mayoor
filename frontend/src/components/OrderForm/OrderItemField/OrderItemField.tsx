@@ -2,13 +2,14 @@ import React from 'react';
 import { useField, FieldArrayRenderProps } from 'formik';
 import { Input, Row, Col, Button, Popover, Popconfirm } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { DeleteColumnOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import { OrderFormItem } from '../OrderForm';
 import { FormInput } from '../../FormItem/FormInput';
 import { CURRENCY_SUFFIX } from '../../../config';
 
-import { StyledItemNumber } from './OrderItemField.styles';
+import { StyledItemNumber, MaterialColumn } from './OrderItemField.styles';
+import { MaterialPicker } from './MaterialPicker';
 
 type FieldProps = {
 	index: number;
@@ -18,34 +19,23 @@ type FieldProps = {
 export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) => {
 	const { t } = useTranslation();
 	const itemName = `items.${index}`;
-	const [{ value, onChange }, { touched, error }] = useField<OrderFormItem>(itemName);
-	const errorMessage = touched && error;
-	const status = errorMessage ? 'error' : '';
-	const getValue = () => {
-		if (typeof value === 'string') {
-			return value;
-		}
-		if (typeof value === 'number') {
-			return String(value);
-		}
-		return '';
-	};
+	const [{ value }] = useField<OrderFormItem>(itemName);
 	return (
 		<Row key={value.id || index} gutter={6}>
-			<Col sm={1}>
-				<StyledItemNumber>{index + 1}.</StyledItemNumber>
-			</Col>
-			<Col sm={4}>
-				<FormInput name={`${itemName}.materialId`} label={t('Material')} />
+			<Col sm={5}>
+				<MaterialColumn>
+					<StyledItemNumber>{index + 1}.</StyledItemNumber>
+					<MaterialPicker name={`${itemName}.materialId`} />
+				</MaterialColumn>
 			</Col>
 			<Col sm={6}>
 				<FormInput name={`${itemName}.name`} label={t('Name')} />
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.width`} label={t('Width')} />
+				<FormInput name={`${itemName}.width`} label={t('Width')} suffix="m" />
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.height`} label={t('Height')} />
+				<FormInput name={`${itemName}.height`} label={t('Height')} suffix="m" />
 			</Col>
 			<Col sm={2}>
 				<FormInput name={`${itemName}.pieces`} label={t('Pieces')} />

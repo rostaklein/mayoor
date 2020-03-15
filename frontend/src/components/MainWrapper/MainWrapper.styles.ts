@@ -52,5 +52,5 @@ export const PageTitle = styled.h1`
 	font-size: 18px;
 	color: ${Colors.DARK_GRAY3};
 	margin: 0;
-	padding: 15px 25px;
+	padding: 15px 35px;
 `;

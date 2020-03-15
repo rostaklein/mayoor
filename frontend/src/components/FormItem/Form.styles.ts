@@ -4,7 +4,7 @@ import { Divider, Form } from 'antd';
 import { Colors } from '../../themeVariables';
 
 export const StyledForm = styled.form`
-	padding: 15px 25px;
+	padding: 15px 35px;
 `;
 
 export const StyledDivider = styled(Divider)`
