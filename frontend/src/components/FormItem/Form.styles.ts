@@ -21,11 +21,12 @@ export const StyledFormItem = styled(Form.Item)`
 		line-height: normal;
 		margin-bottom: 8px;
 	}
-	label {
-		display: block;
-		margin-bottom: 5px;
-		font-weight: 600;
-	}
+`;
+
+export const StyledLabel = styled.label`
+	display: block;
+	margin-bottom: 5px;
+	font-weight: 600;
 `;
 
 export const StyledFormLabel = styled.label`

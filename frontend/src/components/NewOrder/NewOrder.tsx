@@ -10,9 +10,18 @@ import {
 	CreateOrder,
 	CreateOrderVariables,
 } from '../../__generated__/types';
-import { CenteredWrapper } from '../CenteredWrapper/CenteredWrapper';
 
 import { GET_HIGHEST_ORDER_NUMBER, CREATE_ORDER } from './queries';
+
+export const dummyMaterialItem = {
+	materialId: null,
+	width: '1',
+	height: '1',
+	name: 'test',
+	pieces: 1,
+	totalPrice: 0,
+	totalTax: 0,
+};
 
 const getInitialValues = (orderNumber: string | null): OrderFormValues => ({
 	number: orderNumber,
@@ -20,6 +29,7 @@ const getInitialValues = (orderNumber: string | null): OrderFormValues => ({
 	totalPrice: '',
 	totalTax: '',
 	note: '',
+	items: [dummyMaterialItem],
 });
 
 export const NewOrder: React.FC = () => {

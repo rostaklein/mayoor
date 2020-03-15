@@ -8,7 +8,7 @@ import debounce from 'lodash/debounce';
 import { useField } from 'formik';
 
 import { FindCustomerQuery, FindCustomerQueryVariables } from '../../__generated__/types';
-import { StyledFormItem } from '../FormItem/Form.styles';
+import { StyledFormItem, StyledLabel } from '../FormItem/Form.styles';
 
 import { FIND_CUSTOMER_QUERY } from './queries';
 
@@ -42,7 +42,7 @@ export const CustomerPicker: React.FC = () => {
 	const customers = data?.getAllCustomers.items ?? [];
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>
-			<label>{t('Customer')}</label>
+			<StyledLabel>{t('Customer')}</StyledLabel>
 			<Select
 				filterOption={false}
 				onChange={(value) => (console.log(value), setValue(value))}

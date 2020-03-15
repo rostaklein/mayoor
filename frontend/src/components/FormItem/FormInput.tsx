@@ -2,7 +2,7 @@ import React from 'react';
 import { useField } from 'formik';
 import { Input } from 'antd';
 
-import { StyledFormItem } from './Form.styles';
+import { StyledFormItem, StyledLabel } from './Form.styles';
 
 type FieldProps = {
 	name: string;
@@ -27,7 +27,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>
 			<>
-				{withLabel && <label>{label}</label>}
+				{withLabel && <StyledLabel>{label}</StyledLabel>}
 				<Input
 					prefix={icon && icon}
 					placeholder={label}
