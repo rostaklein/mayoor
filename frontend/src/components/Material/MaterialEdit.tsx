@@ -64,72 +64,76 @@ export const MaterialEdit: React.FC = () => {
 			<PageTitle>{t('Material')}</PageTitle>
 			<StyledForm>
 				<MaterialEditWrapper>
-					<Row gutter={24}>
-						<Col sm={14}>
-							<StyledFormLabel>{t('Material name')}</StyledFormLabel>
-						</Col>
-						<Col sm={6}>
-							<StyledFormLabel>{t('Price')}</StyledFormLabel>
-						</Col>
-						<Col sm={4}></Col>
-					</Row>
-					{data?.getAllMaterials.map((material) => (
-						<Formik<GetAllMaterials_getAllMaterials>
-							key={material.id}
-							initialValues={material}
-							onSubmit={async (values) => {
-								setCurrentlyLoading(material.id);
-								await updateMaterial({
-									variables: {
-										id: material.id,
-										name: values.name,
-										price: Number(values.price),
-									},
-								});
-								setCurrentlyLoading(null);
-							}}
-							validate={getFormikValidate(t)}
-						>
-							{({ handleSubmit }) => (
-								<Row gutter={18}>
-									<Col sm={14}>
-										<FormInput
-											label={t('Material name')}
-											name="name"
-										></FormInput>
-									</Col>
-									<Col sm={6}>
-										<FormInput label={t('Price')} name="price"></FormInput>
-									</Col>
-									<Col sm={3}>
-										<Button
-											type="primary"
-											onClick={() => handleSubmit()}
-											loading={currentlyLoading === material.id}
-											icon={<SaveOutlined />}
-											style={{ width: '100%' }}
-										>
-											{t('Save')}
-										</Button>
-									</Col>
-									<Col sm={1}>
-										<Popconfirm
-											placement="topRight"
-											onConfirm={async () =>
-												await deleteMaterial({
-													variables: { id: material.id },
-												})
-											}
-											title={t('Do you really want to remove this material?')}
-										>
-											<Button icon={<DeleteOutlined />}></Button>
-										</Popconfirm>
-									</Col>
-								</Row>
-							)}
-						</Formik>
-					))}
-					<MaterialCreate />
+					<>
+						<Row gutter={24}>
+							<Col sm={14}>
+								<StyledFormLabel>{t('Material name')}</StyledFormLabel>
+							</Col>
+							<Col sm={6}>
+								<StyledFormLabel>{t('Price')}</StyledFormLabel>
+							</Col>
+							<Col sm={4}></Col>
+						</Row>
+						{data?.getAllMaterials.map((material) => (
+							<Formik<GetAllMaterials_getAllMaterials>
+								key={material.id}
+								initialValues={material}
+								onSubmit={async (values) => {
+									setCurrentlyLoading(material.id);
+									await updateMaterial({
+										variables: {
+											id: material.id,
+											name: values.name,
+											price: Number(values.price),
+										},
+									});
+									setCurrentlyLoading(null);
+								}}
+								validate={getFormikValidate(t)}
+							>
+								{({ handleSubmit }) => (
+									<Row gutter={18}>
+										<Col sm={14}>
+											<FormInput
+												label={t('Material name')}
+												name="name"
+											></FormInput>
+										</Col>
+										<Col sm={6}>
+											<FormInput label={t('Price')} name="price"></FormInput>
+										</Col>
+										<Col sm={3}>
+											<Button
+												type="primary"
+												onClick={() => handleSubmit()}
+												loading={currentlyLoading === material.id}
+												icon={<SaveOutlined />}
+												style={{ width: '100%' }}
+											>
+												{t('Save')}
+											</Button>
+										</Col>
+										<Col sm={1}>
+											<Popconfirm
+												placement="topRight"
+												onConfirm={async () =>
+													await deleteMaterial({
+														variables: { id: material.id },
+													})
+												}
+												title={t(
+													'Do you really want to remove this material?',
+												)}
+											>
+												<Button icon={<DeleteOutlined />}></Button>
+											</Popconfirm>
+										</Col>
+									</Row>
+								)}
+							</Formik>
+						))}
+						<MaterialCreate />
+					</>
 				</MaterialEditWrapper>
 			</StyledForm>
 		</>
