@@ -10,9 +10,10 @@ import { CURRENCY_SUFFIX } from '../../../config';
 import { client } from '../../../ApolloClient';
 import { GET_ALL_MATERIALS } from '../../Material/queries';
 import { GetAllMaterials } from '../../../__generated__/types';
+import { calculateRow } from '../calculateRow';
 
 import { MaterialPicker } from './MaterialPicker';
-import { StyledItemNumber, MaterialColumn } from './OrderItemField.styles';
+import { StyledItemNumber, MaterialColumn, WiderInputWrapper } from './OrderItemField.styles';
 
 type FieldProps = {
 	index: number;
@@ -22,13 +23,14 @@ type FieldProps = {
 export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) => {
 	const { t } = useTranslation();
 	const itemName = `items.${index}`;
-	const [{ value }] = useField<OrderFormItem>(itemName);
+	const [{ value }, _, { setValue }] = useField<OrderFormItem>(itemName);
 	const calculateClickHandler = () => {
 		const allMaterials = client.readQuery<GetAllMaterials>({ query: GET_ALL_MATERIALS });
 		const material = allMaterials?.getAllMaterials.find(({ id }) => id === value.materialId);
 
 		const { width, height, pieces } = value;
-		console.log({ price: material?.price, width, height, pieces });
+		const { price, tax } = calculateRow({ width, height, pieces, unitPrice: material?.price });
+		setValue({ ...value, totalPrice: price, totalTax: tax });
 	};
 	const calculationEnabled = value.materialId && value.width && value.height && value.pieces;
 	return (
@@ -43,10 +45,14 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 				<FormInput name={`${itemName}.name`} label={t('Name')} />
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.width`} suffix="m" type="number" />
+				<WiderInputWrapper>
+					<FormInput name={`${itemName}.width`} suffix="m" type="number" />
+				</WiderInputWrapper>
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.height`} suffix="m" type="number" />
+				<WiderInputWrapper>
+					<FormInput name={`${itemName}.height`} suffix="m" type="number" />
+				</WiderInputWrapper>
 			</Col>
 			<Col sm={2}>
 				<FormInput

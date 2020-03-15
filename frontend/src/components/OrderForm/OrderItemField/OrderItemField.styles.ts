@@ -10,3 +10,16 @@ export const StyledItemNumber = styled.div`
 export const MaterialColumn = styled.div`
 	position: relative;
 `;
+
+export const WiderInputWrapper = styled.div`
+	.ant-input-affix-wrapper {
+		padding: 4px 8px;
+	}
+	input {
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+		-moz-appearance: textfield;
+	}
+`;
