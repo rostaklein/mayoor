@@ -1,15 +1,18 @@
 import React from 'react';
 import { useField, FieldArrayRenderProps } from 'formik';
-import { Input, Row, Col, Button, Popover, Popconfirm, Tooltip } from 'antd';
+import { Row, Col, Button, Popconfirm, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { DeleteOutlined, CalculatorOutlined } from '@ant-design/icons';
 
 import { OrderFormItem } from '../OrderForm';
 import { FormInput } from '../../FormItem/FormInput';
 import { CURRENCY_SUFFIX } from '../../../config';
+import { client } from '../../../ApolloClient';
+import { GET_ALL_MATERIALS } from '../../Material/queries';
+import { GetAllMaterials } from '../../../__generated__/types';
 
-import { StyledItemNumber, MaterialColumn } from './OrderItemField.styles';
 import { MaterialPicker } from './MaterialPicker';
+import { StyledItemNumber, MaterialColumn } from './OrderItemField.styles';
 
 type FieldProps = {
 	index: number;
@@ -21,7 +24,11 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 	const itemName = `items.${index}`;
 	const [{ value }] = useField<OrderFormItem>(itemName);
 	const calculateClickHandler = () => {
-		console.log(value);
+		const allMaterials = client.readQuery<GetAllMaterials>({ query: GET_ALL_MATERIALS });
+		const material = allMaterials?.getAllMaterials.find(({ id }) => id === value.materialId);
+
+		const { width, height, pieces } = value;
+		console.log({ price: material?.price, width, height, pieces });
 	};
 	const calculationEnabled = value.materialId && value.width && value.height && value.pieces;
 	return (

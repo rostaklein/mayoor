@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
 import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Tag, Descriptions, message, Skeleton } from 'antd';
+import { Button, Descriptions, message, Skeleton } from 'antd';
 import styled from '@emotion/styled';
 
 import {

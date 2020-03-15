@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, Col, Button, Popconfirm } from 'antd';
-import { Formik, FormikErrors } from 'formik';
+import { Row, Col, Button } from 'antd';
+import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-apollo';
 
@@ -63,7 +63,7 @@ export const MaterialCreate: React.FC = () => {
 				}}
 				validate={getFormikValidate(t)}
 			>
-				{({ handleSubmit, status }) => (
+				{({ handleSubmit }) => (
 					<Row gutter={18}>
 						<Col sm={14}>
 							<FormInput label={t('Material name')} name="name"></FormInput>

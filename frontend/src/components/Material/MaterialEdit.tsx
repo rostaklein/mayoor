@@ -90,7 +90,7 @@ export const MaterialEdit: React.FC = () => {
 							}}
 							validate={getFormikValidate(t)}
 						>
-							{({ handleSubmit, status }) => (
+							{({ handleSubmit }) => (
 								<Row gutter={18}>
 									<Col sm={14}>
 										<FormInput

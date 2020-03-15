@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Select } from 'antd';
 import { UserOutlined } from '@ant-design/icons';

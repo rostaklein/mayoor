@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormikErrors, Formik, FieldArray, Field } from 'formik';
-import { Row, Col, Divider, Button } from 'antd';
+import { Formik, FieldArray } from 'formik';
+import { Row, Col, Button } from 'antd';
 import { NumberOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import { StyledForm, StyledLabel, StyledDivider } from '../FormItem/Form.styles';

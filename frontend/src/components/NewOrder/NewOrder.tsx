@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, message, Spin } from 'antd';
+import { Button, message } from 'antd';
 import { useQuery, useMutation } from 'react-apollo';
 
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
