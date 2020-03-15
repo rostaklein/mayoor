@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikErrors, Formik, FieldArray, Field } from 'formik';
-import { Row, Col, Divider } from 'antd';
-import { NumberOutlined } from '@ant-design/icons';
+import { Row, Col, Divider, Button } from 'antd';
+import { NumberOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 import { StyledForm, StyledLabel, StyledDivider } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
@@ -13,13 +13,13 @@ import { OrderItemField } from './OrderItemField/OrderItemField';
 
 export type OrderFormItem = {
 	id?: string;
-	name: string;
+	name?: string;
 	materialId: string | null;
-	width: string;
-	height: string;
-	pieces: number;
-	totalPrice: number;
-	totalTax: number;
+	width?: number;
+	height?: number;
+	pieces?: number;
+	totalPrice?: number;
+	totalTax?: number;
 };
 
 export type OrderFormValues = {
@@ -58,7 +58,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 			{({ handleSubmit, values }) => (
 				<StyledForm onSubmit={handleSubmit}>
 					<Row gutter={16}>
-						<Col span={6}>
+						<Col span={4}>
 							<FormInput
 								name="number"
 								label={t('Order number')}
@@ -69,7 +69,6 @@ export const OrderForm: React.FC<Props> = (props) => {
 						<Col span={8}>
 							<CustomerPicker />
 						</Col>
-						<Col span={10}>{/* <CustomerPicker /> */}</Col>
 					</Row>
 					<StyledDivider />
 					<Row gutter={6}>
@@ -77,7 +76,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 						<Col sm={6}>
 							<StyledLabel>{t('Material')}</StyledLabel>
 						</Col>
-						<Col sm={6}>
+						<Col sm={4}>
 							<StyledLabel>{t('Name')}</StyledLabel>
 						</Col>
 						<Col sm={2}>
@@ -89,10 +88,10 @@ export const OrderForm: React.FC<Props> = (props) => {
 						<Col sm={2}>
 							<StyledLabel>{t('Pieces')}</StyledLabel>
 						</Col>
-						<Col sm={2}>
+						<Col sm={3}>
 							<StyledLabel>{t('Price')}</StyledLabel>
 						</Col>
-						<Col sm={2}>
+						<Col sm={3}>
 							<StyledLabel>{t('Tax')}</StyledLabel>
 						</Col>
 						<Col sm={1}></Col>
@@ -100,7 +99,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 					<FieldArray
 						name="items"
 						render={(arrayHelpers) => (
-							<div>
+							<>
 								{values.items.length > 0 &&
 									values.items.map((item, index) => (
 										<OrderItemField
@@ -109,14 +108,17 @@ export const OrderForm: React.FC<Props> = (props) => {
 											arrayHelpers={arrayHelpers}
 										/>
 									))}
-								<button
-									type="button"
-									onClick={() => arrayHelpers.push(dummyMaterialItem)}
-								>
-									{/* show this when user has removed all friends from the list */}
-									Add a friend
-								</button>
-							</div>
+								<Row>
+									<Col offset={1}>
+										<Button
+											icon={<PlusCircleOutlined />}
+											onClick={() => arrayHelpers.push(dummyMaterialItem)}
+										>
+											{t('Add item')}
+										</Button>
+									</Col>
+								</Row>
+							</>
 						)}
 					/>
 					{props.submitButton}

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useField, FieldArrayRenderProps } from 'formik';
-import { Input, Row, Col } from 'antd';
+import { Input, Row, Col, Button, Popover, Popconfirm } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { DeleteColumnOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { OrderFormItem } from '../OrderForm';
 import { FormInput } from '../../FormItem/FormInput';
+import { CURRENCY_SUFFIX } from '../../../config';
 
 import { StyledItemNumber } from './OrderItemField.styles';
 
@@ -33,7 +35,7 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 			<Col sm={1}>
 				<StyledItemNumber>{index + 1}.</StyledItemNumber>
 			</Col>
-			<Col sm={6}>
+			<Col sm={4}>
 				<FormInput name={`${itemName}.materialId`} label={t('Material')} />
 			</Col>
 			<Col sm={6}>
@@ -48,19 +50,30 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 			<Col sm={2}>
 				<FormInput name={`${itemName}.pieces`} label={t('Pieces')} />
 			</Col>
-			<Col sm={2}>
-				<FormInput name={`${itemName}.totalPrice`} label={t('Price')} />
+			<Col sm={3}>
+				<FormInput
+					name={`${itemName}.totalPrice`}
+					label={t('Price')}
+					suffix={CURRENCY_SUFFIX}
+				/>
 			</Col>
-			<Col sm={2}>
-				<FormInput name={`${itemName}.totalTax`} label={t('Tax')} />
+			<Col sm={3}>
+				<FormInput
+					name={`${itemName}.totalTax`}
+					label={t('Tax')}
+					suffix={CURRENCY_SUFFIX}
+				/>
 			</Col>
 			<Col sm={1}>
-				<button
-					type="button"
-					onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+				<Popconfirm
+					title={t('Are you sure want to remove this item?')}
+					onConfirm={() => arrayHelpers.remove(index)}
+					placement="topRight"
+					okText={t('Remove')}
+					okType="danger"
 				>
-					-
-				</button>
+					<Button icon={<DeleteOutlined />} shape="circle-outline" type="link"></Button>
+				</Popconfirm>
 			</Col>
 		</Row>
 	);

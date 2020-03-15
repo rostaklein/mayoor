@@ -9,9 +9,10 @@ type FieldProps = {
 	label: string;
 	icon?: React.ReactNode;
 	withLabel?: boolean;
+	suffix?: React.ReactNode;
 };
 
-export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }) => {
+export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel, suffix }) => {
 	const [{ value, onChange }, { touched, error }] = useField(name);
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
@@ -34,6 +35,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel }
 					name={name}
 					onChange={onChange}
 					value={getValue()}
+					suffix={suffix}
 				/>
 			</>
 		</StyledFormItem>

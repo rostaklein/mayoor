@@ -15,12 +15,8 @@ import { GET_HIGHEST_ORDER_NUMBER, CREATE_ORDER } from './queries';
 
 export const dummyMaterialItem = {
 	materialId: null,
-	width: '1',
-	height: '1',
 	name: 'test',
 	pieces: 1,
-	totalPrice: 0,
-	totalTax: 0,
 };
 
 const getInitialValues = (orderNumber: string | null): OrderFormValues => ({
@@ -72,7 +68,6 @@ export const NewOrder: React.FC = () => {
 	return (
 		<>
 			<PageTitle>{t('Add order')}</PageTitle>
-			{/* {highestOrderNumberQuery.data ? ( */}
 			<OrderForm
 				initialValues={getInitialValues(newOrderNumber)}
 				onSubmit={submitHandler}
@@ -87,11 +82,6 @@ export const NewOrder: React.FC = () => {
 					</Button>
 				}
 			/>
-			{/* ) : (
-				<CenteredWrapper>
-					<Spin />
-				</CenteredWrapper>
-			)} */}
 		</>
 	);
 };
