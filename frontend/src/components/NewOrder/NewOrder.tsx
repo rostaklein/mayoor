@@ -10,6 +10,7 @@ import {
 	CreateOrder,
 	CreateOrderVariables,
 } from '../../__generated__/types';
+import { ValidatedOrder } from '../OrderForm/validateOrder';
 
 import { GET_HIGHEST_ORDER_NUMBER, CREATE_ORDER } from './queries';
 
@@ -23,7 +24,7 @@ export const dummyMaterialItem: OrderFormItem = {
 	totalTax: undefined,
 };
 
-const getInitialValues = (orderNumber: string | null): OrderFormValues => ({
+const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
 	number: orderNumber,
 	customerId: undefined,
 	totalPrice: undefined,
@@ -47,26 +48,18 @@ export const NewOrder: React.FC = () => {
 		},
 	);
 
-	const submitHandler = async (values: OrderFormValues) => {
-		if (values.number === null) {
-			throw new Error('Cant submit with null order number');
-		}
+	const submitHandler = async (rawValues: OrderFormValues) => {
+		const validValues = rawValues as ValidatedOrder; // gets triggered only when form is valid
 		await createOrder({
 			variables: {
-				input: {
-					number: Number(values.number),
-					totalPrice: Number(values.totalPrice),
-					totalTax: Number(values.totalTax),
-					note: values.note,
-					customerId: values.customerId,
-				},
+				input: validValues,
 			},
 		});
 		highestOrderNumberQuery.refetch();
 	};
 
 	const newOrderNumber = highestOrderNumberQuery.data
-		? String((highestOrderNumberQuery.data.getHighestOrderNumber || 0) + 1)
+		? (highestOrderNumberQuery.data.getHighestOrderNumber || 0) + 1
 		: null;
 
 	return (

@@ -18,6 +18,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-helmet": "^5.0.15",
     "@types/react-router-dom": "^5.1.3",
+    "@types/yup": "^0.26.32",
     "antd": "^4.0.0",
     "apollo": "^2.25.0",
     "apollo-cache-inmemory": "^1.6.5",
@@ -43,7 +44,8 @@
     "react-i18next": "^11.3.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "yup": "^0.28.3"
   },
   "scripts": {
     "start": "react-app-rewired start",

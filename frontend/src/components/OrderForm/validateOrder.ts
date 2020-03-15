@@ -1,47 +1,36 @@
-import { FormikErrors } from 'formik';
 import { TFunction } from 'i18next';
+import * as Yup from 'yup';
 
-import { OrderFormValues, OrderFormItem } from './OrderForm';
+const getNonNegativeRequiredNumberSchema = (t: TFunction) =>
+	Yup.number()
+		.min(0, t('invalid_negative_number'))
+		.required(t('field_required'));
 
-export const validateOrderItems = (
-	items: OrderFormItem[],
-	t: TFunction,
-): FormikErrors<OrderFormItem>[] => {
-	const numberValidator = (value?: number) => {
-		if (value == undefined) {
-			return t('field_required');
-		}
-		if (Number.isNaN(Number(value))) {
-			return t('not_number');
-		}
-	};
-
-	const integerValidator = (value?: number) => {
-		const numberError = numberValidator(value);
-
-		const isInteger = Number.isInteger(Number(value));
-
-		return numberError || isInteger ? undefined : t('not_integer');
-	};
-
-	return items.map((item) => {
-		const materialId = !item.materialId ? t('material_required') : undefined;
-		return {
-			materialId,
-			width: numberValidator(item.width),
-			height: numberValidator(item.height),
-			totalPrice: numberValidator(item.totalPrice),
-			totalTax: numberValidator(item.totalTax),
-			pieces: integerValidator(item.pieces),
-		};
+export const getOrderItemValidationSchema = (t: TFunction) => {
+	return Yup.object().shape({
+		name: Yup.string().required(t('field_required')),
+		materialId: Yup.string().required(t('field_required')),
+		width: getNonNegativeRequiredNumberSchema(t),
+		height: getNonNegativeRequiredNumberSchema(t),
+		pieces: Yup.number()
+			.min(0, t('invalid_negative_number'))
+			.integer(t('not_integer_number'))
+			.required(t('field_required')),
+		totalPrice: getNonNegativeRequiredNumberSchema(t),
+		totalTax: getNonNegativeRequiredNumberSchema(t),
 	});
 };
 
-export const validateOrder = (values: OrderFormValues, t: TFunction) => {
-	const errors: FormikErrors<OrderFormValues> = {};
-	if (!values.number) {
-		errors.number = t('missing_order_number');
-	}
-	errors.items = validateOrderItems(values.items, t);
-	return errors;
-};
+export type ValidatedOrderItem = Yup.InferType<ReturnType<typeof getOrderItemValidationSchema>>;
+
+export const getOrderValidationSchema = (t: TFunction) =>
+	Yup.object().shape({
+		number: Yup.number().required(t('missing_order_number')),
+		customerId: Yup.string().required(t('field_required')),
+		totalPrice: getNonNegativeRequiredNumberSchema(t),
+		totalTax: getNonNegativeRequiredNumberSchema(t),
+		items: Yup.array(getOrderItemValidationSchema(t)),
+		note: Yup.string().notRequired(),
+	});
+
+export type ValidatedOrder = Yup.InferType<ReturnType<typeof getOrderValidationSchema>>;

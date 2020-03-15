@@ -1,8 +1,8 @@
 import React from 'react';
 import { useField, FieldArrayRenderProps } from 'formik';
-import { Input, Row, Col, Button, Popover, Popconfirm } from 'antd';
+import { Input, Row, Col, Button, Popover, Popconfirm, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, CalculatorOutlined } from '@ant-design/icons';
 
 import { OrderFormItem } from '../OrderForm';
 import { FormInput } from '../../FormItem/FormInput';
@@ -20,6 +20,10 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 	const { t } = useTranslation();
 	const itemName = `items.${index}`;
 	const [{ value }] = useField<OrderFormItem>(itemName);
+	const calculateClickHandler = () => {
+		console.log(value);
+	};
+	const calculationEnabled = value.materialId && value.width && value.height && value.pieces;
 	return (
 		<Row key={value.id || index} gutter={6}>
 			<Col sm={5}>
@@ -28,23 +32,41 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 					<MaterialPicker name={`${itemName}.materialId`} />
 				</MaterialColumn>
 			</Col>
-			<Col sm={6}>
+			<Col sm={5}>
 				<FormInput name={`${itemName}.name`} label={t('Name')} />
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.width`} label={t('Width')} suffix="m" />
+				<FormInput name={`${itemName}.width`} suffix="m" type="number" />
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.height`} label={t('Height')} suffix="m" />
+				<FormInput name={`${itemName}.height`} suffix="m" type="number" />
 			</Col>
 			<Col sm={2}>
-				<FormInput name={`${itemName}.pieces`} label={t('Pieces')} />
+				<FormInput
+					name={`${itemName}.pieces`}
+					label={t('Pieces')}
+					type="number"
+					min="0"
+					step="1"
+				/>
+			</Col>
+			<Col>
+				<Tooltip title={t('Calculate row')}>
+					<Button
+						icon={<CalculatorOutlined />}
+						shape="circle-outline"
+						type="link"
+						disabled={!calculationEnabled}
+						onClick={calculateClickHandler}
+					></Button>
+				</Tooltip>
 			</Col>
 			<Col sm={3}>
 				<FormInput
 					name={`${itemName}.totalPrice`}
 					label={t('Price')}
 					suffix={CURRENCY_SUFFIX}
+					type="number"
 				/>
 			</Col>
 			<Col sm={3}>
@@ -52,6 +74,7 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 					name={`${itemName}.totalTax`}
 					label={t('Tax')}
 					suffix={CURRENCY_SUFFIX}
+					type="number"
 				/>
 			</Col>
 			<Col sm={1}>

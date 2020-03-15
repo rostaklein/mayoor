@@ -1,18 +1,20 @@
 import React from 'react';
 import { useField } from 'formik';
 import { Input } from 'antd';
+import { InputProps } from 'antd/lib/input';
 
 import { StyledFormItem, StyledLabel } from './Form.styles';
 
 type FieldProps = {
 	name: string;
-	label: string;
+	label?: string;
 	icon?: React.ReactNode;
 	withLabel?: boolean;
-	suffix?: React.ReactNode;
 };
 
-export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel, suffix }) => {
+type Props = FieldProps & InputProps;
+
+export const FormInput: React.FC<Props> = ({ icon, label, name, withLabel, ...rest }) => {
 	const [{ value, onChange }, { touched, error }] = useField(name);
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
@@ -21,7 +23,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel, 
 			return value;
 		}
 		if (typeof value === 'number') {
-			return String(value);
+			return value;
 		}
 		return '';
 	};
@@ -35,7 +37,7 @@ export const FormInput: React.FC<FieldProps> = ({ icon, label, name, withLabel, 
 					name={name}
 					onChange={onChange}
 					value={getValue()}
-					suffix={suffix}
+					{...rest}
 				/>
 			</>
 		</StyledFormItem>

@@ -16,7 +16,11 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
 
-	const { data, loading } = useQuery<GetAllMaterials>(GET_ALL_MATERIALS);
+	const { data, loading } = useQuery<GetAllMaterials>(GET_ALL_MATERIALS, {
+		onCompleted: (data) => {
+			setValue(data.getAllMaterials[0].id);
+		},
+	});
 
 	const materials = data?.getAllMaterials ?? [];
 
@@ -25,7 +29,6 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
 			materials.filter(({ name }) => name.toLowerCase().includes(search.toLowerCase())),
 		);
 	};
-	console.log({ error });
 
 	const hasFilteredItems = filteredItems.length > 0;
 	return (
