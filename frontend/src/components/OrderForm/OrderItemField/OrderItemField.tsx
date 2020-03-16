@@ -13,7 +13,13 @@ import { GetAllMaterials } from '../../../__generated__/types';
 import { calculateRow } from '../calculateRow';
 
 import { MaterialPicker } from './MaterialPicker';
-import { StyledItemNumber, MaterialColumn, WiderInputWrapper } from './OrderItemField.styles';
+import {
+	StyledItemNumber,
+	MaterialColumn,
+	WiderInputWrapper,
+	StyledOrderRow,
+	HiddenDeleteButton,
+} from './OrderItemField.styles';
 
 type FieldProps = {
 	index: number;
@@ -34,14 +40,14 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 	};
 	const calculationEnabled = value.materialId && value.width && value.height && value.pieces;
 	return (
-		<Row key={value.id || index} gutter={6}>
-			<Col sm={5}>
+		<StyledOrderRow key={value.id || index} gutter={6}>
+			<Col sm={4}>
 				<MaterialColumn>
 					<StyledItemNumber>{index + 1}.</StyledItemNumber>
 					<MaterialPicker name={`${itemName}.materialId`} />
 				</MaterialColumn>
 			</Col>
-			<Col sm={5}>
+			<Col sm={7}>
 				<FormInput name={`${itemName}.name`} label={t('Name')} />
 			</Col>
 			<Col sm={2}>
@@ -63,7 +69,7 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 					step="1"
 				/>
 			</Col>
-			<Col>
+			<Col sm={1}>
 				<Tooltip title={t('Calculate row')}>
 					<Button
 						icon={<CalculatorOutlined />}
@@ -89,18 +95,22 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 					suffix={CURRENCY_SUFFIX}
 					type="number"
 				/>
+				<HiddenDeleteButton>
+					<Popconfirm
+						title={t('Are you sure want to remove this item?')}
+						onConfirm={() => arrayHelpers.remove(index)}
+						placement="topRight"
+						okText={t('Remove')}
+						okType="danger"
+					>
+						<Button
+							icon={<DeleteOutlined />}
+							shape="circle-outline"
+							type="link"
+						></Button>
+					</Popconfirm>
+				</HiddenDeleteButton>
 			</Col>
-			<Col sm={1}>
-				<Popconfirm
-					title={t('Are you sure want to remove this item?')}
-					onConfirm={() => arrayHelpers.remove(index)}
-					placement="topRight"
-					okText={t('Remove')}
-					okType="danger"
-				>
-					<Button icon={<DeleteOutlined />} shape="circle-outline" type="link"></Button>
-				</Popconfirm>
-			</Col>
-		</Row>
+		</StyledOrderRow>
 	);
 };

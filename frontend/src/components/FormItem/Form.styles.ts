@@ -17,6 +17,8 @@ export const StyledDivider = styled(Divider)`
 export const StyledFormItem = styled(Form.Item)`
 	margin-bottom: 5px;
 	line-height: normal;
+	display: flex;
+	flex-direction: column;
 	.ant-form-item-control {
 		line-height: normal;
 		margin-bottom: 8px;

@@ -22,7 +22,7 @@ describe(calculateRow.name, () => {
 				pieces: 5,
 				unitPrice: 150,
 			}),
-		).toEqual({ price: 1500, tax: 1500 * TAX });
+		).toEqual({ price: 1500, tax: 1500 * TAX, totalSize: 10 });
 	});
 
 	it('should round the price correctly', () => {
@@ -33,6 +33,6 @@ describe(calculateRow.name, () => {
 				pieces: 2,
 				unitPrice: 100,
 			}),
-		).toEqual({ price: 310, tax: Math.ceil(310 * TAX) });
+		).toEqual({ price: 310, tax: Math.ceil(310 * TAX), totalSize: 3.1 });
 	});
 });

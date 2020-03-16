@@ -1,16 +1,20 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Formik, FieldArray } from 'formik';
-import { Row, Col, Button } from 'antd';
-import { NumberOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Formik, FieldArray, Field } from 'formik';
+import { Row, Col, Button, Input } from 'antd';
+import { NumberOutlined, PlusCircleOutlined, CalculatorOutlined } from '@ant-design/icons';
 
-import { StyledForm, StyledLabel, StyledDivider } from '../FormItem/Form.styles';
+import { StyledForm, StyledLabel, StyledDivider, StyledFormItem } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
 import { dummyMaterialItem } from '../NewOrder/NewOrder';
+import { CURRENCY_SUFFIX } from '../../config';
+import { useCurrencyFormatter } from '../../locales/useCurrencyFormatter';
 
 import { CustomerPicker } from './CustomerPicker';
 import { OrderItemField } from './OrderItemField/OrderItemField';
 import { getOrderValidationSchema } from './validateOrder';
+import { StyledOrderNumberWrapper, OrderSummaryWrapper } from './OrderForm.styles';
+import { calculateSummary, getTotalPriceIncludingTax } from './calculateSummary';
 
 export type OrderFormItem = {
 	id?: string;
@@ -40,6 +44,7 @@ type Props = {
 
 export const OrderForm: React.FC<Props> = (props) => {
 	const { t } = useTranslation();
+	const { currencyFormatter } = useCurrencyFormatter();
 
 	return (
 		<Formik<OrderFormValues>
@@ -50,28 +55,30 @@ export const OrderForm: React.FC<Props> = (props) => {
 			validationSchema={getOrderValidationSchema(t)}
 			enableReinitialize
 		>
-			{({ handleSubmit, values }) => (
+			{({ handleSubmit, values, handleChange, setFieldValue }) => (
 				<StyledForm onSubmit={handleSubmit}>
 					<Row gutter={8}>
-						<Col span={4}>
-							<FormInput
-								name="number"
-								label={t('Order number')}
-								icon={<NumberOutlined />}
-								withLabel
-								type="number"
-							/>
+						<Col lg={4}>
+							<StyledOrderNumberWrapper>
+								<FormInput
+									name="number"
+									label={t('Order number')}
+									icon={<NumberOutlined />}
+									withLabel
+									type="number"
+								/>
+							</StyledOrderNumberWrapper>
 						</Col>
-						<Col span={7}>
+						<Col lg={7}>
 							<CustomerPicker />
 						</Col>
 					</Row>
 					<StyledDivider />
 					<Row gutter={6}>
-						<Col sm={5}>
+						<Col sm={4}>
 							<StyledLabel>{t('Material')}</StyledLabel>
 						</Col>
-						<Col sm={5}>
+						<Col sm={7}>
 							<StyledLabel>{t('Name')}</StyledLabel>
 						</Col>
 						<Col sm={2}>
@@ -90,7 +97,6 @@ export const OrderForm: React.FC<Props> = (props) => {
 						<Col sm={3}>
 							<StyledLabel>{t('Tax')}</StyledLabel>
 						</Col>
-						<Col sm={1}></Col>
 					</Row>
 					<FieldArray
 						name="items"
@@ -105,18 +111,74 @@ export const OrderForm: React.FC<Props> = (props) => {
 										/>
 									))}
 								<Row>
-									<Button
-										icon={<PlusCircleOutlined />}
-										onClick={() => arrayHelpers.push(dummyMaterialItem)}
-									>
-										{t('Add item')}
-									</Button>
+									<Col>
+										<Button
+											icon={<PlusCircleOutlined />}
+											onClick={() => arrayHelpers.push(dummyMaterialItem)}
+										>
+											{t('Add item')}
+										</Button>
+									</Col>
+									<Col style={{ textAlign: 'right' }}>
+										<Button
+											icon={<CalculatorOutlined />}
+											onClick={() => {
+												const { totalPrice, totalTax } = calculateSummary(
+													values,
+												);
+												setFieldValue('totalPrice', totalPrice);
+												setFieldValue('totalTax', totalTax);
+											}}
+											style={{ marginLeft: 10 }}
+										>
+											{t('Sum items')}
+										</Button>
+									</Col>
 								</Row>
 							</>
 						)}
 					/>
-					<FormInput name="totalPrice" label={t('Total price')} type="number" />
-					<FormInput name="totalTax" label={t('Total tax')} type="number" />
+					<Row gutter={8} style={{ marginTop: 15 }}>
+						<Col sm={13}>
+							<StyledFormItem>
+								<StyledLabel>{t('Note')}</StyledLabel>
+								<Input.TextArea
+									rows={4}
+									name="note"
+									placeholder={t('Write down your extras about this order here.')}
+									onChange={handleChange}
+									value={values.note || ''}
+								/>
+							</StyledFormItem>
+						</Col>
+						<Col></Col>
+						<Col sm={6}>
+							<OrderSummaryWrapper>
+								<FormInput
+									name="totalPrice"
+									label={t('Total price')}
+									type="number"
+									suffix={CURRENCY_SUFFIX}
+									withLabel
+								/>
+								<FormInput
+									name="totalTax"
+									label={t('Total tax')}
+									type="number"
+									suffix={CURRENCY_SUFFIX}
+									withLabel
+								/>
+								{!!getTotalPriceIncludingTax(values) && (
+									<div>
+										<StyledLabel>{t('Total price including tax')}</StyledLabel>
+										<span>
+											{currencyFormatter(getTotalPriceIncludingTax(values)!)}
+										</span>
+									</div>
+								)}
+							</OrderSummaryWrapper>
+						</Col>
+					</Row>
 					{props.submitButton}
 				</StyledForm>
 			)}

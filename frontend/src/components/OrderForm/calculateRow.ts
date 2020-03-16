@@ -1,13 +1,13 @@
 import { TAX } from '../../config';
 
-type Params = {
+export type OrderItemCalculateParams = {
 	width?: number;
 	height?: number;
 	pieces?: number;
 	unitPrice?: number;
 };
 
-export const calculateRow = ({ width, height, pieces, unitPrice }: Params) => {
+export const calculateRow = ({ width, height, pieces, unitPrice }: OrderItemCalculateParams) => {
 	if (
 		width === undefined ||
 		height === undefined ||
@@ -22,5 +22,5 @@ export const calculateRow = ({ width, height, pieces, unitPrice }: Params) => {
 	const price = Math.ceil(totalSize * unitPrice);
 	const tax = Math.ceil(price * TAX);
 
-	return { price, tax };
+	return { totalSize, price, tax };
 };

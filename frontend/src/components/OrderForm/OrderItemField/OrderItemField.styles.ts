@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Row } from 'antd';
 
 export const StyledItemNumber = styled.div`
 	padding: 6px 4px;
@@ -21,5 +22,26 @@ export const WiderInputWrapper = styled.div`
 			-webkit-appearance: none;
 		}
 		-moz-appearance: textfield;
+	}
+`;
+
+export const HiddenDeleteButton = styled.div`
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translateX(20px);
+	opacity: 0;
+	transition: all 0.2s;
+`;
+
+export const StyledOrderRow = styled(Row)`
+	position: relative;
+	&:hover,
+	&:focus,
+	&:active {
+		${HiddenDeleteButton} {
+			opacity: 1;
+			transform: translateX(30px);
+		}
 	}
 `;
