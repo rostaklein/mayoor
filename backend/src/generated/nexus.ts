@@ -216,6 +216,7 @@ export interface NexusGenFieldTypes {
     createdBy: NexusGenRootTypes['User']; // User!
     height: number | null; // Float
     id: string; // String!
+    material: NexusGenRootTypes['Material'] | null; // Material
     name: string | null; // String
     pieces: number | null; // Int
     totalPrice: number; // Float!

@@ -125,6 +125,7 @@ type OrderItem {
   createdBy: User!
   height: Float
   id: String!
+  material: Material
   name: String
   pieces: Int
   totalPrice: Float!

@@ -84,6 +84,7 @@ export const OrderItem = objectType({
   definition(t) {
     t.model.id();
     t.model.name();
+    t.model.material();
     t.model.width();
     t.model.height();
     t.model.pieces();

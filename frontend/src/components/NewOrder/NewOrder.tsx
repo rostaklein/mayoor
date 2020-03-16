@@ -18,17 +18,17 @@ export const dummyMaterialItem: OrderFormItem = {
 	materialId: undefined,
 	name: 'test',
 	pieces: 1,
-	width: undefined,
-	height: undefined,
-	totalPrice: undefined,
-	totalTax: undefined,
+	width: 2,
+	height: 1,
+	totalPrice: 100,
+	totalTax: 20,
 };
 
 const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
 	number: orderNumber,
 	customerId: undefined,
-	totalPrice: undefined,
-	totalTax: undefined,
+	totalPrice: 200,
+	totalTax: 20,
 	note: '',
 	items: [dummyMaterialItem],
 });

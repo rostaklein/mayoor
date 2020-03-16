@@ -1,6 +1,7 @@
 import { objectType, arg, inputObjectType } from 'nexus';
-import { UserInputError, ApolloError } from 'apollo-server-express';
+import { ApolloError } from 'apollo-server-express';
 import { OrderItemInput } from './addOrderItem';
+import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
 
 export const OrderInput = inputObjectType({
   name: 'OrderInput',
@@ -50,6 +51,9 @@ export const CreateOrder = objectType({
                   },
                 }
               : undefined,
+            items: {
+              create: mapOrderItemInputToCreateOrderItem(input.items, user.id),
+            },
             createdBy: {
               connect: {
                 id: user.id,
