@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
 import { DeleteOutlined, SaveOutlined } from '@ant-design/icons';
-import { Row, Col, Button, Popconfirm } from 'antd';
+import { Row, Col, Button, Popconfirm, message } from 'antd';
 import { Formik, FormikErrors } from 'formik';
 import { TFunction } from 'i18next';
 
@@ -16,7 +16,7 @@ import {
 	DeleteMaterial,
 	DeleteMaterialVariables,
 } from '../../__generated__/types';
-import { StyledForm, StyledFormLabel } from '../FormItem/Form.styles';
+import { StyledForm, StyledFormLabel, StyledLabel } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
 
 import { GET_ALL_MATERIALS, UPDATE_MATERIAL, DELETE_MATERIAL } from './queries';
@@ -40,8 +40,15 @@ export const MaterialEdit: React.FC = () => {
 
 	const { data } = useQuery<GetAllMaterials>(GET_ALL_MATERIALS);
 
-	const [updateMaterial] = useMutation<UpdateMaterial, UpdateMaterialVariables>(UPDATE_MATERIAL);
+	const [updateMaterial] = useMutation<UpdateMaterial, UpdateMaterialVariables>(UPDATE_MATERIAL, {
+		onCompleted: () => {
+			message.success(t('Material updated'));
+		},
+	});
 	const [deleteMaterial] = useMutation<DeleteMaterial, DeleteMaterialVariables>(DELETE_MATERIAL, {
+		onCompleted: () => {
+			message.success(t('Material deleted'));
+		},
 		update: (cache, { data }) => {
 			const cached = cache.readQuery<GetAllMaterials>({ query: GET_ALL_MATERIALS });
 			if (cached === null) {
@@ -67,10 +74,10 @@ export const MaterialEdit: React.FC = () => {
 					<>
 						<Row gutter={24}>
 							<Col sm={14}>
-								<StyledFormLabel>{t('Material name')}</StyledFormLabel>
+								<StyledLabel>{t('Material name')}</StyledLabel>
 							</Col>
 							<Col sm={6}>
-								<StyledFormLabel>{t('Price')}</StyledFormLabel>
+								<StyledLabel>{t('Price')}</StyledLabel>
 							</Col>
 							<Col sm={4}></Col>
 						</Row>
@@ -99,12 +106,11 @@ export const MaterialEdit: React.FC = () => {
 												name="name"
 											></FormInput>
 										</Col>
-										<Col sm={6}>
+										<Col sm={5}>
 											<FormInput label={t('Price')} name="price"></FormInput>
 										</Col>
 										<Col sm={3}>
 											<Button
-												type="primary"
 												onClick={() => handleSubmit()}
 												loading={currentlyLoading === material.id}
 												icon={<SaveOutlined />}
@@ -113,7 +119,7 @@ export const MaterialEdit: React.FC = () => {
 												{t('Save')}
 											</Button>
 										</Col>
-										<Col sm={1}>
+										<Col sm={1} style={{ textAlign: 'right' }}>
 											<Popconfirm
 												placement="topRight"
 												onConfirm={async () =>
@@ -125,7 +131,10 @@ export const MaterialEdit: React.FC = () => {
 													'Do you really want to remove this material?',
 												)}
 											>
-												<Button icon={<DeleteOutlined />}></Button>
+												<Button
+													shape="circle"
+													icon={<DeleteOutlined />}
+												></Button>
 											</Popconfirm>
 										</Col>
 									</Row>

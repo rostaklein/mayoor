@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-apollo';
 
-import { StyledFormLabel } from '../FormItem/Form.styles';
+import { StyledFormLabel, StyledLabel, StyledDivider } from '../FormItem/Form.styles';
 import {
 	GetAllMaterials,
 	CreateMaterial,
@@ -39,12 +39,13 @@ export const MaterialCreate: React.FC = () => {
 
 	return (
 		<>
+			<StyledDivider orientation="left">{t('Add new material')}</StyledDivider>
 			<Row gutter={24}>
 				<Col sm={14}>
-					<StyledFormLabel>{t('Add new material')}</StyledFormLabel>
+					<StyledLabel>{t('Material name')}</StyledLabel>
 				</Col>
 				<Col sm={6}>
-					<StyledFormLabel>{t('Price')}</StyledFormLabel>
+					<StyledLabel>{t('Price')}</StyledLabel>
 				</Col>
 				<Col sm={4}></Col>
 			</Row>
@@ -68,10 +69,10 @@ export const MaterialCreate: React.FC = () => {
 						<Col sm={14}>
 							<FormInput label={t('Material name')} name="name"></FormInput>
 						</Col>
-						<Col sm={6}>
+						<Col sm={5}>
 							<FormInput label={t('Price')} name="price"></FormInput>
 						</Col>
-						<Col sm={3}>
+						<Col sm={5}>
 							<Button
 								type="primary"
 								onClick={() => handleSubmit()}
