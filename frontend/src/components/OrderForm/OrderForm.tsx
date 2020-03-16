@@ -145,7 +145,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 								<Input.TextArea
 									rows={4}
 									name="note"
-									placeholder={t('Write down your extras about this order here.')}
+									placeholder={t('note_placeholder')}
 									onChange={handleChange}
 									value={values.note || ''}
 								/>
