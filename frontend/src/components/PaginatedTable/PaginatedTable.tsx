@@ -44,6 +44,7 @@ export function PaginatedTable<T extends Record>(props: Props<T>) {
 			}),
 		onChange: (newPageNumber) => {
 			setCurrentPageNumber(newPageNumber);
+			props.onPaginationChange(newPageNumber);
 		},
 	};
 

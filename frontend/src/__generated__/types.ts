@@ -135,6 +135,58 @@ export interface GetAllCustomersVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetAllOrders
+// ====================================================
+
+export interface GetAllOrders_getAllOrders_items_customer {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+}
+
+export interface GetAllOrders_getAllOrders_items_items_material {
+  __typename: "Material";
+  name: string;
+}
+
+export interface GetAllOrders_getAllOrders_items_items {
+  __typename: "OrderItem";
+  material: GetAllOrders_getAllOrders_items_items_material | null;
+  pieces: number | null;
+}
+
+export interface GetAllOrders_getAllOrders_items {
+  __typename: "Order";
+  id: string;
+  number: number;
+  customer: GetAllOrders_getAllOrders_items_customer | null;
+  createdAt: any;
+  totalPrice: number;
+  totalTax: number;
+  items: GetAllOrders_getAllOrders_items_items[];
+}
+
+export interface GetAllOrders_getAllOrders {
+  __typename: "OrderPaginated";
+  totalCount: number;
+  items: GetAllOrders_getAllOrders_items[];
+}
+
+export interface GetAllOrders {
+  getAllOrders: GetAllOrders_getAllOrders;
+}
+
+export interface GetAllOrdersVariables {
+  first?: number | null;
+  skip?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: LoginMutation
 // ====================================================
 

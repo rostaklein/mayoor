@@ -12,6 +12,7 @@ import { ListCustomers } from '../ListCustomers/ListCustomers';
 import { DetailCustomer } from '../DetailCustomer/DetailCustomer';
 import { MaterialEdit } from '../Material/MaterialEdit';
 import { NewOrder } from '../NewOrder/NewOrder';
+import { ListOrders } from '../ListOrders/ListOrders';
 
 import * as S from './MainWrapper.styles';
 
@@ -28,7 +29,7 @@ export const MainWrapper: React.FC = () => {
 	const routes: RouteConfig[] = [
 		{ path: '/orders/inprogress', title: t('In Progress') },
 		{ path: '/orders/new', title: t('Add order'), Component: <NewOrder /> },
-		{ path: '/orders/list', title: t('List orders') },
+		{ path: '/orders/list', title: t('List orders'), Component: <ListOrders /> },
 		{ path: '/customers/new', title: t('Add customer'), Component: <NewCustomer /> },
 		{ path: '/customers/list', title: t('Customers'), Component: <ListCustomers /> },
 		{
