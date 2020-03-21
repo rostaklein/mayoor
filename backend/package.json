@@ -14,7 +14,8 @@
     "apollo:push": "apollo service:push --endpoint=http://localhost:4444/graphql",
     "database:migrate": "prisma2 migrate up --experimental",
     "database:seed": "ts-node ./prisma/seed.ts",
-    "start:full": "npm run database:migrate && npm run database:seed && npm run start"
+    "start:full": "npm run database:migrate && npm run database:seed && npm run start",
+    "start:full:dev": "npm run database:migrate && npm run database:seed && npm run dev"
   },
   "keywords": [
     "order",

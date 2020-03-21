@@ -13,6 +13,21 @@ async function seed() {
   });
   console.log('Prisma seed: Created admin user');
   console.log(createdAdminUser);
+
+  const basicMaterial = await prisma.material.create({
+    data: {
+      name: 'Banner 510',
+      price: 150,
+      createdBy: {
+        connect: {
+          id: createdAdminUser.id,
+        },
+      },
+    },
+  });
+
+  console.log('Prisma seed: Created basic material');
+  console.log(basicMaterial);
 }
 
 seed().then(() => {
