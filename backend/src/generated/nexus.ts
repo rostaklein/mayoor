@@ -44,9 +44,8 @@ export interface NexusGenInputs {
   }
   OrderInput: { // input type
     customerId?: string | null; // ID
-    items?: NexusGenInputs['OrderItemInput'][] | null; // [OrderItemInput!]
+    items: NexusGenInputs['OrderItemInput'][]; // [OrderItemInput!]!
     note?: string | null; // String
-    number: number; // Int!
     status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
     totalPrice: number; // Float!
     totalTax: number; // Float!
@@ -278,6 +277,7 @@ export interface NexusGenArgTypes {
     }
     createOrder: { // args
       input: NexusGenInputs['OrderInput']; // OrderInput!
+      number: number; // Int!
     }
     deleteCustomer: { // args
       id: string; // ID!

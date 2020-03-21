@@ -10,7 +10,9 @@ export const mapOrderItemInputToCreateOrderItem = (
   }
   return items.map(item => {
     return {
-      material: { connect: { id: item.materialId } },
+      material: item.materialId
+        ? { connect: { id: item.materialId } }
+        : undefined,
       name: item.name,
       width: item.width,
       height: item.height,

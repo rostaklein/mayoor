@@ -87,7 +87,7 @@ type Mutation {
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createMaterial(name: String!, price: Float!): Material!
-  createOrder(input: OrderInput!): Order!
+  createOrder(input: OrderInput!, number: Int!): Order!
   deleteCustomer(id: ID!): Customer!
   deleteMaterial(id: ID!): Material!
   login(email: String!, password: String!): AuthPayload!
@@ -114,9 +114,8 @@ type Order {
 
 input OrderInput {
   customerId: ID
-  items: [OrderItemInput!]
+  items: [OrderItemInput!]!
   note: String
-  number: Int!
   status: OrderStatus
   totalPrice: Float!
   totalTax: Float!
