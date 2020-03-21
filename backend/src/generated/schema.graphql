@@ -105,6 +105,7 @@ type Order {
   note: String
   number: Int!
   shippedAt: DateTime
+  status: OrderStatus!
   totalPrice: Float!
   totalTax: Float!
   updatedAt: DateTime!
@@ -116,6 +117,7 @@ input OrderInput {
   items: [OrderItemInput!]
   note: String
   number: Int!
+  status: OrderStatus
   totalPrice: Float!
   totalTax: Float!
 }
@@ -151,6 +153,15 @@ input OrderItemWhereUniqueInput {
 type OrderPaginated {
   items: [Order!]!
   totalCount: Int!
+}
+
+enum OrderStatus {
+  DONE
+  NEW
+  READY_TO_PRINT
+  TO_BE_SHIPPED
+  WAITING_FOR_CALCULATION
+  WAITING_FOR_PRODUCTION
 }
 
 type Query {

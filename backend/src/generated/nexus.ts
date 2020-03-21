@@ -47,6 +47,7 @@ export interface NexusGenInputs {
     items?: NexusGenInputs['OrderItemInput'][] | null; // [OrderItemInput!]
     note?: string | null; // String
     number: number; // Int!
+    status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
     totalPrice: number; // Float!
     totalTax: number; // Float!
   }
@@ -86,6 +87,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  OrderStatus: "DONE" | "NEW" | "READY_TO_PRINT" | "TO_BE_SHIPPED" | "WAITING_FOR_CALCULATION" | "WAITING_FOR_PRODUCTION"
 }
 
 export interface NexusGenRootTypes {
@@ -134,6 +136,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   OrderItemWhereUniqueInput: NexusGenInputs['OrderItemWhereUniqueInput'];
   UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
   UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
+  OrderStatus: NexusGenEnums['OrderStatus'];
 }
 
 export interface NexusGenFieldTypes {
@@ -206,6 +209,7 @@ export interface NexusGenFieldTypes {
     note: string | null; // String
     number: number; // Int!
     shippedAt: any | null; // DateTime
+    status: NexusGenEnums['OrderStatus']; // OrderStatus!
     totalPrice: number; // Float!
     totalTax: number; // Float!
     updatedAt: any; // DateTime!
@@ -335,7 +339,7 @@ export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "Cust
 
 export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "UpdateAddressInput" | "UpdateCustomerInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "OrderStatus";
 
 export type NexusGenInterfaceNames = never;
 

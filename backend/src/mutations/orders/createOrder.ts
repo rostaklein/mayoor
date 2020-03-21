@@ -2,6 +2,7 @@ import { objectType, arg, inputObjectType } from 'nexus';
 import { ApolloError } from 'apollo-server-express';
 import { OrderItemInput } from './addOrderItem';
 import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
+import { OrderStatus } from '../../types';
 
 export const OrderInput = inputObjectType({
   name: 'OrderInput',
@@ -12,6 +13,7 @@ export const OrderInput = inputObjectType({
     t.string('note');
     t.id('customerId');
     t.field('items', { type: OrderItemInput, list: true });
+    t.field('status', { type: OrderStatus });
   },
 });
 
@@ -43,7 +45,7 @@ export const CreateOrder = objectType({
             totalPrice: input.totalPrice || 0,
             totalTax: input.totalTax || 0,
             note: input.note,
-            status: 'new',
+            status: input.status || 'NEW',
             customer: input.customerId
               ? {
                   connect: {
