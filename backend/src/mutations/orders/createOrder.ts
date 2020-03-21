@@ -14,6 +14,7 @@ export const OrderInput = inputObjectType({
     t.id('customerId');
     t.field('items', { type: OrderItemInput, list: true });
     t.field('status', { type: OrderStatus });
+    t.int('urgency');
   },
 });
 
@@ -46,6 +47,7 @@ export const CreateOrder = objectType({
             totalTax: input.totalTax || 0,
             note: input.note,
             status: input.status || 'NEW',
+            urgency: input.urgency,
             customer: input.customerId
               ? {
                   connect: {

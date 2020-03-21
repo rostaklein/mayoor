@@ -50,6 +50,7 @@ export interface NexusGenInputs {
     status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
     totalPrice: number; // Float!
     totalTax: number; // Float!
+    urgency?: number | null; // Int
   }
   OrderItemInput: { // input type
     height?: number | null; // Float

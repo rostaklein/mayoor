@@ -120,6 +120,7 @@ input OrderInput {
   status: OrderStatus
   totalPrice: Float!
   totalTax: Float!
+  urgency: Int
 }
 
 type OrderItem {
