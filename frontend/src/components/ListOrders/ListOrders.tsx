@@ -24,6 +24,7 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 	{
 		title: t('Order number'),
 		dataIndex: 'number',
+		width: 150,
 		render: (_, record) => {
 			return <Link to={`/orders/${record.id}`}>{record.number}</Link>;
 		},
@@ -38,7 +39,6 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 	},
 	{
 		title: t('Items info'),
-		width: 250,
 		ellipsis: true,
 		dataIndex: 'items',
 		render: (_, { items }) => JSON.stringify(items),

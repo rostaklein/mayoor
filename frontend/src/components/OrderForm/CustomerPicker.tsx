@@ -45,7 +45,7 @@ export const CustomerPicker: React.FC = () => {
 			<StyledLabel>{t('Customer')}</StyledLabel>
 			<Select
 				filterOption={false}
-				onChange={(value) => (console.log(value), setValue(value))}
+				onChange={(value) => setValue(value)}
 				placeholder={t('Select a customer')}
 				onSearch={debouncedSearchHandler}
 				showSearch

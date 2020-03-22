@@ -15,6 +15,7 @@ import { OrderItemField } from './OrderItemField/OrderItemField';
 import { getOrderValidationSchema } from './validateOrder';
 import { StyledOrderNumberWrapper, OrderSummaryWrapper } from './OrderForm.styles';
 import { calculateSummary, getTotalPriceIncludingTax } from './calculateSummary';
+import { OrderStatusSelect } from './OrderStatusSelect';
 
 export type OrderFormItem = {
 	id?: string;
@@ -29,6 +30,7 @@ export type OrderFormItem = {
 
 export type OrderFormValues = {
 	number: number | null;
+	status?: string;
 	customerId?: string;
 	totalPrice?: number;
 	totalTax?: number;
@@ -71,6 +73,9 @@ export const OrderForm: React.FC<Props> = (props) => {
 						</Col>
 						<Col lg={7}>
 							<CustomerPicker />
+						</Col>
+						<Col lg={6}>
+							<OrderStatusSelect />
 						</Col>
 					</Row>
 					<StyledDivider />

@@ -26,6 +26,7 @@ export const dummyMaterialItem: OrderFormItem = {
 
 const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
 	number: orderNumber,
+	status: 'NEW',
 	customerId: undefined,
 	totalPrice: 200,
 	totalTax: 20,
@@ -49,10 +50,11 @@ export const NewOrder: React.FC = () => {
 	);
 
 	const submitHandler = async (rawValues: OrderFormValues) => {
-		const validValues = rawValues as ValidatedOrder; // gets triggered only when form is valid
+		const { number, ...rest } = rawValues as ValidatedOrder; // gets triggered only when form is valid
 		await createOrder({
 			variables: {
-				input: validValues,
+				number,
+				input: rest,
 			},
 		});
 		highestOrderNumberQuery.refetch();

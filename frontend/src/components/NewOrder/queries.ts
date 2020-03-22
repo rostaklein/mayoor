@@ -7,8 +7,8 @@ export const GET_HIGHEST_ORDER_NUMBER = gql`
 `;
 
 export const CREATE_ORDER = gql`
-	mutation CreateOrder($input: OrderInput!) {
-		createOrder(input: $input) {
+	mutation CreateOrder($number: Int!, $input: OrderInput!) {
+		createOrder(number: $number, input: $input) {
 			id
 			customer {
 				id

@@ -423,6 +423,7 @@ export interface CreateOrder {
 }
 
 export interface CreateOrderVariables {
+  number: number;
   input: OrderInput;
 }
 
@@ -551,6 +552,15 @@ export interface CustomerFragment {
 // START Enums and Input Objects
 //==============================================================
 
+export enum OrderStatus {
+  DONE = "DONE",
+  NEW = "NEW",
+  READY_TO_PRINT = "READY_TO_PRINT",
+  TO_BE_SHIPPED = "TO_BE_SHIPPED",
+  WAITING_FOR_CALCULATION = "WAITING_FOR_CALCULATION",
+  WAITING_FOR_PRODUCTION = "WAITING_FOR_PRODUCTION",
+}
+
 export interface AddressInput {
   city?: string | null;
   isPrimary?: boolean | null;
@@ -574,11 +584,12 @@ export interface CreateCustomerInput {
 
 export interface OrderInput {
   customerId?: string | null;
-  items?: OrderItemInput[] | null;
+  items: OrderItemInput[];
   note?: string | null;
-  number: number;
+  status?: OrderStatus | null;
   totalPrice: number;
   totalTax: number;
+  urgency?: number | null;
 }
 
 export interface OrderItemInput {
