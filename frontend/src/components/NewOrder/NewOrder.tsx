@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, message } from 'antd';
 import { useQuery, useMutation } from 'react-apollo';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { OrderForm, OrderFormValues, OrderFormItem } from '../OrderForm/OrderForm';
@@ -36,6 +38,7 @@ const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
 
 export const NewOrder: React.FC = () => {
 	const { t } = useTranslation();
+	const history = useHistory();
 
 	const highestOrderNumberQuery = useQuery<GetHighestOrderNumber>(GET_HIGHEST_ORDER_NUMBER);
 	const [createOrder, { loading }] = useMutation<CreateOrder, CreateOrderVariables>(
@@ -45,6 +48,20 @@ export const NewOrder: React.FC = () => {
 				if (err.graphQLErrors[0].extensions?.code === 'ORDER_NUMBER_EXISTS') {
 					message.error(t('order_number_exists'));
 				}
+			},
+			onCompleted: (data) => {
+				message.success(
+					<>
+						{t('Order number {{number}} created.', {
+							number: data.createOrder.number,
+						})}{' '}
+						<Button
+							type="link"
+							icon={<ArrowRightOutlined />}
+							onClick={() => history.push(`/orders/${data.createOrder.id}`)}
+						></Button>
+					</>,
+				);
 			},
 		},
 	);

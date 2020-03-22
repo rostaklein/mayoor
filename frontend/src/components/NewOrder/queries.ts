@@ -10,10 +10,7 @@ export const CREATE_ORDER = gql`
 	mutation CreateOrder($number: Int!, $input: OrderInput!) {
 		createOrder(number: $number, input: $input) {
 			id
-			customer {
-				id
-				name
-			}
+			number
 		}
 	}
 `;

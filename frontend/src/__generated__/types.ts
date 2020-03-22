@@ -406,16 +406,10 @@ export interface GetHighestOrderNumber {
 // GraphQL mutation operation: CreateOrder
 // ====================================================
 
-export interface CreateOrder_createOrder_customer {
-  __typename: "Customer";
-  id: string;
-  name: string | null;
-}
-
 export interface CreateOrder_createOrder {
   __typename: "Order";
   id: string;
-  customer: CreateOrder_createOrder_customer | null;
+  number: number;
 }
 
 export interface CreateOrder {
