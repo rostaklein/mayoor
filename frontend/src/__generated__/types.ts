@@ -100,6 +100,69 @@ export interface UpdateCustomerVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetOrder
+// ====================================================
+
+export interface GetOrder_getOrder_customer {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+}
+
+export interface GetOrder_getOrder_createdBy {
+  __typename: "User";
+  id: string;
+  name: string | null;
+}
+
+export interface GetOrder_getOrder_items_material {
+  __typename: "Material";
+  id: string;
+}
+
+export interface GetOrder_getOrder_items {
+  __typename: "OrderItem";
+  id: string;
+  material: GetOrder_getOrder_items_material | null;
+  name: string | null;
+  width: number | null;
+  height: number | null;
+  pieces: number | null;
+  totalPrice: number;
+  totalTax: number;
+}
+
+export interface GetOrder_getOrder {
+  __typename: "Order";
+  id: string;
+  number: number;
+  customer: GetOrder_getOrder_customer | null;
+  status: OrderStatus;
+  note: string | null;
+  urgency: number;
+  totalPrice: number;
+  totalTax: number;
+  createdAt: any;
+  updatedAt: any;
+  createdBy: GetOrder_getOrder_createdBy;
+  items: GetOrder_getOrder_items[];
+}
+
+export interface GetOrder {
+  getOrder: GetOrder_getOrder | null;
+}
+
+export interface GetOrderVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetAllCustomers
 // ====================================================
 
