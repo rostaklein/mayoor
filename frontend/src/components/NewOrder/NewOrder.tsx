@@ -28,6 +28,7 @@ export const dummyMaterialItem: OrderFormItem = {
 
 const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
 	number: orderNumber,
+	urgency: 1,
 	status: 'NEW',
 	customerId: undefined,
 	totalPrice: 200,

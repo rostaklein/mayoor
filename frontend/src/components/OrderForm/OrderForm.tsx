@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Formik, FieldArray, Field } from 'formik';
+import { Formik, FieldArray } from 'formik';
 import { Row, Col, Button, Input } from 'antd';
 import { NumberOutlined, PlusCircleOutlined, CalculatorOutlined } from '@ant-design/icons';
 
@@ -16,6 +16,7 @@ import { getOrderValidationSchema } from './validateOrder';
 import { StyledOrderNumberWrapper, OrderSummaryWrapper } from './OrderForm.styles';
 import { calculateSummary, getTotalPriceIncludingTax } from './calculateSummary';
 import { OrderStatusSelect } from './OrderStatusSelect';
+import { UrgentSlider } from './UrgentSlider';
 
 export type OrderFormItem = {
 	id?: string;
@@ -30,6 +31,7 @@ export type OrderFormItem = {
 
 export type OrderFormValues = {
 	number: number | null;
+	urgency: number;
 	status?: string;
 	customerId?: string;
 	totalPrice?: number;
@@ -144,7 +146,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 						)}
 					/>
 					<Row gutter={8} style={{ marginTop: 15 }}>
-						<Col sm={13}>
+						<Col sm={10}>
 							<StyledFormItem>
 								<StyledLabel>{t('Note')}</StyledLabel>
 								<Input.TextArea
@@ -156,7 +158,13 @@ export const OrderForm: React.FC<Props> = (props) => {
 								/>
 							</StyledFormItem>
 						</Col>
-						<Col></Col>
+						<Col sm={8}>
+							<Row>
+								<Col sm={18} offset={3}>
+									<UrgentSlider />
+								</Col>
+							</Row>
+						</Col>
 						<Col sm={6}>
 							<OrderSummaryWrapper>
 								<FormInput
@@ -177,7 +185,9 @@ export const OrderForm: React.FC<Props> = (props) => {
 									<div>
 										<StyledLabel>{t('Total price including tax')}</StyledLabel>
 										<span>
-											{currencyFormatter(getTotalPriceIncludingTax(values)!)}
+											{currencyFormatter(
+												getTotalPriceIncludingTax(values) || 0,
+											)}
 										</span>
 									</div>
 								)}
