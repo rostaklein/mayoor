@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-apollo';
 import { useParams } from 'react-router-dom';
+import { Button } from 'antd';
 
 import { GetOrder, GetOrderVariables } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
+import { OrderForm } from '../OrderForm/OrderForm';
+import { CenteredSpinner } from '../SharedStyles/CenteredSpinner';
 
 import { GET_ORDER } from './queries';
+import { mapToOrderFormValues } from './mapToOrderFormValues';
 
 export const DetailOrder: React.FC = () => {
 	const routeParams = useParams<{ id: string }>();
@@ -25,10 +29,29 @@ export const DetailOrder: React.FC = () => {
 		document.title = `${orderTitle} | mayoor`;
 	}, [data?.getOrder?.number]);
 
+	const initialValues = mapToOrderFormValues(data);
+
 	return (
 		<>
 			<PageTitle>{orderTitle}</PageTitle>
-			{JSON.stringify(data?.getOrder)}
+			{initialValues ? (
+				<OrderForm
+					initialValues={initialValues}
+					onSubmit={async (params) => console.log(params)}
+					submitButton={
+						<Button
+							type="primary"
+							htmlType="submit"
+							style={{ marginTop: 10 }}
+							loading={false}
+						>
+							{t('Save order')}
+						</Button>
+					}
+				/>
+			) : (
+				<CenteredSpinner />
+			)}
 		</>
 	);
 };

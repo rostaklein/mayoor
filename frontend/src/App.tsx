@@ -3,22 +3,15 @@ import { useQuery, ApolloProvider } from 'react-apollo';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { LoadingOutlined } from '@ant-design/icons';
 import { Spin, Alert, message } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
 import { MeQuery } from './__generated__/types';
-import { CenteredWrapper } from './components/CenteredWrapper/CenteredWrapper';
 import { useAppDispatch, useAppState, AppContextProvider } from './appContext/context';
 import { MainWrapper } from './components/MainWrapper/MainWrapper';
 import { client } from './ApolloClient';
-
-const CenteredSpinner: React.FC = () => (
-	<CenteredWrapper>
-		<Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
-	</CenteredWrapper>
-);
+import { CenteredSpinner } from './components/SharedStyles/CenteredSpinner';
 
 const App: React.FC = () => {
 	const dispatch = useAppDispatch();
