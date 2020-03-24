@@ -84,6 +84,25 @@ export interface NexusGenInputs {
     phone?: string | null; // String
     taxIdentificationNumber?: string | null; // String
   }
+  UpdateOrderInput: { // input type
+    customerId?: string | null; // ID
+    items: NexusGenInputs['UpdateOrderItemInput'][]; // [UpdateOrderItemInput!]!
+    note?: string | null; // String
+    status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    urgency?: number | null; // Int
+  }
+  UpdateOrderItemInput: { // input type
+    height?: number | null; // Float
+    id?: string | null; // ID
+    materialId?: string | null; // ID
+    name?: string | null; // String
+    pieces?: number | null; // Int
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    width?: number | null; // Float
+  }
 }
 
 export interface NexusGenEnums {
@@ -136,6 +155,8 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   OrderItemWhereUniqueInput: NexusGenInputs['OrderItemWhereUniqueInput'];
   UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
   UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
+  UpdateOrderInput: NexusGenInputs['UpdateOrderInput'];
+  UpdateOrderItemInput: NexusGenInputs['UpdateOrderItemInput'];
   OrderStatus: NexusGenEnums['OrderStatus'];
 }
 
@@ -199,6 +220,7 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateCustomer: NexusGenRootTypes['Customer']; // Customer!
     updateMaterial: NexusGenRootTypes['Material']; // Material!
+    updateOrder: NexusGenRootTypes['Order']; // Order!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -303,6 +325,10 @@ export interface NexusGenArgTypes {
       name?: string | null; // String
       price?: number | null; // Float
     }
+    updateOrder: { // args
+      id?: string | null; // ID
+      input: NexusGenInputs['UpdateOrderInput']; // UpdateOrderInput!
+    }
   }
   Order: {
     items: { // args
@@ -342,7 +368,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "UpdateAddressInput" | "UpdateCustomerInput";
+export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput";
 
 export type NexusGenEnumNames = "OrderStatus";
 

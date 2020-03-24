@@ -94,6 +94,7 @@ type Mutation {
   register(email: String!, name: String, password: String!): AuthPayload!
   updateCustomer(input: UpdateCustomerInput!): Customer!
   updateMaterial(id: ID!, name: String, price: Float): Material!
+  updateOrder(id: ID, input: UpdateOrderInput!): Order!
 }
 
 type Order {
@@ -196,6 +197,27 @@ input UpdateCustomerInput {
   personName: String
   phone: String
   taxIdentificationNumber: String
+}
+
+input UpdateOrderInput {
+  customerId: ID
+  items: [UpdateOrderItemInput!]!
+  note: String
+  status: OrderStatus
+  totalPrice: Float!
+  totalTax: Float!
+  urgency: Int
+}
+
+input UpdateOrderItemInput {
+  height: Float
+  id: ID
+  materialId: ID
+  name: String
+  pieces: Int
+  totalPrice: Float!
+  totalTax: Float!
+  width: Float
 }
 
 type User {
