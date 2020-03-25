@@ -183,6 +183,7 @@ type Query {
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   getHighestOrderNumber: Int
   getOrder(id: ID!): Order
+  getOrderByNumber(number: Int!): Order
   me: User!
 }
 

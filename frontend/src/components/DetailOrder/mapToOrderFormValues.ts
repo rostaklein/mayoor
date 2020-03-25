@@ -2,7 +2,7 @@ import { OrderFormValues } from '../OrderForm/OrderForm';
 import { GetOrder } from '../../__generated__/types';
 
 export const mapToOrderFormValues = (data?: GetOrder): OrderFormValues | undefined => {
-	const order = data?.getOrder;
+	const order = data?.getOrderByNumber;
 
 	if (!order) {
 		return;

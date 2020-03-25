@@ -269,6 +269,7 @@ export interface NexusGenFieldTypes {
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
     getHighestOrderNumber: number | null; // Int
     getOrder: NexusGenRootTypes['Order'] | null; // Order
+    getOrderByNumber: NexusGenRootTypes['Order'] | null; // Order
     me: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
@@ -366,6 +367,9 @@ export interface NexusGenArgTypes {
     }
     getOrder: { // args
       id: string; // ID!
+    }
+    getOrderByNumber: { // args
+      number: number; // Int!
     }
   }
 }

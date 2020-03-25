@@ -103,28 +103,28 @@ export interface UpdateCustomerVariables {
 // GraphQL query operation: GetOrder
 // ====================================================
 
-export interface GetOrder_getOrder_customer {
+export interface GetOrder_getOrderByNumber_customer {
   __typename: "Customer";
   id: string;
   name: string | null;
   identificationNumber: string | null;
 }
 
-export interface GetOrder_getOrder_createdBy {
+export interface GetOrder_getOrderByNumber_createdBy {
   __typename: "User";
   id: string;
   name: string | null;
 }
 
-export interface GetOrder_getOrder_items_material {
+export interface GetOrder_getOrderByNumber_items_material {
   __typename: "Material";
   id: string;
 }
 
-export interface GetOrder_getOrder_items {
+export interface GetOrder_getOrderByNumber_items {
   __typename: "OrderItem";
   id: string;
-  material: GetOrder_getOrder_items_material | null;
+  material: GetOrder_getOrderByNumber_items_material | null;
   name: string | null;
   width: number | null;
   height: number | null;
@@ -133,11 +133,11 @@ export interface GetOrder_getOrder_items {
   totalTax: number;
 }
 
-export interface GetOrder_getOrder {
+export interface GetOrder_getOrderByNumber {
   __typename: "Order";
   id: string;
   number: number;
-  customer: GetOrder_getOrder_customer | null;
+  customer: GetOrder_getOrderByNumber_customer | null;
   status: OrderStatus;
   note: string | null;
   urgency: number;
@@ -145,16 +145,16 @@ export interface GetOrder_getOrder {
   totalTax: number;
   createdAt: any;
   updatedAt: any;
-  createdBy: GetOrder_getOrder_createdBy;
-  items: GetOrder_getOrder_items[];
+  createdBy: GetOrder_getOrderByNumber_createdBy;
+  items: GetOrder_getOrderByNumber_items[];
 }
 
 export interface GetOrder {
-  getOrder: GetOrder_getOrder | null;
+  getOrderByNumber: GetOrder_getOrderByNumber | null;
 }
 
 export interface GetOrderVariables {
-  id: string;
+  number: number;
 }
 
 /* tslint:disable */

@@ -30,7 +30,7 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 		dataIndex: 'number',
 		width: 80,
 		render: (_, record) => {
-			return <Link to={`/orders/${record.id}`}>{record.number}</Link>;
+			return <Link to={`/orders/${record.number}`}>{record.number}</Link>;
 		},
 	},
 	{
@@ -68,7 +68,7 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 		width: 40,
 		render: (_, record) => {
 			return (
-				<Link to={`/orders/${record.id}`}>
+				<Link to={`/orders/${record.number}`}>
 					<Button icon={<RightCircleOutlined />} type="link"></Button>
 				</Link>
 			);

@@ -36,8 +36,8 @@ export const ORDER_FRAGMENT = gql`
 `;
 
 export const GET_ORDER = gql`
-	query GetOrder($id: ID!) {
-		getOrder(id: $id) {
+	query GetOrder($number: Int!) {
+		getOrderByNumber(number: $number) {
 			...OrderFragment
 		}
 	}

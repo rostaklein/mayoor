@@ -22,17 +22,17 @@ export const DetailOrder: React.FC = () => {
 	const { t } = useTranslation();
 
 	const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
-		variables: { id: routeParams.id },
+		variables: { number: Number(routeParams.id) },
 	});
 
 	const orderTitle = t('Order #{{number}} {{customerName}}', {
-		number: data?.getOrder?.number,
-		customerName: data?.getOrder?.customer?.name,
+		number: data?.getOrderByNumber?.number,
+		customerName: data?.getOrderByNumber?.customer?.name,
 	});
 
 	useEffect(() => {
 		document.title = `${orderTitle} | mayoor`;
-	}, [data?.getOrder?.number]);
+	}, [data?.getOrderByNumber?.number]);
 
 	const initialValues = mapToOrderFormValues(data);
 
@@ -40,10 +40,15 @@ export const DetailOrder: React.FC = () => {
 
 	const submitHandler = async (orderValues: OrderFormValues) => {
 		const { urgency, status, customerId, totalPrice, totalTax, note } = orderValues;
+
+		const id = data?.getOrderByNumber?.id;
+		if (!id) {
+			return;
+		}
 		try {
 			await updateOrder({
 				variables: {
-					id: routeParams.id,
+					id,
 					input: {
 						urgency,
 						status,
@@ -73,7 +78,7 @@ export const DetailOrder: React.FC = () => {
 				<OrderForm
 					initialValues={initialValues}
 					onSubmit={submitHandler}
-					extraCustomer={data?.getOrder?.customer ?? null}
+					extraCustomer={data?.getOrderByNumber?.customer ?? null}
 					submitButton={
 						<Button
 							type="primary"
