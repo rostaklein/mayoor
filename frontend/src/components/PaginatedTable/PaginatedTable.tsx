@@ -20,6 +20,7 @@ type Props<RecordType> = {
 		search: string;
 		emptyResult: string;
 	};
+	topRowContent?: React.ReactNode;
 };
 
 interface Record {
@@ -62,8 +63,9 @@ export function PaginatedTable<T extends Record>(props: Props<T>) {
 
 	return (
 		<StyledTableWrapper>
-			{props.onSearch && (
-				<Row justify="end">
+			<Row justify="end">
+				{props.topRowContent}
+				{props.onSearch && (
 					<Col xs={24} md={6}>
 						<StyledSearch
 							enterButton
@@ -71,8 +73,9 @@ export function PaginatedTable<T extends Record>(props: Props<T>) {
 							onSearch={searchSubmitHandler}
 						/>
 					</Col>
-				</Row>
-			)}
+				)}
+			</Row>
+
 			<Table<T>
 				columns={props.columns}
 				dataSource={props.records}

@@ -2,9 +2,19 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Select } from 'antd';
 import { useField } from 'formik';
+import { TFunction } from 'i18next';
 
 import { StyledFormItem, StyledLabel } from '../FormItem/Form.styles';
 import { OrderStatus } from '../../__generated__/types';
+
+export const getOrderStatuses = (t: TFunction): { [key in OrderStatus]: string } => ({
+	NEW: t('New'),
+	WAITING_FOR_CALCULATION: t('Waiting for calculation'),
+	READY_TO_PRINT: t('Ready to print'),
+	WAITING_FOR_PRODUCTION: t('Waiting for production'),
+	TO_BE_SHIPPED: t('To be shipped'),
+	DONE: t('Done'),
+});
 
 export const OrderStatusSelect: React.FC = () => {
 	const { t } = useTranslation();
@@ -12,15 +22,7 @@ export const OrderStatusSelect: React.FC = () => {
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
 
-	const statuses: { [key in OrderStatus]: string } = {
-		NEW: t('New'),
-		WAITING_FOR_CALCULATION: t('Waiting for calculation'),
-		READY_TO_PRINT: t('Ready to print'),
-		WAITING_FOR_PRODUCTION: t('Waiting for production'),
-		TO_BE_SHIPPED: t('To be shipped'),
-		DONE: t('Done'),
-	} as const;
-
+	const statuses = getOrderStatuses(t);
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>
 			<StyledLabel>{t('Order status')}</StyledLabel>

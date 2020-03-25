@@ -25,6 +25,9 @@ const getColumns = (t: TFunction): ColumnProps<GetAllCustomers_getAllCustomers_i
 		title: t('Company name'),
 		ellipsis: true,
 		dataIndex: 'name',
+		render: (_, record) => {
+			return <Link to={`/customers/${record.id}`}>{record.name}</Link>;
+		},
 	},
 	{
 		title: t('Identification number'),

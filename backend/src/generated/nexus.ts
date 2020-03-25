@@ -356,6 +356,7 @@ export interface NexusGenArgTypes {
     getAllOrders: { // args
       first?: number | null; // Int
       skip?: number | null; // Int
+      status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
     }
     getCustomer: { // args
       id: string; // ID!

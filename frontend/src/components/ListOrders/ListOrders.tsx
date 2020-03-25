@@ -1,8 +1,8 @@
 /* eslint-disable  @typescript-eslint/camelcase */
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RightCircleOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, Select, Col, Row } from 'antd';
 import { useQuery } from 'react-apollo';
 import { TFunction } from 'i18next';
 import { ColumnProps } from 'antd/lib/table';
@@ -12,10 +12,13 @@ import {
 	GetAllOrders,
 	GetAllOrdersVariables,
 	GetAllOrders_getAllOrders_items,
+	OrderStatus,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { PaginatedTable } from '../PaginatedTable/PaginatedTable';
 import { DisplayTime } from '../DisplayTime/DisplayTime';
+import { getOrderStatuses } from '../OrderForm/OrderStatusSelect';
+import { StyledFormItem, StyledLabel } from '../FormItem/Form.styles';
 
 import { GET_ALL_ORDERS_QUERY } from './queries';
 
@@ -75,8 +78,9 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 
 export const ListOrders: React.FC = () => {
 	const { t } = useTranslation();
+	const [hasFilterActive, setHasFilterActive] = useState(false);
 
-	const { data, loading, fetchMore } = useQuery<GetAllOrders, GetAllOrdersVariables>(
+	const { data, loading, fetchMore, refetch } = useQuery<GetAllOrders, GetAllOrdersVariables>(
 		GET_ALL_ORDERS_QUERY,
 		{
 			variables: { first: PAGE_SIZE },
@@ -96,11 +100,43 @@ export const ListOrders: React.FC = () => {
 		});
 	};
 
+	const handleFilterStatusChange = (status: OrderStatus | '') => {
+		if (status === '') {
+			setHasFilterActive(false);
+			return refetch({ first: PAGE_SIZE, status: undefined });
+		}
+		setHasFilterActive(true);
+		refetch({ first: PAGE_SIZE, status });
+	};
+
 	const items = data?.getAllOrders.items ?? [];
+
+	const statuses = getOrderStatuses(t);
 
 	return (
 		<>
-			<PageTitle>{t('List orders')}</PageTitle>
+			<Row>
+				<Col md={18}>
+					<PageTitle>{t('List orders')}</PageTitle>
+				</Col>
+				<Col xs={24} md={6}>
+					<StyledFormItem style={{ marginTop: 10, marginRight: 25 }}>
+						<StyledLabel>{t('Filter by status')}</StyledLabel>
+						<Select
+							style={{ width: '100%' }}
+							defaultValue=""
+							onChange={handleFilterStatusChange}
+						>
+							<Select.Option value="">{t('Without status filter')}</Select.Option>
+							{Object.entries(statuses).map(([value, label]) => (
+								<Select.Option key={value} value={value}>
+									{label}
+								</Select.Option>
+							))}
+						</Select>
+					</StyledFormItem>
+				</Col>
+			</Row>
 			<PaginatedTable<GetAllOrders_getAllOrders_items>
 				columns={getColumns(t)}
 				records={items}
@@ -108,7 +144,9 @@ export const ListOrders: React.FC = () => {
 				onPaginationChange={paginationChangedHandler}
 				loading={loading}
 				translations={{
-					emptyResult: t('Customers list is empty'),
+					emptyResult: hasFilterActive
+						? t('No orders found matching this filter.')
+						: t('Order list is empty'),
 					search: t('Search customers'),
 				}}
 			/>
