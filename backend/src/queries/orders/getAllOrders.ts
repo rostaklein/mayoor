@@ -6,7 +6,10 @@ export const GetAllOrders = queryField('getAllOrders', {
   args: paginationArgs,
   nullable: false,
   resolve: async (_parent, args, ctx) => {
-    const orders = await ctx.prisma.order.findMany(args);
+    const orders = await ctx.prisma.order.findMany({
+      ...args,
+      orderBy: { createdAt: 'desc' },
+    });
     return {
       totalCount: await ctx.prisma.order.count(),
       items: orders,

@@ -11,7 +11,6 @@ export const mapOrderItemInputToCreateOrderItem = (
   if (!items) {
     return null;
   }
-  console.log(items);
   return items.map(item => {
     return {
       material: item.materialId
