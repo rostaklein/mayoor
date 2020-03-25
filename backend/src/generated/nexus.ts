@@ -233,6 +233,7 @@ export interface NexusGenFieldTypes {
     shippedAt: any | null; // DateTime
     status: NexusGenEnums['OrderStatus']; // OrderStatus!
     totalPrice: number; // Float!
+    totalSize: number; // Int!
     totalTax: number; // Float!
     updatedAt: any; // DateTime!
     urgency: number; // Int!

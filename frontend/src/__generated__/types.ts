@@ -273,6 +273,7 @@ export interface GetAllOrders_getAllOrders_items_customer {
 
 export interface GetAllOrders_getAllOrders_items_items_material {
 	__typename: 'Material';
+	id: string;
 	name: string;
 }
 
@@ -290,6 +291,7 @@ export interface GetAllOrders_getAllOrders_items {
 	createdAt: any;
 	totalPrice: number;
 	totalTax: number;
+	totalSize: number;
 	items: GetAllOrders_getAllOrders_items_items[];
 }
 

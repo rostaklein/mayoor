@@ -15,6 +15,7 @@ import {
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { PaginatedTable } from '../PaginatedTable/PaginatedTable';
+import { DisplayTime } from '../DisplayTime/DisplayTime';
 
 import { GET_ALL_ORDERS_QUERY } from './queries';
 
@@ -22,9 +23,9 @@ const PAGE_SIZE = 10;
 
 const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[] => [
 	{
-		title: t('Order number'),
+		title: t('Order nr.'),
 		dataIndex: 'number',
-		width: 150,
+		width: 80,
 		render: (_, record) => {
 			return <Link to={`/orders/${record.id}`}>{record.number}</Link>;
 		},
@@ -41,17 +42,27 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 		title: t('Items info'),
 		ellipsis: true,
 		dataIndex: 'items',
-		render: (_, { items }) => JSON.stringify(items),
+		render: (_, { items, totalSize }) => {
+			const allMaterialNames = items.map((item) => item.material?.name);
+			const distinctMaterials = [...new Set(allMaterialNames)].filter((item) => item);
+			return (
+				<>
+					{totalSize} m<sup>2</sup>
+					{distinctMaterials.length > 0 && `, ${distinctMaterials.join(', ')}`}
+				</>
+			);
+		},
 	},
 	{
 		title: t('Created at'),
-		width: 150,
+		width: 200,
 		ellipsis: true,
 		dataIndex: 'createdAt',
+		render: (_, { createdAt }) => <DisplayTime date={createdAt} />,
 	},
 	{
 		key: 'actions',
-		width: 50,
+		width: 40,
 		render: (_, record) => {
 			return (
 				<Link to={`/orders/${record.id}`}>

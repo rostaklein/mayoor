@@ -14,8 +14,10 @@ export const GET_ALL_ORDERS_QUERY = gql`
 				createdAt
 				totalPrice
 				totalTax
+				totalSize
 				items {
 					material {
+						id
 						name
 					}
 					pieces

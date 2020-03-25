@@ -1,5 +1,7 @@
 import { objectType, inputObjectType, enumType } from 'nexus';
-import { NexusGenEnums } from './generated/nexus';
+import { NexusGenEnums } from '../generated/nexus';
+
+export * from './order';
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
@@ -72,29 +74,6 @@ export const OrderStatus = enumType({
     'TO_BE_SHIPPED',
     'DONE',
   ],
-});
-
-export const Order = objectType({
-  name: 'Order',
-  definition(t) {
-    t.model.id();
-    t.model.number();
-    t.field('status', {
-      resolve: a => a.status.toUpperCase() as NexusGenEnums['OrderStatus'],
-      type: OrderStatus,
-    });
-    t.model.urgency();
-    t.model.customer();
-    t.model.items();
-    t.model.totalPrice();
-    t.model.totalTax();
-    t.model.shippedAt();
-    t.model.note();
-    t.model.urgency();
-    t.model.createdBy();
-    t.model.createdAt();
-    t.model.updatedAt();
-  },
 });
 
 export const OrderItem = objectType({
