@@ -20,7 +20,7 @@ export const ORDER_FRAGMENT = gql`
 			id
 			name
 		}
-		items {
+		items(orderBy: { createdAt: asc }) {
 			id
 			material {
 				id

@@ -68,9 +68,10 @@ export const UpdateOrder = mutationField('updateOrder', {
       );
 
       if (updateData) {
+        const { materialId, ...rest } = updateData;
         await ctx.prisma.orderItem.update({
           where: { id: itemToUpdate.id },
-          data: updateData,
+          data: { ...rest, material: { connect: { id: materialId } } },
         });
       }
     });

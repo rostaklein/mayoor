@@ -13,7 +13,7 @@ export const Order = objectType({
     });
     t.model.urgency();
     t.model.customer();
-    t.model.items();
+    t.model.items({ ordering: { createdAt: true } });
     t.model.totalPrice();
     t.model.totalTax();
     t.int('totalSize', {

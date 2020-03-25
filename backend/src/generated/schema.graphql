@@ -102,7 +102,7 @@ type Order {
   createdBy: User!
   customer: Customer
   id: String!
-  items(after: OrderItemWhereUniqueInput, before: OrderItemWhereUniqueInput, first: Int, last: Int, skip: Int): [OrderItem!]!
+  items(after: OrderItemWhereUniqueInput, before: OrderItemWhereUniqueInput, first: Int, last: Int, orderBy: OrderItemsOrderByInput, skip: Int): [OrderItem!]!
   note: String
   number: Int!
   shippedAt: DateTime
@@ -112,6 +112,11 @@ type Order {
   totalTax: Float!
   updatedAt: DateTime!
   urgency: Int!
+}
+
+enum OrderByArg {
+  asc
+  desc
 }
 
 input OrderInput {
@@ -146,6 +151,10 @@ input OrderItemInput {
   totalPrice: Float!
   totalTax: Float!
   width: Float
+}
+
+input OrderItemsOrderByInput {
+  createdAt: OrderByArg
 }
 
 input OrderItemWhereUniqueInput {

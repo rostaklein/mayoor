@@ -18,7 +18,9 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
 
 	const { data, loading } = useQuery<GetAllMaterials>(GET_ALL_MATERIALS, {
 		onCompleted: (data) => {
-			setValue(data.getAllMaterials[0].id);
+			if (value === null) {
+				setValue(data.getAllMaterials[0].id);
+			}
 		},
 	});
 
