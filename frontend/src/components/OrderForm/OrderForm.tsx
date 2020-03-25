@@ -9,6 +9,7 @@ import { FormInput } from '../FormItem/FormInput';
 import { dummyMaterialItem } from '../NewOrder/NewOrder';
 import { CURRENCY_SUFFIX } from '../../config';
 import { useCurrencyFormatter } from '../../locales/useCurrencyFormatter';
+import { OrderStatus } from '../../__generated__/types';
 
 import { CustomerPicker } from './CustomerPicker';
 import { OrderItemField } from './OrderItemField/OrderItemField';
@@ -32,7 +33,7 @@ export type OrderFormItem = {
 export type OrderFormValues = {
 	number: number | null;
 	urgency: number;
-	status?: string;
+	status?: OrderStatus;
 	customerId?: string;
 	totalPrice?: number;
 	totalTax?: number;

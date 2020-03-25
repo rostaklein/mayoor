@@ -4,6 +4,7 @@ import { Select } from 'antd';
 import { useField } from 'formik';
 
 import { StyledFormItem, StyledLabel } from '../FormItem/Form.styles';
+import { OrderStatus } from '../../__generated__/types';
 
 export const OrderStatusSelect: React.FC = () => {
 	const { t } = useTranslation();
@@ -11,7 +12,7 @@ export const OrderStatusSelect: React.FC = () => {
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
 
-	const statuses = {
+	const statuses: { [key in OrderStatus]: string } = {
 		NEW: t('New'),
 		WAITING_FOR_CALCULATION: t('Waiting for calculation'),
 		READY_TO_PRINT: t('Ready to print'),

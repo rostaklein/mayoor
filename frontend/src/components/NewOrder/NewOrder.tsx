@@ -11,6 +11,7 @@ import {
 	GetHighestOrderNumber,
 	CreateOrder,
 	CreateOrderVariables,
+	OrderStatus,
 } from '../../__generated__/types';
 import { ValidatedOrder } from '../OrderForm/validateOrder';
 
@@ -29,7 +30,7 @@ export const dummyMaterialItem: OrderFormItem = {
 const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
 	number: orderNumber,
 	urgency: 1,
-	status: 'NEW',
+	status: OrderStatus.NEW,
 	customerId: undefined,
 	totalPrice: 200,
 	totalTax: 20,
