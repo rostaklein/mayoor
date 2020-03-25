@@ -90,6 +90,7 @@ type Mutation {
   createOrder(input: OrderInput!, number: Int!): Order!
   deleteCustomer(id: ID!): Customer!
   deleteMaterial(id: ID!): Material!
+  deleteOrder(id: ID!): Order!
   login(email: String!, password: String!): AuthPayload!
   register(email: String!, name: String, password: String!): AuthPayload!
   updateCustomer(input: UpdateCustomerInput!): Customer!

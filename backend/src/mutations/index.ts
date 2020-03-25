@@ -4,6 +4,7 @@ export * from './auth/changePassword';
 
 export * from './orders/createOrder';
 export * from './orders/updateOrder';
+export * from './orders/deleteOrder';
 export * from './orders/addOrderItem';
 
 export * from './customers/createCustomer';

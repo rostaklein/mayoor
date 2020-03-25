@@ -222,6 +222,7 @@ export interface NexusGenFieldTypes {
     createOrder: NexusGenRootTypes['Order']; // Order!
     deleteCustomer: NexusGenRootTypes['Customer']; // Customer!
     deleteMaterial: NexusGenRootTypes['Material']; // Material!
+    deleteOrder: NexusGenRootTypes['Order']; // Order!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateCustomer: NexusGenRootTypes['Customer']; // Customer!
@@ -314,6 +315,9 @@ export interface NexusGenArgTypes {
       id: string; // ID!
     }
     deleteMaterial: { // args
+      id: string; // ID!
+    }
+    deleteOrder: { // args
       id: string; // ID!
     }
     login: { // args
