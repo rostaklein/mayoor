@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
-import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Descriptions, message, Skeleton } from 'antd';
-import styled from '@emotion/styled';
+import { Button, message, Skeleton } from 'antd';
 
 import {
 	GetCustomer,
@@ -14,25 +12,13 @@ import {
 } from '../../__generated__/types';
 import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
-import { useDateFormatter } from '../../locales/useDateFormatter';
+import { DetailDescription } from '../DetailDescription/DetailDescription';
 
 import { GET_CUSTOMER, UPDATE_CUSTOMER } from './queries';
-
-const StyledDescriptions = styled(Descriptions)`
-	padding: 0 25px;
-	.ant-descriptions-item-label,
-	.ant-descriptions-item-content {
-		font-size: 12px;
-	}
-	.anticon {
-		margin-right: 3px;
-	}
-`;
 
 export const DetailCustomer: React.FC = () => {
 	const routeParams = useParams<{ id: string }>();
 	const { t } = useTranslation();
-	const { f } = useDateFormatter();
 	const { data } = useQuery<GetCustomer, GetCustomerVariables>(GET_CUSTOMER, {
 		variables: { id: routeParams.id },
 	});
@@ -92,18 +78,11 @@ export const DetailCustomer: React.FC = () => {
 	return (
 		<>
 			<PageTitle>{data.getCustomer.name}</PageTitle>
-			<StyledDescriptions>
-				<Descriptions.Item label={t('Created By')}>
-					<UserOutlined />
-					{data.getCustomer.createdBy.name}
-				</Descriptions.Item>
-				<Descriptions.Item label={t('Created At')}>
-					<CalendarOutlined /> {f(data.getCustomer.createdAt, 'datetime')}
-				</Descriptions.Item>
-				<Descriptions.Item label={t('Last Updated At')}>
-					<CalendarOutlined /> {f(data.getCustomer.updatedAt, 'datetime')}
-				</Descriptions.Item>
-			</StyledDescriptions>
+			<DetailDescription
+				createdAt={data.getCustomer.createdAt}
+				createdByName={data.getCustomer.createdBy.name}
+				updatedAt={data.getCustomer.updatedAt}
+			></DetailDescription>
 			<CustomerForm
 				onSubmit={submitHandler}
 				submitButton={

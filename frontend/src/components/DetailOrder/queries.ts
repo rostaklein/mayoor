@@ -52,3 +52,11 @@ export const UPDATE_ORDER = gql`
 	}
 	${ORDER_FRAGMENT}
 `;
+
+export const DELETE_ORDER = gql`
+	mutation DeleteOrder($id: ID!) {
+		deleteOrder(id: $id) {
+			id
+		}
+	}
+`;

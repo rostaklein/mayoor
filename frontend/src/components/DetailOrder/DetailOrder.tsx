@@ -1,25 +1,31 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
-import { useParams } from 'react-router-dom';
-import { Button, message } from 'antd';
+import { useParams, useHistory } from 'react-router-dom';
+import { Button, message, Row, Col, Popconfirm } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import {
 	GetOrder,
 	GetOrderVariables,
 	UpdateOrder,
 	UpdateOrderVariables,
+	DeleteOrder,
+	DeleteOrderVariables,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { OrderForm, OrderFormValues } from '../OrderForm/OrderForm';
 import { CenteredSpinner } from '../SharedStyles/CenteredSpinner';
+import { DetailDescription } from '../DetailDescription/DetailDescription';
 
-import { GET_ORDER, UPDATE_ORDER } from './queries';
+import { GET_ORDER, UPDATE_ORDER, DELETE_ORDER } from './queries';
 import { mapToOrderFormValues } from './mapToOrderFormValues';
+import { OrderActionsWrapper } from './DetailOrder.styles';
 
 export const DetailOrder: React.FC = () => {
 	const routeParams = useParams<{ id: string }>();
 	const { t } = useTranslation();
+	const history = useHistory();
 
 	const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
 		variables: { number: Number(routeParams.id) },
@@ -37,6 +43,10 @@ export const DetailOrder: React.FC = () => {
 	const initialValues = mapToOrderFormValues(data);
 
 	const [updateOrder, { loading }] = useMutation<UpdateOrder, UpdateOrderVariables>(UPDATE_ORDER);
+	const [deleteOrder, { loading: deleteLoading }] = useMutation<
+		DeleteOrder,
+		DeleteOrderVariables
+	>(DELETE_ORDER);
 
 	const submitHandler = async (orderValues: OrderFormValues) => {
 		const { urgency, status, customerId, totalPrice, totalTax, note } = orderValues;
@@ -71,9 +81,50 @@ export const DetailOrder: React.FC = () => {
 		}
 	};
 
+	const handleOrderDelete = async () => {
+		const id = data?.getOrderByNumber?.id;
+		if (!id) {
+			return;
+		}
+		try {
+			await deleteOrder({ variables: { id } });
+			message.info(t('order_deleted'));
+			history.push(`/orders/list`);
+		} catch (err) {
+			console.error(err);
+			message.error(t('order_delete_fail'));
+		}
+	};
+
 	return (
 		<>
-			<PageTitle>{orderTitle}</PageTitle>
+			<Row>
+				<Col sm={12}>
+					<PageTitle>{orderTitle}</PageTitle>
+				</Col>
+				<Col sm={12}>
+					<Row justify="end">
+						<OrderActionsWrapper>
+							<Popconfirm
+								title={t('Are you sure want to remove this order?')}
+								onConfirm={handleOrderDelete}
+								placement="topRight"
+								okText={t('Delete')}
+								okType="danger"
+							>
+								<Button icon={<DeleteOutlined />} loading={deleteLoading}>
+									{t('Delete')}
+								</Button>
+							</Popconfirm>
+						</OrderActionsWrapper>
+					</Row>
+				</Col>
+			</Row>
+			<DetailDescription
+				createdAt={data?.getOrderByNumber?.createdAt}
+				createdByName={data?.getOrderByNumber?.createdBy.name}
+				updatedAt={data?.getOrderByNumber?.updatedAt}
+			></DetailDescription>
 			{initialValues ? (
 				<OrderForm
 					initialValues={initialValues}
