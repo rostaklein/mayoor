@@ -60,7 +60,7 @@ export const NewOrder: React.FC = () => {
 						<Button
 							type="link"
 							icon={<ArrowRightOutlined />}
-							onClick={() => history.push(`/orders/${data.createOrder.id}`)}
+							onClick={() => history.push(`/orders/${data.createOrder.number}`)}
 						></Button>
 					</>,
 				);
