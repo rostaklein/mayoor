@@ -17,10 +17,10 @@ import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { OrderForm, OrderFormValues } from '../OrderForm/OrderForm';
 import { CenteredSpinner } from '../SharedStyles/CenteredSpinner';
 import { DetailDescription } from '../DetailDescription/DetailDescription';
+import { OrderActionsWrapper } from '../SharedStyles/OrderActions';
 
 import { GET_ORDER, UPDATE_ORDER, DELETE_ORDER } from './queries';
 import { mapToOrderFormValues } from './mapToOrderFormValues';
-import { OrderActionsWrapper } from './DetailOrder.styles';
 
 export const DetailOrder: React.FC = () => {
 	const routeParams = useParams<{ id: string }>();

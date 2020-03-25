@@ -1,23 +1,28 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-apollo';
-import { Button, message, Skeleton } from 'antd';
+import { Button, message, Skeleton, Row, Col, Popconfirm } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import {
 	GetCustomer,
 	GetCustomerVariables,
 	UpdateCustomer,
 	UpdateCustomerVariables,
+	DeleteCustomer,
+	DeleteCustomerVariables,
 } from '../../__generated__/types';
 import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { DetailDescription } from '../DetailDescription/DetailDescription';
+import { OrderActionsWrapper } from '../SharedStyles/OrderActions';
 
-import { GET_CUSTOMER, UPDATE_CUSTOMER } from './queries';
+import { GET_CUSTOMER, UPDATE_CUSTOMER, DELETE_CUSTOMER } from './queries';
 
 export const DetailCustomer: React.FC = () => {
 	const routeParams = useParams<{ id: string }>();
+	const history = useHistory();
 	const { t } = useTranslation();
 	const { data } = useQuery<GetCustomer, GetCustomerVariables>(GET_CUSTOMER, {
 		variables: { id: routeParams.id },
@@ -26,6 +31,10 @@ export const DetailCustomer: React.FC = () => {
 	const [updateCustomer, { loading }] = useMutation<UpdateCustomer, UpdateCustomerVariables>(
 		UPDATE_CUSTOMER,
 	);
+	const [deleteCustomer, { loading: deleteLoading }] = useMutation<
+		DeleteCustomer,
+		DeleteCustomerVariables
+	>(DELETE_CUSTOMER);
 
 	useEffect(() => {
 		document.title = `${data?.getCustomer?.name} | mayoor`;
@@ -71,13 +80,49 @@ export const DetailCustomer: React.FC = () => {
 		}
 	};
 
+	const handleCustomerDelete = async () => {
+		const id = data?.getCustomer?.id;
+		if (!id) {
+			return;
+		}
+		try {
+			await deleteCustomer({ variables: { id } });
+			message.info(t('customer_deleted'));
+			history.push(`/customers/list`);
+		} catch (err) {
+			console.error(err);
+			message.error(t('customer_delete_fail'));
+		}
+	};
+
 	if (!data || !data.getCustomer) {
 		return <Skeleton active />;
 	}
 
 	return (
 		<>
-			<PageTitle>{data.getCustomer.name}</PageTitle>
+			<Row>
+				<Col sm={12}>
+					<PageTitle>{data.getCustomer.name}</PageTitle>
+				</Col>
+				<Col sm={12}>
+					<Row justify="end">
+						<OrderActionsWrapper>
+							<Popconfirm
+								title={t('Are you sure want to remove this customer?')}
+								onConfirm={handleCustomerDelete}
+								placement="topRight"
+								okText={t('Delete')}
+								okType="danger"
+							>
+								<Button icon={<DeleteOutlined />} loading={deleteLoading}>
+									{t('Delete')}
+								</Button>
+							</Popconfirm>
+						</OrderActionsWrapper>
+					</Row>
+				</Col>
+			</Row>
 			<DetailDescription
 				createdAt={data.getCustomer.createdAt}
 				createdByName={data.getCustomer.createdBy.name}

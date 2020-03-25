@@ -42,3 +42,11 @@ export const UPDATE_CUSTOMER = gql`
 	}
 	${CUSTOMER_FRAGMENT}
 `;
+
+export const DELETE_CUSTOMER = gql`
+	mutation DeleteCustomer($id: ID!) {
+		deleteCustomer(id: $id) {
+			id
+		}
+	}
+`;

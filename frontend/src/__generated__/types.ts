@@ -100,6 +100,28 @@ export interface UpdateCustomerVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: DeleteCustomer
+// ====================================================
+
+export interface DeleteCustomer_deleteCustomer {
+  __typename: "Customer";
+  id: string;
+}
+
+export interface DeleteCustomer {
+  deleteCustomer: DeleteCustomer_deleteCustomer;
+}
+
+export interface DeleteCustomerVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetOrder
 // ====================================================
 
