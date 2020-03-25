@@ -20,7 +20,15 @@ const StyledSubName = styled.span`
 	opacity: 0.5;
 `;
 
-export const CustomerPicker: React.FC = () => {
+export type CustomerOption = {
+	id: string;
+	name: string | null;
+	identificationNumber: string | null;
+};
+
+export const CustomerPicker: React.FC<{ extraCustomer: CustomerOption | null }> = ({
+	extraCustomer,
+}) => {
 	const { t } = useTranslation();
 	const [{ value }, { touched, error }, { setValue }] = useField('customerId');
 	const errorMessage = touched && error;
@@ -40,6 +48,19 @@ export const CustomerPicker: React.FC = () => {
 	const debouncedSearchHandler = debounce(searchHandler, 500);
 
 	const customers = data?.getAllCustomers.items ?? [];
+
+	const renderCustomerOption = (customer: CustomerOption) => {
+		return (
+			<Select.Option key={customer.id} value={customer.id}>
+				<UserOutlined style={{ marginRight: 5 }}></UserOutlined>
+				<span>{customer.name}</span>{' '}
+				{customer.identificationNumber && (
+					<StyledSubName>{customer.identificationNumber}</StyledSubName>
+				)}
+			</Select.Option>
+		);
+	};
+
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>
 			<StyledLabel>{t('Customer')}</StyledLabel>
@@ -54,15 +75,8 @@ export const CustomerPicker: React.FC = () => {
 				allowClear
 				notFoundContent={t('Not found')}
 			>
-				{customers.map((customer) => (
-					<Select.Option key={customer.id} value={customer.id}>
-						<UserOutlined style={{ marginRight: 5 }}></UserOutlined>
-						<span>{customer.name}</span>{' '}
-						{customer.identificationNumber && (
-							<StyledSubName>{customer.identificationNumber}</StyledSubName>
-						)}
-					</Select.Option>
-				))}
+				{extraCustomer && renderCustomerOption(extraCustomer)}
+				{customers.map(renderCustomerOption)}
 			</Select>
 		</StyledFormItem>
 	);

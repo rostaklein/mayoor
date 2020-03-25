@@ -11,7 +11,7 @@ import { CURRENCY_SUFFIX } from '../../config';
 import { useCurrencyFormatter } from '../../locales/useCurrencyFormatter';
 import { OrderStatus } from '../../__generated__/types';
 
-import { CustomerPicker } from './CustomerPicker';
+import { CustomerPicker, CustomerOption } from './CustomerPicker';
 import { OrderItemField } from './OrderItemField/OrderItemField';
 import { getOrderValidationSchema } from './validateOrder';
 import { StyledOrderNumberWrapper, OrderSummaryWrapper } from './OrderForm.styles';
@@ -45,6 +45,7 @@ type Props = {
 	initialValues: OrderFormValues;
 	onSubmit: (values: OrderFormValues, resetForm: () => void) => Promise<void>;
 	submitButton: React.ReactNode;
+	extraCustomer: CustomerOption | null;
 };
 
 export const OrderForm: React.FC<Props> = (props) => {
@@ -75,7 +76,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 							</StyledOrderNumberWrapper>
 						</Col>
 						<Col lg={7}>
-							<CustomerPicker />
+							<CustomerPicker extraCustomer={props.extraCustomer} />
 						</Col>
 						<Col lg={6}>
 							<OrderStatusSelect />

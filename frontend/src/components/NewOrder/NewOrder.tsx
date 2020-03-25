@@ -89,6 +89,7 @@ export const NewOrder: React.FC = () => {
 			<OrderForm
 				initialValues={getInitialValues(newOrderNumber)}
 				onSubmit={submitHandler}
+				extraCustomer={null}
 				submitButton={
 					<Button
 						type="primary"

@@ -73,6 +73,7 @@ export const DetailOrder: React.FC = () => {
 				<OrderForm
 					initialValues={initialValues}
 					onSubmit={submitHandler}
+					extraCustomer={data?.getOrder?.customer ?? null}
 					submitButton={
 						<Button
 							type="primary"
