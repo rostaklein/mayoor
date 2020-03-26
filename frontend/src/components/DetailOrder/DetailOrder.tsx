@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
 import { useParams, useHistory } from 'react-router-dom';
-import { Button, message, Row, Col, Popconfirm } from 'antd';
+import { Button, message, Row, Col, Popconfirm, Skeleton } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
 import {
@@ -95,6 +95,14 @@ export const DetailOrder: React.FC = () => {
 			message.error(t('order_delete_fail'));
 		}
 	};
+
+	if (!data || !data.getOrderByNumber) {
+		return (
+			<PageTitle>
+				<Skeleton active />
+			</PageTitle>
+		);
+	}
 
 	return (
 		<>

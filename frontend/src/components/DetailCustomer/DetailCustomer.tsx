@@ -96,7 +96,11 @@ export const DetailCustomer: React.FC = () => {
 	};
 
 	if (!data || !data.getCustomer) {
-		return <Skeleton active />;
+		return (
+			<PageTitle>
+				<Skeleton active />
+			</PageTitle>
+		);
 	}
 
 	return (
