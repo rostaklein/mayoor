@@ -213,11 +213,11 @@ input UpdateCustomerInput {
 
 input UpdateOrderInput {
   customerId: ID
-  items: [UpdateOrderItemInput!]!
+  items: [UpdateOrderItemInput!]
   note: String
   status: OrderStatus
-  totalPrice: Float!
-  totalTax: Float!
+  totalPrice: Float
+  totalTax: Float
   urgency: Int
 }
 

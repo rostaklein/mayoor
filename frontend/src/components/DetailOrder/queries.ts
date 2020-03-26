@@ -24,6 +24,7 @@ export const ORDER_FRAGMENT = gql`
 			id
 			material {
 				id
+				name
 			}
 			name
 			width

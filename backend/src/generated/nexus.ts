@@ -89,11 +89,11 @@ export interface NexusGenInputs {
   }
   UpdateOrderInput: { // input type
     customerId?: string | null; // ID
-    items: NexusGenInputs['UpdateOrderItemInput'][]; // [UpdateOrderItemInput!]!
+    items?: NexusGenInputs['UpdateOrderItemInput'][] | null; // [UpdateOrderItemInput!]
     note?: string | null; // String
     status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
+    totalPrice?: number | null; // Float
+    totalTax?: number | null; // Float
     urgency?: number | null; // Int
   }
   UpdateOrderItemInput: { // input type

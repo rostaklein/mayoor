@@ -16,6 +16,7 @@ import { ListOrders } from '../ListOrders/ListOrders';
 import { DetailOrder } from '../DetailOrder/DetailOrder';
 import { ListOrdersProduction } from '../ListOrdersProduction/ListOrdersProduction';
 import { OrderStatus } from '../../__generated__/types';
+import { DetailOrderProduction } from '../DetailOrderProduction/DetailOrderProduction';
 
 import * as S from './MainWrapper.styles';
 
@@ -58,7 +59,7 @@ export const MainWrapper: React.FC = () => {
 		{
 			path: '/orders/:id/print',
 			title: t('Order detail'),
-			Component: <>Order to print</>,
+			Component: <DetailOrderProduction />,
 		},
 		{
 			path: '/orders/:id',

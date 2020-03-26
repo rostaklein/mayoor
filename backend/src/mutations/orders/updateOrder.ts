@@ -1,7 +1,6 @@
 import { arg, inputObjectType, idArg, mutationField } from 'nexus';
 import { ApolloError } from 'apollo-server-express';
 import { OrderStatus } from '../../types';
-import { text } from 'express';
 import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
 
 export const UpdateOrderItemInput = inputObjectType({
@@ -21,14 +20,13 @@ export const UpdateOrderItemInput = inputObjectType({
 export const UpdateOrderInput = inputObjectType({
   name: 'UpdateOrderInput',
   definition(t) {
-    t.float('totalPrice', { nullable: false });
-    t.float('totalTax', { nullable: false });
+    t.float('totalPrice');
+    t.float('totalTax');
     t.string('note');
     t.id('customerId');
     t.field('items', {
       type: UpdateOrderItemInput,
       list: true,
-      nullable: false,
     });
     t.field('status', { type: OrderStatus });
     t.int('urgency');
@@ -83,10 +81,10 @@ export const UpdateOrder = mutationField('updateOrder', {
         id,
       },
       data: {
-        totalPrice: input.totalPrice || 0,
-        totalTax: input.totalTax || 0,
+        totalPrice: input.totalPrice || undefined,
+        totalTax: input.totalTax || undefined,
         note: input.note,
-        status: input.status || 'NEW',
+        status: input.status || undefined,
         urgency: input.urgency,
         customer: input.customerId
           ? {

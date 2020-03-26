@@ -141,6 +141,7 @@ export interface GetOrder_getOrderByNumber_createdBy {
 export interface GetOrder_getOrderByNumber_items_material {
   __typename: "Material";
   id: string;
+  name: string;
 }
 
 export interface GetOrder_getOrderByNumber_items {
@@ -204,6 +205,7 @@ export interface UpdateOrder_updateOrder_createdBy {
 export interface UpdateOrder_updateOrder_items_material {
   __typename: "Material";
   id: string;
+  name: string;
 }
 
 export interface UpdateOrder_updateOrder_items {
@@ -720,6 +722,7 @@ export interface OrderFragment_createdBy {
 export interface OrderFragment_items_material {
   __typename: "Material";
   id: string;
+  name: string;
 }
 
 export interface OrderFragment_items {
@@ -858,11 +861,11 @@ export interface UpdateCustomerInput {
 
 export interface UpdateOrderInput {
   customerId?: string | null;
-  items: UpdateOrderItemInput[];
+  items?: UpdateOrderItemInput[] | null;
   note?: string | null;
   status?: OrderStatus | null;
-  totalPrice: number;
-  totalTax: number;
+  totalPrice?: number | null;
+  totalTax?: number | null;
   urgency?: number | null;
 }
 
