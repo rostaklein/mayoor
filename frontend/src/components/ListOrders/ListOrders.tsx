@@ -44,7 +44,7 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 		},
 	},
 	{
-		title: t('Customer name'),
+		title: t('Customer'),
 		width: 150,
 		ellipsis: true,
 		dataIndex: 'customer.name',

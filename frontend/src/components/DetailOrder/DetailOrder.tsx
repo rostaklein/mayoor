@@ -138,6 +138,7 @@ export const DetailOrder: React.FC = () => {
 					initialValues={initialValues}
 					onSubmit={submitHandler}
 					extraCustomer={data?.getOrderByNumber?.customer ?? null}
+					isNumberEditable={false}
 					submitButton={
 						<Button
 							type="primary"

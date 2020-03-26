@@ -45,6 +45,7 @@ type Props = {
 	initialValues: OrderFormValues;
 	onSubmit: (values: OrderFormValues, resetForm: () => void) => Promise<void>;
 	submitButton: React.ReactNode;
+	isNumberEditable: boolean;
 	extraCustomer: CustomerOption | null;
 };
 
@@ -72,6 +73,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 									icon={<NumberOutlined />}
 									withLabel
 									type="number"
+									disabled={!props.isNumberEditable}
 								/>
 							</StyledOrderNumberWrapper>
 						</Col>

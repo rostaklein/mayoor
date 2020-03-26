@@ -90,6 +90,7 @@ export const NewOrder: React.FC = () => {
 				initialValues={getInitialValues(newOrderNumber)}
 				onSubmit={submitHandler}
 				extraCustomer={null}
+				isNumberEditable={true}
 				submitButton={
 					<Button
 						type="primary"
