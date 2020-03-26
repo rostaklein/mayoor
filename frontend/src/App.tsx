@@ -3,7 +3,7 @@ import { useQuery, ApolloProvider } from 'react-apollo';
 import { hot } from 'react-hot-loader/root';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Spin, Alert, message } from 'antd';
+import { Alert, message } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';

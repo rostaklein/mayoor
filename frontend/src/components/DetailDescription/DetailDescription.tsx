@@ -28,18 +28,18 @@ export const DetailDescription: React.FC<Props> = ({ createdByName, createdAt, u
 	const { f } = useDateFormatter();
 	return (
 		<StyledDescriptions>
-			<Descriptions.Item label={t('Created By')}>
+			<Descriptions.Item label={t('Created By')} key="createdBy">
 				<UserOutlined />
 				{createdByName}
 			</Descriptions.Item>
-			<Descriptions.Item label={t('Created At')}>
+			<Descriptions.Item label={t('Created At')} key="createdAt">
 				{createdAt && (
 					<>
 						<CalendarOutlined /> {f(createdAt, 'datetime')}
 					</>
 				)}
 			</Descriptions.Item>
-			<Descriptions.Item label={t('Last Updated At')}>
+			<Descriptions.Item label={t('Last Updated At')} key="lastUpdatedAt">
 				{updatedAt && (
 					<>
 						<CalendarOutlined /> {f(updatedAt, 'datetime')}

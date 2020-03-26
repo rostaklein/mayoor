@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField, FieldArrayRenderProps } from 'formik';
-import { Row, Col, Button, Popconfirm, Tooltip } from 'antd';
+import { Col, Button, Popconfirm, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { DeleteOutlined, CalculatorOutlined } from '@ant-design/icons';
 
@@ -29,7 +29,7 @@ type FieldProps = {
 export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) => {
 	const { t } = useTranslation();
 	const itemName = `items.${index}`;
-	const [{ value }, _, { setValue }] = useField<OrderFormItem>(itemName);
+	const [{ value }, , { setValue }] = useField<OrderFormItem>(itemName);
 	const calculateClickHandler = () => {
 		const allMaterials = client.readQuery<GetAllMaterials>({ query: GET_ALL_MATERIALS });
 		const material = allMaterials?.getAllMaterials.find(({ id }) => id === value.materialId);

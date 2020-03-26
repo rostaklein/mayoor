@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-apollo';
 
-import { StyledFormLabel, StyledLabel, StyledDivider } from '../FormItem/Form.styles';
+import { StyledLabel, StyledDivider } from '../FormItem/Form.styles';
 import {
 	GetAllMaterials,
 	CreateMaterial,

@@ -4,7 +4,6 @@ import { Table, Row, Col, Empty } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
 import { PaginationConfig } from 'antd/lib/pagination';
 
-import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { StyledTableWrapper, StyledSearch } from '../SharedStyles/Table.styles';
 
 const PAGE_SIZE = 10;

@@ -11,13 +11,11 @@ export const UrgentSlider: React.FC = () => {
 	const errorMessage = touched && error;
 	const status = errorMessage ? 'error' : '';
 
-	const marks = {
-		0: t('Not Urgent'),
-		1: t('Normal'),
-		2: t('Hurry'),
-		3: t('Urgent'),
-		4: t('Very Urgent'),
-	};
+	const urgentOptions = [t('Not Urgent'), t('Normal'), t('Hurry'), t('Urgent'), t('Very Urgent')];
+	const marks = urgentOptions.reduce<{ [key: number]: string | undefined }>((acc, curr, i) => {
+		acc[i] = value === i ? curr : undefined;
+		return acc;
+	}, {});
 
 	return (
 		<StyledFormItem validateStatus={status} help={errorMessage}>

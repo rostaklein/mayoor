@@ -16,7 +16,7 @@ import {
 	DeleteMaterial,
 	DeleteMaterialVariables,
 } from '../../__generated__/types';
-import { StyledForm, StyledFormLabel, StyledLabel } from '../FormItem/Form.styles';
+import { StyledForm, StyledLabel } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
 
 import { GET_ALL_MATERIALS, UPDATE_MATERIAL, DELETE_MATERIAL } from './queries';
