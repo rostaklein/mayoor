@@ -111,6 +111,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   OrderByArg: prisma.OrderByArg
   OrderStatus: "DONE" | "NEW" | "READY_TO_PRINT" | "TO_BE_SHIPPED" | "WAITING_FOR_CALCULATION" | "WAITING_FOR_PRODUCTION"
+  ProductionLogType: "PRINT" | "PRODUCTION"
 }
 
 export interface NexusGenRootTypes {
@@ -140,6 +141,7 @@ export interface NexusGenRootTypes {
     items: NexusGenRootTypes['Order'][]; // [Order!]!
     totalCount: number; // Int!
   }
+  ProductionLog: prisma.ProductionLog;
   Query: {};
   User: prisma.User;
   String: string;
@@ -164,6 +166,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UpdateOrderItemInput: NexusGenInputs['UpdateOrderItemInput'];
   OrderByArg: NexusGenEnums['OrderByArg'];
   OrderStatus: NexusGenEnums['OrderStatus'];
+  ProductionLogType: NexusGenEnums['ProductionLogType'];
 }
 
 export interface NexusGenFieldTypes {
@@ -253,6 +256,7 @@ export interface NexusGenFieldTypes {
     material: NexusGenRootTypes['Material'] | null; // Material
     name: string | null; // String
     pieces: number | null; // Int
+    productionLog: NexusGenRootTypes['ProductionLog'][]; // [ProductionLog!]!
     totalPrice: number; // Float!
     totalTax: number; // Float!
     updatedAt: any; // DateTime!
@@ -261,6 +265,14 @@ export interface NexusGenFieldTypes {
   OrderPaginated: { // field return type
     items: NexusGenRootTypes['Order'][]; // [Order!]!
     totalCount: number; // Int!
+  }
+  ProductionLog: { // field return type
+    action: NexusGenEnums['ProductionLogType']; // ProductionLogType!
+    createdAt: any; // DateTime!
+    createdBy: NexusGenRootTypes['User']; // User!
+    id: string; // String!
+    orderItem: NexusGenRootTypes['OrderItem']; // OrderItem!
+    pieces: number; // Int!
   }
   Query: { // field return type
     getAllCustomers: NexusGenRootTypes['CustomerPaginated']; // CustomerPaginated!
@@ -384,11 +396,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "Query" | "User";
+export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "ProductionLog" | "Query" | "User";
 
 export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "OrderItemsOrderByInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput";
 
-export type NexusGenEnumNames = "OrderByArg" | "OrderStatus";
+export type NexusGenEnumNames = "OrderByArg" | "OrderStatus" | "ProductionLogType";
 
 export type NexusGenInterfaceNames = never;
 

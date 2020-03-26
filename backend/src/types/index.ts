@@ -90,6 +90,15 @@ export const OrderItem = objectType({
     t.model.createdBy();
     t.model.createdAt();
     t.model.updatedAt();
+    t.field('productionLog', {
+      type: 'ProductionLog',
+      list: true,
+      resolve: (item, _, ctx) => {
+        return ctx.prisma.productionLog.findMany({
+          where: { orderItem: { id: item.id } },
+        });
+      },
+    });
   },
 });
 
@@ -115,5 +124,25 @@ export const UpdateAddressInput = inputObjectType({
     t.string('state');
     t.string('postNumber');
     t.boolean('isPrimary');
+  },
+});
+
+export const ProductionLogType = enumType({
+  name: 'ProductionLogType',
+  members: ['PRINT', 'PRODUCTION'],
+});
+
+export const ProductionLog = objectType({
+  name: 'ProductionLog',
+  definition(t) {
+    t.model.id();
+    t.model.orderItem();
+    t.field('action', {
+      type: ProductionLogType,
+      resolve: a => a.action as NexusGenEnums['ProductionLogType'],
+    });
+    t.model.pieces();
+    t.model.createdAt();
+    t.model.createdBy();
   },
 });

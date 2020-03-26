@@ -52,7 +52,7 @@ export const UpdateOrder = mutationField('updateOrder', {
       where: { order: { id } },
     });
 
-    const inputItemIds = input.items.map(({ id }) => id);
+    const inputItemIds = input.items?.map(({ id }) => id) ?? [];
     const itemsToDelete = orderItems.filter(
       ({ id }) => !inputItemIds.includes(id),
     );
@@ -61,7 +61,7 @@ export const UpdateOrder = mutationField('updateOrder', {
     );
 
     itemsToUpdate.forEach(async itemToUpdate => {
-      const updateData = input.items.find(
+      const updateData = input.items?.find(
         inputItem => inputItem.id === itemToUpdate.id,
       );
 
@@ -74,7 +74,7 @@ export const UpdateOrder = mutationField('updateOrder', {
       }
     });
 
-    const itemsToCreate = input.items.filter(({ id }) => !id);
+    const itemsToCreate = input.items?.filter(({ id }) => !id);
 
     return ctx.prisma.order.update({
       where: {

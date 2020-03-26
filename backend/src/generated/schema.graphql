@@ -138,6 +138,7 @@ type OrderItem {
   material: Material
   name: String
   pieces: Int
+  productionLog: [ProductionLog!]!
   totalPrice: Float!
   totalTax: Float!
   updatedAt: DateTime!
@@ -174,6 +175,20 @@ enum OrderStatus {
   TO_BE_SHIPPED
   WAITING_FOR_CALCULATION
   WAITING_FOR_PRODUCTION
+}
+
+type ProductionLog {
+  action: ProductionLogType!
+  createdAt: DateTime!
+  createdBy: User!
+  id: String!
+  orderItem: OrderItem!
+  pieces: Int!
+}
+
+enum ProductionLogType {
+  PRINT
+  PRODUCTION
 }
 
 type Query {
