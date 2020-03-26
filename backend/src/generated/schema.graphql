@@ -84,6 +84,7 @@ type Material {
 
 type Mutation {
   addOrderItem(input: OrderItemInput!, orderId: ID): OrderItem!
+  addProductionLog(action: ProductionLogType!, orderItemId: ID, pieces: Int!): OrderItem!
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createMaterial(name: String!, price: Float!): Material!

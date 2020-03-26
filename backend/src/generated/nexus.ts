@@ -219,6 +219,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addOrderItem: NexusGenRootTypes['OrderItem']; // OrderItem!
+    addProductionLog: NexusGenRootTypes['OrderItem']; // OrderItem!
     changePassword: NexusGenRootTypes['User']; // User!
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
     createMaterial: NexusGenRootTypes['Material']; // Material!
@@ -307,6 +308,11 @@ export interface NexusGenArgTypes {
     addOrderItem: { // args
       input: NexusGenInputs['OrderItemInput']; // OrderItemInput!
       orderId?: string | null; // ID
+    }
+    addProductionLog: { // args
+      action: NexusGenEnums['ProductionLogType']; // ProductionLogType!
+      orderItemId?: string | null; // ID
+      pieces: number; // Int!
     }
     changePassword: { // args
       newPassword: string; // String!

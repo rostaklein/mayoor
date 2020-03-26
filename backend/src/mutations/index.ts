@@ -14,3 +14,5 @@ export * from './customers/deleteCustomer';
 export * from './material/createMaterial';
 export * from './material/updateMaterial';
 export * from './material/deleteMaterial';
+
+export * from './productionLog/addProductionLog';
