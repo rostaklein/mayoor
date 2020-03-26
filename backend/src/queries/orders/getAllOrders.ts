@@ -14,8 +14,13 @@ export const GetAllOrders = queryField('getAllOrders', {
       },
       orderBy: { createdAt: 'desc' },
     });
+    const allMatchingOrders = await ctx.prisma.order.findMany({
+      where: {
+        status,
+      },
+    });
     return {
-      totalCount: await ctx.prisma.order.count(),
+      totalCount: allMatchingOrders.length,
       items: orders,
     };
   },
