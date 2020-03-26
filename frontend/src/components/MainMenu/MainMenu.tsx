@@ -8,6 +8,8 @@ import {
 	UserAddOutlined,
 	TeamOutlined,
 	FileTextOutlined,
+	BgColorsOutlined,
+	HighlightOutlined,
 } from '@ant-design/icons';
 
 import { Colors } from '../../themeVariables';
@@ -42,16 +44,21 @@ export const MainMenu: React.FC = () => {
 		<StyledMenu>
 			<li>
 				<CategoryName>{t('Orders')}</CategoryName>
-				<LinkItem
-					icon={<SyncOutlined />}
-					name={t('In Progress')}
-					to={'/orders/inprogress'}
-				/>
 				<LinkItem icon={<PlusCircleOutlined />} name={t('Add order')} to={'/orders/new'} />
 				<LinkItem
 					icon={<FileSearchOutlined />}
 					name={t('List orders')}
 					to={'/orders/list'}
+				/>
+				<LinkItem
+					icon={<BgColorsOutlined />}
+					name={t('To be printed')}
+					to={'/orders/print'}
+				/>
+				<LinkItem
+					icon={<HighlightOutlined />}
+					name={t('In Production')}
+					to={'/orders/production'}
 				/>
 			</li>
 			<li>

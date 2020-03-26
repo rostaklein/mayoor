@@ -34,6 +34,15 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 		},
 	},
 	{
+		title: t('Status'),
+		dataIndex: 'status',
+		width: 160,
+		render: (_, record) => {
+			const statuses = getOrderStatuses(t);
+			return statuses[record.status];
+		},
+	},
+	{
 		title: t('Customer name'),
 		width: 150,
 		ellipsis: true,

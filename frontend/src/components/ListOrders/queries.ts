@@ -7,6 +7,7 @@ export const GET_ALL_ORDERS_QUERY = gql`
 			items {
 				id
 				number
+				status
 				customer {
 					id
 					name

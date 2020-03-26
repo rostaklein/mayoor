@@ -331,6 +331,7 @@ export interface GetAllOrders_getAllOrders_items {
   __typename: "Order";
   id: string;
   number: number;
+  status: OrderStatus;
   customer: GetAllOrders_getAllOrders_items_customer | null;
   createdAt: any;
   totalPrice: number;
