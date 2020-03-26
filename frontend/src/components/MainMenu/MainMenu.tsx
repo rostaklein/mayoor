@@ -57,7 +57,7 @@ export const MainMenu: React.FC = () => {
 				/>
 				<LinkItem
 					icon={<HighlightOutlined />}
-					name={t('In Production')}
+					name={t('Waiting for production')}
 					to={'/orders/production'}
 				/>
 			</li>

@@ -4,15 +4,21 @@ import { OrderStatus } from '../../types';
 
 export const GetAllOrders = queryField('getAllOrders', {
   type: getPaginatedObjectType('Order'),
-  args: { ...paginationArgs, status: arg({ type: OrderStatus }) },
+  args: {
+    ...paginationArgs,
+    status: arg({ type: OrderStatus }),
+    orderByUrgency: 'OrderByArg',
+  },
   nullable: false,
-  resolve: async (_parent, { status, ...args }, ctx) => {
+  resolve: async (_parent, { status, orderByUrgency, ...args }, ctx) => {
     const orders = await ctx.prisma.order.findMany({
       ...args,
       where: {
         status,
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: orderByUrgency
+        ? { urgency: orderByUrgency }
+        : { createdAt: 'desc' },
     });
     const allMatchingOrders = await ctx.prisma.order.findMany({
       where: {

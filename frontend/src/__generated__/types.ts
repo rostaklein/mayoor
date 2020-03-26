@@ -332,6 +332,7 @@ export interface GetAllOrders_getAllOrders_items {
   id: string;
   number: number;
   status: OrderStatus;
+  urgency: number;
   customer: GetAllOrders_getAllOrders_items_customer | null;
   createdAt: any;
   totalPrice: number;
@@ -354,6 +355,7 @@ export interface GetAllOrdersVariables {
   first?: number | null;
   skip?: number | null;
   status?: OrderStatus | null;
+  orderByUrgency?: OrderByArg | null;
 }
 
 /* tslint:disable */
@@ -775,6 +777,11 @@ export interface CustomerFragment {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum OrderByArg {
+  asc = "asc",
+  desc = "desc",
+}
 
 export enum OrderStatus {
   DONE = "DONE",

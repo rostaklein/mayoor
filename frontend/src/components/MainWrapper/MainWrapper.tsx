@@ -14,6 +14,8 @@ import { MaterialEdit } from '../Material/MaterialEdit';
 import { NewOrder } from '../NewOrder/NewOrder';
 import { ListOrders } from '../ListOrders/ListOrders';
 import { DetailOrder } from '../DetailOrder/DetailOrder';
+import { ListOrdersProduction } from '../ListOrdersProduction/ListOrdersProduction';
+import { OrderStatus } from '../../__generated__/types';
 
 import * as S from './MainWrapper.styles';
 
@@ -31,6 +33,33 @@ export const MainWrapper: React.FC = () => {
 		{ path: '/orders/inprogress', title: t('In Progress') },
 		{ path: '/orders/new', title: t('Add order'), Component: <NewOrder /> },
 		{ path: '/orders/list', title: t('List orders'), Component: <ListOrders /> },
+		{
+			path: '/orders/print',
+			title: t('Orders to be printed'),
+			Component: (
+				<ListOrdersProduction
+					status={OrderStatus.READY_TO_PRINT}
+					title={t('To be printed')}
+					linkSuffix="print"
+				/>
+			),
+		},
+		{
+			path: '/orders/production',
+			title: t('Waiting for production'),
+			Component: (
+				<ListOrdersProduction
+					status={OrderStatus.WAITING_FOR_PRODUCTION}
+					title={t('Waiting for production')}
+					linkSuffix="production"
+				/>
+			),
+		},
+		{
+			path: '/orders/:id/print',
+			title: t('Order detail'),
+			Component: <>Order to print</>,
+		},
 		{
 			path: '/orders/:id',
 			title: t('Order detail'),

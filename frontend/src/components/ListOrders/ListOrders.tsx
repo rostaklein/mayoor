@@ -21,6 +21,7 @@ import { getOrderStatuses } from '../OrderForm/OrderStatusSelect';
 import { StyledFormItem, StyledLabel } from '../FormItem/Form.styles';
 
 import { GET_ALL_ORDERS_QUERY } from './queries';
+import { ItemsInfoRow } from './ItemsInfoRow';
 
 const PAGE_SIZE = 10;
 
@@ -54,16 +55,7 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 		title: t('Items info'),
 		ellipsis: true,
 		dataIndex: 'items',
-		render: (_, { items, totalSize }) => {
-			const allMaterialNames = items.map((item) => item.material?.name);
-			const distinctMaterials = [...new Set(allMaterialNames)].filter((item) => item);
-			return (
-				<>
-					{totalSize} m<sup>2</sup>
-					{distinctMaterials.length > 0 && `, ${distinctMaterials.join(', ')}`}
-				</>
-			);
-		},
+		render: (_, { items, totalSize }) => <ItemsInfoRow items={items} totalSize={totalSize} />,
 	},
 	{
 		title: t('Created at'),

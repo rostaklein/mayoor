@@ -179,7 +179,7 @@ enum OrderStatus {
 type Query {
   getAllCustomers(first: Int, search: String, skip: Int): CustomerPaginated!
   getAllMaterials: [Material!]!
-  getAllOrders(first: Int, skip: Int, status: OrderStatus): OrderPaginated!
+  getAllOrders(first: Int, orderByUrgency: OrderByArg, skip: Int, status: OrderStatus): OrderPaginated!
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   getHighestOrderNumber: Int

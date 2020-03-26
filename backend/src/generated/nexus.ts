@@ -360,6 +360,7 @@ export interface NexusGenArgTypes {
     }
     getAllOrders: { // args
       first?: number | null; // Int
+      orderByUrgency?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
       skip?: number | null; // Int
       status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
     }
