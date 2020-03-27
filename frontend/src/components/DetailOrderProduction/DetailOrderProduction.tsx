@@ -3,15 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
 import { useParams, useHistory } from 'react-router-dom';
 import { Button, message, Row, Col, Popconfirm, Skeleton } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PrinterOutlined } from '@ant-design/icons';
 
 import {
 	GetOrder,
 	GetOrderVariables,
 	UpdateOrder,
 	UpdateOrderVariables,
-	DeleteOrder,
-	DeleteOrderVariables,
+	AddProductionLog,
+	AddProductionLogVariables,
+	ProductionLogType,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { OrderForm, OrderFormValues } from '../OrderForm/OrderForm';
@@ -22,8 +23,18 @@ import { GET_ORDER, UPDATE_ORDER } from '../DetailOrder/queries';
 import { StyledLabel } from '../FormItem/Form.styles';
 
 import { OrderWrapper } from './DetailOrderProduction.styles';
+import { ADD_PRODUCTION_LOG_MUTATION } from './queries';
+import { ProductionRow } from './ProductionRow';
 
-export const DetailOrderProduction: React.FC = () => {
+type Props = {
+	productionLogType: ProductionLogType;
+	productionButtonText: string;
+};
+
+export const DetailOrderProduction: React.FC<Props> = ({
+	productionLogType,
+	productionButtonText,
+}) => {
 	const routeParams = useParams<{ id: string }>();
 	const { t } = useTranslation();
 
@@ -32,6 +43,10 @@ export const DetailOrderProduction: React.FC = () => {
 	});
 
 	const [updateOrder, { loading }] = useMutation<UpdateOrder, UpdateOrderVariables>(UPDATE_ORDER);
+	const [addProductionLog, { loading: productionLogLoading }] = useMutation<
+		AddProductionLog,
+		AddProductionLogVariables
+	>(ADD_PRODUCTION_LOG_MUTATION);
 
 	const updateNoteHandler = async (note: string) => {
 		const id = data?.getOrderByNumber?.id;
@@ -52,6 +67,10 @@ export const DetailOrderProduction: React.FC = () => {
 			console.error(err);
 			message.error(t('note_update_fail'));
 		}
+	};
+
+	const productionButtonHandler = (pieces: number, orderItemId: string) => {
+		addProductionLog({ variables: { orderItemId, pieces, action: productionLogType } });
 	};
 
 	if (!data || !data.getOrderByNumber) {
@@ -79,7 +98,7 @@ export const DetailOrderProduction: React.FC = () => {
 					<Col sm={4}>
 						<StyledLabel>{t('Material')}</StyledLabel>
 					</Col>
-					<Col sm={7}>
+					<Col sm={4}>
 						<StyledLabel>{t('Name')}</StyledLabel>
 					</Col>
 					<Col sm={2}>
@@ -91,17 +110,21 @@ export const DetailOrderProduction: React.FC = () => {
 					<Col sm={2}>
 						<StyledLabel>{t('Pieces')}</StyledLabel>
 					</Col>
-					<Col sm={7}></Col>
+					<Col sm={2}>
+						<StyledLabel>{t('Printed pcs')}</StyledLabel>
+					</Col>
+					<Col sm={2}>
+						<StyledLabel>{t('Production done pcs')}</StyledLabel>
+					</Col>
+					<Col sm={5}></Col>
 				</Row>
 				{data.getOrderByNumber.items.map((item) => (
-					<Row gutter={6} key={item.id}>
-						<Col sm={4}>{item.material?.name}</Col>
-						<Col sm={7}>{item.name}</Col>
-						<Col sm={2}>{item.width} m</Col>
-						<Col sm={2}>{item.height} m</Col>
-						<Col sm={2}>{item.pieces}</Col>
-						<Col sm={7}></Col>
-					</Row>
+					<ProductionRow
+						key={item.id}
+						item={item}
+						onProductionClick={productionButtonHandler}
+						productionButtonText={productionButtonText}
+					/>
 				))}
 			</OrderWrapper>
 		</>

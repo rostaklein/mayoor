@@ -273,6 +273,46 @@ export interface DeleteOrderVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AddProductionLog
+// ====================================================
+
+export interface AddProductionLog_addProductionLog_productionLog_createdBy {
+  __typename: "User";
+  id: string;
+  name: string | null;
+}
+
+export interface AddProductionLog_addProductionLog_productionLog {
+  __typename: "ProductionLog";
+  id: string;
+  action: ProductionLogType;
+  pieces: number;
+  createdAt: any;
+  createdBy: AddProductionLog_addProductionLog_productionLog_createdBy;
+}
+
+export interface AddProductionLog_addProductionLog {
+  __typename: "OrderItem";
+  id: string;
+  productionLog: AddProductionLog_addProductionLog_productionLog[];
+}
+
+export interface AddProductionLog {
+  addProductionLog: AddProductionLog_addProductionLog;
+}
+
+export interface AddProductionLogVariables {
+  orderItemId: string;
+  action: ProductionLogType;
+  pieces: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetAllCustomers
 // ====================================================
 
@@ -759,6 +799,30 @@ export interface OrderFragment {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: ProductionLogFragment
+// ====================================================
+
+export interface ProductionLogFragment_createdBy {
+  __typename: "User";
+  id: string;
+  name: string | null;
+}
+
+export interface ProductionLogFragment {
+  __typename: "ProductionLog";
+  id: string;
+  action: ProductionLogType;
+  pieces: number;
+  createdAt: any;
+  createdBy: ProductionLogFragment_createdBy;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: CustomerFragment
 // ====================================================
 
@@ -793,6 +857,11 @@ export enum OrderStatus {
   TO_BE_SHIPPED = "TO_BE_SHIPPED",
   WAITING_FOR_CALCULATION = "WAITING_FOR_CALCULATION",
   WAITING_FOR_PRODUCTION = "WAITING_FOR_PRODUCTION",
+}
+
+export enum ProductionLogType {
+  PRINT = "PRINT",
+  PRODUCTION = "PRODUCTION",
 }
 
 export interface AddressInput {
