@@ -386,6 +386,73 @@ export interface UpdateOrderNoteVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UpdateOrderStatus
+// ====================================================
+
+export interface UpdateOrderStatus_updateOrderStatus_customer {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+}
+
+export interface UpdateOrderStatus_updateOrderStatus_createdBy {
+  __typename: "User";
+  id: string;
+  name: string | null;
+}
+
+export interface UpdateOrderStatus_updateOrderStatus_items_material {
+  __typename: "Material";
+  id: string;
+  name: string;
+}
+
+export interface UpdateOrderStatus_updateOrderStatus_items {
+  __typename: "OrderItem";
+  id: string;
+  material: UpdateOrderStatus_updateOrderStatus_items_material | null;
+  name: string | null;
+  width: number | null;
+  height: number | null;
+  pieces: number | null;
+  printedPieces: number;
+  producedPieces: number;
+  totalPrice: number;
+  totalTax: number;
+}
+
+export interface UpdateOrderStatus_updateOrderStatus {
+  __typename: "Order";
+  id: string;
+  number: number;
+  customer: UpdateOrderStatus_updateOrderStatus_customer | null;
+  status: OrderStatus;
+  note: string | null;
+  urgency: number;
+  totalPrice: number;
+  totalTax: number;
+  createdAt: any;
+  updatedAt: any;
+  createdBy: UpdateOrderStatus_updateOrderStatus_createdBy;
+  items: UpdateOrderStatus_updateOrderStatus_items[];
+}
+
+export interface UpdateOrderStatus {
+  updateOrderStatus: UpdateOrderStatus_updateOrderStatus;
+}
+
+export interface UpdateOrderStatusVariables {
+  id: string;
+  status: OrderStatus;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetAllCustomers
 // ====================================================
 

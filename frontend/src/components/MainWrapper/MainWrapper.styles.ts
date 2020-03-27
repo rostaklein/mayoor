@@ -5,6 +5,7 @@ import { Colors } from '../../themeVariables';
 export const BodyWrapper = styled.main`
 	display: flex;
 	height: 100%;
+	min-width: 1024px;
 `;
 
 export const Aside = styled.aside`

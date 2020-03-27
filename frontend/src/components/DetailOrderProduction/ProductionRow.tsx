@@ -24,6 +24,7 @@ export const ProductionRow: React.FC<Props> = ({
 		if (pieces) {
 			onProductionClick(pieces, item.id);
 		}
+		setPieces(undefined);
 	};
 	return (
 		<Row gutter={12} key={item.id} style={{ marginBottom: 10 }}>
@@ -34,8 +35,8 @@ export const ProductionRow: React.FC<Props> = ({
 			<Col sm={2}>{item.pieces}</Col>
 			<Col sm={2}>{item.printedPieces}</Col>
 			<Col sm={2}>{item.producedPieces}</Col>
-			<Col sm={5}>
-				<Row gutter={12}>
+			<Col sm={6}>
+				<Row gutter={12} justify="end">
 					<Col sm={12}>
 						<Input
 							type="number"
@@ -44,10 +45,15 @@ export const ProductionRow: React.FC<Props> = ({
 							min={1}
 							max={item.pieces ?? 1}
 							onChange={(e) => setPieces(Number(e.target.value))}
+							onKeyDown={(e) => e.key === 'Enter' && productionButtonClickHandler()}
 						/>
 					</Col>
 					<Col sm={12}>
-						<Button icon={<PrinterOutlined />} onClick={productionButtonClickHandler}>
+						<Button
+							icon={<PrinterOutlined />}
+							onClick={productionButtonClickHandler}
+							style={{ width: '100%' }}
+						>
 							{productionButtonText}
 						</Button>
 					</Col>

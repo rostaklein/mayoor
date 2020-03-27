@@ -3,25 +3,29 @@ import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
 import { useParams } from 'react-router-dom';
 import { Button, message, Row, Col, Skeleton, Input } from 'antd';
-import { SaveOutlined } from '@ant-design/icons';
+import { SaveOutlined, CheckOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
 import {
 	GetOrder,
 	GetOrderVariables,
 	UpdateOrderNote,
 	UpdateOrderNoteVariables,
+	UpdateOrderStatus,
+	UpdateOrderStatusVariables,
 	AddProductionLog,
 	AddProductionLogVariables,
 	ProductionLogType,
+	OrderStatus,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { DetailDescription } from '../DetailDescription/DetailDescription';
 import { GET_ORDER } from '../DetailOrder/queries';
-import { StyledLabel, StyledFormItem } from '../FormItem/Form.styles';
+import { StyledLabel, StyledFormItem, StyledDivider } from '../FormItem/Form.styles';
 
 import { OrderWrapper } from './DetailOrderProduction.styles';
-import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE } from './queries';
+import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE, UPDATE_ORDER_STATUS } from './queries';
 import { ProductionRow } from './ProductionRow';
+import { UpdateStatusButton } from './UpdateStatusButton';
 
 type Props = {
 	productionLogType: ProductionLogType;
@@ -126,7 +130,7 @@ export const DetailOrderProduction: React.FC<Props> = ({
 						productionButtonText={productionButtonText}
 					/>
 				))}
-				<Row>
+				<Row gutter={32}>
 					<Col sm={12}>
 						<StyledFormItem>
 							<StyledLabel>{t('Note')}</StyledLabel>
@@ -141,6 +145,15 @@ export const DetailOrderProduction: React.FC<Props> = ({
 								{t('Save note')}
 							</Button>
 						</StyledFormItem>
+					</Col>
+					<Col sm={12}>
+						<Row justify="end" style={{ marginTop: 20 }}>
+							<UpdateStatusButton
+								orderId={data.getOrderByNumber.id}
+								productionLogType={productionLogType}
+								orderStatus={data.getOrderByNumber.status}
+							/>
+						</Row>
 					</Col>
 				</Row>
 			</OrderWrapper>

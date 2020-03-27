@@ -98,6 +98,7 @@ type Mutation {
   updateMaterial(id: ID!, name: String, price: Float): Material!
   updateOrder(id: ID, input: UpdateOrderInput!): Order!
   updateOrderNote(id: ID, note: String): Order!
+  updateOrderStatus(id: ID, status: OrderStatus!): Order!
 }
 
 type Order {

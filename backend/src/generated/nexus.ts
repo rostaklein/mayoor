@@ -233,6 +233,7 @@ export interface NexusGenFieldTypes {
     updateMaterial: NexusGenRootTypes['Material']; // Material!
     updateOrder: NexusGenRootTypes['Order']; // Order!
     updateOrderNote: NexusGenRootTypes['Order']; // Order!
+    updateOrderStatus: NexusGenRootTypes['Order']; // Order!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -365,6 +366,10 @@ export interface NexusGenArgTypes {
     updateOrderNote: { // args
       id?: string | null; // ID
       note?: string | null; // String
+    }
+    updateOrderStatus: { // args
+      id?: string | null; // ID
+      status: NexusGenEnums['OrderStatus']; // OrderStatus!
     }
   }
   Order: {

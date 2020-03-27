@@ -37,3 +37,12 @@ export const UPDATE_ORDER_NOTE = gql`
 	}
 	${ORDER_FRAGMENT}
 `;
+
+export const UPDATE_ORDER_STATUS = gql`
+	mutation UpdateOrderStatus($id: ID!, $status: OrderStatus!) {
+		updateOrderStatus(id: $id, status: $status) {
+			...OrderFragment
+		}
+	}
+	${ORDER_FRAGMENT}
+`;
