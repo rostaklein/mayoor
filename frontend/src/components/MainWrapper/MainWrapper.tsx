@@ -67,6 +67,16 @@ export const MainWrapper: React.FC = () => {
 			),
 		},
 		{
+			path: '/orders/:id/production',
+			title: t('Order detail'),
+			Component: (
+				<DetailOrderProduction
+					productionLogType={ProductionLogType.PRODUCTION}
+					productionButtonText={t('Finished')}
+				/>
+			),
+		},
+		{
 			path: '/orders/:id',
 			title: t('Order detail'),
 			Component: <DetailOrder />,
