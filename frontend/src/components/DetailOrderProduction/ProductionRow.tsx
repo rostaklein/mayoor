@@ -26,14 +26,14 @@ export const ProductionRow: React.FC<Props> = ({
 		}
 	};
 	return (
-		<Row gutter={6} key={item.id}>
+		<Row gutter={12} key={item.id} style={{ marginBottom: 10 }}>
 			<Col sm={4}>{item.material?.name}</Col>
 			<Col sm={4}>{item.name}</Col>
 			<Col sm={2}>{item.width} m</Col>
 			<Col sm={2}>{item.height} m</Col>
 			<Col sm={2}>{item.pieces}</Col>
-			<Col sm={2}></Col>
-			<Col sm={2}></Col>
+			<Col sm={2}>{item.printedPieces}</Col>
+			<Col sm={2}>{item.producedPieces}</Col>
 			<Col sm={5}>
 				<Row gutter={12}>
 					<Col sm={12}>

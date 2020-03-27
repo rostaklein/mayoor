@@ -30,6 +30,8 @@ export const ORDER_FRAGMENT = gql`
 			width
 			height
 			pieces
+			printedPieces
+			producedPieces
 			totalPrice
 			totalTax
 		}

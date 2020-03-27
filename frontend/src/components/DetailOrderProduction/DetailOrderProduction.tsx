@@ -1,29 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
-import { useParams, useHistory } from 'react-router-dom';
-import { Button, message, Row, Col, Popconfirm, Skeleton } from 'antd';
-import { DeleteOutlined, PrinterOutlined } from '@ant-design/icons';
+import { useParams } from 'react-router-dom';
+import { Button, message, Row, Col, Skeleton, Input } from 'antd';
+import { SaveOutlined } from '@ant-design/icons';
 
 import {
 	GetOrder,
 	GetOrderVariables,
-	UpdateOrder,
-	UpdateOrderVariables,
+	UpdateOrderNote,
+	UpdateOrderNoteVariables,
 	AddProductionLog,
 	AddProductionLogVariables,
 	ProductionLogType,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
-import { OrderForm, OrderFormValues } from '../OrderForm/OrderForm';
-import { CenteredSpinner } from '../SharedStyles/CenteredSpinner';
 import { DetailDescription } from '../DetailDescription/DetailDescription';
-import { OrderActionsWrapper } from '../SharedStyles/OrderActions';
-import { GET_ORDER, UPDATE_ORDER } from '../DetailOrder/queries';
-import { StyledLabel } from '../FormItem/Form.styles';
+import { GET_ORDER } from '../DetailOrder/queries';
+import { StyledLabel, StyledFormItem } from '../FormItem/Form.styles';
 
 import { OrderWrapper } from './DetailOrderProduction.styles';
-import { ADD_PRODUCTION_LOG_MUTATION } from './queries';
+import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE } from './queries';
 import { ProductionRow } from './ProductionRow';
 
 type Props = {
@@ -37,29 +34,32 @@ export const DetailOrderProduction: React.FC<Props> = ({
 }) => {
 	const routeParams = useParams<{ id: string }>();
 	const { t } = useTranslation();
+	const [noteValue, setNoteValue] = useState<string | undefined | null>();
 
 	const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
 		variables: { number: Number(routeParams.id) },
+		onCompleted: (data) => {
+			setNoteValue(data.getOrderByNumber?.note);
+		},
 	});
 
-	const [updateOrder, { loading }] = useMutation<UpdateOrder, UpdateOrderVariables>(UPDATE_ORDER);
-	const [addProductionLog, { loading: productionLogLoading }] = useMutation<
-		AddProductionLog,
-		AddProductionLogVariables
-	>(ADD_PRODUCTION_LOG_MUTATION);
+	const [updateOrderNote] = useMutation<UpdateOrderNote, UpdateOrderNoteVariables>(
+		UPDATE_ORDER_NOTE,
+	);
+	const [addProductionLog] = useMutation<AddProductionLog, AddProductionLogVariables>(
+		ADD_PRODUCTION_LOG_MUTATION,
+	);
 
-	const updateNoteHandler = async (note: string) => {
+	const updateNoteHandler = async () => {
 		const id = data?.getOrderByNumber?.id;
 		if (!id) {
 			return;
 		}
 		try {
-			await updateOrder({
+			await updateOrderNote({
 				variables: {
 					id,
-					input: {
-						note,
-					},
+					note: noteValue,
 				},
 			});
 			message.success(t('note_updated'));
@@ -94,7 +94,7 @@ export const DetailOrderProduction: React.FC<Props> = ({
 				updatedAt={data?.getOrderByNumber?.updatedAt}
 			></DetailDescription>
 			<OrderWrapper>
-				<Row gutter={6}>
+				<Row gutter={12}>
 					<Col sm={4}>
 						<StyledLabel>{t('Material')}</StyledLabel>
 					</Col>
@@ -126,6 +126,23 @@ export const DetailOrderProduction: React.FC<Props> = ({
 						productionButtonText={productionButtonText}
 					/>
 				))}
+				<Row>
+					<Col sm={12}>
+						<StyledFormItem>
+							<StyledLabel>{t('Note')}</StyledLabel>
+							<Input.TextArea
+								rows={4}
+								name="note"
+								placeholder={t('note_placeholder')}
+								onChange={(e) => setNoteValue(e.target.value)}
+								value={noteValue || ''}
+							/>
+							<Button icon={<SaveOutlined />} onClick={updateNoteHandler}>
+								{t('Save note')}
+							</Button>
+						</StyledFormItem>
+					</Col>
+				</Row>
 			</OrderWrapper>
 		</>
 	);

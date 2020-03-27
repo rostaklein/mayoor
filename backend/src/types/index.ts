@@ -85,6 +85,30 @@ export const OrderItem = objectType({
     t.model.width();
     t.model.height();
     t.model.pieces();
+    t.field('printedPieces', {
+      type: 'Int',
+      resolve: async (item, _, ctx) => {
+        const action: NexusGenEnums['ProductionLogType'] = 'PRINT';
+        const productionLogs = await ctx.prisma.productionLog.findMany({
+          where: { AND: [{ orderItem: { id: item.id } }, { action }] },
+        });
+        return productionLogs.reduce((acc, curr) => {
+          return (acc += curr.pieces);
+        }, 0);
+      },
+    });
+    t.field('producedPieces', {
+      type: 'Int',
+      resolve: async (item, _, ctx) => {
+        const action: NexusGenEnums['ProductionLogType'] = 'PRODUCTION';
+        const productionLogs = await ctx.prisma.productionLog.findMany({
+          where: { AND: [{ orderItem: { id: item.id } }, { action }] },
+        });
+        return productionLogs.reduce((acc, curr) => {
+          return (acc += curr.pieces);
+        }, 0);
+      },
+    });
     t.model.totalPrice();
     t.model.totalTax();
     t.model.createdBy();

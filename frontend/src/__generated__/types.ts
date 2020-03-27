@@ -152,6 +152,8 @@ export interface GetOrder_getOrderByNumber_items {
   width: number | null;
   height: number | null;
   pieces: number | null;
+  printedPieces: number;
+  producedPieces: number;
   totalPrice: number;
   totalTax: number;
 }
@@ -216,6 +218,8 @@ export interface UpdateOrder_updateOrder_items {
   width: number | null;
   height: number | null;
   pieces: number | null;
+  printedPieces: number;
+  producedPieces: number;
   totalPrice: number;
   totalTax: number;
 }
@@ -294,6 +298,8 @@ export interface AddProductionLog_addProductionLog_productionLog {
 export interface AddProductionLog_addProductionLog {
   __typename: "OrderItem";
   id: string;
+  printedPieces: number;
+  producedPieces: number;
   productionLog: AddProductionLog_addProductionLog_productionLog[];
 }
 
@@ -305,6 +311,73 @@ export interface AddProductionLogVariables {
   orderItemId: string;
   action: ProductionLogType;
   pieces: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateOrderNote
+// ====================================================
+
+export interface UpdateOrderNote_updateOrderNote_customer {
+  __typename: "Customer";
+  id: string;
+  name: string | null;
+  identificationNumber: string | null;
+}
+
+export interface UpdateOrderNote_updateOrderNote_createdBy {
+  __typename: "User";
+  id: string;
+  name: string | null;
+}
+
+export interface UpdateOrderNote_updateOrderNote_items_material {
+  __typename: "Material";
+  id: string;
+  name: string;
+}
+
+export interface UpdateOrderNote_updateOrderNote_items {
+  __typename: "OrderItem";
+  id: string;
+  material: UpdateOrderNote_updateOrderNote_items_material | null;
+  name: string | null;
+  width: number | null;
+  height: number | null;
+  pieces: number | null;
+  printedPieces: number;
+  producedPieces: number;
+  totalPrice: number;
+  totalTax: number;
+}
+
+export interface UpdateOrderNote_updateOrderNote {
+  __typename: "Order";
+  id: string;
+  number: number;
+  customer: UpdateOrderNote_updateOrderNote_customer | null;
+  status: OrderStatus;
+  note: string | null;
+  urgency: number;
+  totalPrice: number;
+  totalTax: number;
+  createdAt: any;
+  updatedAt: any;
+  createdBy: UpdateOrderNote_updateOrderNote_createdBy;
+  items: UpdateOrderNote_updateOrderNote_items[];
+}
+
+export interface UpdateOrderNote {
+  updateOrderNote: UpdateOrderNote_updateOrderNote;
+}
+
+export interface UpdateOrderNoteVariables {
+  id: string;
+  note?: string | null;
 }
 
 /* tslint:disable */
@@ -773,6 +846,8 @@ export interface OrderFragment_items {
   width: number | null;
   height: number | null;
   pieces: number | null;
+  printedPieces: number;
+  producedPieces: number;
   totalPrice: number;
   totalTax: number;
 }

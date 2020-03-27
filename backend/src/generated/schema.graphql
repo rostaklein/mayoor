@@ -97,6 +97,7 @@ type Mutation {
   updateCustomer(input: UpdateCustomerInput!): Customer!
   updateMaterial(id: ID!, name: String, price: Float): Material!
   updateOrder(id: ID, input: UpdateOrderInput!): Order!
+  updateOrderNote(id: ID, note: String): Order!
 }
 
 type Order {
@@ -139,6 +140,8 @@ type OrderItem {
   material: Material
   name: String
   pieces: Int
+  printedPieces: Int!
+  producedPieces: Int!
   productionLog: [ProductionLog!]!
   totalPrice: Float!
   totalTax: Float!

@@ -232,6 +232,7 @@ export interface NexusGenFieldTypes {
     updateCustomer: NexusGenRootTypes['Customer']; // Customer!
     updateMaterial: NexusGenRootTypes['Material']; // Material!
     updateOrder: NexusGenRootTypes['Order']; // Order!
+    updateOrderNote: NexusGenRootTypes['Order']; // Order!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -257,6 +258,8 @@ export interface NexusGenFieldTypes {
     material: NexusGenRootTypes['Material'] | null; // Material
     name: string | null; // String
     pieces: number | null; // Int
+    printedPieces: number; // Int!
+    producedPieces: number; // Int!
     productionLog: NexusGenRootTypes['ProductionLog'][]; // [ProductionLog!]!
     totalPrice: number; // Float!
     totalTax: number; // Float!
@@ -358,6 +361,10 @@ export interface NexusGenArgTypes {
     updateOrder: { // args
       id?: string | null; // ID
       input: NexusGenInputs['UpdateOrderInput']; // UpdateOrderInput!
+    }
+    updateOrderNote: { // args
+      id?: string | null; // ID
+      note?: string | null; // String
     }
   }
   Order: {
