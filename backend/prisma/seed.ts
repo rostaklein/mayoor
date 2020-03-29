@@ -7,11 +7,11 @@ async function seed() {
     data: {
       email: 'user',
       password: '$2b$10$BxSwFfG7kUCgb9EO1TMiyOscC22GQ8RDe56LFYWqY1SOPvD6A.H.K', // decoded password: ok
-      role: 'ADMIN',
+      role: 'EXECUTIVE',
       name: 'John Doe',
     },
   });
-  console.log('Prisma seed: Created admin user');
+  console.log('Prisma seed: Created admin user (all permissions)');
   console.log(createdAdminUser);
 
   const basicMaterial = await prisma.material.create({

@@ -112,6 +112,7 @@ export interface NexusGenEnums {
   OrderByArg: prisma.OrderByArg
   OrderStatus: "DONE" | "NEW" | "READY_TO_PRINT" | "TO_BE_SHIPPED" | "WAITING_FOR_CALCULATION" | "WAITING_FOR_PRODUCTION"
   ProductionLogType: "PRINT" | "PRODUCTION"
+  UserRole: "ADMINISTRATION" | "EXECUTIVE" | "FACTORY"
 }
 
 export interface NexusGenRootTypes {
@@ -167,6 +168,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   OrderByArg: NexusGenEnums['OrderByArg'];
   OrderStatus: NexusGenEnums['OrderStatus'];
   ProductionLogType: NexusGenEnums['ProductionLogType'];
+  UserRole: NexusGenEnums['UserRole'];
 }
 
 export interface NexusGenFieldTypes {
@@ -350,6 +352,7 @@ export interface NexusGenArgTypes {
       email: string; // String!
       name?: string | null; // String
       password: string; // String!
+      role?: NexusGenEnums['UserRole'] | null; // UserRole
     }
     updateCustomer: { // args
       input: NexusGenInputs['UpdateCustomerInput']; // UpdateCustomerInput!
@@ -418,7 +421,7 @@ export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "Cust
 
 export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "OrderItemsOrderByInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput";
 
-export type NexusGenEnumNames = "OrderByArg" | "OrderStatus" | "ProductionLogType";
+export type NexusGenEnumNames = "OrderByArg" | "OrderStatus" | "ProductionLogType" | "UserRole";
 
 export type NexusGenInterfaceNames = never;
 

@@ -93,7 +93,7 @@ type Mutation {
   deleteMaterial(id: ID!): Material!
   deleteOrder(id: ID!): Order!
   login(email: String!, password: String!): AuthPayload!
-  register(email: String!, name: String, password: String!): AuthPayload!
+  register(email: String!, name: String, password: String!, role: UserRole): AuthPayload!
   updateCustomer(input: UpdateCustomerInput!): Customer!
   updateMaterial(id: ID!, name: String, price: Float): Material!
   updateOrder(id: ID, input: UpdateOrderInput!): Order!
@@ -257,4 +257,10 @@ type User {
   id: String!
   name: String
   role: String!
+}
+
+enum UserRole {
+  ADMINISTRATION
+  EXECUTIVE
+  FACTORY
 }
