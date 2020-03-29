@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { Button, message, Row, Col, Popconfirm, Skeleton } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, BgColorsOutlined, HighlightOutlined } from '@ant-design/icons';
+import ButtonGroup from 'antd/lib/button/button-group';
 
 import {
 	GetOrder,
@@ -113,17 +114,27 @@ export const DetailOrder: React.FC = () => {
 				<Col sm={12}>
 					<Row justify="end">
 						<OrderActionsWrapper>
-							<Popconfirm
-								title={t('Are you sure want to remove this order?')}
-								onConfirm={handleOrderDelete}
-								placement="topRight"
-								okText={t('Delete')}
-								okType="danger"
-							>
-								<Button icon={<DeleteOutlined />} loading={deleteLoading}>
-									{t('Delete')}
-								</Button>
-							</Popconfirm>
+							<ButtonGroup>
+								<Link to={`/orders/${data.getOrderByNumber.number}/print`}>
+									<Button icon={<BgColorsOutlined />}>{t('Print view')}</Button>
+								</Link>
+								<Link to={`/orders/${data.getOrderByNumber.number}/production`}>
+									<Button icon={<HighlightOutlined />}>
+										{t('Production view')}
+									</Button>
+								</Link>
+								<Popconfirm
+									title={t('Are you sure want to remove this order?')}
+									onConfirm={handleOrderDelete}
+									placement="topRight"
+									okText={t('Delete')}
+									okType="danger"
+								>
+									<Button icon={<DeleteOutlined />} loading={deleteLoading}>
+										{t('Delete')}
+									</Button>
+								</Popconfirm>
+							</ButtonGroup>
 						</OrderActionsWrapper>
 					</Row>
 				</Col>
