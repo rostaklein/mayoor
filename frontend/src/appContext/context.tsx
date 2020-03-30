@@ -1,12 +1,14 @@
 import React, { useReducer, useContext } from 'react';
 
+import { UserRole } from '../__generated__/types';
+
 import { reducer, Action } from './reducer';
 
 export type User = {
 	name: string | null;
 	id: string;
 	email: string;
-	isAdmin: boolean;
+	role: UserRole;
 };
 
 export type AppState = {

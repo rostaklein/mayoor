@@ -7,7 +7,7 @@ import { LockFilled, LoginOutlined, UserOutlined } from '@ant-design/icons';
 import { Input, Button } from 'antd';
 
 import LogoImage from '../../images/mayoor_logo.svg';
-import { LoginMutation, LoginMutationVariables } from '../../__generated__/types';
+import { LoginMutation, LoginMutationVariables, UserRole } from '../../__generated__/types';
 import { CenteredWrapper } from '../CenteredWrapper/CenteredWrapper';
 import { useAppDispatch } from '../../appContext/context';
 import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
@@ -48,10 +48,7 @@ export const LoginForm: React.FC = () => {
 				if (result.data?.login) {
 					dispatch({
 						type: 'SET_CURRENT_USER',
-						user: {
-							...result.data.login.user,
-							isAdmin: result.data.login.user.role === 'ADMIN',
-						},
+						user: result.data.login.user,
 					});
 					localStorage.setItem('auth-token', result.data.login.token);
 				}

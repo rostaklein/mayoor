@@ -554,7 +554,7 @@ export interface LoginMutation_login_user {
   name: string | null;
   id: string;
   email: string;
-  role: string;
+  role: UserRole;
 }
 
 export interface LoginMutation_login {
@@ -586,7 +586,7 @@ export interface MeQuery_me {
   id: string;
   name: string | null;
   email: string;
-  role: string;
+  role: UserRole;
 }
 
 export interface MeQuery {
@@ -1004,6 +1004,12 @@ export enum OrderStatus {
 export enum ProductionLogType {
   PRINT = "PRINT",
   PRODUCTION = "PRODUCTION",
+}
+
+export enum UserRole {
+  ADMINISTRATION = "ADMINISTRATION",
+  EXECUTIVE = "EXECUTIVE",
+  FACTORY = "FACTORY",
 }
 
 export interface AddressInput {

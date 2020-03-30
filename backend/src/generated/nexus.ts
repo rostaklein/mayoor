@@ -296,7 +296,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // String!
     name: string | null; // String
-    role: string; // String!
+    role: NexusGenEnums['UserRole']; // UserRole!
   }
 }
 

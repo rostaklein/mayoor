@@ -1,5 +1,6 @@
 import { objectType, inputObjectType, enumType } from 'nexus';
 import { NexusGenEnums } from '../generated/nexus';
+import { UserRole } from '../mutations';
 
 export * from './order';
 
@@ -17,7 +18,10 @@ export const User = objectType({
     t.model.id();
     t.model.name();
     t.model.email();
-    t.model.role();
+    t.field('role', {
+      type: UserRole,
+      resolve: a => a.role as NexusGenEnums['UserRole'],
+    });
   },
 });
 

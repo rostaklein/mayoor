@@ -14,6 +14,7 @@ import {
 
 import { Colors } from '../../themeVariables';
 import { useAppState } from '../../appContext/context';
+import { UserRole } from '../../__generated__/types';
 
 import { LinkItem } from './LinkItem';
 
@@ -70,7 +71,7 @@ export const MainMenu: React.FC = () => {
 				/>
 				<LinkItem icon={<TeamOutlined />} name={t('Customers')} to={'/customers/list'} />
 			</li>
-			{currentUser?.isAdmin && (
+			{currentUser?.role === UserRole.EXECUTIVE && (
 				<li>
 					<CategoryName>{t('Administration')}</CategoryName>
 					<LinkItem icon={<FileTextOutlined />} name={t('Material')} to={'/materials'} />

@@ -7,7 +7,7 @@ import { Alert, message } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
-import { MeQuery } from './__generated__/types';
+import { MeQuery, UserRole } from './__generated__/types';
 import { useAppDispatch, useAppState, AppContextProvider } from './appContext/context';
 import { MainWrapper } from './components/MainWrapper/MainWrapper';
 import { client } from './ApolloClient';
@@ -40,7 +40,12 @@ const App: React.FC = () => {
 				const { id, name, email, role } = data.me;
 				dispatch({
 					type: 'SET_CURRENT_USER',
-					user: { id, name, email, isAdmin: role === 'ADMIN' },
+					user: {
+						id,
+						name,
+						email,
+						role,
+					},
 				});
 			}
 		},
