@@ -17,6 +17,7 @@ import { DetailOrder } from '../DetailOrder/DetailOrder';
 import { ListOrdersProduction } from '../ListOrdersProduction/ListOrdersProduction';
 import { OrderStatus, ProductionLogType } from '../../__generated__/types';
 import { DetailOrderProduction } from '../DetailOrderProduction/DetailOrderProduction';
+import { UserEdit } from '../Users/UserEdit';
 
 import * as S from './MainWrapper.styles';
 
@@ -89,7 +90,7 @@ export const MainWrapper: React.FC = () => {
 			Component: <DetailCustomer />,
 		},
 		{ path: '/materials', title: t('Material'), Component: <MaterialEdit /> },
-		{ path: '/users', title: t('Users administration'), Component: <MaterialEdit /> },
+		{ path: '/users', title: t('Users administration'), Component: <UserEdit /> },
 	];
 
 	useEffect(() => {

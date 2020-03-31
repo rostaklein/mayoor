@@ -843,6 +843,27 @@ export interface ChangePasswordMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetAllUsers
+// ====================================================
+
+export interface GetAllUsers_getAllUsers {
+  __typename: "User";
+  id: string;
+  email: string;
+  name: string | null;
+  role: UserRole;
+}
+
+export interface GetAllUsers {
+  getAllUsers: GetAllUsers_getAllUsers[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: CustomerDetails
 // ====================================================
 
