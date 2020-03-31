@@ -89,6 +89,7 @@ export const MainWrapper: React.FC = () => {
 			Component: <DetailCustomer />,
 		},
 		{ path: '/materials', title: t('Material'), Component: <MaterialEdit /> },
+		{ path: '/users', title: t('Users administration'), Component: <MaterialEdit /> },
 	];
 
 	useEffect(() => {

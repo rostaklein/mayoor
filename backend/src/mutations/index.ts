@@ -1,5 +1,6 @@
 export * from './auth/login';
-export * from './auth/register';
+export * from './auth/addUser';
+export * from './auth/deleteUser';
 export * from './auth/changePassword';
 
 export * from './orders/createOrder';

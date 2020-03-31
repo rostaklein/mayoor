@@ -1,6 +1,5 @@
 import { stringArg, mutationField, enumType, arg } from 'nexus';
 import { hash } from 'bcrypt';
-import { issueToken } from '../../auth';
 import { NexusGenEnums } from '../../generated/nexus';
 
 export const UserRole = enumType({
@@ -12,8 +11,8 @@ export const UserRole = enumType({
   ],
 });
 
-export const Register = mutationField('register', {
-  type: 'AuthPayload',
+export const AddUser = mutationField('addUser', {
+  type: 'User',
   args: {
     email: stringArg({ nullable: false }),
     password: stringArg({ nullable: false }),
@@ -35,7 +34,6 @@ export const Register = mutationField('register', {
       data: { password: hashedPwd, name, email, role: role || defaultRole },
     });
 
-    const token = issueToken({ email: user.email, id: user.id });
-    return { user, token };
+    return user;
   },
 });

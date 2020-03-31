@@ -85,6 +85,7 @@ type Material {
 type Mutation {
   addOrderItem(input: OrderItemInput!, orderId: ID): OrderItem!
   addProductionLog(action: ProductionLogType!, orderItemId: ID, pieces: Int!): OrderItem!
+  addUser(email: String!, name: String, password: String!, role: UserRole): User!
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createMaterial(name: String!, price: Float!): Material!
@@ -92,8 +93,8 @@ type Mutation {
   deleteCustomer(id: ID!): Customer!
   deleteMaterial(id: ID!): Material!
   deleteOrder(id: ID!): Order!
+  deleteUser(id: ID!): User!
   login(email: String!, password: String!): AuthPayload!
-  register(email: String!, name: String, password: String!, role: UserRole): AuthPayload!
   updateCustomer(input: UpdateCustomerInput!): Customer!
   updateMaterial(id: ID!, name: String, price: Float): Material!
   updateOrder(id: ID, input: UpdateOrderInput!): Order!

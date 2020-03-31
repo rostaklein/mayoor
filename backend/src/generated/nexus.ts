@@ -222,6 +222,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     addOrderItem: NexusGenRootTypes['OrderItem']; // OrderItem!
     addProductionLog: NexusGenRootTypes['OrderItem']; // OrderItem!
+    addUser: NexusGenRootTypes['User']; // User!
     changePassword: NexusGenRootTypes['User']; // User!
     createCustomer: NexusGenRootTypes['Customer']; // Customer!
     createMaterial: NexusGenRootTypes['Material']; // Material!
@@ -229,8 +230,8 @@ export interface NexusGenFieldTypes {
     deleteCustomer: NexusGenRootTypes['Customer']; // Customer!
     deleteMaterial: NexusGenRootTypes['Material']; // Material!
     deleteOrder: NexusGenRootTypes['Order']; // Order!
+    deleteUser: NexusGenRootTypes['User']; // User!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
-    register: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateCustomer: NexusGenRootTypes['Customer']; // Customer!
     updateMaterial: NexusGenRootTypes['Material']; // Material!
     updateOrder: NexusGenRootTypes['Order']; // Order!
@@ -320,6 +321,12 @@ export interface NexusGenArgTypes {
       orderItemId?: string | null; // ID
       pieces: number; // Int!
     }
+    addUser: { // args
+      email: string; // String!
+      name?: string | null; // String
+      password: string; // String!
+      role?: NexusGenEnums['UserRole'] | null; // UserRole
+    }
     changePassword: { // args
       newPassword: string; // String!
       oldPassword: string; // String!
@@ -344,15 +351,12 @@ export interface NexusGenArgTypes {
     deleteOrder: { // args
       id: string; // ID!
     }
+    deleteUser: { // args
+      id: string; // ID!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
-    }
-    register: { // args
-      email: string; // String!
-      name?: string | null; // String
-      password: string; // String!
-      role?: NexusGenEnums['UserRole'] | null; // UserRole
     }
     updateCustomer: { // args
       input: NexusGenInputs['UpdateCustomerInput']; // UpdateCustomerInput!

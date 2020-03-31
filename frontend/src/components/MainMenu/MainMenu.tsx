@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import {
-	SyncOutlined,
 	PlusCircleOutlined,
 	FileSearchOutlined,
 	UserAddOutlined,
@@ -75,6 +74,7 @@ export const MainMenu: React.FC = () => {
 				<li>
 					<CategoryName>{t('Administration')}</CategoryName>
 					<LinkItem icon={<FileTextOutlined />} name={t('Material')} to={'/materials'} />
+					<LinkItem icon={<TeamOutlined />} name={t('Users')} to={'/users'} />
 				</li>
 			)}
 		</StyledMenu>
