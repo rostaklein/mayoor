@@ -1,0 +1,106 @@
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String  @id @default(cuid())
+  role     String
+  email    String  @unique
+  password String
+  name     String?
+}
+
+model Material {
+  id        String   @id @default(cuid())
+  name      String
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy User @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  number     Int         @unique
+  customer   Customer?   @relation(fields: [customerId], references: [id])
+  customerId String?
+  shippedAt  DateTime?
+  totalPrice Float
+  totalTax   Float
+  note       String?
+  items      OrderItem[]
+  urgency    Int         @default(0)
+  status     String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  createdBy User @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
+}
+
+model OrderItem {
+  id         String    @id @default(cuid())
+  material   Material? @relation(fields: [materialId], references: [id])
+  materialId String? 
+  totalPrice Float
+  totalTax   Float
+  name       String?
+  width      Float?
+  height     Float?
+  pieces     Int?
+  order      Order @relation(fields: [orderId], references: [id])
+  orderId    String 
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  createdBy User @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
+}
+
+model ProductionLog {
+  id         String    @id @default(cuid())
+  orderItem  OrderItem @relation(fields: [orderItemId], references: [id])
+  orderItemId String 
+  action     String
+  pieces     Int
+  createdAt  DateTime  @default(now())
+  createdBy User @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
+}
+
+model Customer {
+  id                      String    @id @default(cuid())
+  name                    String?
+  personName              String?
+  phone                   String?
+  email                   String?
+  identificationNumber    String?
+  taxIdentificationNumber String?
+  allowedBankPayments     Boolean   @default(false)
+  address                 Address[]
+  note                    String?
+  createdBy               User      @relation(fields: [createdByUserId], references: [id])
+  createdByUserId         String
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  street     String?
+  number     String?
+  city       String?
+  state      String?
+  postNumber String?
+  customer   Customer   @relation(fields: [customerId], references: [id])
+  customerId String
+  isPrimary  Boolean  @default(false)
+  createdBy  User @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
