@@ -1,20 +1,27 @@
 /* eslint-disable  @typescript-eslint/camelcase */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from 'react-apollo';
+import { useQuery, useMutation } from 'react-apollo';
 import { DeleteOutlined, SaveOutlined } from '@ant-design/icons';
-import { Row, Col, Button, Popconfirm, Select } from 'antd';
+import { Row, Col, Button, Popconfirm, message } from 'antd';
 import { Formik } from 'formik';
 import { TFunction } from 'i18next';
 import * as Yup from 'yup';
 
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
-import { GetAllUsers, GetAllUsers_getAllUsers } from '../../__generated__/types';
+import {
+	UpdateUser,
+	UpdateUserVariables,
+	GetAllUsers,
+	GetAllUsers_getAllUsers,
+	DeleteUser,
+	DeleteUserVariables,
+} from '../../__generated__/types';
 import { StyledForm, StyledLabel } from '../FormItem/Form.styles';
 import { FormInput } from '../FormItem/FormInput';
 import { MaterialEditWrapper } from '../Material/MaterialEdit.styles';
 
-import { GET_ALL_USERS } from './queries';
+import { GET_ALL_USERS, UPDATE_USER, DELETE_USER } from './queries';
 import { UserRoleSelect } from './UserRoleSelect';
 
 export const getUserValidationSchema = (t: TFunction) =>
@@ -24,11 +31,37 @@ export const getUserValidationSchema = (t: TFunction) =>
 		role: Yup.string().required(t('field_required')),
 	});
 
+type FormikValues = GetAllUsers_getAllUsers & { password?: string };
+
 export const UserEdit: React.FC = () => {
 	const { t } = useTranslation();
 	const [currentlyLoading, setCurrentlyLoading] = useState<string | null>(null);
 
 	const { data } = useQuery<GetAllUsers>(GET_ALL_USERS);
+
+	const [updateUser] = useMutation<UpdateUser, UpdateUserVariables>(UPDATE_USER, {
+		onCompleted: () => {
+			message.success(t('User updated'));
+		},
+	});
+	const [deleteUser] = useMutation<DeleteUser, DeleteUserVariables>(DELETE_USER, {
+		onCompleted: () => {
+			message.success(t('User deleted'));
+		},
+		update: (cache, { data }) => {
+			const cached = cache.readQuery<GetAllUsers>({ query: GET_ALL_USERS });
+			if (cached === null) {
+				return;
+			}
+			const { getAllUsers } = cached;
+			cache.writeQuery<GetAllUsers>({
+				query: GET_ALL_USERS,
+				data: {
+					getAllUsers: getAllUsers.filter(({ id }) => id !== data?.deleteUser.id),
+				},
+			});
+		},
+	});
 
 	return (
 		<>
@@ -52,19 +85,22 @@ export const UserEdit: React.FC = () => {
 							<Col sm={4}></Col>
 						</Row>
 						{data?.getAllUsers.map((user) => (
-							<Formik<GetAllUsers_getAllUsers>
+							<Formik<FormikValues>
 								key={user.id}
-								initialValues={user}
+								initialValues={{ ...user, password: undefined }}
 								onSubmit={async (values) => {
 									setCurrentlyLoading(user.id);
 									console.log(values);
-									// await updateMaterial({
-									// 	variables: {
-									// 		id: material.id,
-									// 		name: values.name,
-									// 		price: Number(values.price),
-									// 	},
-									// });
+									const { id, __typename, ...rest } = values;
+									await updateUser({
+										variables: {
+											id: user.id,
+											input: {
+												...rest,
+												password: values.password || undefined,
+											},
+										},
+									});
 									setCurrentlyLoading(null);
 								}}
 								validationSchema={getUserValidationSchema(t)}

@@ -11,12 +11,12 @@ export const UserRole = enumType({
   ],
 });
 
-export const UserInput = inputObjectType({
-  name: 'UserInput',
-  definition(t){
-    t.string('email', {nullable: false});
-    t.string('password', {nullable: false});
-    t.field('role', {type: UserRole});
+export const CreateUserInput = inputObjectType({
+  name: 'CreateUserInput',
+  definition(t) {
+    t.string('email', { nullable: false });
+    t.string('password', { nullable: false });
+    t.field('role', { type: UserRole });
     t.string('name');
   }
 })
@@ -24,9 +24,9 @@ export const UserInput = inputObjectType({
 export const AddUser = mutationField('addUser', {
   type: 'User',
   args: {
-    input: arg({type: UserInput, nullable: false})
+    input: arg({ type: CreateUserInput, nullable: false })
   },
-  resolve: async (_, { input: {email, name, password, role} }, ctx) => {
+  resolve: async (_, { input: { email, name, password, role } }, ctx) => {
     const existingUser = await ctx.prisma.user.findOne({ where: { email } });
 
     if (existingUser) {

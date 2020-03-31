@@ -864,6 +864,79 @@ export interface GetAllUsers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: AddUser
+// ====================================================
+
+export interface AddUser_addUser {
+  __typename: "User";
+  id: string;
+  email: string;
+  name: string | null;
+  role: UserRole;
+}
+
+export interface AddUser {
+  addUser: AddUser_addUser;
+}
+
+export interface AddUserVariables {
+  input: CreateUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateUser
+// ====================================================
+
+export interface UpdateUser_updateUser {
+  __typename: "User";
+  id: string;
+  email: string;
+  name: string | null;
+  role: UserRole;
+}
+
+export interface UpdateUser {
+  updateUser: UpdateUser_updateUser;
+}
+
+export interface UpdateUserVariables {
+  id: string;
+  input: UpdateUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: DeleteUser
+// ====================================================
+
+export interface DeleteUser_deleteUser {
+  __typename: "User";
+  id: string;
+}
+
+export interface DeleteUser {
+  deleteUser: DeleteUser_deleteUser;
+}
+
+export interface DeleteUserVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: CustomerDetails
 // ====================================================
 
@@ -1054,6 +1127,13 @@ export interface CreateCustomerInput {
   taxIdentificationNumber?: string | null;
 }
 
+export interface CreateUserInput {
+  email: string;
+  name?: string | null;
+  password: string;
+  role?: UserRole | null;
+}
+
 export interface OrderInput {
   customerId?: string | null;
   items: OrderItemInput[];
@@ -1116,6 +1196,13 @@ export interface UpdateOrderItemInput {
   totalPrice: number;
   totalTax: number;
   width?: number | null;
+}
+
+export interface UpdateUserInput {
+  email: string;
+  name?: string | null;
+  password?: string | null;
+  role?: UserRole | null;
 }
 
 //==============================================================
