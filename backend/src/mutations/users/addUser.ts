@@ -1,4 +1,4 @@
-import { stringArg, mutationField, enumType, arg } from 'nexus';
+import { stringArg, mutationField, enumType, arg, inputObjectType } from 'nexus';
 import { hash } from 'bcrypt';
 import { NexusGenEnums } from '../../generated/nexus';
 
@@ -11,15 +11,22 @@ export const UserRole = enumType({
   ],
 });
 
+export const UserInput = inputObjectType({
+  name: 'UserInput',
+  definition(t){
+    t.string('email', {nullable: false});
+    t.string('password', {nullable: false});
+    t.field('role', {type: UserRole});
+    t.string('name');
+  }
+})
+
 export const AddUser = mutationField('addUser', {
   type: 'User',
   args: {
-    email: stringArg({ nullable: false }),
-    password: stringArg({ nullable: false }),
-    role: arg({ type: UserRole }),
-    name: stringArg(),
+    input: arg({type: UserInput, nullable: false})
   },
-  resolve: async (_, { email, name, password, role }, ctx) => {
+  resolve: async (_, { input: {email, name, password, role} }, ctx) => {
     const existingUser = await ctx.prisma.user.findOne({ where: { email } });
 
     if (existingUser) {

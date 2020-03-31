@@ -1,6 +1,4 @@
 export * from './auth/login';
-export * from './auth/addUser';
-export * from './auth/deleteUser';
 export * from './auth/changePassword';
 
 export * from './orders/createOrder';
@@ -17,5 +15,9 @@ export * from './customers/deleteCustomer';
 export * from './material/createMaterial';
 export * from './material/updateMaterial';
 export * from './material/deleteMaterial';
+
+export * from './users/addUser';
+export * from './users/deleteUser';
+export * from './users/updateUser';
 
 export * from './productionLog/addProductionLog';

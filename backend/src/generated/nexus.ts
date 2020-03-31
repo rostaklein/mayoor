@@ -106,6 +106,12 @@ export interface NexusGenInputs {
     totalTax: number; // Float!
     width?: number | null; // Float
   }
+  UserInput: { // input type
+    email: string; // String!
+    name?: string | null; // String
+    password: string; // String!
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
+  }
 }
 
 export interface NexusGenEnums {
@@ -165,6 +171,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
   UpdateOrderInput: NexusGenInputs['UpdateOrderInput'];
   UpdateOrderItemInput: NexusGenInputs['UpdateOrderItemInput'];
+  UserInput: NexusGenInputs['UserInput'];
   OrderByArg: NexusGenEnums['OrderByArg'];
   OrderStatus: NexusGenEnums['OrderStatus'];
   ProductionLogType: NexusGenEnums['ProductionLogType'];
@@ -237,6 +244,7 @@ export interface NexusGenFieldTypes {
     updateOrder: NexusGenRootTypes['Order']; // Order!
     updateOrderNote: NexusGenRootTypes['Order']; // Order!
     updateOrderStatus: NexusGenRootTypes['Order']; // Order!
+    updateUser: NexusGenRootTypes['User']; // User!
   }
   Order: { // field return type
     createdAt: any; // DateTime!
@@ -286,6 +294,7 @@ export interface NexusGenFieldTypes {
     getAllCustomers: NexusGenRootTypes['CustomerPaginated']; // CustomerPaginated!
     getAllMaterials: NexusGenRootTypes['Material'][]; // [Material!]!
     getAllOrders: NexusGenRootTypes['OrderPaginated']; // OrderPaginated!
+    getAllUsers: NexusGenRootTypes['User'][]; // [User!]!
     getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo']; // CustomerHelperInfo!
     getHighestOrderNumber: number | null; // Int
@@ -322,10 +331,7 @@ export interface NexusGenArgTypes {
       pieces: number; // Int!
     }
     addUser: { // args
-      email: string; // String!
-      name?: string | null; // String
-      password: string; // String!
-      role?: NexusGenEnums['UserRole'] | null; // UserRole
+      input: NexusGenInputs['UserInput']; // UserInput!
     }
     changePassword: { // args
       newPassword: string; // String!
@@ -378,6 +384,10 @@ export interface NexusGenArgTypes {
       id?: string | null; // ID
       status: NexusGenEnums['OrderStatus']; // OrderStatus!
     }
+    updateUser: { // args
+      id: string; // ID!
+      input: NexusGenInputs['UserInput']; // UserInput!
+    }
   }
   Order: {
     items: { // args
@@ -423,7 +433,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "ProductionLog" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "OrderItemsOrderByInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput";
+export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "OrderItemsOrderByInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput" | "UserInput";
 
 export type NexusGenEnumNames = "OrderByArg" | "OrderStatus" | "ProductionLogType" | "UserRole";
 

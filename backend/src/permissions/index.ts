@@ -33,6 +33,7 @@ export const permissions = shield(
   {
     Query: {
       '*': rules.isAuthenticatedUser,
+      getAllUsers: rules.isExecutive,
     },
     Mutation: {
       '*': rules.isAuthenticatedUser,
@@ -47,6 +48,7 @@ export const permissions = shield(
       deleteOrder: or(rules.isAdministration, rules.isExecutive),
       login: rules.notProtected,
       addUser: rules.isExecutive,
+      updateUser: rules.isExecutive,
       deleteUser: rules.isExecutive,
       updateCustomer: or(rules.isAdministration, rules.isExecutive),
       updateMaterial: rules.isExecutive,

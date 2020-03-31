@@ -85,7 +85,7 @@ type Material {
 type Mutation {
   addOrderItem(input: OrderItemInput!, orderId: ID): OrderItem!
   addProductionLog(action: ProductionLogType!, orderItemId: ID, pieces: Int!): OrderItem!
-  addUser(email: String!, name: String, password: String!, role: UserRole): User!
+  addUser(input: UserInput!): User!
   changePassword(newPassword: String!, oldPassword: String!): User!
   createCustomer(input: CreateCustomerInput!): Customer!
   createMaterial(name: String!, price: Float!): Material!
@@ -100,6 +100,7 @@ type Mutation {
   updateOrder(id: ID, input: UpdateOrderInput!): Order!
   updateOrderNote(id: ID, note: String): Order!
   updateOrderStatus(id: ID, status: OrderStatus!): Order!
+  updateUser(id: ID!, input: UserInput!): User!
 }
 
 type Order {
@@ -201,6 +202,7 @@ type Query {
   getAllCustomers(first: Int, search: String, skip: Int): CustomerPaginated!
   getAllMaterials: [Material!]!
   getAllOrders(first: Int, orderByUrgency: OrderByArg, skip: Int, status: OrderStatus): OrderPaginated!
+  getAllUsers: [User!]!
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!
   getHighestOrderNumber: Int
@@ -258,6 +260,13 @@ type User {
   id: String!
   name: String
   role: UserRole!
+}
+
+input UserInput {
+  email: String!
+  name: String
+  password: String!
+  role: UserRole
 }
 
 enum UserRole {
