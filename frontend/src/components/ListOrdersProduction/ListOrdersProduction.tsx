@@ -52,7 +52,7 @@ const getColumns = (
 		},
 	},
 	{
-		title: t('Order nr.'),
+		title: t('Order nr'),
 		dataIndex: 'number',
 		width: 80,
 		render: (_, record) => {

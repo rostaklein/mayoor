@@ -59,7 +59,7 @@
   "{{count}} pcs": {
     "_plural": "{{count}} pcs."
   },
-  "Order nr": "Order nr.",
+  "Order nr": "Order nr",
   "Status": "Status",
   "Customer": "Customer",
   "Items info": "Items info",
