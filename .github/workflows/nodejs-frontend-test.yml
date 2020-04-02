@@ -1,0 +1,25 @@
+name: Node Frontend Test CI
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: install, lint, build, and test
+        working-directory: frontend
+        run: |
+          npm install
+          npm run lint
+          npm run build
+          npm run test
+        env:
+          CI: true
