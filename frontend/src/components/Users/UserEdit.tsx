@@ -23,6 +23,7 @@ import { MaterialEditWrapper } from '../Material/MaterialEdit.styles';
 
 import { GET_ALL_USERS, UPDATE_USER, DELETE_USER } from './queries';
 import { UserRoleSelect } from './UserRoleSelect';
+import { UserCreate } from './UserCreate';
 
 export const getUserValidationSchema = (t: TFunction) =>
 	Yup.object().shape({
@@ -90,7 +91,6 @@ export const UserEdit: React.FC = () => {
 								initialValues={{ ...user, password: undefined }}
 								onSubmit={async (values) => {
 									setCurrentlyLoading(user.id);
-									console.log(values);
 									const { id, __typename, ...rest } = values;
 									await updateUser({
 										variables: {
@@ -142,8 +142,8 @@ export const UserEdit: React.FC = () => {
 										<Col sm={1} style={{ textAlign: 'right' }}>
 											<Popconfirm
 												placement="topRight"
-												onConfirm={async () =>
-													console.log('Deleting', user.id)
+												onConfirm={() =>
+													deleteUser({ variables: { id: user.id } })
 												}
 												title={t('Do you really want to remove this user?')}
 											>
@@ -157,7 +157,7 @@ export const UserEdit: React.FC = () => {
 								)}
 							</Formik>
 						))}
-						{/* <MaterialCreate /> */}
+						<UserCreate />
 					</>
 				</MaterialEditWrapper>
 			</StyledForm>

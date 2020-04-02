@@ -864,10 +864,10 @@ export interface GetAllUsers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: AddUser
+// GraphQL mutation operation: CreateUser
 // ====================================================
 
-export interface AddUser_addUser {
+export interface CreateUser_addUser {
   __typename: "User";
   id: string;
   email: string;
@@ -875,11 +875,11 @@ export interface AddUser_addUser {
   role: UserRole;
 }
 
-export interface AddUser {
-  addUser: AddUser_addUser;
+export interface CreateUser {
+  addUser: CreateUser_addUser;
 }
 
-export interface AddUserVariables {
+export interface CreateUserVariables {
   input: CreateUserInput;
 }
 

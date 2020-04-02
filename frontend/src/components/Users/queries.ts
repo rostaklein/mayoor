@@ -11,8 +11,8 @@ export const GET_ALL_USERS = gql`
 	}
 `;
 
-export const ADD_USER = gql`
-	mutation AddUser($input: CreateUserInput!) {
+export const CREATE_USER = gql`
+	mutation CreateUser($input: CreateUserInput!) {
 		addUser(input: $input) {
 			id
 			email
