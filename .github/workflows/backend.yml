@@ -1,4 +1,4 @@
-name: Node Backend Test CI
+name: backend CI
 
 on:
   push:
@@ -14,8 +14,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: install and lint
+      - name: install
         working-directory: backend
         run: |
           npm install
+      - name: lint
+        working-directory: backend
+        run: |
           npm run lint
