@@ -147,7 +147,11 @@ export const DetailCustomer: React.FC = () => {
 				}
 				initialValues={data.getCustomer}
 			/>
-			<ListOrders title={t('Customers orders')} pageSize={5} />
+			<ListOrders
+				title={t('Customers orders')}
+				pageSize={5}
+				customerId={data.getCustomer.id}
+			/>
 		</>
 	);
 };

@@ -538,6 +538,7 @@ export interface GetAllOrdersVariables {
   skip?: number | null;
   status?: OrderStatus | null;
   orderByUrgency?: OrderByArg | null;
+  customerId?: string | null;
 }
 
 /* tslint:disable */

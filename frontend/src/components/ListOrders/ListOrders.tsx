@@ -94,7 +94,7 @@ export const ListOrders: React.FC<Props> = ({
 	const { data, loading, fetchMore, refetch } = useQuery<GetAllOrders, GetAllOrdersVariables>(
 		GET_ALL_ORDERS_QUERY,
 		{
-			variables: { first: pageSize },
+			variables: { first: pageSize, customerId },
 			fetchPolicy: 'network-only',
 		},
 	);
@@ -128,9 +128,7 @@ export const ListOrders: React.FC<Props> = ({
 		<>
 			<Row>
 				<Col md={18}>
-					<PageTitle>
-						{title || t('List orders')} {customerId}
-					</PageTitle>
+					<PageTitle>{title || t('List orders')}</PageTitle>
 				</Col>
 				<Col xs={24} md={6}>
 					<StyledFormItem style={{ marginTop: 10, marginRight: 25 }}>

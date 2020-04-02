@@ -413,6 +413,7 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
     }
     getAllOrders: { // args
+      customerId?: string | null; // ID
       first?: number | null; // Int
       orderByUrgency?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
       skip?: number | null; // Int

@@ -1,4 +1,4 @@
-import { queryField, arg } from 'nexus';
+import { queryField, arg, idArg } from 'nexus';
 import { paginationArgs, getPaginatedObjectType } from '../../utils/pagination';
 import { OrderStatus } from '../../types';
 
@@ -7,14 +7,20 @@ export const GetAllOrders = queryField('getAllOrders', {
   args: {
     ...paginationArgs,
     status: arg({ type: OrderStatus }),
+    customerId: idArg(),
     orderByUrgency: 'OrderByArg',
   },
   nullable: false,
-  resolve: async (_parent, { status, orderByUrgency, ...args }, ctx) => {
+  resolve: async (
+    _parent,
+    { status, orderByUrgency, customerId, ...args },
+    ctx,
+  ) => {
     const orders = await ctx.prisma.order.findMany({
       ...args,
       where: {
         status,
+        customerId,
       },
       orderBy: orderByUrgency
         ? { urgency: orderByUrgency }
@@ -23,6 +29,7 @@ export const GetAllOrders = queryField('getAllOrders', {
     const allMatchingOrders = await ctx.prisma.order.findMany({
       where: {
         status,
+        customerId,
       },
     });
     return {

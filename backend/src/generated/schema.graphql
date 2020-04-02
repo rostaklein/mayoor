@@ -208,7 +208,7 @@ enum ProductionLogType {
 type Query {
   getAllCustomers(first: Int, search: String, skip: Int): CustomerPaginated!
   getAllMaterials: [Material!]!
-  getAllOrders(first: Int, orderByUrgency: OrderByArg, skip: Int, status: OrderStatus): OrderPaginated!
+  getAllOrders(customerId: ID, first: Int, orderByUrgency: OrderByArg, skip: Int, status: OrderStatus): OrderPaginated!
   getAllUsers: [User!]!
   getCustomer(id: ID!): Customer
   getCustomerHelperInfo(partialIdentificationNumber: String!): CustomerHelperInfo!

@@ -1,8 +1,20 @@
 import gql from 'graphql-tag';
 
 export const GET_ALL_ORDERS_QUERY = gql`
-	query GetAllOrders($first: Int, $skip: Int, $status: OrderStatus, $orderByUrgency: OrderByArg) {
-		getAllOrders(first: $first, skip: $skip, status: $status, orderByUrgency: $orderByUrgency) {
+	query GetAllOrders(
+		$first: Int
+		$skip: Int
+		$status: OrderStatus
+		$orderByUrgency: OrderByArg
+		$customerId: ID
+	) {
+		getAllOrders(
+			first: $first
+			skip: $skip
+			status: $status
+			orderByUrgency: $orderByUrgency
+			customerId: $customerId
+		) {
 			totalCount
 			items {
 				id
