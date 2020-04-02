@@ -54,7 +54,7 @@ export const NewOrder: React.FC = () => {
 			onCompleted: (data) => {
 				message.success(
 					<>
-						{t('Order number {{number}} created.', {
+						{t('Order number {{number}} created', {
 							number: data.createOrder.number,
 						})}{' '}
 						<Button
