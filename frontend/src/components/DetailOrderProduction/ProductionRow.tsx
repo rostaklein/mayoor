@@ -1,6 +1,6 @@
 /* eslint-disable  @typescript-eslint/camelcase */
 import React, { useState } from 'react';
-import { Row, Col, Button, Select, Input } from 'antd';
+import { Row, Col, Button, Input } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 

@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { validateYupSchema, yupToFormErrors } from 'formik';
 
 import { getOrderValidationSchema } from './validateOrder';
-import { OrderFormValues, OrderFormItem } from './OrderForm';
+import { OrderFormValues } from './OrderForm';
 
 const mockedTFunction = (t: string) => t;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getFormikErrors = async (formValues: any) => {
 	try {
 		await validateYupSchema(formValues, getOrderValidationSchema(mockedTFunction));

@@ -3,27 +3,24 @@ import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from 'react-apollo';
 import { useParams } from 'react-router-dom';
 import { Button, message, Row, Col, Skeleton, Input } from 'antd';
-import { SaveOutlined, CheckOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { SaveOutlined } from '@ant-design/icons';
 
 import {
 	GetOrder,
 	GetOrderVariables,
 	UpdateOrderNote,
 	UpdateOrderNoteVariables,
-	UpdateOrderStatus,
-	UpdateOrderStatusVariables,
 	AddProductionLog,
 	AddProductionLogVariables,
 	ProductionLogType,
-	OrderStatus,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { DetailDescription } from '../DetailDescription/DetailDescription';
 import { GET_ORDER } from '../DetailOrder/queries';
-import { StyledLabel, StyledFormItem, StyledDivider } from '../FormItem/Form.styles';
+import { StyledLabel, StyledFormItem } from '../FormItem/Form.styles';
 
 import { OrderWrapper } from './DetailOrderProduction.styles';
-import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE, UPDATE_ORDER_STATUS } from './queries';
+import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE } from './queries';
 import { ProductionRow } from './ProductionRow';
 import { UpdateStatusButton } from './UpdateStatusButton';
 

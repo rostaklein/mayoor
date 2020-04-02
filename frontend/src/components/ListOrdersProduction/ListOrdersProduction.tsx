@@ -15,7 +15,6 @@ import {
 	GetAllOrders,
 	GetAllOrders_getAllOrders_items,
 	OrderByArg,
-	GetAllCustomersVariables,
 } from '../../__generated__/types';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { PaginatedTable } from '../PaginatedTable/PaginatedTable';

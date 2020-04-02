@@ -91,12 +91,13 @@ export const UserEdit: React.FC = () => {
 								initialValues={{ ...user, password: undefined }}
 								onSubmit={async (values) => {
 									setCurrentlyLoading(user.id);
-									const { id, __typename, ...rest } = values;
 									await updateUser({
 										variables: {
 											id: user.id,
 											input: {
-												...rest,
+												email: values.email,
+												name: values.name,
+												role: values.role,
 												password: values.password || undefined,
 											},
 										},

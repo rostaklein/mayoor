@@ -7,7 +7,7 @@ import { LockFilled, LoginOutlined, UserOutlined } from '@ant-design/icons';
 import { Input, Button } from 'antd';
 
 import LogoImage from '../../images/mayoor_logo.svg';
-import { LoginMutation, LoginMutationVariables, UserRole } from '../../__generated__/types';
+import { LoginMutation, LoginMutationVariables } from '../../__generated__/types';
 import { CenteredWrapper } from '../CenteredWrapper/CenteredWrapper';
 import { useAppDispatch } from '../../appContext/context';
 import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';

@@ -7,7 +7,7 @@ import { Alert, message } from 'antd';
 
 import { LoginForm } from './components/Login/LoginForm';
 import { ME_QUERY } from './components/Login/queries';
-import { MeQuery, UserRole } from './__generated__/types';
+import { MeQuery } from './__generated__/types';
 import { useAppDispatch, useAppState, AppContextProvider } from './appContext/context';
 import { MainWrapper } from './components/MainWrapper/MainWrapper';
 import { client } from './ApolloClient';
