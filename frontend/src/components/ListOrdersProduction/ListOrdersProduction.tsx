@@ -124,6 +124,7 @@ export const ListOrdersProduction: React.FC<{
 		<>
 			<PageTitle>{title}</PageTitle>
 			<PaginatedTable<GetAllOrders_getAllOrders_items>
+				pageSize={PAGE_SIZE}
 				columns={getColumns(t, linkSuffix)}
 				records={items}
 				totalCount={data?.getAllOrders.totalCount ?? 0}

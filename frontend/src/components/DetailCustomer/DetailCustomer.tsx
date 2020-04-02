@@ -17,6 +17,7 @@ import { UserFormValues, CustomerForm } from '../CustomerForm/CustomerForm';
 import { PageTitle } from '../MainWrapper/MainWrapper.styles';
 import { DetailDescription } from '../DetailDescription/DetailDescription';
 import { OrderActionsWrapper } from '../SharedStyles/OrderActions';
+import { ListOrders } from '../ListOrders/ListOrders';
 
 import { GET_CUSTOMER, UPDATE_CUSTOMER, DELETE_CUSTOMER } from './queries';
 
@@ -146,6 +147,7 @@ export const DetailCustomer: React.FC = () => {
 				}
 				initialValues={data.getCustomer}
 			/>
+			<ListOrders title={t('Customers orders')} pageSize={5} />
 		</>
 	);
 };

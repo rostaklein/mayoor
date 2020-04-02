@@ -99,6 +99,7 @@ export const ListCustomers: React.FC = () => {
 		<>
 			<PageTitle>{t('Customers')}</PageTitle>
 			<PaginatedTable<GetAllCustomers_getAllCustomers_items>
+				pageSize={PAGE_SIZE}
 				columns={getColumns(t)}
 				records={items}
 				totalCount={data?.getAllCustomers.totalCount ?? 0}

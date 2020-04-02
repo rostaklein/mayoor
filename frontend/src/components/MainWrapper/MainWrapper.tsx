@@ -115,13 +115,15 @@ export const MainWrapper: React.FC = () => {
 					<LanguageSwitch />
 					<Logout />
 				</S.StyledNavbar>
-				<Switch>
-					{routes.map(({ path, title, Component }) => (
-						<Route path={path} key={path}>
-							{Component ? Component : <S.PageTitle>{title}</S.PageTitle>}
-						</Route>
-					))}
-				</Switch>
+				<S.Content>
+					<Switch>
+						{routes.map(({ path, title, Component }) => (
+							<Route path={path} key={path}>
+								{Component ? Component : <S.PageTitle>{title}</S.PageTitle>}
+							</Route>
+						))}
+					</Switch>
+				</S.Content>
 			</S.Main>
 		</S.BodyWrapper>
 	);

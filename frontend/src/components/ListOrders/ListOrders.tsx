@@ -23,8 +23,6 @@ import { StyledFormItem, StyledLabel } from '../FormItem/Form.styles';
 import { GET_ALL_ORDERS_QUERY } from './queries';
 import { ItemsInfoRow } from './ItemsInfoRow';
 
-const PAGE_SIZE = 10;
-
 const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[] => [
 	{
 		title: t('Order nr'),
@@ -77,21 +75,33 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 	},
 ];
 
-export const ListOrders: React.FC = () => {
+type Props = {
+	pageSize?: number;
+	title?: string;
+	customerId?: string;
+};
+
+const DEFAULT_PAGE_SIZE = 10;
+
+export const ListOrders: React.FC<Props> = ({
+	pageSize = DEFAULT_PAGE_SIZE,
+	title,
+	customerId,
+}) => {
 	const { t } = useTranslation();
 	const [hasFilterActive, setHasFilterActive] = useState(false);
 
 	const { data, loading, fetchMore, refetch } = useQuery<GetAllOrders, GetAllOrdersVariables>(
 		GET_ALL_ORDERS_QUERY,
 		{
-			variables: { first: PAGE_SIZE },
+			variables: { first: pageSize },
 			fetchPolicy: 'network-only',
 		},
 	);
 
 	const paginationChangedHandler = (newPageNumber: number) => {
 		fetchMore({
-			variables: { first: PAGE_SIZE, skip: (newPageNumber - 1) * PAGE_SIZE },
+			variables: { first: pageSize, skip: (newPageNumber - 1) * pageSize },
 			updateQuery: (_, { fetchMoreResult }) => {
 				if (!fetchMoreResult) {
 					throw new Error('Failed to load more');
@@ -104,10 +114,10 @@ export const ListOrders: React.FC = () => {
 	const handleFilterStatusChange = (status: OrderStatus | '') => {
 		if (status === '') {
 			setHasFilterActive(false);
-			return refetch({ first: PAGE_SIZE, status: undefined });
+			return refetch({ first: pageSize, status: undefined });
 		}
 		setHasFilterActive(true);
-		refetch({ first: PAGE_SIZE, status });
+		refetch({ first: pageSize, status });
 	};
 
 	const items = data?.getAllOrders.items ?? [];
@@ -118,7 +128,9 @@ export const ListOrders: React.FC = () => {
 		<>
 			<Row>
 				<Col md={18}>
-					<PageTitle>{t('List orders')}</PageTitle>
+					<PageTitle>
+						{title || t('List orders')} {customerId}
+					</PageTitle>
 				</Col>
 				<Col xs={24} md={6}>
 					<StyledFormItem style={{ marginTop: 10, marginRight: 25 }}>
@@ -144,6 +156,7 @@ export const ListOrders: React.FC = () => {
 				totalCount={data?.getAllOrders.totalCount ?? 0}
 				onPaginationChange={paginationChangedHandler}
 				loading={loading}
+				pageSize={pageSize}
 				translations={{
 					emptyResult: hasFilterActive
 						? t('No orders found matching this filter.')

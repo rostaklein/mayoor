@@ -34,6 +34,10 @@ export const Main = styled.div`
 	flex-direction: column;
 `;
 
+export const Content = styled.div`
+	overflow: auto;
+`;
+
 export const StyledNavbar = styled.header`
 	padding: 5px 15px;
 	display: flex;

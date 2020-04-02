@@ -6,8 +6,6 @@ import { PaginationConfig } from 'antd/lib/pagination';
 
 import { StyledTableWrapper, StyledSearch } from '../SharedStyles/Table.styles';
 
-const PAGE_SIZE = 10;
-
 type Props<RecordType> = {
 	records: RecordType[];
 	totalCount: number;
@@ -20,6 +18,7 @@ type Props<RecordType> = {
 		emptyResult: string;
 	};
 	topRowContent?: React.ReactNode;
+	pageSize: number;
 };
 
 interface Record {
@@ -34,7 +33,7 @@ export function PaginatedTable<T extends Record>(props: Props<T>) {
 	const pagination: PaginationConfig = {
 		current: currentPageNumber,
 		total: props.totalCount,
-		pageSize: PAGE_SIZE,
+		pageSize: props.pageSize,
 		hideOnSinglePage: true,
 		showTotal: (total, range) =>
 			t('Showing {{start}}-{{end}} of {{total}} items', {
