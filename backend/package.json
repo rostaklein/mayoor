@@ -15,7 +15,9 @@
     "database:migrate": "npx prisma migrate up --experimental",
     "database:seed": "ts-node ./prisma/seed.ts",
     "start:full": "npm run database:migrate && npm run database:seed && npm run start",
-    "start:full:dev": "npm run database:migrate && npm run database:seed && npm run dev"
+    "start:full:dev": "npm run database:migrate && npm run database:seed && npm run dev",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
   },
   "keywords": [
     "order",
@@ -48,6 +50,14 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.2",
     "ts-node-dev": "1.0.0-pre.44"
   },
   "prettier": {

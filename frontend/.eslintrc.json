@@ -1,12 +1,13 @@
 {
   "root": true,
   "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended"
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["react-hooks", "import", "import-alias"],
+  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks", "import", "import-alias"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -15,7 +16,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "settings": {
     "react": {
