@@ -9,5 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: make e2e test
-        working-directory: backend
         run: make e2e
