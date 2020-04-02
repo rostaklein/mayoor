@@ -1,9 +1,7 @@
 name: e2e tests
 
-on:
-  push:
-    paths:
-      - 'backend/**'
+on: [push]
+
 jobs:
   test:
     runs-on: ubuntu-latest
