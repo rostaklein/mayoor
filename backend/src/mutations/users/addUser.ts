@@ -1,10 +1,4 @@
-import {
-  stringArg,
-  mutationField,
-  enumType,
-  arg,
-  inputObjectType,
-} from 'nexus';
+import { mutationField, enumType, arg, inputObjectType } from 'nexus';
 import { hash } from 'bcrypt';
 import { NexusGenEnums } from '../../generated/nexus';
 

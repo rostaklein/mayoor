@@ -1,4 +1,4 @@
-import { extendType, objectType } from 'nexus';
+import { objectType } from 'nexus';
 import { NexusGenEnums } from '../generated/nexus';
 import { OrderStatus } from '.';
 
