@@ -60,9 +60,9 @@ export const UpdateOrder = mutationField('updateOrder', {
       inputItemIds.includes(id),
     );
 
-    itemsToUpdate.forEach(async itemToUpdate => {
+    itemsToUpdate.forEach(async (itemToUpdate) => {
       const updateData = input.items?.find(
-        inputItem => inputItem.id === itemToUpdate.id,
+        (inputItem) => inputItem.id === itemToUpdate.id,
       );
 
       if (updateData) {

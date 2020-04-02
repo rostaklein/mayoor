@@ -1,4 +1,10 @@
-import { stringArg, mutationField, enumType, arg, inputObjectType } from 'nexus';
+import {
+  stringArg,
+  mutationField,
+  enumType,
+  arg,
+  inputObjectType,
+} from 'nexus';
 import { hash } from 'bcrypt';
 import { NexusGenEnums } from '../../generated/nexus';
 
@@ -18,13 +24,13 @@ export const CreateUserInput = inputObjectType({
     t.string('password', { nullable: false });
     t.field('role', { type: UserRole });
     t.string('name');
-  }
-})
+  },
+});
 
 export const AddUser = mutationField('addUser', {
   type: 'User',
   args: {
-    input: arg({ type: CreateUserInput, nullable: false })
+    input: arg({ type: CreateUserInput, nullable: false }),
   },
   resolve: async (_, { input: { email, name, password, role } }, ctx) => {
     const existingUser = await ctx.prisma.user.findOne({ where: { email } });

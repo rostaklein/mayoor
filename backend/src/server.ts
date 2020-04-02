@@ -11,7 +11,7 @@ const schemaWithMiddleware = applyMiddleware(schema, permissions);
 const apolloServer = new ApolloServer({
   schema: schemaWithMiddleware,
   context: createContext,
-  formatError: error => {
+  formatError: (error) => {
     console.error(`Apollo Server Error: ` + error.message);
     return error;
   },

@@ -20,7 +20,7 @@ export const User = objectType({
     t.model.email();
     t.field('role', {
       type: UserRole,
-      resolve: a => a.role as NexusGenEnums['UserRole'],
+      resolve: (a) => a.role as NexusGenEnums['UserRole'],
     });
   },
 });
@@ -167,7 +167,7 @@ export const ProductionLog = objectType({
     t.model.orderItem();
     t.field('action', {
       type: ProductionLogType,
-      resolve: a => a.action as NexusGenEnums['ProductionLogType'],
+      resolve: (a) => a.action as NexusGenEnums['ProductionLogType'],
     });
     t.model.pieces();
     t.model.createdAt();

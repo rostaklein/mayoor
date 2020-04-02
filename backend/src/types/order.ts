@@ -8,7 +8,7 @@ export const Order = objectType({
     t.model.id();
     t.model.number();
     t.field('status', {
-      resolve: a => a.status.toUpperCase() as NexusGenEnums['OrderStatus'],
+      resolve: (a) => a.status.toUpperCase() as NexusGenEnums['OrderStatus'],
       type: OrderStatus,
     });
     t.model.urgency();

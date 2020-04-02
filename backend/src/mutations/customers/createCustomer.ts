@@ -28,14 +28,14 @@ export const CreateCustomer = mutationField('createCustomer', {
     const user = await ctx.user.getCurrentUser();
 
     const { addresses, ...otherArgs } = input;
-    const primaryAddresses = addresses?.filter(address => address.isPrimary);
+    const primaryAddresses = addresses?.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
       throw new UserInputError('Only one address can be primary.');
     }
 
     const newAddresses: AddressCreateManyWithoutCustomerInput = {
-      create: addresses?.map(addressInput => ({
+      create: addresses?.map((addressInput) => ({
         ...addressInput,
         createdBy: { connect: { id: user.id } },
       })),

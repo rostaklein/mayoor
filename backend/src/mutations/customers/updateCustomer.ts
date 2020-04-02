@@ -35,13 +35,13 @@ export const UpdateCustomer = mutationField('updateCustomer', {
       );
     }
     const { addresses, ...otherArgs } = input;
-    const primaryAddresses = addresses?.filter(address => address.isPrimary);
+    const primaryAddresses = addresses?.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
       throw new UserInputError('Only one address can be primary.');
     }
 
-    addresses?.map(async address => {
+    addresses?.map(async (address) => {
       await ctx.prisma.address.update({
         where: { id: address.id },
         data: address,
