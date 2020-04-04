@@ -1,6 +1,9 @@
 name: backend CI
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'backend/**'
 
 jobs:
   build:
