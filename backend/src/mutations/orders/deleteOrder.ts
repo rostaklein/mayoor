@@ -6,6 +6,9 @@ export const DeleteOrder = mutationField('deleteOrder', {
     id: idArg({ nullable: false }),
   },
   resolve: async (_, { id }, ctx) => {
-    return ctx.prisma.order.delete({ where: { id } });
+    return ctx.prisma.order.update({
+      where: { id },
+      data: { deleted: true },
+    });
   },
 });

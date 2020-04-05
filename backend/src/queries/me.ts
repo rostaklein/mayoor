@@ -8,7 +8,8 @@ export const Me = queryField('me', {
     const user = await ctx.prisma.user.findOne({
       where: { id: userContext.id },
     });
-    if (!user) {
+
+    if (!user || user.deleted) {
       throw new Error('User not found');
     }
 

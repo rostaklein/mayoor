@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { getUserContext } from './auth';
 import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ log: ['query', 'info', 'warn'] });
 
 export type UserDetails = {
   id: string;

@@ -1,9 +1,14 @@
-import { queryField } from 'nexus';
+import { queryField, booleanArg } from 'nexus';
 
 export const GetAllMaterials = queryField('getAllMaterials', {
   type: 'Material',
   list: true,
-  resolve: async (_, __, ctx) => {
-    return ctx.prisma.material.findMany();
+  args: {
+    deleted: booleanArg({ default: false }),
+  },
+  resolve: async (_, args, ctx) => {
+    return ctx.prisma.material.findMany({
+      where: { deleted: args.deleted || false },
+    });
   },
 });

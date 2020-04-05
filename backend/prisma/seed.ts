@@ -31,5 +31,5 @@ async function seed() {
 }
 
 seed().then(() => {
-  process.exit();
+  prisma.disconnect();
 });

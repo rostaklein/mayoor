@@ -6,6 +6,9 @@ export const DeleteMaterial = mutationField('deleteMaterial', {
     id: idArg({ nullable: false }),
   },
   resolve: async (_, { id }, ctx) => {
-    return ctx.prisma.material.delete({ where: { id } });
+    return ctx.prisma.material.update({
+      where: { id },
+      data: { deleted: true },
+    });
   },
 });

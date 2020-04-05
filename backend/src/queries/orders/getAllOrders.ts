@@ -21,6 +21,7 @@ export const GetAllOrders = queryField('getAllOrders', {
       where: {
         status,
         customerId,
+        deleted: false,
       },
       orderBy: orderByUrgency
         ? { urgency: orderByUrgency }
@@ -30,6 +31,7 @@ export const GetAllOrders = queryField('getAllOrders', {
       where: {
         status,
         customerId,
+        deleted: false,
       },
     });
     return {

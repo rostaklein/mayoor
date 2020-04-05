@@ -412,6 +412,9 @@ export interface NexusGenArgTypes {
       search?: string | null; // String
       skip?: number | null; // Int
     }
+    getAllMaterials: { // args
+      deleted?: boolean | null; // Boolean
+    }
     getAllOrders: { // args
       customerId?: string | null; // ID
       first?: number | null; // Int

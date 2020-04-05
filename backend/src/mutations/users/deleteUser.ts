@@ -6,6 +6,9 @@ export const DeleteUser = mutationField('deleteUser', {
     id: idArg({ nullable: false }),
   },
   resolve: async (_, { id }, ctx) => {
-    return ctx.prisma.user.delete({ where: { id } });
+    return ctx.prisma.user.update({
+      where: { id },
+      data: { deleted: true },
+    });
   },
 });
