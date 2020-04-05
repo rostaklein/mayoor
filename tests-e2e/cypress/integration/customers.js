@@ -1,6 +1,6 @@
 import Login from '../pages/login';
 
-describe('Customers CRUD', function () {
+describe.skip('Customers CRUD', function () {
   const login = new Login();
 
   beforeEach(function () {
