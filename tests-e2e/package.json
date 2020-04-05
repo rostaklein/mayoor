@@ -1,0 +1,16 @@
+{
+  "name": "tests-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^4.3.0"
+  },
+  "scripts": {
+    "dev": "npx cypress open -P ../tests-e2e",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

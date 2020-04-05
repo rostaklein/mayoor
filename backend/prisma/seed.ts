@@ -5,13 +5,13 @@ const prisma = new PrismaClient();
 async function seed() {
   const createdAdminUser = await prisma.user.create({
     data: {
-      email: 'user',
-      password: '$2b$10$BxSwFfG7kUCgb9EO1TMiyOscC22GQ8RDe56LFYWqY1SOPvD6A.H.K', // decoded password: ok
-      role: 'EXECUTIVE',
+      email: 'admin',
+      password: '$2b$10$LwzufdvFedsTXeHz122DxuqKv/X6GEs48dtErdW1FD0V0I/ZwUrKe', // decoded password: admin
+      role: 'EXECUTIVE', // highest permission role
       name: 'John Doe',
     },
   });
-  console.log('Prisma seed: Created admin user (all permissions)');
+  console.log('Prisma seed: Created EXECUTIVE user (all permissions)');
   console.log(createdAdminUser);
 
   const basicMaterial = await prisma.material.create({

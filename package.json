@@ -1,12 +1,11 @@
 {
   "name": "mayoor",
+  "description": "This package.json is used for Heroku build only. Check ./frontend and ./backend and their own package.json",
   "engines": {
     "node": ">=10.0.0"
   },
   "scripts": {
     "install": "(cd backend && npm i) & (cd frontend && npm i)",
-    "heroku-postbuild": "(cd frontend && npm run build) && (cd backend && npm run build)",
-    "start": "cd backend && npm run start",
-    "dev": "cd backend && npm run dev & (cd frontend && npm start)"
+    "heroku-postbuild": "(cd frontend && npm run build) && (cd backend && npm run build)"
   }
 }

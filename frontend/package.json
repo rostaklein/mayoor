@@ -54,7 +54,6 @@
     "test": "react-app-rewired test",
     "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=../backend/src/generated/schema.graphql --target=typescript",
     "extract:translations": "i18next",
-    "test:e2e:dev": "npx cypress open -P ../tests-e2e",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
   },
@@ -77,7 +76,6 @@
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "babel-plugin-emotion": "^10.0.27",
-    "cypress": "^4.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import-alias": "^1.2.0",
