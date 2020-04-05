@@ -37,6 +37,7 @@ export const FormInput: React.FC<Props> = ({ icon, label, name, withLabel, ...re
 					name={name}
 					onChange={onChange}
 					value={getValue()}
+					data-test-id={`form-item-${name}`}
 					{...rest}
 				/>
 			</>

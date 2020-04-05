@@ -57,6 +57,7 @@ export const NewCustomer: React.FC = () => {
 						htmlType="submit"
 						loading={loading}
 						style={{ marginTop: 10 }}
+						data-test-id="add-customer-submit-button"
 					>
 						{t('Add customer')}
 					</Button>

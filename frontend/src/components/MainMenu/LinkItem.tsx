@@ -38,7 +38,7 @@ interface Props {
 
 export const LinkItem: React.FC<Props> = ({ icon, name, to }) => {
 	return (
-		<MenuLinkItem to={to}>
+		<MenuLinkItem to={to} data-test-id={`menu-link-item-${to}`}>
 			{icon}
 			{name}
 		</MenuLinkItem>

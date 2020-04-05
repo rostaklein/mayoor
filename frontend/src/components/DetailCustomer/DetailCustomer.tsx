@@ -120,7 +120,11 @@ export const DetailCustomer: React.FC = () => {
 								okText={t('Delete')}
 								okType="danger"
 							>
-								<Button icon={<DeleteOutlined />} loading={deleteLoading}>
+								<Button
+									icon={<DeleteOutlined />}
+									loading={deleteLoading}
+									data-test-id="customer-delete-button"
+								>
 									{t('Delete')}
 								</Button>
 							</Popconfirm>
@@ -141,6 +145,7 @@ export const DetailCustomer: React.FC = () => {
 						htmlType="submit"
 						loading={loading}
 						style={{ marginTop: 10 }}
+						data-test-id="save-customer"
 					>
 						{t('Save customer')}
 					</Button>
