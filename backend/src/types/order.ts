@@ -16,7 +16,7 @@ export const Order = objectType({
     t.model.items({ ordering: { createdAt: true } });
     t.model.totalPrice();
     t.model.totalTax();
-    t.int('totalSize', {
+    t.float('totalSize', {
       resolve: async (order, _, ctx) => {
         const orderItems = await ctx.prisma.orderItem.findMany({
           where: { order: { id: order.id } },

@@ -121,7 +121,7 @@ type Order {
   shippedAt: DateTime
   status: OrderStatus!
   totalPrice: Float!
-  totalSize: Int!
+  totalSize: Float!
   totalTax: Float!
   updatedAt: DateTime!
   urgency: Int!
