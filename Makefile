@@ -17,3 +17,4 @@ E2E_DC = docker-compose -f docker-compose.e2e-env.yml -f docker-compose.cypress.
 e2e:
 	$(E2E_DC) build
 	$(E2E_DC) up --exit-code-from cypress
+	$(E2E_DC) down
