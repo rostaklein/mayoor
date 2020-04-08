@@ -1,6 +1,4 @@
 {
-  "pluginsFile": false,
-  "supportFile": false,
   "baseUrl": "http://localhost:3000",
   "projectId": "a9nxk5"
 }
