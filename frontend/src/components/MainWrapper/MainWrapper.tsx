@@ -102,7 +102,7 @@ export const MainWrapper: React.FC = () => {
 	}, [location, i18n.language]);
 
 	return (
-		<S.BodyWrapper>
+		<S.BodyWrapper data-test-id="main-body-wrapper">
 			<S.Aside>
 				<S.LogoWrapper>
 					<S.Logo src={LogoImage} />

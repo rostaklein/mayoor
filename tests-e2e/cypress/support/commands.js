@@ -1,27 +1,25 @@
+const graphqlUrl = Cypress.env('GRAPHQL_URL') || '/graphql';
 Cypress.Commands.add('login', () => {
-  cy.request('POST', Cypress.env('GRAPHQL_URL'), {
-    operationName: 'LoginMutation',
-    variables: { email: 'admin', password: 'admin' },
-    query:
-      'mutation LoginMutation($email: String!, $password: String!) {login(email: $email, password: $password) {  user {    name    id    email    role    __typename  }  token  __typename}}',
-  })
+  return cy
+    .request('POST', graphqlUrl, {
+      operationName: 'LoginMutation',
+      variables: { email: 'admin', password: 'admin' },
+      query:
+        'mutation LoginMutation($email: String!, $password: String!) {login(email: $email, password: $password) {  user {    name    id    email    role    __typename  }  token  __typename}}',
+    })
     .its('body')
-    .then(
-      ({
-        data: {
-          login: { token },
-        },
-      }) => {
-        window.localStorage.setItem('auth-token', token);
-      },
-    );
+    .then((response) => {
+      window.localStorage.setItem('auth-token', response.data.login.token);
+      cy.visit('/');
+      cy.get('[data-test-id="main-body-wrapper"', { timeout: 3000 });
+    });
 });
 
 Cypress.Commands.add('sendMutation', (body) => {
   const authToken = window.localStorage.getItem('auth-token');
   return cy.request({
     method: 'POST',
-    url: Cypress.env('GRAPHQL_URL'),
+    url: graphqlUrl,
     body,
     headers: {
       Authorization: authToken ? `Bearer ${authToken}` : undefined,
@@ -63,5 +61,8 @@ Cypress.Commands.add('addCustomer', (companyName) => {
         'mutation CreateCustomerMutation($input: CreateCustomerInput!) {  createCustomer(input: $input) {    ...CustomerFragment    __typename  }}fragment CustomerFragment on Customer {  id  name  identificationNumber  personName  email  phone  __typename}',
     })
     .its('body')
-    .then((response) => response.data.createCustomer.id);
+    .then((response) => {
+      cy.log(response);
+      cy.log(JSON.stringify(response));
+    });
 });

@@ -9,15 +9,6 @@ services:
       POSTGRES_DB: db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pwd
-  adminer-test:
-    image: adminer
-    restart: always
-    environment:
-      ADMINER_DEFAULT_DB_DRIVER: pgsql
-      ADMINER_DEFAULT_DB_HOST: db
-      ADMINER_DEFAULT_DB_NAME: db
-    ports:
-      - 8090:8080
   app:
     build:
       context: .
@@ -26,6 +17,7 @@ services:
     environment:
       - PORT=8080
       - DATABASE_URL=postgresql://user:pwd@db-test:5432/db
+      - CLIENT_SECRET=some_strang3_s3cr3t
     ports:
       - 8080:8080
     volumes:

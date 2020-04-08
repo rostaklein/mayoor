@@ -2,7 +2,6 @@ describe('Customers CRUD', function () {
   beforeEach(() => {
     cy.viewport('macbook-15');
     cy.login();
-    cy.visit('/');
   });
 
   it('should create customer', () => {

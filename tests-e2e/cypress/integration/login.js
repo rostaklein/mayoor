@@ -1,11 +1,14 @@
 import Login from '../pages/login';
 
-describe('Login flow', function () {
-  beforeEach(function () {
+describe('Login flow', () => {
+  before(() => {
+    cy.wait(2000);
+  });
+  beforeEach(() => {
     cy.viewport('macbook-15');
   });
 
-  it('can login', function () {
+  it('can login', () => {
     const login = new Login();
     login.visit();
 

@@ -18,3 +18,6 @@ e2e:
 	$(E2E_DC) build
 	$(E2E_DC) up --exit-code-from cypress
 	$(E2E_DC) down
+
+clear-e2e:
+	$(E2E_DC) down

@@ -8,8 +8,7 @@
     "cypress": "^4.3.0"
   },
   "scripts": {
-    "dev": "npx cypress open -P . --env GRAPHQL_URL=http://localhost:4444/graphql",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx cypress open -P . --env GRAPHQL_URL=http://localhost:4444/graphql"
   },
   "author": "",
   "license": "ISC"
