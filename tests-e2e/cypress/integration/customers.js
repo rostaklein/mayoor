@@ -7,16 +7,9 @@ describe('Customers CRUD', function () {
     cy.viewport('macbook-15');
   });
 
-  before(() => {
-    login.visit();
-
-    login.getLoginUserName().type('admin');
-    login.getLoginPassword().type('admin');
-
-    login.getLoginButton().click();
-  });
-
   it('should create, list, update and delete customer', () => {
+    login.fullLogin();
+
     cy.get('[data-test-id="menu-link-item-/customers/new"]').click();
     cy.get('[data-test-id="form-item-name"]').type('Test Customer Name');
     cy.get('[data-test-id="add-customer-submit-button"]').click();
