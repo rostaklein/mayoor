@@ -2,7 +2,7 @@
 
 Modern order management system built with the latest tech stack.
 
-## Whats included?
+## Whats included? 🚀
 
 - orders + customers CRUD
   - forms, lists
@@ -26,7 +26,7 @@ Modern order management system built with the latest tech stack.
 
 ## Live app demo
 
-Visit [https://mayoor.digital/](http://mayoor.digital) - and log in with username: `admin`, password: `admin`
+🌍 Visit [https://mayoor.digital/](http://mayoor.digital) - and log in with username: `admin`, password: `admin`
 
 ## Screenshots
 
@@ -36,16 +36,24 @@ Visit [https://mayoor.digital/](http://mayoor.digital) - and log in with usernam
 
 ## Why does it exist?
 
-The main motivation is to provide a codebase for an order management system that **you can build** on top of.
+The main motivation is to provide a codebase for an order management system that **you can build on top of**.
 
-> This project was built with a main focus as a support software for a company that prints PVC banners etc. Thats the reason why you might find some business specific pieces of code. The company is based in Czechia, thats also the reason why the default currency is CZK and there are Czech translations.
+> This project was built with a main focus as a support software for a company that prints PVC banners etc. Thats the reason why you might find some business specific pieces of code. The company is based in Czechia 🇨🇿, thats also the reason why the default currency is CZK and there are Czech translations.
+
+> Also this project is a result of my masters thesis on the University of Economics in 2020 👨‍🎓
 
 ## Getting started
 
 To get the up and running in development mode, you need to follow these two:
 
-- [frontend](./frontend/README.md)
+Clone this repository:
+
+`git clone https://github.com/prisma/prisma.git`
+
+🏃‍♂️Get both parts running:
+
 - [backend](./backend/README.md)
+- [frontend](./frontend/README.md)
 
 ## License
 

@@ -6,7 +6,7 @@ Built on top of `create-react-app`
 
 1. `npm install` - install the dependencies
 2. `npm run dev` - run app in dev mode
-3. open [http://localhost:3000](http://localhost:3000) to view it in the browser, HMR enabled
+3. 🚀open [http://localhost:3000](http://localhost:3000) to view it in the browser, HMR enabled 🚀
 
 ## Running tests & lints
 
