@@ -15,7 +15,7 @@ describe('Orders CRUD', function () {
 
     //assign customer
     cy.get('[data-test-id="menu-link-item-/orders/new"]').click();
-    cy.get('[data-test-id="customer-picker"]').click().type('Test Order');
+    cy.get('[data-test-id="customer-picker"]').click();
     cy.wait(500);
     cy.contains('Test Order Customer Company 1').click();
 
