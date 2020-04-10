@@ -75,6 +75,7 @@ export const OrderItemField: React.FC<FieldProps> = ({ index, arrayHelpers }) =>
 						icon={<CalculatorOutlined />}
 						shape="circle-outline"
 						type="link"
+						data-test-id={`${itemName}-calculate-button`}
 						disabled={!calculationEnabled}
 						onClick={calculateClickHandler}
 					></Button>

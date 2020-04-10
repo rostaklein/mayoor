@@ -65,9 +65,9 @@ const getColumns = (t: TFunction): ColumnProps<GetAllOrders_getAllOrders_items>[
 	{
 		key: 'actions',
 		width: 40,
-		render: (_, record) => {
+		render: (_, record, i) => {
 			return (
-				<Link to={`/orders/${record.number}`}>
+				<Link to={`/orders/${record.number}`} data-test-id={`order-list-go-to-button-${i}`}>
 					<Button icon={<RightCircleOutlined />} type="link"></Button>
 				</Link>
 			);

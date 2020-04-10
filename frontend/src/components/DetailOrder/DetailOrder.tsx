@@ -130,7 +130,11 @@ export const DetailOrder: React.FC = () => {
 									okText={t('Delete')}
 									okType="danger"
 								>
-									<Button icon={<DeleteOutlined />} loading={deleteLoading}>
+									<Button
+										icon={<DeleteOutlined />}
+										loading={deleteLoading}
+										data-test-id="order-delete-button"
+									>
 										{t('Delete')}
 									</Button>
 								</Popconfirm>
@@ -156,6 +160,7 @@ export const DetailOrder: React.FC = () => {
 							htmlType="submit"
 							style={{ marginTop: 10 }}
 							loading={loading}
+							data-test-id="save-order-submit-button"
 						>
 							{t('Save order')}
 						</Button>

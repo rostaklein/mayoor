@@ -45,6 +45,7 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
 				loading={loading}
 				allowClear
 				notFoundContent={t('No material found')}
+				data-test-id={name}
 			>
 				{(hasFilteredItems ? filteredItems : materials).map((material) => (
 					<Select.Option key={material.id} value={material.id}>

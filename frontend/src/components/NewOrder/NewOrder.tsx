@@ -97,6 +97,7 @@ export const NewOrder: React.FC = () => {
 						htmlType="submit"
 						style={{ marginTop: 10 }}
 						loading={loading}
+						data-test-id="add-order-submit-button"
 					>
 						{t('Add order')}
 					</Button>

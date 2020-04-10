@@ -74,6 +74,7 @@ export const CustomerPicker: React.FC<{ extraCustomer: CustomerOption | null }> 
 				loading={loading}
 				allowClear
 				notFoundContent={t('Not found')}
+				data-test-id="customer-picker"
 			>
 				{extraCustomer && renderCustomerOption(extraCustomer)}
 				{customers.map(renderCustomerOption)}

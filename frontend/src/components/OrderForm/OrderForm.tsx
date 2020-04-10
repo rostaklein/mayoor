@@ -141,6 +141,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 												setFieldValue('totalTax', totalTax);
 											}}
 											style={{ marginLeft: 10 }}
+											data-test-id="order-sum-items-button"
 										>
 											{t('Sum items')}
 										</Button>
@@ -158,6 +159,7 @@ export const OrderForm: React.FC<Props> = (props) => {
 									name="note"
 									placeholder={t('note_placeholder')}
 									onChange={handleChange}
+									data-test-id="order-form-note"
 									value={values.note || ''}
 								/>
 							</StyledFormItem>

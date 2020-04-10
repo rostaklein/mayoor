@@ -15,7 +15,7 @@ Cypress.Commands.add('login', () => {
     });
 });
 
-Cypress.Commands.add('sendMutation', (body) => {
+Cypress.Commands.add('callGraphQL', (body) => {
   const authToken = window.localStorage.getItem('auth-token');
   return cy.request({
     method: 'POST',
@@ -28,41 +28,87 @@ Cypress.Commands.add('sendMutation', (body) => {
 });
 
 Cypress.Commands.add('addCustomer', (companyName) => {
-  return cy
-    .sendMutation({
-      operationName: 'CreateCustomerMutation',
-      variables: {
-        input: {
-          name: companyName || 'Company Inc.',
-          identificationNumber: '49842154',
-          taxIdentificationNumber: '14587458',
-          personName: 'Jack Smith',
-          phone: '741 852 963',
-          email: 'email@somewhere.com',
-          note: 'Long customer note',
-          allowedBankPayments: false,
-          addresses: [
-            {
-              isPrimary: true,
-              street: 'Somewhere',
-              city: 'Wherever',
-              postNumber: '123',
-            },
-            {
-              isPrimary: false,
-              street: 'Somewhere',
-              city: 'Wherever',
-              postNumber: '123',
-            },
-          ],
-        },
+  return cy.callGraphQL({
+    operationName: 'CreateCustomerMutation',
+    variables: {
+      input: {
+        name: companyName || 'Company Inc.',
+        identificationNumber: '49842154',
+        taxIdentificationNumber: '14587458',
+        personName: 'Jack Smith',
+        phone: '741 852 963',
+        email: 'email@somewhere.com',
+        note: 'Long customer note',
+        allowedBankPayments: false,
+        addresses: [
+          {
+            isPrimary: true,
+            street: 'Somewhere',
+            city: 'Wherever',
+            postNumber: '123',
+          },
+          {
+            isPrimary: false,
+            street: 'Somewhere',
+            city: 'Wherever',
+            postNumber: '123',
+          },
+        ],
       },
-      query:
-        'mutation CreateCustomerMutation($input: CreateCustomerInput!) {  createCustomer(input: $input) {    ...CustomerFragment    __typename  }}fragment CustomerFragment on Customer {  id  name  identificationNumber  personName  email  phone  __typename}',
-    })
-    .its('body')
-    .then((response) => {
-      cy.log(response);
-      cy.log(JSON.stringify(response));
+    },
+    query:
+      'mutation CreateCustomerMutation($input: CreateCustomerInput!) {  createCustomer(input: $input) {    ...CustomerFragment    __typename  }}fragment CustomerFragment on Customer {  id  name  identificationNumber  personName  email  phone  __typename}',
+  });
+});
+
+Cypress.Commands.add('addMaterial', (materialName) => {
+  return cy.callGraphQL({
+    operationName: 'CreateMaterial',
+    variables: { name: materialName || 'Banner 510', price: 199 },
+    query:
+      'mutation CreateMaterial($name: String!, $price: Float!) {  createMaterial(name: $name, price: $price) {    id    name    price    updatedAt    __typename  }}',
+  });
+});
+
+Cypress.Commands.add('addOrder', () => {
+  return cy.addCustomer().then((response) => {
+    const customerId = response.body.data.createCustomer.id;
+    cy.addMaterial().then((response) => {
+      const materialId = response.body.data.createMaterial.id;
+      cy.callGraphQL({
+        operationName: 'GetHighestOrderNumber',
+        variables: {},
+        query: 'query GetHighestOrderNumber {  getHighestOrderNumber}',
+      }).then((response) => {
+        const newOrderNumber = response.body.data.getHighestOrderNumber;
+        cy.callGraphQL({
+          operationName: 'CreateOrder',
+          variables: {
+            number: newOrderNumber + 1,
+            input: {
+              urgency: 1,
+              status: 'NEW',
+              customerId,
+              totalPrice: 200,
+              totalTax: 20,
+              note: '',
+              items: [
+                {
+                  materialId,
+                  name: 'test',
+                  pieces: 1,
+                  width: 2,
+                  height: 1,
+                  totalPrice: 100,
+                  totalTax: 20,
+                },
+              ],
+            },
+          },
+          query:
+            'mutation CreateOrder($number: Int!, $input: OrderInput!) {  createOrder(number: $number, input: $input) {    id    number    __typename  }}',
+        });
+      });
     });
+  });
 });
