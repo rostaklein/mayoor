@@ -8,7 +8,7 @@
     "build": "npm -s run clean && npm -s run generate && tsc",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "npx prisma generate",
-    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema",
+    "generate:nexus": "ts-node --transpile-only src/schema",
     "postinstall": "npm -s run generate",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/server",
     "apollo:push": "apollo service:push --endpoint=http://localhost:4444/graphql",
