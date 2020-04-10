@@ -52,7 +52,7 @@
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
     "test": "react-app-rewired test",
-    "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --includes=./src/**/queries.ts --addTypename --localSchemaFile=../backend/src/generated/schema.graphql --target=typescript",
+    "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --addTypename --localSchemaFile=../backend/src/generated/schema.graphql --target=typescript",
     "extract:translations": "i18next",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"

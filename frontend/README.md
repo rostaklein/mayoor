@@ -1,35 +1,48 @@
-## Mayoor frontend
+# mayoor frontend
 
-## Tech stack
+Built on top of `create-react-app`
 
-- typescript
-- react
-- emotion (styled-components)
-- eslint, prettier
+## Development mode
 
-## Available Scripts
+1. `npm install` - install the dependencies
+2. `npm run dev` - run app in dev mode
+3. open [http://localhost:3000](http://localhost:3000) to view it in the browser, HMR enabled
 
-In the project directory, you can run:
+## Running tests & lints
 
-### `npm start`
+`npm run test` and `npm run lint`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Apollo codegen
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+To have your GraphQL operations properly typed, you have to generate the typescript types via following:
 
-### `npm test`
+1. add a graphql query the component (preferably to `queries.ts` next to the component file)
+2. run `npm run generate:types`
+3. import the generated type to your component from `./src/__generated__/types.ts`
 
-Launches the test runner in the interactive watch mode.
+## Translations
 
-### `npm run build`
+### Adding a language
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. add a language locale string to `locales` in `./i18next-parser.config.js`
+2. add translations JSON import to resources in `./src/i18n.ts`
+3. translate the whole JSON to the language you have chosen
+4. add/change the languages available to select in `./src/components/LanguageSwitch/LanguageSwitch.tsx`
 
-The build is minified and the filenames include the hashes.<br />
+### Adding a translated string
 
----
+If you add any text string and you want that string translated, follow these steps:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. add a translated string to a component, e.g.:
+
+```tsx
+import { useTranslation } from 'react-i18next';
+...
+const { t } = useTranslation();
+return <div>{t('This is going to be translated')}</div>
+...
+```
+
+2. save that file
+3. run `npm run extract:translations`
+4. if the string wasnt translated yet, it will appear in `./src/locales/cs/translation.json`
