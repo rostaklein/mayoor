@@ -19,6 +19,9 @@ export const StyledFormItem = styled(Form.Item)`
 	line-height: normal;
 	display: flex;
 	flex-direction: column;
+	.ant-form-item-label {
+		text-align: left;
+	}
 	.ant-form-item-control {
 		line-height: normal;
 		margin-bottom: 8px;
