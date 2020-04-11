@@ -28,3 +28,11 @@ services:
       - /frontend/node_modules
     depends_on:
       - db-test
+  cypress:
+    image: 'cypress/included:3.2.0'
+    entrypoint: /e2e/scripts/wait_for_it.sh app:8080 -- cypress run --record --key 5619557e-5109-4f0c-8043-d9565867395b
+    environment:
+      - CYPRESS_baseUrl=http://app:8080
+    working_dir: /e2e
+    volumes:
+      - ./tests-e2e:/e2e
