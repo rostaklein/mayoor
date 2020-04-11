@@ -15,6 +15,8 @@ The recommended way is to spin it up using Docker. To do so:
    `docker ps -a | grep 54320`
    (check that postgres is running)
 
+This docker-compose will spin up and Adminer web database access, so you can check how does the database look like via web UI. The URL is: [http://localhost:8089/?pgsql=db&username=user&db=db](http://localhost:8089/?pgsql=db&username=user&db=db) password is `pwd`
+
 ---
 
 If you dont want to use docker, you can use a remote hosted database for dev env as well (not recommended, though!). Free plans for postgre e.g. here - [https://www.elephantsql.com/](https://www.elephantsql.com/plans.html) are ok for this kind of app.
@@ -59,7 +61,8 @@ E.g. adding a new database table:
 
 ## Working with Nexus
 
-1. e.g. add a new GraphQL query
-2. run
+1. e.g. add a new GraphQL query to `./src/queries/material`
+2. add it to the index file in `./src/queries/index.ts`
+3. run
    `npm run generate:nexus`
-3. it should generate types for all of the queries arguments, return types etc. into `./src/generated/nexus.ts`
+4. it should generate types for all of the queries arguments, return types etc. into `./src/generated/nexus.ts`
