@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import LogoImage from '../../images/mayoor_logo.svg';
@@ -122,6 +122,7 @@ export const MainWrapper: React.FC = () => {
 								{Component ? Component : <S.PageTitle>{title}</S.PageTitle>}
 							</Route>
 						))}
+						<Redirect from="/" to="/orders/list" />
 					</Switch>
 				</S.Content>
 			</S.Main>

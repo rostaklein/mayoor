@@ -11,10 +11,8 @@ async function seed() {
       name: 'John Doe',
     },
   });
-  console.log('Prisma seed: Created EXECUTIVE user (all permissions)');
-  console.log(createdAdminUser);
 
-  const basicMaterial = await prisma.material.create({
+  const material = await prisma.material.create({
     data: {
       name: 'Banner 510',
       price: 150,
@@ -26,8 +24,54 @@ async function seed() {
     },
   });
 
-  console.log('Prisma seed: Created basic material');
-  console.log(basicMaterial);
+  await Promise.all(
+    ['John Black', 'Jane Blue', 'Robert Gillbert'].map(
+      async (personName, i) => {
+        await prisma.order.create({
+          data: {
+            number: i + 1,
+            totalPrice: 890,
+            totalTax: 120,
+            status: 'NEW',
+            createdBy: {
+              connect: {
+                id: createdAdminUser.id,
+              },
+            },
+            customer: {
+              create: {
+                name: 'Company Inc.',
+                identificationNumber: '1567984511',
+                personName,
+                createdBy: {
+                  connect: { id: createdAdminUser.id },
+                },
+              },
+            },
+            items: {
+              create: {
+                material: {
+                  connect: {
+                    id: material.id,
+                  },
+                },
+                width: 3,
+                height: 1.5,
+                totalTax: 50,
+                totalPrice: 150,
+                createdBy: {
+                  connect: { id: createdAdminUser.id },
+                },
+              },
+            },
+          },
+        });
+      },
+    ),
+  );
+
+  console.log('Prisma seed - Created EXECUTIVE user (all permissions)');
+  console.log(createdAdminUser);
 }
 
 seed().then(() => {

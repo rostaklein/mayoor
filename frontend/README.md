@@ -4,9 +4,10 @@ Built on top of `create-react-app`
 
 ## Development mode
 
-1. `npm install` - install the dependencies
-2. `npm run start` - run app in dev mode
-3. 🚀open [http://localhost:3000](http://localhost:3000) to view it in the browser, HMR enabled 🚀
+1. make sure your current working directory is `./frontend`
+2. `npm install` - install the dependencies
+3. `npm run start` - run app in dev mode
+4. 🚀open [http://localhost:3000](http://localhost:3000) to view it in the browser, HMR enabled 🚀
    (the admin user login credentials are username: `admin` password: `admin`)
 
 ## Running tests & lints
