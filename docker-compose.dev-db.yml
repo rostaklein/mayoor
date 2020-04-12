@@ -7,9 +7,9 @@ services:
     ports:
       - '54320:5432'
     environment:
-      POSTGRES_DB: db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pwd
+      POSTGRES_DB: mayoor-db
+      POSTGRES_USER: mayoor-user
+      POSTGRES_PASSWORD: developer1
 
   adminer:
     image: adminer
