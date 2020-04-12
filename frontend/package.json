@@ -48,7 +48,7 @@
     "yup": "^0.28.3"
   },
   "scripts": {
-    "dev": "react-app-rewired start",
+    "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
     "test": "react-app-rewired test",
