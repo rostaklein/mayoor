@@ -127,46 +127,48 @@ export const CustomerForm: React.FC<Props> = (props) => {
 						</Col>
 					</Row>
 					<Row gutter={32}>
-						{values.addresses.map((_, i) => (
-							<Col xs={24} md={12} key={i}>
-								<StyledDivider orientation="left">
-									{i === 0 ? t('Shipping address') : t('Billing address')}
-								</StyledDivider>
-								<StyledFormItem>
-									<Input
-										name={`addresses.${i}.street`}
-										prefix={<EnvironmentOutlined />}
-										placeholder={t('Street')}
-										onChange={handleChange}
-										value={values.addresses[i].street || ''}
-									/>
-								</StyledFormItem>
-								<Row gutter={12}>
-									<Col span={16}>
-										<StyledFormItem>
-											<Input
-												name={`addresses.${i}.city`}
-												prefix={<HomeOutlined />}
-												placeholder={t('City')}
-												onChange={handleChange}
-												value={values.addresses[i].city || ''}
-											/>
-										</StyledFormItem>
-									</Col>
-									<Col span={8}>
-										<StyledFormItem>
-											<Input
-												name={`addresses.${i}.postNumber`}
-												prefix={<NumberOutlined />}
-												placeholder={t('Post Number')}
-												onChange={handleChange}
-												value={values.addresses[i].postNumber || ''}
-											/>
-										</StyledFormItem>
-									</Col>
-								</Row>
-							</Col>
-						))}
+						{values.addresses
+							.sort(({ isPrimary }) => (isPrimary ? -1 : 1))
+							.map((_, i) => (
+								<Col xs={24} md={12} key={i}>
+									<StyledDivider orientation="left">
+										{i === 0 ? t('Shipping address') : t('Billing address')}
+									</StyledDivider>
+									<StyledFormItem>
+										<Input
+											name={`addresses.${i}.street`}
+											prefix={<EnvironmentOutlined />}
+											placeholder={t('Street')}
+											onChange={handleChange}
+											value={values.addresses[i].street || ''}
+										/>
+									</StyledFormItem>
+									<Row gutter={12}>
+										<Col span={16}>
+											<StyledFormItem>
+												<Input
+													name={`addresses.${i}.city`}
+													prefix={<HomeOutlined />}
+													placeholder={t('City')}
+													onChange={handleChange}
+													value={values.addresses[i].city || ''}
+												/>
+											</StyledFormItem>
+										</Col>
+										<Col span={8}>
+											<StyledFormItem>
+												<Input
+													name={`addresses.${i}.postNumber`}
+													prefix={<NumberOutlined />}
+													placeholder={t('Post Number')}
+													onChange={handleChange}
+													value={values.addresses[i].postNumber || ''}
+												/>
+											</StyledFormItem>
+										</Col>
+									</Row>
+								</Col>
+							))}
 					</Row>
 					{props.submitButton}
 				</StyledForm>
