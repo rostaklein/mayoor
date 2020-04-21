@@ -14,6 +14,7 @@ services:
       context: .
       args:
         database_url: postgresql://user:pwd@db-test:5432/db
+    entrypoint: /e2e/scripts/wait_for_it.sh db-test:5432 -- npm run start:full
     environment:
       - PORT=8080
       - DATABASE_URL=postgresql://user:pwd@db-test:5432/db
@@ -26,6 +27,7 @@ services:
       - /backend/node_modules
       - .:/frontend
       - /frontend/node_modules
+      - ./tests-e2e:/e2e
     depends_on:
       - db-test
   cypress:

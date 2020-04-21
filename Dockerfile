@@ -19,14 +19,4 @@ USER root
 
 RUN rm -rf node_modules \
     && npm install \
-    && npm run build \
-    && chown -R node /opt/app
-
-USER node
-
-ENV HOME_DIR=/opt/app \
-    DEBUG=*
-
-EXPOSE 8080
-
-CMD ["npm", "run", "start:full"]
+    && npm run build
