@@ -4,7 +4,6 @@
  */
 
 import * as Context from "../context"
-import * as prisma from "@prisma/client"
 
 
 
@@ -27,9 +26,6 @@ export interface NexusGenInputs {
     postNumber?: string | null; // String
     state?: string | null; // String
     street?: string | null; // String
-  }
-  AddressWhereUniqueInput: { // input type
-    id?: string | null; // String
   }
   CreateCustomerInput: { // input type
     addresses?: NexusGenInputs['AddressInput'][] | null; // [AddressInput!]
@@ -65,9 +61,6 @@ export interface NexusGenInputs {
     totalPrice: number; // Float!
     totalTax: number; // Float!
     width?: number | null; // Float
-  }
-  OrderItemWhereUniqueInput: { // input type
-    id?: string | null; // String
   }
   OrderItemsOrderByInput: { // input type
     createdAt?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
@@ -121,19 +114,38 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  OrderByArg: prisma.OrderByArg
+  OrderByArg: "asc" | "desc"
   OrderStatus: "DONE" | "NEW" | "READY_TO_PRINT" | "TO_BE_SHIPPED" | "WAITING_FOR_CALCULATION" | "WAITING_FOR_PRODUCTION"
   ProductionLogType: "PRINT" | "PRODUCTION"
   UserRole: "ADMINISTRATION" | "EXECUTIVE" | "FACTORY"
 }
 
 export interface NexusGenRootTypes {
-  Address: prisma.Address;
+  Address: { // root type
+    city?: string | null; // String
+    id: string; // String!
+    isPrimary: boolean; // Boolean!
+    number?: string | null; // String
+    postNumber?: string | null; // String
+    street?: string | null; // String
+  }
   AuthPayload: { // root type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
-  Customer: prisma.Customer;
+  Customer: { // root type
+    allowedBankPayments: boolean; // Boolean!
+    createdAt: any; // DateTime!
+    email?: string | null; // String
+    id: string; // String!
+    identificationNumber?: string | null; // String
+    name?: string | null; // String
+    note?: string | null; // String
+    personName?: string | null; // String
+    phone?: string | null; // String
+    taxIdentificationNumber?: string | null; // String
+    updatedAt: any; // DateTime!
+  }
   CustomerHelperInfo: { // root type
     city?: string | null; // String
     identificationNumber?: string | null; // String
@@ -146,17 +158,51 @@ export interface NexusGenRootTypes {
     items: NexusGenRootTypes['Customer'][]; // [Customer!]!
     totalCount: number; // Int!
   }
-  Material: prisma.Material;
+  Material: { // root type
+    createdAt: any; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    price: number; // Float!
+    updatedAt: any; // DateTime!
+  }
   Mutation: {};
-  Order: prisma.Order;
-  OrderItem: prisma.OrderItem;
+  Order: { // root type
+    createdAt: any; // DateTime!
+    id: string; // String!
+    note?: string | null; // String
+    number: number; // Int!
+    shippedAt?: any | null; // DateTime
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    updatedAt: any; // DateTime!
+    urgency: number; // Int!
+  }
+  OrderItem: { // root type
+    createdAt: any; // DateTime!
+    height?: number | null; // Float
+    id: string; // String!
+    name?: string | null; // String
+    pieces?: number | null; // Int
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    updatedAt: any; // DateTime!
+    width?: number | null; // Float
+  }
   OrderPaginated: { // root type
     items: NexusGenRootTypes['Order'][]; // [Order!]!
     totalCount: number; // Int!
   }
-  ProductionLog: prisma.ProductionLog;
+  ProductionLog: { // root type
+    createdAt: any; // DateTime!
+    id: string; // String!
+    pieces: number; // Int!
+  }
   Query: {};
-  User: prisma.User;
+  User: { // root type
+    email: string; // String!
+    id: string; // String!
+    name?: string | null; // String
+  }
   String: string;
   Int: number;
   Float: number;
@@ -167,12 +213,10 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   AddressInput: NexusGenInputs['AddressInput'];
-  AddressWhereUniqueInput: NexusGenInputs['AddressWhereUniqueInput'];
   CreateCustomerInput: NexusGenInputs['CreateCustomerInput'];
   CreateUserInput: NexusGenInputs['CreateUserInput'];
   OrderInput: NexusGenInputs['OrderInput'];
   OrderItemInput: NexusGenInputs['OrderItemInput'];
-  OrderItemWhereUniqueInput: NexusGenInputs['OrderItemWhereUniqueInput'];
   OrderItemsOrderByInput: NexusGenInputs['OrderItemsOrderByInput'];
   UpdateAddressInput: NexusGenInputs['UpdateAddressInput'];
   UpdateCustomerInput: NexusGenInputs['UpdateCustomerInput'];
@@ -320,10 +364,6 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Customer: {
     addresses: { // args
-      after?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
-      before?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
       skip?: number | null; // Int
     }
   }
@@ -398,10 +438,6 @@ export interface NexusGenArgTypes {
   }
   Order: {
     items: { // args
-      after?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
-      before?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
       orderBy?: NexusGenInputs['OrderItemsOrderByInput'] | null; // OrderItemsOrderByInput
       skip?: number | null; // Int
     }
@@ -444,7 +480,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Address" | "AuthPayload" | "Customer" | "CustomerHelperInfo" | "CustomerPaginated" | "Material" | "Mutation" | "Order" | "OrderItem" | "OrderPaginated" | "ProductionLog" | "Query" | "User";
 
-export type NexusGenInputNames = "AddressInput" | "AddressWhereUniqueInput" | "CreateCustomerInput" | "CreateUserInput" | "OrderInput" | "OrderItemInput" | "OrderItemWhereUniqueInput" | "OrderItemsOrderByInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput" | "UpdateUserInput";
+export type NexusGenInputNames = "AddressInput" | "CreateCustomerInput" | "CreateUserInput" | "OrderInput" | "OrderItemInput" | "OrderItemsOrderByInput" | "UpdateAddressInput" | "UpdateCustomerInput" | "UpdateOrderInput" | "UpdateOrderItemInput" | "UpdateUserInput";
 
 export type NexusGenEnumNames = "OrderByArg" | "OrderStatus" | "ProductionLogType" | "UserRole";
 

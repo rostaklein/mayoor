@@ -19,7 +19,7 @@ model User {
   productionLogs ProductionLog[]
   customers      Customer[]
   addresses      Address[]
-  deleted        Boolean @default(false)
+  deleted        Boolean         @default(false)
 }
 
 model Material {
@@ -31,7 +31,7 @@ model Material {
   createdBy       User        @relation(fields: [createdByUserId], references: [id])
   createdByUserId String
   orderItems      OrderItem[]
-  deleted         Boolean @default(false)
+  deleted         Boolean     @default(false)
 }
 
 model Order {
@@ -49,7 +49,7 @@ model Order {
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
   createdBy       User        @relation(fields: [createdByUserId], references: [id])
-  deleted         Boolean @default(false)
+  deleted         Boolean     @default(false)
   createdByUserId String
 }
 
@@ -99,7 +99,7 @@ model Customer {
   createdAt               DateTime  @default(now())
   updatedAt               DateTime  @updatedAt
   orders                  Order[]
-  deleted                 Boolean @default(false)
+  deleted                 Boolean   @default(false)
 }
 
 model Address {
@@ -116,5 +116,5 @@ model Address {
   createdByUserId String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  deleted         Boolean @default(false)
+  deleted         Boolean  @default(false)
 }

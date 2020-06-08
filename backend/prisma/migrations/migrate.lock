@@ -1,10 +1,3 @@
-# IF THERE'S A GIT CONFLICT IN THIS FILE, DON'T SOLVE IT MANUALLY!
-# INSTEAD EXECUTE `prisma migrate fix`
 # Prisma Migrate lockfile v1
-# Read more about conflict resolution here: TODO
 
-20200304001502-postgre-init
-20200326234505-added-production-log
-20200331230339-prisma2-migration
-20200405144002-soft-delete
-20200405144904-deleted-default-value
+20200608205227-beta-9-init
