@@ -17,9 +17,10 @@ export const GetAllOrders = queryField('getAllOrders', {
     ctx,
   ) => {
     const orders = await ctx.prisma.order.findMany({
-      ...args,
+      take: args.first ?? undefined,
+      skip: args.skip ?? undefined,
       where: {
-        status,
+        status: status ?? undefined,
         customerId,
         deleted: false,
       },
@@ -27,15 +28,17 @@ export const GetAllOrders = queryField('getAllOrders', {
         ? { urgency: orderByUrgency }
         : { createdAt: 'desc' },
     });
-    const allMatchingOrders = await ctx.prisma.order.findMany({
+
+    const allMatchingOrdersCount = await ctx.prisma.order.count({
       where: {
-        status,
+        status: status ?? undefined,
         customerId,
         deleted: false,
       },
     });
+
     return {
-      totalCount: allMatchingOrders.length,
+      totalCount: allMatchingOrdersCount,
       items: orders,
     };
   },

@@ -25,6 +25,7 @@
   "author": "rostaklein",
   "license": "ISC",
   "dependencies": {
+    "@nexus/schema": "^0.14.0",
     "@prisma/cli": "^2.0.0-beta.9",
     "@prisma/client": "^2.0.0-beta.9",
     "@types/bcrypt": "^3.0.0",
@@ -43,7 +44,7 @@
     "graphql-shield": "^7.0.11",
     "jsonwebtoken": "^8.5.1",
     "nexus": "^0.12.0",
-    "nexus-prisma": "^0.10.0",
+    "nexus-prisma": "^0.14.0",
     "node-fetch": "^2.6.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5",

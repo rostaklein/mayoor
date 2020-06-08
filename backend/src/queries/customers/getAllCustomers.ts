@@ -9,11 +9,11 @@ export const GetAllCustomers = queryField('getAllCustomers', {
   resolve: async (_parent, { search = '', ...args }, ctx) => {
     const ilike = search ? `%${search}%` : '%%';
 
-    const allCustomers = await ctx.prisma.raw<
+    const allCustomersCount = await ctx.prisma.executeRaw<
       Customer[]
     >`SELECT * FROM "Customer" AS t WHERE NOT "deleted" AND t::text ILIKE ${ilike}`;
 
-    const paginatedCustomers = await ctx.prisma.raw<
+    const paginatedCustomers = await ctx.prisma.queryRaw<
       Customer[]
     >`SELECT * FROM "Customer" AS t
       WHERE NOT "deleted"
@@ -24,7 +24,7 @@ export const GetAllCustomers = queryField('getAllCustomers', {
     `;
 
     return {
-      totalCount: allCustomers.length,
+      totalCount: allCustomersCount,
       items: paginatedCustomers,
     };
   },

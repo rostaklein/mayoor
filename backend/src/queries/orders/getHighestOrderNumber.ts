@@ -6,7 +6,7 @@ export const GetHighestOrderNumber = queryField('getHighestOrderNumber', {
   resolve: async (_parent, _args, ctx) => {
     const orders = await ctx.prisma.order.findMany({
       orderBy: { number: 'desc' },
-      first: 1,
+      take: 1,
     });
     if (orders.length === 0) {
       return 1;
