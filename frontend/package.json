@@ -54,7 +54,9 @@
     "test": "react-app-rewired test",
     "generate:types": "apollo client:codegen ./src/__generated__/types.ts --outputFlat --addTypename --localSchemaFile=../backend/src/generated/schema.graphql --target=typescript",
     "extract:translations": "i18next",
-    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint": "npm run lint:tsc && npm run lint:eslint",
+    "lint:tsc": "tsc",
+    "lint:eslint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
   },
   "eslintConfig": {
