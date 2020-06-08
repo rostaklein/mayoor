@@ -6,7 +6,7 @@ import { ApolloError } from 'apollo-server-express';
 export const AddProductionLog = mutationField('addProductionLog', {
   type: 'OrderItem',
   args: {
-    orderItemId: idArg(),
+    orderItemId: idArg({ nullable: false }),
     action: arg({ type: ProductionLogType, nullable: false }),
     pieces: intArg({ nullable: false }),
   },

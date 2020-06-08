@@ -37,7 +37,6 @@ export const permissions = shield(
     },
     Mutation: {
       '*': rules.isAuthenticatedUser,
-      addOrderItem: or(rules.isAdministration, rules.isExecutive),
       addProductionLog: rules.isAuthenticatedUser,
       changePassword: rules.isAuthenticatedUser,
       createCustomer: or(rules.isAdministration, rules.isExecutive),

@@ -1,5 +1,5 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
-import { makeSchema } from 'nexus';
+import { makeSchema } from '@nexus/schema';
 
 import * as Mutations from './mutations';
 import * as Queries from './queries';

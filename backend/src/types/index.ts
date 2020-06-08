@@ -1,6 +1,7 @@
 import { objectType, inputObjectType, enumType } from 'nexus';
 import { NexusGenEnums } from '../generated/nexus';
 import { UserRole } from '../mutations';
+import { NexusEnumTypeDef } from '@nexus/schema/dist/core';
 
 export * from './order';
 
@@ -18,10 +19,7 @@ export const User = objectType({
     t.model.id();
     t.model.name();
     t.model.email();
-    t.field('role', {
-      type: UserRole,
-      resolve: (a) => a.role as NexusGenEnums['UserRole'],
-    });
+    t.model.role();
   },
 });
 
@@ -165,10 +163,7 @@ export const ProductionLog = objectType({
   definition(t) {
     t.model.id();
     t.model.orderItem();
-    t.field('action', {
-      type: ProductionLogType,
-      resolve: (a) => a.action as NexusGenEnums['ProductionLogType'],
-    });
+    t.model.action();
     t.model.pieces();
     t.model.createdAt();
     t.model.createdBy();

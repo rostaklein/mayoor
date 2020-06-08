@@ -1,16 +1,11 @@
 import { objectType } from 'nexus';
-import { NexusGenEnums } from '../generated/nexus';
-import { OrderStatus } from '.';
 
 export const Order = objectType({
   name: 'Order',
   definition(t) {
     t.model.id();
     t.model.number();
-    t.field('status', {
-      resolve: (a) => a.status.toUpperCase() as NexusGenEnums['OrderStatus'],
-      type: OrderStatus,
-    });
+    t.model.status();
     t.model.urgency();
     t.model.customer();
     t.model.items({ ordering: { createdAt: true } });

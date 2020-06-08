@@ -6,7 +6,6 @@ export * from './orders/updateOrder';
 export * from './orders/updateOrderNote';
 export * from './orders/updateOrderStatus';
 export * from './orders/deleteOrder';
-export * from './orders/addOrderItem';
 
 export * from './customers/createCustomer';
 export * from './customers/updateCustomer';

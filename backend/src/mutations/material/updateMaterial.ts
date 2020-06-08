@@ -10,8 +10,8 @@ export const UpdateMaterial = mutationField('updateMaterial', {
   resolve: async (_, { id, name, price }, ctx) => {
     return ctx.prisma.material.update({
       data: {
-        name,
-        price,
+        name: name ?? undefined,
+        price: price ?? undefined,
       },
       where: {
         id,

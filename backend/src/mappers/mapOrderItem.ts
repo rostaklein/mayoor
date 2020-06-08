@@ -7,10 +7,11 @@ export const mapOrderItemInputToCreateOrderItem = (
     | null
     | undefined,
   createdByUserId: string,
-): Enumerable<OrderItemCreateWithoutOrderInput> | null => {
+): Enumerable<OrderItemCreateWithoutOrderInput> | undefined => {
   if (!items) {
-    return null;
+    return;
   }
+
   return items.map((item) => {
     return {
       material: item.materialId

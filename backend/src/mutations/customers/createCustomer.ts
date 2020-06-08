@@ -27,7 +27,7 @@ export const CreateCustomer = mutationField('createCustomer', {
   resolve: async (_, { input }, ctx) => {
     const user = await ctx.user.getCurrentUser();
 
-    const { addresses, ...otherArgs } = input;
+    const { addresses, allowedBankPayments, ...otherArgs } = input;
     const primaryAddresses = addresses?.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
@@ -37,6 +37,7 @@ export const CreateCustomer = mutationField('createCustomer', {
     const newAddresses: AddressCreateManyWithoutCustomerInput = {
       create: addresses?.map((addressInput) => ({
         ...addressInput,
+        isPrimary: addressInput.isPrimary ?? undefined,
         createdBy: { connect: { id: user.id } },
       })),
     };
@@ -44,6 +45,7 @@ export const CreateCustomer = mutationField('createCustomer', {
     return ctx.prisma.customer.create({
       data: {
         ...otherArgs,
+        allowedBankPayments: allowedBankPayments ?? undefined,
         address: newAddresses,
         createdBy: {
           connect: {

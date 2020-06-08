@@ -13,7 +13,7 @@ export const UpdateOrderItemInput = inputObjectType({
     t.float('width');
     t.float('height');
     t.int('pieces');
-    t.id('materialId');
+    t.id('materialId', { nullable: false });
   },
 });
 
@@ -36,7 +36,7 @@ export const UpdateOrderInput = inputObjectType({
 export const UpdateOrder = mutationField('updateOrder', {
   type: 'Order',
   args: {
-    id: idArg(),
+    id: idArg({ nullable: false }),
     input: arg({ type: UpdateOrderInput, nullable: false }),
   },
   resolve: async (_, { id, input }, ctx) => {
@@ -66,7 +66,7 @@ export const UpdateOrder = mutationField('updateOrder', {
       );
 
       if (updateData) {
-        const { materialId, ...rest } = updateData;
+        const { materialId, id, ...rest } = updateData;
         await ctx.prisma.orderItem.update({
           where: { id: itemToUpdate.id },
           data: { ...rest, material: { connect: { id: materialId } } },
@@ -81,11 +81,11 @@ export const UpdateOrder = mutationField('updateOrder', {
         id,
       },
       data: {
-        totalPrice: input.totalPrice || undefined,
-        totalTax: input.totalTax || undefined,
+        totalPrice: input.totalPrice ?? undefined,
+        totalTax: input.totalTax ?? undefined,
         note: input.note,
-        status: input.status || undefined,
-        urgency: input.urgency,
+        status: input.status ?? undefined,
+        urgency: input.urgency ?? undefined,
         customer: input.customerId
           ? {
               connect: {

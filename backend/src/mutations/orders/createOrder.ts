@@ -1,8 +1,20 @@
 import { objectType, arg, inputObjectType, intArg } from 'nexus';
 import { ApolloError } from 'apollo-server-express';
-import { OrderItemInput } from './addOrderItem';
 import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
 import { OrderStatus } from '../../types';
+
+export const OrderItemInput = inputObjectType({
+  name: 'OrderItemInput',
+  definition(t) {
+    t.string('name');
+    t.float('totalPrice', { nullable: false });
+    t.float('totalTax', { nullable: false });
+    t.float('width');
+    t.float('height');
+    t.int('pieces');
+    t.id('materialId');
+  },
+});
 
 export const OrderInput = inputObjectType({
   name: 'OrderInput',
@@ -50,11 +62,11 @@ export const CreateOrder = objectType({
         return ctx.prisma.order.create({
           data: {
             number,
-            totalPrice: input.totalPrice || 0,
-            totalTax: input.totalTax || 0,
+            totalPrice: input.totalPrice,
+            totalTax: input.totalTax,
             note: input.note,
             status: input.status || 'NEW',
-            urgency: input.urgency,
+            urgency: input.urgency ?? 0,
             customer: input.customerId
               ? {
                   connect: {

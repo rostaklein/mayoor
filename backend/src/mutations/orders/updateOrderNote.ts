@@ -3,7 +3,7 @@ import { idArg, mutationField, stringArg } from 'nexus';
 export const UpdateOrderNote = mutationField('updateOrderNote', {
   type: 'Order',
   args: {
-    id: idArg(),
+    id: idArg({ nullable: false }),
     note: stringArg(),
   },
   resolve: async (_, { id, note }, ctx) => {

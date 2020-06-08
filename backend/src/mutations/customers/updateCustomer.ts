@@ -26,33 +26,40 @@ export const UpdateCustomer = mutationField('updateCustomer', {
   },
   resolve: async (_, { input }, ctx) => {
     const customer = await ctx.prisma.customer.findOne({
-      where: { id: input.id },
+      where: { id: input.id ?? undefined },
     });
+
     if (customer === null) {
       throw new ApolloError(
         `Customer with id ${input.id} not found`,
         'CUSTOMER_NOT_FOUND',
       );
     }
-    const { addresses, ...otherArgs } = input;
+
+    const { addresses } = input;
     const primaryAddresses = addresses?.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
       throw new UserInputError('Only one address can be primary.');
     }
 
-    addresses?.map(async (address) => {
+    addresses?.map(async ({ id, ...address }) => {
       await ctx.prisma.address.update({
-        where: { id: address.id },
-        data: address,
+        where: { id: id ?? undefined },
+        data: { ...address, isPrimary: address.isPrimary ?? undefined },
       });
     });
 
+    const { id, allowedBankPayments, ...otherArgs } = input;
+
     return await ctx.prisma.customer.update({
       where: {
-        id: input.id,
+        id: id ?? undefined,
       },
-      data: otherArgs,
+      data: {
+        ...otherArgs,
+        allowedBankPayments: allowedBankPayments ?? undefined,
+      },
     });
   },
 });

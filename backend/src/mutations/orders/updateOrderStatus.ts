@@ -4,7 +4,7 @@ import { OrderStatus } from '../../types';
 export const UpdateOrderStatus = mutationField('updateOrderStatus', {
   type: 'Order',
   args: {
-    id: idArg(),
+    id: idArg({ nullable: false }),
     status: arg({ type: OrderStatus, nullable: false }),
   },
   resolve: async (_, { id, status }, ctx) => {

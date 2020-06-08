@@ -19,14 +19,12 @@ export const UpdateUser = mutationField('updateUser', {
     input: arg({ type: UpdateUserInput, nullable: false }),
   },
   resolve: async (_, { id, input }, ctx) => {
-    const { password, ...rest } = input;
+    const { password, role, ...rest } = input;
 
     if (password) {
       await ctx.prisma.user.update({
         where: { id },
-        data: {
-          password: await hash(password, 10),
-        },
+        data: {},
       });
     }
 
@@ -34,6 +32,8 @@ export const UpdateUser = mutationField('updateUser', {
       where: { id },
       data: {
         ...rest,
+        password: password ? await hash(password, 10) : undefined,
+        role: role ?? undefined,
       },
     });
   },
