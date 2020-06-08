@@ -15,7 +15,9 @@
     "database:migrate": "npx prisma migrate up --experimental",
     "database:seed": "ts-node ./prisma/seed.ts",
     "start:full": "npm run database:migrate && npm run database:seed && npm run start",
-    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint": "npm run lint:tsc && npm run lint:eslint",
+    "lint:tsc": "tsc",
+    "lint:eslint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
   },
   "keywords": [
