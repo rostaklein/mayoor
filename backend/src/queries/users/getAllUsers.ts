@@ -1,4 +1,4 @@
-import { queryField } from 'nexus';
+import { queryField } from '@nexus/schema';
 
 export const GetAllUsers = queryField('getAllUsers', {
   type: 'User',

@@ -1,4 +1,4 @@
-import { mutationField, idArg } from 'nexus';
+import { mutationField, idArg } from '@nexus/schema';
 
 export const DeleteMaterial = mutationField('deleteMaterial', {
   type: 'Material',

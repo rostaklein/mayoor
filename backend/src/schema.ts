@@ -1,4 +1,4 @@
-import { nexusPrismaPlugin } from 'nexus-prisma';
+import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
 import { makeSchema } from '@nexus/schema';
 
 import * as Mutations from './mutations';
@@ -9,7 +9,7 @@ require('dotenv').config();
 
 export const schema = makeSchema({
   types: [Types, Mutations, Queries],
-  plugins: [nexusPrismaPlugin()],
+  plugins: [nexusSchemaPrisma()],
   outputs: {
     schema: __dirname + '/generated/schema.graphql',
     typegen: __dirname + '/generated/nexus.ts',

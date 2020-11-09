@@ -1,5 +1,4 @@
-import { arg } from 'nexus';
-import { mutationField, inputObjectType } from 'nexus/dist/core';
+import { arg, mutationField, inputObjectType } from '@nexus/schema';
 import { UserInputError, ApolloError } from 'apollo-server-express';
 import { UpdateAddressInput } from '../../types';
 

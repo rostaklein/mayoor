@@ -1,4 +1,4 @@
-import { queryField, booleanArg } from 'nexus';
+import { queryField, booleanArg } from '@nexus/schema';
 
 export const GetAllMaterials = queryField('getAllMaterials', {
   type: 'Material',

@@ -1,4 +1,4 @@
-import { mutationField, stringArg, floatArg } from 'nexus';
+import { mutationField, stringArg, floatArg } from '@nexus/schema';
 
 export const CreateMaterial = mutationField('createMaterial', {
   type: 'Material',

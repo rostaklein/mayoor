@@ -1,4 +1,4 @@
-import { objectType, arg, inputObjectType, intArg } from 'nexus';
+import { objectType, arg, inputObjectType, intArg } from '@nexus/schema';
 import { ApolloError } from 'apollo-server-express';
 import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
 import { OrderStatus } from '../../types';

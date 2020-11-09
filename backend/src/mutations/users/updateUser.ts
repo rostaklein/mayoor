@@ -1,4 +1,4 @@
-import { mutationField, idArg, arg, inputObjectType } from 'nexus';
+import { mutationField, idArg, arg, inputObjectType } from '@nexus/schema';
 import { UserRole } from './addUser';
 import { hash } from 'bcrypt';
 

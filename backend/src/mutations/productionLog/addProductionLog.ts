@@ -1,5 +1,4 @@
-import { arg } from 'nexus';
-import { mutationField, idArg, intArg } from 'nexus/dist/core';
+import { arg, mutationField, idArg, intArg } from '@nexus/schema';
 import { ProductionLogType } from '../../types';
 import { ApolloError } from 'apollo-server-express';
 

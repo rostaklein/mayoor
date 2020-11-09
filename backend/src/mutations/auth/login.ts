@@ -1,4 +1,4 @@
-import { stringArg, mutationField } from 'nexus';
+import { stringArg, mutationField } from '@nexus/schema';
 import { compare } from 'bcrypt';
 import { ApolloError } from 'apollo-server-express';
 import { issueToken } from '../../auth';

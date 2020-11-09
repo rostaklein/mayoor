@@ -1,4 +1,4 @@
-import { mutationField, idArg } from 'nexus';
+import { mutationField, idArg } from '@nexus/schema';
 
 export const DeleteUser = mutationField('deleteUser', {
   type: 'User',

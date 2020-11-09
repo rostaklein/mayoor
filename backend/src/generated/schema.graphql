@@ -20,6 +20,10 @@ input AddressInput {
   street: String
 }
 
+input AddressWhereUniqueInput {
+  id: String
+}
+
 type AuthPayload {
   token: String!
   user: User!
@@ -45,7 +49,7 @@ input CreateUserInput {
 }
 
 type Customer {
-  addresses(skip: Int): [Address!]!
+  addresses(after: AddressWhereUniqueInput, before: AddressWhereUniqueInput, first: Int, last: Int): [Address!]!
   allowedBankPayments: Boolean!
   createdAt: DateTime!
   createdBy: User!
@@ -110,7 +114,7 @@ type Order {
   createdBy: User!
   customer: Customer
   id: String!
-  items(orderBy: OrderItemsOrderByInput, skip: Int): [OrderItem!]!
+  items(after: OrderItemWhereUniqueInput, before: OrderItemWhereUniqueInput, first: Int, last: Int, orderBy: [OrderItemsOrderByInput!]): [OrderItem!]!
   note: String
   number: Int!
   shippedAt: DateTime
@@ -165,7 +169,11 @@ input OrderItemInput {
 }
 
 input OrderItemsOrderByInput {
-  createdAt: OrderByArg
+  createdAt: SortOrder
+}
+
+input OrderItemWhereUniqueInput {
+  id: String
 }
 
 type OrderPaginated {
@@ -207,6 +215,11 @@ type Query {
   getOrder(id: ID!): Order
   getOrderByNumber(number: Int!): Order
   me: User!
+}
+
+enum SortOrder {
+  asc
+  desc
 }
 
 input UpdateAddressInput {

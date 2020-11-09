@@ -1,4 +1,4 @@
-import { queryField, arg, idArg } from 'nexus';
+import { queryField, arg, idArg, enumType } from '@nexus/schema';
 import { paginationArgs, getPaginatedObjectType } from '../../utils/pagination';
 import { OrderStatus } from '../../types';
 
@@ -8,7 +8,7 @@ export const GetAllOrders = queryField('getAllOrders', {
     ...paginationArgs,
     status: arg({ type: OrderStatus }),
     customerId: idArg(),
-    orderByUrgency: 'OrderByArg',
+    orderByUrgency: enumType({ name: 'OrderByArg', members: ['asc', 'desc'] }),
   },
   nullable: false,
   resolve: async (

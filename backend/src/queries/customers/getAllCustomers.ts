@@ -1,4 +1,4 @@
-import { queryField, stringArg } from 'nexus';
+import { queryField, stringArg } from '@nexus/schema';
 import { Customer } from '@prisma/client';
 import { paginationArgs, getPaginatedObjectType } from '../../utils/pagination';
 

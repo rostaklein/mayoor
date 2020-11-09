@@ -1,6 +1,6 @@
-import { intArg, GetGen, objectType } from 'nexus/dist/core';
+import { intArg, AllOutputTypes, objectType } from '@nexus/schema';
 
-export const getPaginatedObjectType = (type: GetGen<'allOutputTypes'>) =>
+export const getPaginatedObjectType = (type: AllOutputTypes) =>
   objectType({
     name: `${type}Paginated`,
     definition(t) {

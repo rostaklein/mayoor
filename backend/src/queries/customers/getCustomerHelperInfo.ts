@@ -1,4 +1,4 @@
-import { objectType, stringArg, queryField } from 'nexus';
+import { objectType, stringArg, queryField } from '@nexus/schema';
 import { getInfoFromAres } from './getInfoFromAres';
 
 const CustomerHelperInfo = objectType({

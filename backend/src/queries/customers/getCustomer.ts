@@ -1,4 +1,4 @@
-import { queryField, idArg } from 'nexus';
+import { queryField, idArg } from '@nexus/schema';
 
 export const GetCustomer = queryField('getCustomer', {
   type: 'Customer',

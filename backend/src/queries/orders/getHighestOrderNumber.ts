@@ -1,4 +1,4 @@
-import { queryField } from 'nexus';
+import { queryField } from '@nexus/schema';
 
 export const GetHighestOrderNumber = queryField('getHighestOrderNumber', {
   type: 'Int',

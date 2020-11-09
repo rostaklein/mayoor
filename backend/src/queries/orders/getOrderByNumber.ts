@@ -1,4 +1,4 @@
-import { queryField, intArg } from 'nexus';
+import { queryField, intArg } from '@nexus/schema';
 
 export const GetOrderByNumber = queryField('getOrderByNumber', {
   type: 'Order',

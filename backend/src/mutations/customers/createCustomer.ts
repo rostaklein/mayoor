@@ -1,5 +1,4 @@
-import { arg } from 'nexus';
-import { mutationField, inputObjectType } from 'nexus/dist/core';
+import { arg, mutationField, inputObjectType } from '@nexus/schema';
 import { AddressInput } from '../../types';
 import { AddressCreateManyWithoutCustomerInput } from '@prisma/client';
 import { UserInputError } from 'apollo-server-express';

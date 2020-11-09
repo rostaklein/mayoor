@@ -1,4 +1,4 @@
-import { idArg, mutationField, arg } from 'nexus';
+import { idArg, mutationField, arg } from '@nexus/schema';
 import { OrderStatus } from '../../types';
 
 export const UpdateOrderStatus = mutationField('updateOrderStatus', {

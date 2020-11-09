@@ -1,4 +1,4 @@
-import { objectType, inputObjectType, enumType } from 'nexus';
+import { objectType, inputObjectType, enumType } from '@nexus/schema';
 import { NexusGenEnums } from '../generated/nexus';
 import { UserRole } from '../mutations';
 import { NexusEnumTypeDef } from '@nexus/schema/dist/core';
