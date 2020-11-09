@@ -22,6 +22,13 @@ export const ChangePassword = mutationField('changePassword', {
       throw new ApolloError('Incorrect old password', 'INVALID_PASSWORD');
     }
 
+    if (!user.canBeDeleted) {
+      throw new ApolloError(
+        'You cant change this users password.',
+        'INVALID_OPERATION',
+      );
+    }
+
     const newHashedPwd = await hash(newPassword, 10);
 
     const updatedUser = ctx.prisma.user.update({
