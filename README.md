@@ -26,7 +26,7 @@ Modern order management system built with the latest tech stack.
 
 ## Live app demo
 
-🌍 Visit [https://mayoor.digital/](http://mayoor.digital) - and log in with username: `admin`, password: `admin`
+🌍 Visit [http://mayoor.herokuapp.com/](http://mayoor.herokuapp.com/) - and log in with username: `admin`, password: `admin`
 
 ## Screenshots
 
