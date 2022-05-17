@@ -1,20 +1,20 @@
-import { queryField, arg, idArg, enumType } from '@nexus/schema';
-import { paginationArgs, getPaginatedObjectType } from '../../utils/pagination';
-import { OrderStatus } from '../../types';
+import { queryField, arg, idArg, enumType } from "nexus";
+import { paginationArgs, getPaginatedObjectType } from "../../utils/pagination";
+import { OrderStatus } from "../../types";
 
-export const GetAllOrders = queryField('getAllOrders', {
-  type: getPaginatedObjectType('Order'),
+export const GetAllOrders = queryField("getAllOrders", {
+  type: getPaginatedObjectType("Order"),
   args: {
     ...paginationArgs,
     status: arg({ type: OrderStatus }),
     customerId: idArg(),
-    orderByUrgency: enumType({ name: 'OrderByArg', members: ['asc', 'desc'] }),
+    orderByUrgency: enumType({ name: "OrderByArg", members: ["asc", "desc"] }),
   },
   nullable: false,
   resolve: async (
     _parent,
     { status, orderByUrgency, customerId, ...args },
-    ctx,
+    ctx
   ) => {
     const orders = await ctx.prisma.order.findMany({
       take: args.first ?? undefined,
@@ -26,7 +26,7 @@ export const GetAllOrders = queryField('getAllOrders', {
       },
       orderBy: orderByUrgency
         ? { urgency: orderByUrgency }
-        : { createdAt: 'desc' },
+        : { createdAt: "desc" },
     });
 
     const allMatchingOrdersCount = await ctx.prisma.order.count({

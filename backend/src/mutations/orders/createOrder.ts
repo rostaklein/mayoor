@@ -1,39 +1,39 @@
-import { objectType, arg, inputObjectType, intArg } from '@nexus/schema';
-import { ApolloError } from 'apollo-server-express';
-import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
-import { OrderStatus } from '../../types';
+import { objectType, arg, inputObjectType, intArg } from "nexus";
+import { ApolloError } from "apollo-server-micro";
+import { mapOrderItemInputToCreateOrderItem } from "../../mappers/mapOrderItem";
+import { OrderStatus } from "../../types";
 
 export const OrderItemInput = inputObjectType({
-  name: 'OrderItemInput',
+  name: "OrderItemInput",
   definition(t) {
-    t.string('name');
-    t.float('totalPrice', { nullable: false });
-    t.float('totalTax', { nullable: false });
-    t.float('width');
-    t.float('height');
-    t.int('pieces');
-    t.id('materialId');
+    t.string("name");
+    t.float("totalPrice", { nullable: false });
+    t.float("totalTax", { nullable: false });
+    t.float("width");
+    t.float("height");
+    t.int("pieces");
+    t.id("materialId");
   },
 });
 
 export const OrderInput = inputObjectType({
-  name: 'OrderInput',
+  name: "OrderInput",
   definition(t) {
-    t.float('totalPrice', { nullable: false });
-    t.float('totalTax', { nullable: false });
-    t.string('note');
-    t.id('customerId');
-    t.field('items', { type: OrderItemInput, list: true, nullable: false });
-    t.field('status', { type: OrderStatus });
-    t.int('urgency');
+    t.float("totalPrice", { nullable: false });
+    t.float("totalTax", { nullable: false });
+    t.string("note");
+    t.id("customerId");
+    t.field("items", { type: OrderItemInput, list: true, nullable: false });
+    t.field("status", { type: OrderStatus });
+    t.int("urgency");
   },
 });
 
 export const CreateOrder = objectType({
-  name: 'Mutation',
+  name: "Mutation",
   definition(t) {
-    t.field('createOrder', {
-      type: 'Order',
+    t.field("createOrder", {
+      type: "Order",
       args: {
         number: intArg({ nullable: false }),
         input: arg({ type: OrderInput, nullable: false }),
@@ -48,14 +48,14 @@ export const CreateOrder = objectType({
         if (existingOrder) {
           throw new ApolloError(
             `Order number ${number} already exists`,
-            'ORDER_NUMBER_EXISTS',
+            "ORDER_NUMBER_EXISTS"
           );
         }
 
         if (input.items.length === 0) {
           throw new ApolloError(
             `Order needs to have at least one item`,
-            'INVALID_ITEMS_LENGTH',
+            "INVALID_ITEMS_LENGTH"
           );
         }
 
@@ -65,7 +65,7 @@ export const CreateOrder = objectType({
             totalPrice: input.totalPrice,
             totalTax: input.totalTax,
             note: input.note,
-            status: input.status || 'NEW',
+            status: input.status || "NEW",
             urgency: input.urgency ?? 0,
             customer: input.customerId
               ? {

@@ -1,7 +1,7 @@
-import { mutationField, idArg } from '@nexus/schema';
+import { mutationField, idArg } from "nexus";
 
-export const DeleteOrder = mutationField('deleteOrder', {
-  type: 'Order',
+export const DeleteOrder = mutationField("deleteOrder", {
+  type: "Order",
   args: {
     id: idArg({ nullable: false }),
   },

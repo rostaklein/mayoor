@@ -1,7 +1,7 @@
-import { queryField } from '@nexus/schema';
+import { queryField } from "nexus";
 
-export const Me = queryField('me', {
-  type: 'User',
+export const Me = queryField("me", {
+  type: "User",
   resolve: async (_, __, ctx) => {
     const userContext = await ctx.user.getCurrentUser();
 
@@ -10,7 +10,7 @@ export const Me = queryField('me', {
     });
 
     if (!user || user.deleted) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     return user;

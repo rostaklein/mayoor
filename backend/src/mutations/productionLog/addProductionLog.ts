@@ -1,9 +1,9 @@
-import { arg, mutationField, idArg, intArg } from '@nexus/schema';
-import { ProductionLogType } from '../../types';
-import { ApolloError } from 'apollo-server-express';
+import { arg, mutationField, idArg, intArg } from "nexus";
+import { ProductionLogType } from "../../types";
+import { ApolloError } from "apollo-server-micro";
 
-export const AddProductionLog = mutationField('addProductionLog', {
-  type: 'OrderItem',
+export const AddProductionLog = mutationField("addProductionLog", {
+  type: "OrderItem",
   args: {
     orderItemId: idArg({ nullable: false }),
     action: arg({ type: ProductionLogType, nullable: false }),
@@ -34,7 +34,7 @@ export const AddProductionLog = mutationField('addProductionLog', {
     });
 
     if (!updatedOrderItem) {
-      throw new ApolloError('Order item not found', 'ORDER_ITEM_NOT_FOUND');
+      throw new ApolloError("Order item not found", "ORDER_ITEM_NOT_FOUND");
     }
 
     return updatedOrderItem;

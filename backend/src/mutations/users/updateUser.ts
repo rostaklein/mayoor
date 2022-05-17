@@ -1,20 +1,20 @@
-import { mutationField, idArg, arg, inputObjectType } from '@nexus/schema';
-import { UserRole } from './addUser';
-import { hash } from 'bcrypt';
-import { ApolloError } from 'apollo-server-express';
+import { mutationField, idArg, arg, inputObjectType } from "nexus";
+import { UserRole } from "./addUser";
+import { hash } from "bcrypt";
+import { ApolloError } from "apollo-server-micro";
 
 export const UpdateUserInput = inputObjectType({
-  name: 'UpdateUserInput',
+  name: "UpdateUserInput",
   definition(t) {
-    t.string('email', { nullable: false });
-    t.string('password');
-    t.field('role', { type: UserRole });
-    t.string('name');
+    t.string("email", { nullable: false });
+    t.string("password");
+    t.field("role", { type: UserRole });
+    t.string("name");
   },
 });
 
-export const UpdateUser = mutationField('updateUser', {
-  type: 'User',
+export const UpdateUser = mutationField("updateUser", {
+  type: "User",
   args: {
     id: idArg({ nullable: false }),
     input: arg({ type: UpdateUserInput, nullable: false }),
@@ -26,8 +26,8 @@ export const UpdateUser = mutationField('updateUser', {
 
     if (!user?.canBeDeleted) {
       throw new ApolloError(
-        'You cant change this users password.',
-        'INVALID_OPERATION',
+        "You cant change this users password.",
+        "INVALID_OPERATION"
       );
     }
 

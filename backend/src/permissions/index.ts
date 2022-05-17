@@ -1,16 +1,16 @@
-import { rule, shield, or } from 'graphql-shield';
-import { Context } from '../context';
-import { ApolloError } from 'apollo-server-express';
-import { NexusGenEnums } from '../generated/nexus';
-import { IRuleFunction } from 'graphql-shield/dist/types';
+import { rule, shield, or } from "graphql-shield";
+import { Context } from "../context";
+import { ApolloError } from "apollo-server-micro";
+import { NexusGenEnums } from "../generated/nexus";
+import { IRuleFunction } from "graphql-shield/dist/types";
 
-const getCheckUserRole = (
-  role: NexusGenEnums['UserRole'],
-): IRuleFunction => async (parent, args, context: Context) => {
-  const { id } = await context.user.getCurrentUser();
-  const user = await context.prisma.user.findOne({ where: { id } });
-  return user?.role === role;
-};
+const getCheckUserRole =
+  (role: NexusGenEnums["UserRole"]): IRuleFunction =>
+  async (parent, args, context: Context) => {
+    const { id } = await context.user.getCurrentUser();
+    const user = await context.prisma.user.findOne({ where: { id } });
+    return user?.role === role;
+  };
 
 const rules = {
   notProtected: rule()(() => {
@@ -24,19 +24,19 @@ const rules = {
       return false;
     }
   }),
-  isFactory: rule()(getCheckUserRole('FACTORY')),
-  isAdministration: rule()(getCheckUserRole('ADMINISTRATION')),
-  isExecutive: rule()(getCheckUserRole('EXECUTIVE')),
+  isFactory: rule()(getCheckUserRole("FACTORY")),
+  isAdministration: rule()(getCheckUserRole("ADMINISTRATION")),
+  isExecutive: rule()(getCheckUserRole("EXECUTIVE")),
 };
 
 export const permissions = shield(
   {
     Query: {
-      '*': rules.isAuthenticatedUser,
+      "*": rules.isAuthenticatedUser,
       getAllUsers: rules.isExecutive,
     },
     Mutation: {
-      '*': rules.isAuthenticatedUser,
+      "*": rules.isAuthenticatedUser,
       addProductionLog: rules.isAuthenticatedUser,
       changePassword: rules.isAuthenticatedUser,
       createCustomer: or(rules.isAdministration, rules.isExecutive),
@@ -58,6 +58,6 @@ export const permissions = shield(
   },
   {
     allowExternalErrors: true,
-    fallbackError: new ApolloError('Not Authorized!', 'NOT_AUTHORIZED'),
-  },
+    fallbackError: new ApolloError("Not Authorized!", "NOT_AUTHORIZED"),
+  }
 );

@@ -1,7 +1,7 @@
-import { queryField, idArg } from '@nexus/schema';
+import { queryField, idArg } from "nexus";
 
-export const GetOrder = queryField('getOrder', {
-  type: 'Order',
+export const GetOrder = queryField("getOrder", {
+  type: "Order",
   args: {
     id: idArg({ nullable: false }),
   },

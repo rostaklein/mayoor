@@ -1,11 +1,11 @@
-import { queryField } from '@nexus/schema';
+import { queryField } from "nexus";
 
-export const GetHighestOrderNumber = queryField('getHighestOrderNumber', {
-  type: 'Int',
+export const GetHighestOrderNumber = queryField("getHighestOrderNumber", {
+  type: "Int",
   nullable: true,
   resolve: async (_parent, _args, ctx) => {
     const orders = await ctx.prisma.order.findMany({
-      orderBy: { number: 'desc' },
+      orderBy: { number: "desc" },
       take: 1,
     });
     if (orders.length === 0) {

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import { MicroRequest } from 'apollo-server-micro/dist/types';
 import { getUserContext } from './auth';
-import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 
 const prisma = new PrismaClient({ log: ['query', 'info', 'warn'] });
 
@@ -17,6 +17,6 @@ export interface Context {
   user: UserContext;
 }
 
-export function createContext(contextParameters: ExpressContext): Context {
+export function createContext(contextParameters: MicroRequest): Context {
   return { prisma, user: getUserContext(contextParameters) };
 }

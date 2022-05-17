@@ -1,25 +1,25 @@
-import { arg, mutationField, inputObjectType } from '@nexus/schema';
-import { AddressInput } from '../../types';
-import { AddressCreateManyWithoutCustomerInput } from '@prisma/client';
-import { UserInputError } from 'apollo-server-express';
+import { arg, mutationField, inputObjectType } from "nexus";
+import { AddressInput } from "../../types";
+import { AddressCreateManyWithoutCustomerInput } from "@prisma/client";
+import { UserInputError } from "apollo-server-micro";
 
 export const CreateCustomerInput = inputObjectType({
-  name: 'CreateCustomerInput',
+  name: "CreateCustomerInput",
   definition(t) {
-    t.string('name');
-    t.string('personName');
-    t.string('phone');
-    t.string('email');
-    t.string('identificationNumber');
-    t.string('taxIdentificationNumber');
-    t.boolean('allowedBankPayments');
-    t.string('note');
-    t.field('addresses', { type: AddressInput, list: true });
+    t.string("name");
+    t.string("personName");
+    t.string("phone");
+    t.string("email");
+    t.string("identificationNumber");
+    t.string("taxIdentificationNumber");
+    t.boolean("allowedBankPayments");
+    t.string("note");
+    t.field("addresses", { type: AddressInput, list: true });
   },
 });
 
-export const CreateCustomer = mutationField('createCustomer', {
-  type: 'Customer',
+export const CreateCustomer = mutationField("createCustomer", {
+  type: "Customer",
   args: {
     input: arg({ type: CreateCustomerInput, nullable: false }),
   },
@@ -30,7 +30,7 @@ export const CreateCustomer = mutationField('createCustomer', {
     const primaryAddresses = addresses?.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
-      throw new UserInputError('Only one address can be primary.');
+      throw new UserInputError("Only one address can be primary.");
     }
 
     const newAddresses: AddressCreateManyWithoutCustomerInput = {

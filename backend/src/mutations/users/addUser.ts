@@ -1,28 +1,28 @@
-import { mutationField, enumType, arg, inputObjectType } from '@nexus/schema';
-import { hash } from 'bcrypt';
-import { NexusGenEnums } from '../../generated/nexus';
+import { mutationField, enumType, arg, inputObjectType } from "nexus";
+import { hash } from "bcrypt";
+import { NexusGenEnums } from "../../generated/nexus";
 
 export const UserRole = enumType({
-  name: 'UserRole',
+  name: "UserRole",
   members: [
-    'FACTORY', // lowest permissions, workers in production
-    'ADMINISTRATION', // people in the office
-    'EXECUTIVE', // CEO and others, highest permissions
+    "FACTORY", // lowest permissions, workers in production
+    "ADMINISTRATION", // people in the office
+    "EXECUTIVE", // CEO and others, highest permissions
   ],
 });
 
 export const CreateUserInput = inputObjectType({
-  name: 'CreateUserInput',
+  name: "CreateUserInput",
   definition(t) {
-    t.string('email', { nullable: false });
-    t.string('password', { nullable: false });
-    t.field('role', { type: UserRole });
-    t.string('name');
+    t.string("email", { nullable: false });
+    t.string("password", { nullable: false });
+    t.field("role", { type: UserRole });
+    t.string("name");
   },
 });
 
-export const AddUser = mutationField('addUser', {
-  type: 'User',
+export const AddUser = mutationField("addUser", {
+  type: "User",
   args: {
     input: arg({ type: CreateUserInput, nullable: false }),
   },
@@ -35,7 +35,7 @@ export const AddUser = mutationField('addUser', {
 
     const hashedPwd = await hash(password, 10);
 
-    const defaultRole: NexusGenEnums['UserRole'] = 'FACTORY';
+    const defaultRole: NexusGenEnums["UserRole"] = "FACTORY";
 
     const user = await ctx.prisma.user.create({
       data: { password: hashedPwd, name, email, role: role || defaultRole },

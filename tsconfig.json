@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
-    "lib": ["esnext", "dom"],
+    "rootDir": "backend/src",
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["backend/src/**/*"]
 }

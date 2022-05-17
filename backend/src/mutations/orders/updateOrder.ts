@@ -1,40 +1,40 @@
-import { arg, inputObjectType, idArg, mutationField } from '@nexus/schema';
-import { ApolloError } from 'apollo-server-express';
-import { OrderStatus } from '../../types';
-import { mapOrderItemInputToCreateOrderItem } from '../../mappers/mapOrderItem';
+import { arg, inputObjectType, idArg, mutationField } from "nexus";
+import { ApolloError } from "apollo-server-micro";
+import { OrderStatus } from "../../types";
+import { mapOrderItemInputToCreateOrderItem } from "../../mappers/mapOrderItem";
 
 export const UpdateOrderItemInput = inputObjectType({
-  name: 'UpdateOrderItemInput',
+  name: "UpdateOrderItemInput",
   definition(t) {
-    t.id('id');
-    t.string('name');
-    t.float('totalPrice', { nullable: false });
-    t.float('totalTax', { nullable: false });
-    t.float('width');
-    t.float('height');
-    t.int('pieces');
-    t.id('materialId', { nullable: false });
+    t.id("id");
+    t.string("name");
+    t.float("totalPrice", { nullable: false });
+    t.float("totalTax", { nullable: false });
+    t.float("width");
+    t.float("height");
+    t.int("pieces");
+    t.id("materialId", { nullable: false });
   },
 });
 
 export const UpdateOrderInput = inputObjectType({
-  name: 'UpdateOrderInput',
+  name: "UpdateOrderInput",
   definition(t) {
-    t.float('totalPrice');
-    t.float('totalTax');
-    t.string('note');
-    t.id('customerId');
-    t.field('items', {
+    t.float("totalPrice");
+    t.float("totalTax");
+    t.string("note");
+    t.id("customerId");
+    t.field("items", {
       type: UpdateOrderItemInput,
       list: true,
     });
-    t.field('status', { type: OrderStatus });
-    t.int('urgency');
+    t.field("status", { type: OrderStatus });
+    t.int("urgency");
   },
 });
 
-export const UpdateOrder = mutationField('updateOrder', {
-  type: 'Order',
+export const UpdateOrder = mutationField("updateOrder", {
+  type: "Order",
   args: {
     id: idArg({ nullable: false }),
     input: arg({ type: UpdateOrderInput, nullable: false }),
@@ -45,7 +45,7 @@ export const UpdateOrder = mutationField('updateOrder', {
     const order = await ctx.prisma.order.findOne({ where: { id } });
 
     if (!order) {
-      throw new ApolloError(`Order not found`, 'NOT_FOUND');
+      throw new ApolloError(`Order not found`, "NOT_FOUND");
     }
 
     const orderItems = await ctx.prisma.orderItem.findMany({
@@ -54,15 +54,15 @@ export const UpdateOrder = mutationField('updateOrder', {
 
     const inputItemIds = input.items?.map(({ id }) => id) ?? [];
     const itemsToDelete = orderItems.filter(
-      ({ id }) => !inputItemIds.includes(id),
+      ({ id }) => !inputItemIds.includes(id)
     );
     const itemsToUpdate = orderItems.filter(({ id }) =>
-      inputItemIds.includes(id),
+      inputItemIds.includes(id)
     );
 
     itemsToUpdate.forEach(async (itemToUpdate) => {
       const updateData = input.items?.find(
-        (inputItem) => inputItem.id === itemToUpdate.id,
+        (inputItem) => inputItem.id === itemToUpdate.id
       );
 
       if (updateData) {

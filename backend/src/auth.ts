@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import { UserContext, UserDetails } from './context';
-import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
+import { MicroRequest } from 'apollo-server-micro/dist/types';
 
 export const issueToken = (userDetails: UserDetails): string => {
   if (!process.env.CLIENT_SECRET) {
@@ -29,10 +29,7 @@ const getCurrentUserByToken = (token: string | undefined) =>
     });
   });
 
-export const getUserContext = (
-  contextParameters: ExpressContext,
-): UserContext => {
-  const { req } = contextParameters;
+export const getUserContext = (req: MicroRequest): UserContext => {
   const token = req.headers.authorization?.replace('Bearer ', '');
 
   return { getCurrentUser: () => getCurrentUserByToken(token) };

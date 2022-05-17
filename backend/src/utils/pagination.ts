@@ -1,11 +1,11 @@
-import { intArg, AllOutputTypes, objectType } from '@nexus/schema';
+import { intArg, AllOutputTypes, objectType } from "nexus";
 
 export const getPaginatedObjectType = (type: AllOutputTypes) =>
   objectType({
     name: `${type}Paginated`,
     definition(t) {
-      t.int('totalCount');
-      t.field('items', { type, list: true });
+      t.int("totalCount");
+      t.field("items", { type, list: true });
     },
   });
 

@@ -1,9 +1,9 @@
-import { stringArg, mutationField } from '@nexus/schema';
-import { hash, compare } from 'bcrypt';
-import { ApolloError } from 'apollo-server-express';
+import { stringArg, mutationField } from "nexus";
+import { hash, compare } from "bcrypt";
+import { ApolloError } from "apollo-server-micro";
 
-export const ChangePassword = mutationField('changePassword', {
-  type: 'User',
+export const ChangePassword = mutationField("changePassword", {
+  type: "User",
   args: {
     oldPassword: stringArg({ nullable: false }),
     newPassword: stringArg({ nullable: false }),
@@ -19,13 +19,13 @@ export const ChangePassword = mutationField('changePassword', {
     const isPasswordValid = await compare(oldPassword, user.password);
 
     if (!isPasswordValid) {
-      throw new ApolloError('Incorrect old password', 'INVALID_PASSWORD');
+      throw new ApolloError("Incorrect old password", "INVALID_PASSWORD");
     }
 
     if (!user.canBeDeleted) {
       throw new ApolloError(
-        'You cant change this users password.',
-        'INVALID_OPERATION',
+        "You cant change this users password.",
+        "INVALID_OPERATION"
       );
     }
 

@@ -1,7 +1,8 @@
-import { queryField, booleanArg } from '@nexus/schema';
+import { queryField, booleanArg } from "nexus";
+import { Context } from "../../context";
 
-export const GetAllMaterials = queryField('getAllMaterials', {
-  type: 'Material',
+export const GetAllMaterials = queryField("getAllMaterials", {
+  type: "Material",
   list: true,
   args: {
     deleted: booleanArg({ default: false }),
