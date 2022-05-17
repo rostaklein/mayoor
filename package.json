@@ -7,6 +7,7 @@
   "scripts": {
     "install": "(cd backend && npm i) & (cd frontend && npm i)",
     "heroku-postbuild": "(cd frontend && npm run build) && (cd backend && npm run build)",
-    "start": "cd backend && npm run start"
+    "start": "cd backend && npm run start",
+    "vercel-build": "cd frontend && npm run build"
   }
 }
