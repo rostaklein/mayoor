@@ -37,7 +37,7 @@
     "@types/ws": "6.0.4",
     "@types/xml2js": "^0.4.5",
     "apollo-server-express": "^2.14.2",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -46,7 +46,7 @@
     "graphql-shield": "^7.0.11",
     "jsonwebtoken": "^8.5.1",
     "nexus-plugin-prisma": "^0.23.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5",
     "xml2js": "^0.4.23"
@@ -60,7 +60,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
     "prettier": "^2.0.2",
-    "ts-node-dev": "1.0.0-pre.44"
+    "ts-node-dev": "^1.1.8"
   },
   "prettier": {
     "singleQuote": true,
