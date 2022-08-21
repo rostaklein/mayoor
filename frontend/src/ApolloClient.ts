@@ -5,7 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 
 const httpLink = new HttpLink({
-	uri: process.env.NODE_ENV === 'development' ? 'http://localhost:4444/graphql' : '/graphql',
+	uri: '/api/graphql',
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

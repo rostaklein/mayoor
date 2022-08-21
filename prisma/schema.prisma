@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id             String          @default(cuid()) @id
+  id             String          @id @default(cuid()) @map("_id")
   role           String
   email          String          @unique
   password       String
@@ -24,7 +24,7 @@ model User {
 }
 
 model Material {
-  id              String      @default(cuid()) @id
+  id              String      @id @default(cuid()) @map("_id")
   name            String
   price           Float
   createdAt       DateTime    @default(now())
@@ -36,7 +36,7 @@ model Material {
 }
 
 model Order {
-  id              String      @default(cuid()) @id
+  id              String      @id @default(cuid()) @map("_id")
   number          Int         @unique
   customer        Customer?   @relation(fields: [customerId], references: [id])
   customerId      String?
@@ -55,7 +55,7 @@ model Order {
 }
 
 model OrderItem {
-  id              String          @default(cuid()) @id
+  id              String          @id @default(cuid())  @map("_id")
   material        Material?       @relation(fields: [materialId], references: [id])
   materialId      String?
   totalPrice      Float
@@ -74,7 +74,7 @@ model OrderItem {
 }
 
 model ProductionLog {
-  id              String    @default(cuid()) @id
+  id              String    @id @default(cuid())  @map("_id")
   orderItem       OrderItem @relation(fields: [orderItemId], references: [id])
   orderItemId     String
   action          String
@@ -85,7 +85,7 @@ model ProductionLog {
 }
 
 model Customer {
-  id                      String    @default(cuid()) @id
+  id                      String    @id @default(cuid())  @map("_id")
   name                    String?
   personName              String?
   phone                   String?
@@ -104,7 +104,7 @@ model Customer {
 }
 
 model Address {
-  id              String   @default(cuid()) @id
+  id              String   @id @default(cuid())  @map("_id")
   street          String?
   number          String?
   city            String?

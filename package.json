@@ -11,7 +11,7 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json backend/src/schema",
     "postinstall": "npm -s run generate",
-    "database:migrate": "npx prisma migrate up --experimental",
+    "database:push": "prisma db push",
     "database:seed": "ts-node ./prisma/seed.ts",
     "start:full": "npm run database:migrate && npm run database:seed && npm run start"
   },

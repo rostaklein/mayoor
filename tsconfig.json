@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "backend/src",
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

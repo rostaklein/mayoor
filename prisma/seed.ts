@@ -74,6 +74,4 @@ async function seed() {
   console.log(createdAdminUser);
 }
 
-seed().then(() => {
-  prisma.disconnect();
-});
+seed();
