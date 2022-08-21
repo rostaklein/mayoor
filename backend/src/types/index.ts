@@ -16,10 +16,8 @@ export const User = objectType({
   definition(t) {
     t.id("id");
     t.string("name");
-    // t.model.id();
-    // t.model.name();
-    // t.model.email();
-    // t.model.role();
+    t.string("email");
+    t.field("role", { type: "UserRole" });
   },
 });
 

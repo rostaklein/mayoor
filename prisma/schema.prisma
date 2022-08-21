@@ -9,7 +9,7 @@ generator client {
 
 model User {
   id             String          @id @default(cuid()) @map("_id")
-  role           String
+  role           UserRole        @default(FACTORY)
   email          String          @unique
   password       String
   name           String?
@@ -118,4 +118,10 @@ model Address {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   deleted         Boolean  @default(false)
+}
+
+enum UserRole {
+  ADMINISTRATION
+  EXECUTIVE
+  FACTORY
 }

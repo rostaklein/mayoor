@@ -3,127 +3,20 @@
  * Do not make changes to this file directly
  */
 
-import * as Context from "./../context"
+
+import type { Context as Context } from "./../context"
 
 
 
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    model: NexusPrisma<TypeName, 'model'>
-    crud: any
-  }
-}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
-  AddressInput: { // input type
-    city?: string | null; // String
-    isPrimary?: boolean | null; // Boolean
-    number?: string | null; // String
-    postNumber?: string | null; // String
-    state?: string | null; // String
-    street?: string | null; // String
-  }
-  AddressWhereUniqueInput: { // input type
-    id?: string | null; // String
-  }
-  CreateCustomerInput: { // input type
-    addresses?: Array<NexusGenInputs['AddressInput'] | null> | null; // [AddressInput]
-    allowedBankPayments?: boolean | null; // Boolean
-    email?: string | null; // String
-    identificationNumber?: string | null; // String
-    name?: string | null; // String
-    note?: string | null; // String
-    personName?: string | null; // String
-    phone?: string | null; // String
-    taxIdentificationNumber?: string | null; // String
-  }
-  CreateUserInput: { // input type
-    email: string; // String!
-    name?: string | null; // String
-    password: string; // String!
-    role?: NexusGenEnums['UserRole'] | null; // UserRole
-  }
-  OrderInput: { // input type
-    customerId?: string | null; // ID
-    items: NexusGenInputs['OrderItemInput'][]; // [OrderItemInput!]!
-    note?: string | null; // String
-    status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
-    urgency?: number | null; // Int
-  }
-  OrderItemInput: { // input type
-    height?: number | null; // Float
-    materialId?: string | null; // ID
-    name?: string | null; // String
-    pieces?: number | null; // Int
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
-    width?: number | null; // Float
-  }
-  OrderItemWhereUniqueInput: { // input type
-    id?: string | null; // String
-  }
-  OrderItemsOrderByInput: { // input type
-    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
-  }
-  UpdateAddressInput: { // input type
-    city?: string | null; // String
-    id?: string | null; // ID
-    isPrimary?: boolean | null; // Boolean
-    number?: string | null; // String
-    postNumber?: string | null; // String
-    state?: string | null; // String
-    street?: string | null; // String
-  }
-  UpdateCustomerInput: { // input type
-    addresses?: Array<NexusGenInputs['UpdateAddressInput'] | null> | null; // [UpdateAddressInput]
-    allowedBankPayments?: boolean | null; // Boolean
-    email?: string | null; // String
-    id?: string | null; // ID
-    identificationNumber?: string | null; // String
-    name?: string | null; // String
-    note?: string | null; // String
-    personName?: string | null; // String
-    phone?: string | null; // String
-    taxIdentificationNumber?: string | null; // String
-  }
-  UpdateOrderInput: { // input type
-    customerId?: string | null; // ID
-    items?: Array<NexusGenInputs['UpdateOrderItemInput'] | null> | null; // [UpdateOrderItemInput]
-    note?: string | null; // String
-    status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
-    totalPrice?: number | null; // Float
-    totalTax?: number | null; // Float
-    urgency?: number | null; // Int
-  }
-  UpdateOrderItemInput: { // input type
-    height?: number | null; // Float
-    id?: string | null; // ID
-    materialId: string; // ID!
-    name?: string | null; // String
-    pieces?: number | null; // Int
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
-    width?: number | null; // Float
-  }
-  UpdateUserInput: { // input type
-    email: string; // String!
-    name?: string | null; // String
-    password?: string | null; // String
-    role?: NexusGenEnums['UserRole'] | null; // UserRole
-  }
 }
 
 export interface NexusGenEnums {
-  OrderByArg: "asc" | "desc"
-  OrderStatus: "DONE" | "NEW" | "READY_TO_PRINT" | "TO_BE_SHIPPED" | "WAITING_FOR_CALCULATION" | "WAITING_FOR_PRODUCTION"
-  ProductionLogType: "PRINT" | "PRODUCTION"
-  SortOrder: "asc" | "desc"
   UserRole: "ADMINISTRATION" | "EXECUTIVE" | "FACTORY"
 }
 
@@ -133,94 +26,24 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  DateTime: any
 }
 
 export interface NexusGenObjects {
-  Address: { // root type
-    city?: string | null; // String
-    id: string; // String!
-    isPrimary: boolean; // Boolean!
-    number?: string | null; // String
-    postNumber?: string | null; // String
-    street?: string | null; // String
-  }
   AuthPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
-  Customer: { // root type
-    allowedBankPayments: boolean; // Boolean!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    email?: string | null; // String
-    id: string; // String!
-    identificationNumber?: string | null; // String
-    name?: string | null; // String
-    note?: string | null; // String
-    personName?: string | null; // String
-    phone?: string | null; // String
-    taxIdentificationNumber?: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
-  CustomerHelperInfo: { // root type
-    city?: string | null; // String
-    identificationNumber?: string | null; // String
-    name?: string | null; // String
-    postNumber?: string | null; // String
-    street?: string | null; // String
-    taxIdentificationNumber?: string | null; // String
-  }
-  CustomerPaginated: { // root type
-    items?: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
-    totalCount?: number | null; // Int
-  }
-  Material: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // String!
-    name: string; // String!
-    price: number; // Float!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
   Mutation: {};
   Order: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // String!
-    note?: string | null; // String
-    number: number; // Int!
-    shippedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    status: string; // String!
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    urgency: number; // Int!
-  }
-  OrderItem: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    height?: number | null; // Float
-    id: string; // String!
-    name?: string | null; // String
-    pieces?: number | null; // Int
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    width?: number | null; // Float
-  }
-  OrderPaginated: { // root type
-    items?: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
-    totalCount?: number | null; // Int
-  }
-  ProductionLog: { // root type
-    action: string; // String!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // String!
-    pieces: number; // Int!
+    id?: string | null; // ID
+    number?: number | null; // Int
   }
   Query: {};
   User: { // root type
-    email: string; // String!
-    id: string; // String!
+    email?: string | null; // String
+    id?: string | null; // ID
     name?: string | null; // String
-    role: string; // String!
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
   }
 }
 
@@ -235,377 +58,56 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
-  Address: { // field return type
-    city: string | null; // String
-    id: string; // String!
-    isPrimary: boolean; // Boolean!
-    number: string | null; // String
-    postNumber: string | null; // String
-    street: string | null; // String
-  }
   AuthPayload: { // field return type
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
-  Customer: { // field return type
-    addresses: NexusGenRootTypes['Address'][]; // [Address!]!
-    allowedBankPayments: boolean; // Boolean!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    createdBy: NexusGenRootTypes['User']; // User!
-    email: string | null; // String
-    id: string; // String!
-    identificationNumber: string | null; // String
-    name: string | null; // String
-    note: string | null; // String
-    personName: string | null; // String
-    phone: string | null; // String
-    taxIdentificationNumber: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
-  CustomerHelperInfo: { // field return type
-    city: string | null; // String
-    identificationNumber: string | null; // String
-    name: string | null; // String
-    postNumber: string | null; // String
-    street: string | null; // String
-    taxIdentificationNumber: string | null; // String
-  }
-  CustomerPaginated: { // field return type
-    items: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
-    totalCount: number | null; // Int
-  }
-  Material: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    createdBy: NexusGenRootTypes['User']; // User!
-    id: string; // String!
-    name: string; // String!
-    price: number; // Float!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
   Mutation: { // field return type
-    addProductionLog: NexusGenRootTypes['OrderItem'] | null; // OrderItem
-    addUser: NexusGenRootTypes['User'] | null; // User
-    changePassword: NexusGenRootTypes['User'] | null; // User
-    createCustomer: NexusGenRootTypes['Customer'] | null; // Customer
-    createMaterial: NexusGenRootTypes['Material'] | null; // Material
-    createOrder: NexusGenRootTypes['Order'] | null; // Order
-    deleteCustomer: NexusGenRootTypes['Customer'] | null; // Customer
-    deleteMaterial: NexusGenRootTypes['Material'] | null; // Material
-    deleteOrder: NexusGenRootTypes['Order'] | null; // Order
-    deleteUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
-    updateCustomer: NexusGenRootTypes['Customer'] | null; // Customer
-    updateMaterial: NexusGenRootTypes['Material'] | null; // Material
-    updateOrder: NexusGenRootTypes['Order'] | null; // Order
-    updateOrderNote: NexusGenRootTypes['Order'] | null; // Order
-    updateOrderStatus: NexusGenRootTypes['Order'] | null; // Order
-    updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Order: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    createdBy: NexusGenRootTypes['User']; // User!
-    customer: NexusGenRootTypes['Customer'] | null; // Customer
-    id: string; // String!
-    items: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
-    note: string | null; // String
-    number: number; // Int!
-    shippedAt: NexusGenScalars['DateTime'] | null; // DateTime
-    status: string; // String!
-    totalPrice: number; // Float!
-    totalSize: number | null; // Float
-    totalTax: number; // Float!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    urgency: number; // Int!
-  }
-  OrderItem: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    createdBy: NexusGenRootTypes['User']; // User!
-    height: number | null; // Float
-    id: string; // String!
-    material: NexusGenRootTypes['Material'] | null; // Material
-    name: string | null; // String
-    pieces: number | null; // Int
-    printedPieces: number | null; // Int
-    producedPieces: number | null; // Int
-    productionLog: Array<NexusGenRootTypes['ProductionLog'] | null> | null; // [ProductionLog]
-    totalPrice: number; // Float!
-    totalTax: number; // Float!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    width: number | null; // Float
-  }
-  OrderPaginated: { // field return type
-    items: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
-    totalCount: number | null; // Int
-  }
-  ProductionLog: { // field return type
-    action: string; // String!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    createdBy: NexusGenRootTypes['User']; // User!
-    id: string; // String!
-    orderItem: NexusGenRootTypes['OrderItem']; // OrderItem!
-    pieces: number; // Int!
+    id: string | null; // ID
+    number: number | null; // Int
   }
   Query: { // field return type
-    getAllCustomers: NexusGenRootTypes['CustomerPaginated']; // CustomerPaginated!
-    getAllMaterials: Array<NexusGenRootTypes['Material'] | null> | null; // [Material]
-    getAllOrders: NexusGenRootTypes['OrderPaginated']; // OrderPaginated!
-    getAllUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
-    getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
-    getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo'] | null; // CustomerHelperInfo
-    getHighestOrderNumber: number | null; // Int
-    getOrder: NexusGenRootTypes['Order'] | null; // Order
-    getOrderByNumber: NexusGenRootTypes['Order'] | null; // Order
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
-    email: string; // String!
-    id: string; // String!
+    email: string | null; // String
+    id: string | null; // ID
     name: string | null; // String
-    role: string; // String!
+    role: NexusGenEnums['UserRole'] | null; // UserRole
   }
 }
 
 export interface NexusGenFieldTypeNames {
-  Address: { // field return type name
-    city: 'String'
-    id: 'String'
-    isPrimary: 'Boolean'
-    number: 'String'
-    postNumber: 'String'
-    street: 'String'
-  }
   AuthPayload: { // field return type name
     token: 'String'
     user: 'User'
   }
-  Customer: { // field return type name
-    addresses: 'Address'
-    allowedBankPayments: 'Boolean'
-    createdAt: 'DateTime'
-    createdBy: 'User'
-    email: 'String'
-    id: 'String'
-    identificationNumber: 'String'
-    name: 'String'
-    note: 'String'
-    personName: 'String'
-    phone: 'String'
-    taxIdentificationNumber: 'String'
-    updatedAt: 'DateTime'
-  }
-  CustomerHelperInfo: { // field return type name
-    city: 'String'
-    identificationNumber: 'String'
-    name: 'String'
-    postNumber: 'String'
-    street: 'String'
-    taxIdentificationNumber: 'String'
-  }
-  CustomerPaginated: { // field return type name
-    items: 'Customer'
-    totalCount: 'Int'
-  }
-  Material: { // field return type name
-    createdAt: 'DateTime'
-    createdBy: 'User'
-    id: 'String'
-    name: 'String'
-    price: 'Float'
-    updatedAt: 'DateTime'
-  }
   Mutation: { // field return type name
-    addProductionLog: 'OrderItem'
-    addUser: 'User'
-    changePassword: 'User'
-    createCustomer: 'Customer'
-    createMaterial: 'Material'
-    createOrder: 'Order'
-    deleteCustomer: 'Customer'
-    deleteMaterial: 'Material'
-    deleteOrder: 'Order'
-    deleteUser: 'User'
     login: 'AuthPayload'
-    updateCustomer: 'Customer'
-    updateMaterial: 'Material'
-    updateOrder: 'Order'
-    updateOrderNote: 'Order'
-    updateOrderStatus: 'Order'
-    updateUser: 'User'
   }
   Order: { // field return type name
-    createdAt: 'DateTime'
-    createdBy: 'User'
-    customer: 'Customer'
-    id: 'String'
-    items: 'OrderItem'
-    note: 'String'
+    id: 'ID'
     number: 'Int'
-    shippedAt: 'DateTime'
-    status: 'String'
-    totalPrice: 'Float'
-    totalSize: 'Float'
-    totalTax: 'Float'
-    updatedAt: 'DateTime'
-    urgency: 'Int'
-  }
-  OrderItem: { // field return type name
-    createdAt: 'DateTime'
-    createdBy: 'User'
-    height: 'Float'
-    id: 'String'
-    material: 'Material'
-    name: 'String'
-    pieces: 'Int'
-    printedPieces: 'Int'
-    producedPieces: 'Int'
-    productionLog: 'ProductionLog'
-    totalPrice: 'Float'
-    totalTax: 'Float'
-    updatedAt: 'DateTime'
-    width: 'Float'
-  }
-  OrderPaginated: { // field return type name
-    items: 'Order'
-    totalCount: 'Int'
-  }
-  ProductionLog: { // field return type name
-    action: 'String'
-    createdAt: 'DateTime'
-    createdBy: 'User'
-    id: 'String'
-    orderItem: 'OrderItem'
-    pieces: 'Int'
   }
   Query: { // field return type name
-    getAllCustomers: 'CustomerPaginated'
-    getAllMaterials: 'Material'
-    getAllOrders: 'OrderPaginated'
-    getAllUsers: 'User'
-    getCustomer: 'Customer'
-    getCustomerHelperInfo: 'CustomerHelperInfo'
-    getHighestOrderNumber: 'Int'
-    getOrder: 'Order'
-    getOrderByNumber: 'Order'
     me: 'User'
   }
   User: { // field return type name
     email: 'String'
-    id: 'String'
+    id: 'ID'
     name: 'String'
-    role: 'String'
+    role: 'UserRole'
   }
 }
 
 export interface NexusGenArgTypes {
-  Customer: {
-    addresses: { // args
-      after?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
-      before?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
-  }
   Mutation: {
-    addProductionLog: { // args
-      action: NexusGenEnums['ProductionLogType']; // ProductionLogType!
-      orderItemId: string; // ID!
-      pieces: number; // Int!
-    }
-    addUser: { // args
-      input: NexusGenInputs['CreateUserInput']; // CreateUserInput!
-    }
-    changePassword: { // args
-      newPassword: string; // String!
-      oldPassword: string; // String!
-    }
-    createCustomer: { // args
-      input: NexusGenInputs['CreateCustomerInput']; // CreateCustomerInput!
-    }
-    createMaterial: { // args
-      name: string; // String!
-      price: number; // Float!
-    }
-    createOrder: { // args
-      input: NexusGenInputs['OrderInput']; // OrderInput!
-      number: number; // Int!
-    }
-    deleteCustomer: { // args
-      id: string; // ID!
-    }
-    deleteMaterial: { // args
-      id: string; // ID!
-    }
-    deleteOrder: { // args
-      id: string; // ID!
-    }
-    deleteUser: { // args
-      id: string; // ID!
-    }
     login: { // args
       email: string; // String!
       password: string; // String!
-    }
-    updateCustomer: { // args
-      input: NexusGenInputs['UpdateCustomerInput']; // UpdateCustomerInput!
-    }
-    updateMaterial: { // args
-      id: string; // ID!
-      name?: string | null; // String
-      price?: number | null; // Float
-    }
-    updateOrder: { // args
-      id: string; // ID!
-      input: NexusGenInputs['UpdateOrderInput']; // UpdateOrderInput!
-    }
-    updateOrderNote: { // args
-      id: string; // ID!
-      note?: string | null; // String
-    }
-    updateOrderStatus: { // args
-      id: string; // ID!
-      status: NexusGenEnums['OrderStatus']; // OrderStatus!
-    }
-    updateUser: { // args
-      id: string; // ID!
-      input: NexusGenInputs['UpdateUserInput']; // UpdateUserInput!
-    }
-  }
-  Order: {
-    items: { // args
-      after?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
-      before?: NexusGenInputs['OrderItemWhereUniqueInput'] | null; // OrderItemWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['OrderItemsOrderByInput'][] | null; // [OrderItemsOrderByInput!]
-    }
-  }
-  Query: {
-    getAllCustomers: { // args
-      first?: number | null; // Int
-      search?: string | null; // String
-      skip?: number | null; // Int
-    }
-    getAllMaterials: { // args
-      deleted?: boolean | null; // Boolean
-    }
-    getAllOrders: { // args
-      customerId?: string | null; // ID
-      first?: number | null; // Int
-      orderByUrgency?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
-      skip?: number | null; // Int
-      status?: NexusGenEnums['OrderStatus'] | null; // OrderStatus
-    }
-    getCustomer: { // args
-      id: string; // ID!
-    }
-    getCustomerHelperInfo: { // args
-      partialIdentificationNumber: string; // String!
-    }
-    getOrder: { // args
-      id: string; // ID!
-    }
-    getOrderByNumber: { // args
-      number: number; // Int!
     }
   }
 }
@@ -618,7 +120,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = keyof NexusGenInputs;
+export type NexusGenInputNames = never;
 
 export type NexusGenEnumNames = keyof NexusGenEnums;
 
@@ -641,9 +143,10 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context.Context;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
+  inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
   argTypes: NexusGenArgTypes;
   fieldTypes: NexusGenFieldTypes;
   fieldTypeNames: NexusGenFieldTypeNames;
@@ -669,72 +172,14 @@ export interface NexusGenTypes {
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
   }
+  interface NexusGenPluginInputTypeConfig<TypeName extends string> {
+  }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
-    /**
-     * Whether the type can be null
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    nullable?: boolean
-    /**
-     * Whether the type is list of values, or just a single value.
-     * If list is true, we assume the type is a list. If list is an array,
-     * we'll assume that it's a list with the depth. The boolean indicates whether
-     * the type is required (non-null), where true = nonNull, false = nullable.
-     * @see declarativeWrappingPlugin
-     */
-    list?: true | boolean[]
-    /**
-     * Whether the type should be non null, `required: true` = `nullable: false`
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    required?: boolean
   }
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
-    /**
-     * Whether the type can be null
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    nullable?: boolean
-    /**
-     * Whether the type is list of values, or just a single value.
-     * If list is true, we assume the type is a list. If list is an array,
-     * we'll assume that it's a list with the depth. The boolean indicates whether
-     * the type is required (non-null), where true = nonNull, false = nullable.
-     * @see declarativeWrappingPlugin
-     */
-    list?: true | boolean[]
-    /**
-     * Whether the type should be non null, `required: true` = `nullable: false`
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    required?: boolean
   }
   interface NexusGenPluginSchemaConfig {
   }
   interface NexusGenPluginArgConfig {
-    /**
-     * Whether the type can be null
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    nullable?: boolean
-    /**
-     * Whether the type is list of values, or just a single value.
-     * If list is true, we assume the type is a list. If list is an array,
-     * we'll assume that it's a list with the depth. The boolean indicates whether
-     * the type is required (non-null), where true = nonNull, false = nullable.
-     * @see declarativeWrappingPlugin
-     */
-    list?: true | boolean[]
-    /**
-     * Whether the type should be non null, `required: true` = `nullable: false`
-     * @default (depends on whether nullability is configured in type or schema)
-     * @see declarativeWrappingPlugin
-     */
-    required?: boolean
   }
 }

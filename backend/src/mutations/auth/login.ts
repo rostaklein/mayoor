@@ -1,4 +1,4 @@
-import { stringArg, mutationField } from "nexus";
+import { stringArg, mutationField, nonNull } from "nexus";
 import { compare } from "bcrypt";
 import { ApolloError } from "apollo-server-micro";
 import { issueToken } from "../../auth";
@@ -6,11 +6,11 @@ import { issueToken } from "../../auth";
 export const Login = mutationField("login", {
   type: "AuthPayload",
   args: {
-    email: stringArg({ nullable: false }),
-    password: stringArg({ nullable: false }),
+    email: nonNull(stringArg()),
+    password: nonNull(stringArg()),
   },
   resolve: async (_, { email, password }, ctx) => {
-    const user = await ctx.prisma.user.findOne({ where: { email } });
+    const user = await ctx.prisma.user.findFirst({ where: { email } });
 
     if (!user || user.deleted) {
       throw new ApolloError("User not found", "USER_NOT_FOUND");

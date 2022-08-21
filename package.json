@@ -16,6 +16,7 @@
     "start:full": "npm run database:migrate && npm run database:seed && npm run start"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^8.5.8",
     "@vercel/node": "^1.15.2",
     "prisma": "^3.14.0"
