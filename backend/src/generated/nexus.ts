@@ -3,11 +3,16 @@
  * Do not make changes to this file directly
  */
 
-
+import type * as prisma from "./../../../node_modules/.prisma/client/index"
 import type { Context as Context } from "./../context"
 
 
-
+declare global {
+  interface NexusGenCustomOutputProperties<TypeName extends string> {
+    model: NexusPrisma<TypeName, 'model'>
+    crud: any
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -17,7 +22,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  UserRole: "ADMINISTRATION" | "EXECUTIVE" | "FACTORY"
+  UserRole: prisma.UserRole
 }
 
 export interface NexusGenScalars {
@@ -34,17 +39,9 @@ export interface NexusGenObjects {
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: {};
-  Order: { // root type
-    id?: string | null; // ID
-    number?: number | null; // Int
-  }
+  Order: prisma.Order;
   Query: {};
-  User: { // root type
-    email?: string | null; // String
-    id?: string | null; // ID
-    name?: string | null; // String
-    role?: NexusGenEnums['UserRole'] | null; // UserRole
-  }
+  User: prisma.User;
 }
 
 export interface NexusGenInterfaces {
@@ -73,10 +70,10 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
-    email: string | null; // String
-    id: string | null; // ID
+    email: string; // String!
+    id: string; // String!
     name: string | null; // String
-    role: NexusGenEnums['UserRole'] | null; // UserRole
+    role: NexusGenEnums['UserRole']; // UserRole!
   }
 }
 
@@ -97,7 +94,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     email: 'String'
-    id: 'ID'
+    id: 'String'
     name: 'String'
     role: 'UserRole'
   }

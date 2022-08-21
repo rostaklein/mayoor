@@ -1,3 +1,4 @@
+export { UserRole } from "@prisma/client";
 import { objectType, inputObjectType, enumType } from "nexus";
 import { NexusGenEnums } from "../generated/nexus";
 
@@ -14,10 +15,10 @@ export const AuthPayload = objectType({
 export const User = objectType({
   name: "User",
   definition(t) {
-    t.id("id");
-    t.string("name");
-    t.string("email");
-    t.field("role", { type: "UserRole" });
+    t.model.id();
+    t.model.name();
+    t.model.email();
+    t.model.role();
   },
 });
 
