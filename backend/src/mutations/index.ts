@@ -1,5 +1,5 @@
 export * from './auth/login';
-// export * from './auth/changePassword';
+export * from './auth/changePassword';
 
 // export * from './orders/createOrder';
 // export * from './orders/updateOrder';
@@ -15,8 +15,8 @@ export * from './auth/login';
 // export * from './material/updateMaterial';
 // export * from './material/deleteMaterial';
 
-// export * from './users/addUser';
-// export * from './users/deleteUser';
-// export * from './users/updateUser';
+export * from './users/addUser';
+export * from './users/deleteUser';
+export * from './users/updateUser';
 
 // export * from './productionLog/addProductionLog';

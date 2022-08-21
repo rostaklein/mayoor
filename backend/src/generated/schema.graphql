@@ -7,8 +7,19 @@ type AuthPayload {
   user: User
 }
 
+input CreateUserInput {
+  email: String!
+  name: String
+  password: String!
+  role: UserRole
+}
+
 type Mutation {
+  addUser(input: CreateUserInput!): User
+  changePassword(newPassword: String!, oldPassword: String!): User
+  deleteUser(id: ID!): User
   login(email: String!, password: String!): AuthPayload
+  updateUser(id: ID!, input: UpdateUserInput!): User
 }
 
 type Order {
@@ -18,6 +29,13 @@ type Order {
 
 type Query {
   me: User
+}
+
+input UpdateUserInput {
+  email: String!
+  name: String
+  password: String
+  role: UserRole
 }
 
 type User {

@@ -5,7 +5,7 @@ export const Me = queryField("me", {
   resolve: async (_, __, ctx) => {
     const userContext = await ctx.user.getCurrentUser();
 
-    const user = await ctx.prisma.user.findOne({
+    const user = await ctx.prisma.user.findUnique({
       where: { id: userContext.id },
     });
 

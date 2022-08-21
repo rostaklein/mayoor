@@ -1,14 +1,13 @@
-import { mutationField, idArg, arg, inputObjectType } from "nexus";
-import { UserRole } from "./addUser";
+import { mutationField, idArg, arg, inputObjectType, nonNull } from "nexus";
 import { hash } from "bcrypt";
 import { ApolloError } from "apollo-server-micro";
 
 export const UpdateUserInput = inputObjectType({
   name: "UpdateUserInput",
   definition(t) {
-    t.string("email", { nullable: false });
+    t.nonNull.string("email");
     t.string("password");
-    t.field("role", { type: UserRole });
+    t.field("role", { type: "UserRole" });
     t.string("name");
   },
 });
@@ -16,13 +15,13 @@ export const UpdateUserInput = inputObjectType({
 export const UpdateUser = mutationField("updateUser", {
   type: "User",
   args: {
-    id: idArg({ nullable: false }),
-    input: arg({ type: UpdateUserInput, nullable: false }),
+    id: nonNull(idArg()),
+    input: nonNull(arg({ type: UpdateUserInput })),
   },
   resolve: async (_, { id, input }, ctx) => {
     const { password, role, ...rest } = input;
 
-    const user = await ctx.prisma.user.findOne({ where: { id } });
+    const user = await ctx.prisma.user.findUnique({ where: { id } });
 
     if (!user?.canBeDeleted) {
       throw new ApolloError(

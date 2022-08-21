@@ -8,7 +8,7 @@ const getCheckUserRole =
   (role: NexusGenEnums["UserRole"]): IRuleFunction =>
   async (parent, args, context: Context) => {
     const { id } = await context.user.getCurrentUser();
-    const user = await context.prisma.user.findOne({ where: { id } });
+    const user = await context.prisma.user.findUnique({ where: { id } });
     return user?.role === role;
   };
 

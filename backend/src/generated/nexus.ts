@@ -19,6 +19,18 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CreateUserInput: { // input type
+    email: string; // String!
+    name?: string | null; // String
+    password: string; // String!
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
+  }
+  UpdateUserInput: { // input type
+    email: string; // String!
+    name?: string | null; // String
+    password?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
+  }
 }
 
 export interface NexusGenEnums {
@@ -60,7 +72,11 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    addUser: NexusGenRootTypes['User'] | null; // User
+    changePassword: NexusGenRootTypes['User'] | null; // User
+    deleteUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Order: { // field return type
     id: string | null; // ID
@@ -83,7 +99,11 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    addUser: 'User'
+    changePassword: 'User'
+    deleteUser: 'User'
     login: 'AuthPayload'
+    updateUser: 'User'
   }
   Order: { // field return type name
     id: 'ID'
@@ -102,9 +122,23 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addUser: { // args
+      input: NexusGenInputs['CreateUserInput']; // CreateUserInput!
+    }
+    changePassword: { // args
+      newPassword: string; // String!
+      oldPassword: string; // String!
+    }
+    deleteUser: { // args
+      id: string; // ID!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
+    }
+    updateUser: { // args
+      id: string; // ID!
+      input: NexusGenInputs['UpdateUserInput']; // UpdateUserInput!
     }
   }
 }
@@ -117,7 +151,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = keyof NexusGenEnums;
 

@@ -1,13 +1,13 @@
-import { mutationField, idArg } from "nexus";
+import { mutationField, idArg, nonNull } from "nexus";
 import { ApolloError } from "apollo-server-micro";
 
 export const DeleteUser = mutationField("deleteUser", {
   type: "User",
   args: {
-    id: idArg({ nullable: false }),
+    id: nonNull(idArg()),
   },
   resolve: async (_, { id }, ctx) => {
-    const user = await ctx.prisma.user.findOne({ where: { id } });
+    const user = await ctx.prisma.user.findUnique({ where: { id } });
 
     if (!user?.canBeDeleted) {
       throw new ApolloError("You cant delete this user.", "INVALID_OPERATION");
