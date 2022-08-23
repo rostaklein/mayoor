@@ -24,9 +24,12 @@
     "prisma": "^3.15.2"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@prisma/client": "^3.15.2",
+    "antd": "^4.22.7",
     "apollo-server-micro": "^3.10.1",
     "bcrypt": "^5.0.1",
+    "formik": "^2.2.9",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.18.0",
     "jsonwebtoken": "^8.5.1",
@@ -35,7 +38,10 @@
     "nexus-prisma": "^0.35.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^11.18.4",
+    "styled-components": "^5.3.5",
     "ts-node": "^10.9.1",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "yup": "^0.32.11"
   }
 }
