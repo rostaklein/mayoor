@@ -63,18 +63,11 @@ export interface NexusGenObjects {
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Customer: prisma.Customer;
-  CustomerHelperInfo: { // root type
-    city?: string | null; // String
-    identificationNumber?: string | null; // String
-    name?: string | null; // String
-    postNumber?: string | null; // String
-    street?: string | null; // String
-    taxIdentificationNumber?: string | null; // String
-  }
   CustomerPaginated: { // root type
     items?: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
     totalCount?: number | null; // Int
   }
+  Material: prisma.Material;
   Mutation: {};
   Order: prisma.Order;
   Query: {};
@@ -119,17 +112,17 @@ export interface NexusGenFieldTypes {
     taxIdentificationNumber: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  CustomerHelperInfo: { // field return type
-    city: string | null; // String
-    identificationNumber: string | null; // String
-    name: string | null; // String
-    postNumber: string | null; // String
-    street: string | null; // String
-    taxIdentificationNumber: string | null; // String
-  }
   CustomerPaginated: { // field return type
     items: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
     totalCount: number | null; // Int
+  }
+  Material: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    createdBy: NexusGenRootTypes['User']; // User!
+    id: string; // ID!
+    name: string; // String!
+    price: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Mutation: { // field return type
     addUser: NexusGenRootTypes['User'] | null; // User
@@ -144,8 +137,9 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllCustomers: NexusGenRootTypes['CustomerPaginated'] | null; // CustomerPaginated
+    getAllMaterials: Array<NexusGenRootTypes['Material'] | null> | null; // [Material]
+    getAllUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
-    getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo'] | null; // CustomerHelperInfo
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -184,17 +178,17 @@ export interface NexusGenFieldTypeNames {
     taxIdentificationNumber: 'String'
     updatedAt: 'DateTime'
   }
-  CustomerHelperInfo: { // field return type name
-    city: 'String'
-    identificationNumber: 'String'
-    name: 'String'
-    postNumber: 'String'
-    street: 'String'
-    taxIdentificationNumber: 'String'
-  }
   CustomerPaginated: { // field return type name
     items: 'Customer'
     totalCount: 'Int'
+  }
+  Material: { // field return type name
+    createdAt: 'DateTime'
+    createdBy: 'User'
+    id: 'ID'
+    name: 'String'
+    price: 'Float'
+    updatedAt: 'DateTime'
   }
   Mutation: { // field return type name
     addUser: 'User'
@@ -209,8 +203,9 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     getAllCustomers: 'CustomerPaginated'
+    getAllMaterials: 'Material'
+    getAllUsers: 'User'
     getCustomer: 'Customer'
-    getCustomerHelperInfo: 'CustomerHelperInfo'
     me: 'User'
   }
   User: { // field return type name
@@ -248,11 +243,11 @@ export interface NexusGenArgTypes {
       search?: string | null; // String
       skip?: number | null; // Int
     }
+    getAllMaterials: { // args
+      deleted?: boolean | null; // Boolean
+    }
     getCustomer: { // args
       id: string; // ID!
-    }
-    getCustomerHelperInfo: { // args
-      partialIdentificationNumber: string; // String!
     }
   }
 }

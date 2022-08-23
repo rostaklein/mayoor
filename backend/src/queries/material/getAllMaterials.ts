@@ -1,9 +1,8 @@
-import { queryField, booleanArg } from "nexus";
-import { Context } from "../../context";
+import { queryField, booleanArg, list } from "nexus";
+import { MaterialType } from "../../types";
 
 export const GetAllMaterials = queryField("getAllMaterials", {
-  type: "Material",
-  list: true,
+  type: list(MaterialType),
   args: {
     deleted: booleanArg({ default: false }),
   },

@@ -2,6 +2,7 @@ import { objectType, inputObjectType, enumType } from "nexus";
 import {
   Address,
   Customer,
+  Material,
   User,
   UserRole as UserRoleNexus,
 } from "nexus-prisma";
@@ -62,17 +63,18 @@ export const CustomerType = objectType({
   },
 });
 
-// export const Material = objectType({
-//   name: "Material",
-//   definition(t) {
-//     t.model.id();
-//     t.model.name();
-//     t.model.price();
-//     t.model.createdBy();
-//     t.model.createdAt();
-//     t.model.updatedAt();
-//   },
-// });
+export const MaterialType = objectType({
+  name: Material.$name,
+  description: Material.$description,
+  definition(t) {
+    t.field(Material.id);
+    t.field(Material.name);
+    t.field(Material.price);
+    t.field(Material.createdBy);
+    t.field(Material.createdAt);
+    t.field(Material.updatedAt);
+  },
+});
 
 // export const OrderStatus = enumType({
 //   name: "OrderStatus",

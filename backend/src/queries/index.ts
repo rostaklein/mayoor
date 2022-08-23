@@ -5,10 +5,9 @@ export * from "./me";
 // export * from './orders/getAllOrders';
 // export * from './orders/getHighestOrderNumber';
 
-export * from "./customers/getCustomerHelperInfo";
 export * from "./customers/getAllCustomers";
 export * from "./customers/getCustomer";
 
-// export * from './users/getAllUsers';
+export * from "./users/getAllUsers";
 
-// export * from './material/getAllMaterials';
+export * from "./material/getAllMaterials";
