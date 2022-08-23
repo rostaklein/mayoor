@@ -12,4 +12,5 @@ dist
 tests-e2e/cypress/screenshots/
 tests-e2e/cypress/videos/
 
+.next
 .vercel

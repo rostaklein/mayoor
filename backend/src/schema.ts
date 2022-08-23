@@ -19,7 +19,7 @@ export const schema = makeSchema({
       },
     ],
   },
-  types: [Types, Queries, Mutations, asNexusMethod(dateTimeScalar, "dateTime")],
+  types: [],
   outputs: {
     schema: path.resolve("./backend/src/generated/schema.graphql"),
     typegen: path.resolve("./backend/src/generated/nexus.ts"),

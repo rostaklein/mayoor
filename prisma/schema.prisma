@@ -8,7 +8,7 @@ generator client {
 }
 
 generator nexusPrisma {
-   provider = "nexus-prisma"
+  provider = "nexus-prisma"
 }
 
 model User {
@@ -59,7 +59,7 @@ model Order {
 }
 
 model OrderItem {
-  id              String          @id @default(cuid())  @map("_id")
+  id              String          @id @default(cuid()) @map("_id")
   material        Material?       @relation(fields: [materialId], references: [id])
   materialId      String?
   totalPrice      Float
@@ -78,7 +78,7 @@ model OrderItem {
 }
 
 model ProductionLog {
-  id              String    @id @default(cuid())  @map("_id")
+  id              String    @id @default(cuid()) @map("_id")
   orderItem       OrderItem @relation(fields: [orderItemId], references: [id])
   orderItemId     String
   action          String
@@ -89,7 +89,7 @@ model ProductionLog {
 }
 
 model Customer {
-  id                      String    @id @default(cuid())  @map("_id")
+  id                      String    @id @default(cuid()) @map("_id")
   name                    String?
   personName              String?
   phone                   String?
@@ -108,7 +108,7 @@ model Customer {
 }
 
 model Address {
-  id              String   @id @default(cuid())  @map("_id")
+  id              String   @id @default(cuid()) @map("_id")
   street          String?
   number          String?
   city            String?
