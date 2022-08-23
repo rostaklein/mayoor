@@ -1,13 +1,14 @@
 import { mutationField, arg, inputObjectType, nonNull } from "nexus";
 import { hash } from "bcrypt";
-import { NexusGenEnums } from "../../generated/nexus";
+import { UserRole as UserRolePrisma } from "@prisma/client";
+import { UserRole } from "../../types";
 
 export const CreateUserInput = inputObjectType({
   name: "CreateUserInput",
   definition(t) {
     t.nonNull.string("email");
     t.nonNull.string("password");
-    t.field("role", { type: "UserRole" });
+    t.field("role", { type: UserRole });
     t.string("name");
   },
 });
@@ -26,7 +27,7 @@ export const AddUser = mutationField("addUser", {
 
     const hashedPwd = await hash(password, 10);
 
-    const defaultRole: NexusGenEnums["UserRole"] = "FACTORY";
+    const defaultRole = UserRolePrisma.FACTORY;
 
     const user = await ctx.prisma.user.create({
       data: { password: hashedPwd, name, email, role: role || defaultRole },

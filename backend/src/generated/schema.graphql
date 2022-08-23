@@ -40,7 +40,7 @@ input UpdateUserInput {
 
 type User {
   email: String!
-  id: String!
+  id: ID!
   name: String
   role: UserRole!
 }

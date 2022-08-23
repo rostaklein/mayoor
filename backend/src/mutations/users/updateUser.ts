@@ -1,13 +1,14 @@
 import { mutationField, idArg, arg, inputObjectType, nonNull } from "nexus";
 import { hash } from "bcrypt";
 import { ApolloError } from "apollo-server-micro";
+import { UserRole } from "../../types";
 
 export const UpdateUserInput = inputObjectType({
   name: "UpdateUserInput",
   definition(t) {
     t.nonNull.string("email");
     t.string("password");
-    t.field("role", { type: "UserRole" });
+    t.field("role", { type: UserRole });
     t.string("name");
   },
 });

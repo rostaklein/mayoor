@@ -7,6 +7,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nexusPrisma {
+   provider = "nexus-prisma"
+}
+
 model User {
   id             String          @id @default(cuid()) @map("_id")
   role           UserRole        @default(FACTORY)

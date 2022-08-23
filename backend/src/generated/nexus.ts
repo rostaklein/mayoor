@@ -7,12 +7,7 @@ import type * as prisma from "./../../../node_modules/.prisma/client/index"
 import type { Context as Context } from "./../context"
 
 
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    model: NexusPrisma<TypeName, 'model'>
-    crud: any
-  }
-}
+
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -87,7 +82,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string; // String!
-    id: string; // String!
+    id: string; // ID!
     name: string | null; // String
     role: NexusGenEnums['UserRole']; // UserRole!
   }
@@ -114,7 +109,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     email: 'String'
-    id: 'String'
+    id: 'ID'
     name: 'String'
     role: 'UserRole'
   }

@@ -1,6 +1,5 @@
 import path from "path";
 import { makeSchema } from "nexus";
-import { nexusPrisma } from "nexus-plugin-prisma";
 
 import * as Mutations from "./mutations";
 import * as Queries from "./queries";
@@ -15,7 +14,6 @@ export const schema = makeSchema({
       },
     ],
   },
-  plugins: [nexusPrisma()],
   types: [Types, Queries, Mutations],
   outputs: {
     schema: path.resolve("./backend/src/generated/schema.graphql"),
