@@ -1,5 +1,10 @@
 import path from "path";
-import { makeSchema } from "nexus";
+import { asNexusMethod, makeSchema } from "nexus";
+
+import { GraphQLScalarType } from "graphql";
+import { DateTimeResolver } from "graphql-scalars";
+
+const dateTimeScalar = new GraphQLScalarType(DateTimeResolver);
 
 import * as Mutations from "./mutations";
 import * as Queries from "./queries";
@@ -14,7 +19,7 @@ export const schema = makeSchema({
       },
     ],
   },
-  types: [Types, Queries, Mutations],
+  types: [Types, Queries, Mutations, asNexusMethod(dateTimeScalar, "dateTime")],
   outputs: {
     schema: path.resolve("./backend/src/generated/schema.graphql"),
     typegen: path.resolve("./backend/src/generated/nexus.ts"),

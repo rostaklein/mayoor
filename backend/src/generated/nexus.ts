@@ -5,8 +5,23 @@
 
 import type * as prisma from "./../../../node_modules/.prisma/client/index"
 import type { Context as Context } from "./../context"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
@@ -38,12 +53,27 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
+  Address: prisma.Address;
   AuthPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
+  }
+  Customer: prisma.Customer;
+  CustomerHelperInfo: { // root type
+    city?: string | null; // String
+    identificationNumber?: string | null; // String
+    name?: string | null; // String
+    postNumber?: string | null; // String
+    street?: string | null; // String
+    taxIdentificationNumber?: string | null; // String
+  }
+  CustomerPaginated: { // root type
+    items?: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    totalCount?: number | null; // Int
   }
   Mutation: {};
   Order: prisma.Order;
@@ -62,9 +92,44 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Address: { // field return type
+    city: string | null; // String
+    id: string; // ID!
+    isPrimary: boolean; // Boolean!
+    number: string | null; // String
+    postNumber: string | null; // String
+    street: string | null; // String
+  }
   AuthPayload: { // field return type
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
+  }
+  Customer: { // field return type
+    address: NexusGenRootTypes['Address'] | null; // Address
+    allowedBankPayments: boolean; // Boolean!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    createdBy: NexusGenRootTypes['User']; // User!
+    email: string | null; // String
+    id: string; // ID!
+    identificationNumber: string | null; // String
+    name: string | null; // String
+    note: string | null; // String
+    personName: string | null; // String
+    phone: string | null; // String
+    taxIdentificationNumber: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  CustomerHelperInfo: { // field return type
+    city: string | null; // String
+    identificationNumber: string | null; // String
+    name: string | null; // String
+    postNumber: string | null; // String
+    street: string | null; // String
+    taxIdentificationNumber: string | null; // String
+  }
+  CustomerPaginated: { // field return type
+    items: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    totalCount: number | null; // Int
   }
   Mutation: { // field return type
     addUser: NexusGenRootTypes['User'] | null; // User
@@ -78,6 +143,9 @@ export interface NexusGenFieldTypes {
     number: number | null; // Int
   }
   Query: { // field return type
+    getAllCustomers: NexusGenRootTypes['CustomerPaginated'] | null; // CustomerPaginated
+    getCustomer: NexusGenRootTypes['Customer'] | null; // Customer
+    getCustomerHelperInfo: NexusGenRootTypes['CustomerHelperInfo'] | null; // CustomerHelperInfo
     me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -89,9 +157,44 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Address: { // field return type name
+    city: 'String'
+    id: 'ID'
+    isPrimary: 'Boolean'
+    number: 'String'
+    postNumber: 'String'
+    street: 'String'
+  }
   AuthPayload: { // field return type name
     token: 'String'
     user: 'User'
+  }
+  Customer: { // field return type name
+    address: 'Address'
+    allowedBankPayments: 'Boolean'
+    createdAt: 'DateTime'
+    createdBy: 'User'
+    email: 'String'
+    id: 'ID'
+    identificationNumber: 'String'
+    name: 'String'
+    note: 'String'
+    personName: 'String'
+    phone: 'String'
+    taxIdentificationNumber: 'String'
+    updatedAt: 'DateTime'
+  }
+  CustomerHelperInfo: { // field return type name
+    city: 'String'
+    identificationNumber: 'String'
+    name: 'String'
+    postNumber: 'String'
+    street: 'String'
+    taxIdentificationNumber: 'String'
+  }
+  CustomerPaginated: { // field return type name
+    items: 'Customer'
+    totalCount: 'Int'
   }
   Mutation: { // field return type name
     addUser: 'User'
@@ -105,6 +208,9 @@ export interface NexusGenFieldTypeNames {
     number: 'Int'
   }
   Query: { // field return type name
+    getAllCustomers: 'CustomerPaginated'
+    getCustomer: 'Customer'
+    getCustomerHelperInfo: 'CustomerHelperInfo'
     me: 'User'
   }
   User: { // field return type name
@@ -134,6 +240,19 @@ export interface NexusGenArgTypes {
     updateUser: { // args
       id: string; // ID!
       input: NexusGenInputs['UpdateUserInput']; // UpdateUserInput!
+    }
+  }
+  Query: {
+    getAllCustomers: { // args
+      first?: number | null; // Int
+      search?: string | null; // String
+      skip?: number | null; // Int
+    }
+    getCustomer: { // args
+      id: string; // ID!
+    }
+    getCustomerHelperInfo: { // args
+      partialIdentificationNumber: string; // String!
     }
   }
 }

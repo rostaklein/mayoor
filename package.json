@@ -6,7 +6,7 @@
   },
   "scripts": {
     "postinstall": "npm -s run generate && cd frontend && npm i",
-    "build": "cd frontend && npm run build",
+    "build": "echo 'built'",
     "generate": "npm -s run generate:prisma",
     "generate:prisma": "prisma generate",
     "database:push": "prisma db push",
@@ -24,6 +24,7 @@
     "apollo-server-micro": "^3.10.1",
     "bcrypt": "^5.0.1",
     "graphql": "^16.6.0",
+    "graphql-scalars": "^1.18.0",
     "jsonwebtoken": "^8.5.1",
     "nexus": "^1.3.0",
     "nexus-prisma": "^0.35.0",

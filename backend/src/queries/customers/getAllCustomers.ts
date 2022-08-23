@@ -1,31 +1,22 @@
 import { queryField, stringArg } from "nexus";
-import { Customer } from "@prisma/client";
 import { paginationArgs, getPaginatedObjectType } from "../../utils/pagination";
 
 export const GetAllCustomers = queryField("getAllCustomers", {
   type: getPaginatedObjectType("Customer"),
-  args: { ...paginationArgs, search: stringArg({ required: false }) },
-  nullable: false,
-  resolve: async (_parent, { search = "", ...args }, ctx) => {
-    const ilike = search ? `%${search}%` : "%%";
+  args: { ...paginationArgs, search: stringArg() },
+  resolve: async (_parent, { first, skip, search }, ctx) => {
+    const where = { name: { contains: search ?? "" }, deleted: false };
 
-    const allCustomersCount = await ctx.prisma.executeRaw<
-      Customer[]
-    >`SELECT * FROM "Customer" AS t WHERE NOT "deleted" AND t::text ILIKE ${ilike}`;
-
-    const paginatedCustomers = await ctx.prisma.queryRaw<
-      Customer[]
-    >`SELECT * FROM "Customer" AS t
-      WHERE NOT "deleted"
-      AND t::text ILIKE ${ilike}
-      ORDER BY "createdAt" DESC
-      LIMIT ${args.first || "ALL"}
-      OFFSET ${args.skip || 0}
-    `;
+    const totalCustomers = await ctx.prisma.customer.count({ where });
+    const customers = await ctx.prisma.customer.findMany({
+      skip: skip ?? undefined,
+      take: first ?? undefined,
+      where,
+    });
 
     return {
-      totalCount: allCustomersCount,
-      items: paginatedCustomers,
+      totalCount: totalCustomers,
+      items: customers,
     };
   },
 });

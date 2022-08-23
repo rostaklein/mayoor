@@ -1,5 +1,10 @@
 import { objectType, inputObjectType, enumType } from "nexus";
-import { User, UserRole as UserRoleNexus } from "nexus-prisma";
+import {
+  Address,
+  Customer,
+  User,
+  UserRole as UserRoleNexus,
+} from "nexus-prisma";
 
 export * from "./order";
 
@@ -24,36 +29,38 @@ export const UserType = objectType({
   },
 });
 
-// export const Address = objectType({
-//   name: "Address",
-//   definition(t) {
-//     t.model.id();
-//     t.model.street();
-//     t.model.number();
-//     t.model.city();
-//     t.model.postNumber();
-//     t.model.isPrimary();
-//   },
-// });
+export const AddressType = objectType({
+  name: Address.$name,
+  description: Address.$description,
+  definition(t) {
+    t.field(Address.id);
+    t.field(Address.street);
+    t.field(Address.number);
+    t.field(Address.city);
+    t.field(Address.postNumber);
+    t.field(Address.isPrimary);
+  },
+});
 
-// export const Customer = objectType({
-//   name: "Customer",
-//   definition(t) {
-//     t.model.id();
-//     t.model.name();
-//     t.model.email();
-//     t.model.phone();
-//     t.model.identificationNumber();
-//     t.model.taxIdentificationNumber();
-//     t.model.allowedBankPayments();
-//     t.model.personName();
-//     t.model.note();
-//     t.model.createdBy();
-//     t.model.createdAt();
-//     t.model.updatedAt();
-//     t.model.address({ type: "Address", alias: "addresses" });
-//   },
-// });
+export const CustomerType = objectType({
+  name: Customer.$name,
+  description: Customer.$description,
+  definition(t) {
+    t.field(Customer.id);
+    t.field(Customer.name);
+    t.field(Customer.email);
+    t.field(Customer.phone);
+    t.field(Customer.identificationNumber);
+    t.field(Customer.taxIdentificationNumber);
+    t.field(Customer.allowedBankPayments);
+    t.field(Customer.personName);
+    t.field(Customer.note);
+    t.field(Customer.createdBy);
+    t.field(Customer.createdAt);
+    t.field(Customer.updatedAt);
+    t.field("address", { type: AddressType });
+  },
+});
 
 // export const Material = objectType({
 //   name: "Material",

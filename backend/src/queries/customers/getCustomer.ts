@@ -1,12 +1,11 @@
-import { queryField, idArg } from "nexus";
+import { queryField, idArg, nonNull } from "nexus";
 
 export const GetCustomer = queryField("getCustomer", {
   type: "Customer",
   args: {
-    id: idArg({ nullable: false }),
+    id: nonNull(idArg()),
   },
-  nullable: true,
   resolve: async (_parent, args, ctx) => {
-    return ctx.prisma.customer.findOne({ where: { id: args.id } });
+    return ctx.prisma.customer.findUnique({ where: { id: args.id } });
   },
 });

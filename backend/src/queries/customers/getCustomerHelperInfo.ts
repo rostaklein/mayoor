@@ -1,22 +1,22 @@
-import { objectType, stringArg, queryField } from "nexus";
+import { objectType, stringArg, queryField, nonNull } from "nexus";
 import { getInfoFromAres } from "./getInfoFromAres";
 
 const CustomerHelperInfo = objectType({
   name: "CustomerHelperInfo",
   definition(t) {
-    t.string("identificationNumber", { nullable: true });
-    t.string("taxIdentificationNumber", { nullable: true });
-    t.string("name", { nullable: true });
-    t.string("street", { nullable: true });
-    t.string("city", { nullable: true });
-    t.string("postNumber", { nullable: true });
+    t.string("identificationNumber");
+    t.string("taxIdentificationNumber");
+    t.string("name");
+    t.string("street");
+    t.string("city");
+    t.string("postNumber");
   },
 });
 
 export const GetCustomerHelperInfo = queryField("getCustomerHelperInfo", {
   type: CustomerHelperInfo,
   args: {
-    partialIdentificationNumber: stringArg({ nullable: false }),
+    partialIdentificationNumber: nonNull(stringArg()),
   },
   resolve: (_parent, args) => {
     return getInfoFromAres(args.partialIdentificationNumber);
