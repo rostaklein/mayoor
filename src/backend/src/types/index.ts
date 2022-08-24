@@ -5,11 +5,15 @@ import {
   Material,
   User,
   UserRole as UserRoleNexus,
+  OrderStatus as OrderStatusNexus,
+  ProductionLogType as ProductionLogTypeNexus,
 } from "nexus-prisma";
 
 export * from "./order";
 
 export const UserRole = enumType(UserRoleNexus);
+export const OrderStatus = enumType(OrderStatusNexus);
+export const ProductionLogType = enumType(ProductionLogTypeNexus);
 
 export const AuthPayload = objectType({
   name: "AuthPayload",
@@ -75,18 +79,6 @@ export const MaterialType = objectType({
     t.field(Material.updatedAt);
   },
 });
-
-// export const OrderStatus = enumType({
-//   name: "OrderStatus",
-//   members: [
-//     "NEW",
-//     "WAITING_FOR_CALCULATION",
-//     "READY_TO_PRINT",
-//     "WAITING_FOR_PRODUCTION",
-//     "TO_BE_SHIPPED",
-//     "DONE",
-//   ],
-// });
 
 // export const OrderItem = objectType({
 //   name: "OrderItem",
@@ -161,11 +153,6 @@ export const MaterialType = objectType({
 //     t.string("postNumber");
 //     t.boolean("isPrimary");
 //   },
-// });
-
-// export const ProductionLogType = enumType({
-//   name: "ProductionLogType",
-//   members: ["PRINT", "PRODUCTION"],
 // });
 
 // export const ProductionLog = objectType({

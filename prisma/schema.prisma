@@ -50,7 +50,7 @@ model Order {
   note            String?
   items           OrderItem[]
   urgency         Int         @default(0)
-  status          String
+  status          OrderStatus
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
   createdBy       User        @relation(fields: [createdByUserId], references: [id])
@@ -78,13 +78,14 @@ model OrderItem {
 }
 
 model ProductionLog {
-  id              String    @id @default(cuid()) @map("_id")
-  orderItem       OrderItem @relation(fields: [orderItemId], references: [id])
+  id              String            @id @default(cuid()) @map("_id")
+  orderItem       OrderItem         @relation(fields: [orderItemId], references: [id])
+  type            ProductionLogType
   orderItemId     String
   action          String
   pieces          Int
-  createdAt       DateTime  @default(now())
-  createdBy       User      @relation(fields: [createdByUserId], references: [id])
+  createdAt       DateTime          @default(now())
+  createdBy       User              @relation(fields: [createdByUserId], references: [id])
   createdByUserId String
 }
 
@@ -128,4 +129,18 @@ enum UserRole {
   ADMINISTRATION
   EXECUTIVE
   FACTORY
+}
+
+enum OrderStatus {
+  NEW
+  WAITING_FOR_CALCULATION
+  READY_TO_PRINT
+  WAITING_FOR_PRODUCTION
+  TO_BE_SHIPPED
+  DONE
+}
+
+enum ProductionLogType {
+  PRINT
+  PRODUCTION
 }
