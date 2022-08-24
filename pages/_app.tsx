@@ -3,6 +3,9 @@ import { useQuery, ApolloProvider } from "@apollo/client";
 import { useTranslation } from "react-i18next";
 import { Alert, message } from "antd";
 
+import "antd/dist/antd.css";
+import "../src/client/index.css";
+
 import { client } from "../src/client/ApolloClient";
 import {
   useAppDispatch,
