@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npm -s run generate && cd frontend && npm i",
+    "postinstall": "npm -s run generate",
     "generate": "npm -s run generate:prisma",
     "generate:prisma": "prisma generate",
     "database:push": "prisma db push",
