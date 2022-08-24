@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "postinstall": "npm -s run generate",
     "generate": "npm -s run generate:prisma",
     "generate:prisma": "prisma generate",
