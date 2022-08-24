@@ -22,23 +22,23 @@ import { OrderWrapper } from "./DetailOrderProduction.styles";
 import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE } from "./queries";
 import { ProductionRow } from "./ProductionRow";
 import { UpdateStatusButton } from "./UpdateStatusButton";
-import { useRouter } from "next/router";
 
 type Props = {
   productionLogType: ProductionLogType;
   productionButtonText: string;
+  orderNumber: number | null;
 };
 
 export const DetailOrderProduction: React.FC<Props> = ({
   productionLogType,
   productionButtonText,
+  orderNumber,
 }) => {
-  const { query: routeParams } = useRouter();
   const { t } = useTranslation();
   const [noteValue, setNoteValue] = useState<string | undefined | null>();
 
   const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
-    variables: { number: Number(routeParams.id) },
+    variables: { number: orderNumber },
     onCompleted: (data) => {
       setNoteValue(data.getOrderByNumber?.note);
     },

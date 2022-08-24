@@ -21,11 +21,13 @@ import { ListOrders } from "../ListOrders/ListOrders";
 import { GET_CUSTOMER, UPDATE_CUSTOMER, DELETE_CUSTOMER } from "./queries";
 import { useRouter } from "next/router";
 
-export const DetailCustomer: React.FC = () => {
-  const { query: routeParams, push } = useRouter();
+export const DetailCustomer: React.FC<{ customerId: string }> = ({
+  customerId,
+}) => {
+  const { push } = useRouter();
   const { t } = useTranslation();
   const { data } = useQuery<GetCustomer, GetCustomerVariables>(GET_CUSTOMER, {
-    variables: { id: routeParams.id },
+    variables: { id: customerId },
   });
 
   const [updateCustomer, { loading }] = useMutation<

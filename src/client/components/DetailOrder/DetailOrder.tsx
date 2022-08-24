@@ -28,12 +28,14 @@ import { mapToOrderFormValues } from "./mapToOrderFormValues";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export const DetailOrder: React.FC = () => {
-  const { query: routeParams, push } = useRouter();
+export const DetailOrder: React.FC<{ orderNumber: number }> = ({
+  orderNumber,
+}) => {
+  const { push } = useRouter();
   const { t } = useTranslation();
 
   const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
-    variables: { number: Number(routeParams.id) },
+    variables: { number: orderNumber },
   });
 
   const orderTitle = t("Order #{{number}} {{customerName}}", {

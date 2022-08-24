@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { LockFilled, LoginOutlined, UserOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
 
-import LogoImage from "../../images/mayoor_logo.svg";
 import {
   LoginMutation,
   LoginMutationVariables,
@@ -86,7 +85,7 @@ export const LoginForm: React.FC = () => {
   return (
     <CenteredWrapper>
       <S.LoginWrapper onSubmit={handleSubmit}>
-        <S.Logo src={LogoImage} />
+        <S.Logo src={"/mayoor_logo.svg"} />
         <S.FormItemStyled
           validateStatus={touched.username && errors.username ? "error" : ""}
           help={touched.username && errors.username}

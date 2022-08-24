@@ -28,7 +28,7 @@ const getColumns = (
     ellipsis: true,
     dataIndex: "name",
     render: (_, record) => {
-      return <Link to={`/customers/${record.id}`}>{record.name}</Link>;
+      return <Link href={`/customers/${record.id}`}>{record.name}</Link>;
     },
   },
   {
