@@ -1,4 +1,4 @@
-import { objectType, inputObjectType, enumType } from "nexus";
+import { objectType, inputObjectType, enumType, extendInputType } from "nexus";
 import {
   Address,
   Customer,
@@ -6,14 +6,16 @@ import {
   User,
   UserRole as UserRoleNexus,
   OrderStatus as OrderStatusNexus,
-  ProductionLogType as ProductionLogTypeNexus,
+  ProductionLogAction as ProductionLogActionNexus,
+  ProductionLog,
+  OrderItem,
 } from "nexus-prisma";
 
 export * from "./order";
 
 export const UserRole = enumType(UserRoleNexus);
 export const OrderStatus = enumType(OrderStatusNexus);
-export const ProductionLogType = enumType(ProductionLogTypeNexus);
+export const ProductionLogActionEnum = enumType(ProductionLogActionNexus);
 
 export const AuthPayload = objectType({
   name: "AuthPayload",
@@ -80,89 +82,82 @@ export const MaterialType = objectType({
   },
 });
 
-// export const OrderItem = objectType({
-//   name: "OrderItem",
-//   definition(t) {
-//     t.model.id();
-//     t.model.name();
-//     t.model.material();
-//     t.model.width();
-//     t.model.height();
-//     t.model.pieces();
-//     t.field("printedPieces", {
-//       type: "Int",
-//       resolve: async (item, _, ctx) => {
-//         const action: NexusGenEnums["ProductionLogType"] = "PRINT";
-//         const productionLogs = await ctx.prisma.productionLog.findMany({
-//           where: { AND: [{ orderItem: { id: item.id } }, { action }] },
-//         });
-//         return productionLogs.reduce((acc, curr) => {
-//           return (acc += curr.pieces);
-//         }, 0);
-//       },
-//     });
-//     t.field("producedPieces", {
-//       type: "Int",
-//       resolve: async (item, _, ctx) => {
-//         const action: NexusGenEnums["ProductionLogType"] = "PRODUCTION";
-//         const productionLogs = await ctx.prisma.productionLog.findMany({
-//           where: { AND: [{ orderItem: { id: item.id } }, { action }] },
-//         });
-//         return productionLogs.reduce((acc, curr) => {
-//           return (acc += curr.pieces);
-//         }, 0);
-//       },
-//     });
-//     t.model.totalPrice();
-//     t.model.totalTax();
-//     t.model.createdBy();
-//     t.model.createdAt();
-//     t.model.updatedAt();
-//     t.field("productionLog", {
-//       type: "ProductionLog",
-//       list: true,
-//       resolve: (item, _, ctx) => {
-//         return ctx.prisma.productionLog.findMany({
-//           where: { orderItem: { id: item.id } },
-//         });
-//       },
-//     });
-//   },
-// });
+export const OrderItemType = objectType({
+  name: OrderItem.$name,
+  description: OrderItem.$description,
+  definition(t) {
+    t.field(OrderItem.id);
+    t.field(OrderItem.name);
+    t.field(OrderItem.material);
+    t.field(OrderItem.width);
+    t.field(OrderItem.height);
+    t.field(OrderItem.pieces);
+    t.field("printedPieces", {
+      type: "Int",
+      resolve: async (item, _, ctx) => {
+        const action = "PRINT";
+        const productionLogs = await ctx.prisma.productionLog.findMany({
+          where: { AND: [{ orderItem: { id: item.id } }, { action }] },
+        });
+        return productionLogs.reduce((acc, curr) => {
+          return (acc += curr.pieces);
+        }, 0);
+      },
+    });
+    t.field("producedPieces", {
+      type: "Int",
+      resolve: async (item, _, ctx) => {
+        const action = "PRODUCTION";
+        const productionLogs = await ctx.prisma.productionLog.findMany({
+          where: { AND: [{ orderItem: { id: item.id } }, { action }] },
+        });
+        return productionLogs.reduce((acc, curr) => {
+          return (acc += curr.pieces);
+        }, 0);
+      },
+    });
+    t.field(OrderItem.totalPrice);
+    t.field(OrderItem.totalTax);
+    t.field(OrderItem.createdBy);
+    t.field(OrderItem.createdAt);
+    t.field(OrderItem.updatedAt);
+    t.field(OrderItem.productionLogs);
+  },
+});
 
-// export const AddressInput = inputObjectType({
-//   name: "AddressInput",
-//   definition(t) {
-//     t.string("street");
-//     t.string("number");
-//     t.string("city");
-//     t.string("state");
-//     t.string("postNumber");
-//     t.boolean("isPrimary");
-//   },
-// });
+export const AddressInput = inputObjectType({
+  name: "AddressInput",
+  definition(t) {
+    t.string("street");
+    t.string("number");
+    t.string("city");
+    t.string("state");
+    t.string("postNumber");
+    t.boolean("isPrimary");
+  },
+});
 
-// export const UpdateAddressInput = inputObjectType({
-//   name: "UpdateAddressInput",
-//   definition(t) {
-//     t.id("id");
-//     t.string("street");
-//     t.string("number");
-//     t.string("city");
-//     t.string("state");
-//     t.string("postNumber");
-//     t.boolean("isPrimary");
-//   },
-// });
+export const UpdateAddressInput = inputObjectType({
+  name: "UpdateAddressInput",
+  definition(t) {
+    t.id("id");
+    t.string("street");
+    t.string("number");
+    t.string("city");
+    t.string("state");
+    t.string("postNumber");
+    t.boolean("isPrimary");
+  },
+});
 
-// export const ProductionLog = objectType({
-//   name: "ProductionLog",
-//   definition(t) {
-//     t.model.id();
-//     t.model.orderItem();
-//     t.model.action();
-//     t.model.pieces();
-//     t.model.createdAt();
-//     t.model.createdBy();
-//   },
-// });
+export const ProductionLogType = objectType({
+  name: "ProductionLog",
+  definition(t) {
+    t.field(ProductionLog.id);
+    t.field(ProductionLog.orderItem);
+    t.field(ProductionLog.action);
+    t.field(ProductionLog.pieces);
+    t.field(ProductionLog.createdAt);
+    t.field(ProductionLog.createdBy);
+  },
+});

@@ -78,14 +78,13 @@ model OrderItem {
 }
 
 model ProductionLog {
-  id              String            @id @default(cuid()) @map("_id")
-  orderItem       OrderItem         @relation(fields: [orderItemId], references: [id])
-  type            ProductionLogType
+  id              String              @id @default(cuid()) @map("_id")
+  orderItem       OrderItem           @relation(fields: [orderItemId], references: [id])
   orderItemId     String
-  action          String
+  action          ProductionLogAction
   pieces          Int
-  createdAt       DateTime          @default(now())
-  createdBy       User              @relation(fields: [createdByUserId], references: [id])
+  createdAt       DateTime            @default(now())
+  createdBy       User                @relation(fields: [createdByUserId], references: [id])
   createdByUserId String
 }
 
@@ -140,7 +139,7 @@ enum OrderStatus {
   DONE
 }
 
-enum ProductionLogType {
+enum ProductionLogAction {
   PRINT
   PRODUCTION
 }
