@@ -12,7 +12,7 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-export default async (req: VercelRequest, res: VercelResponse) => {
+const handler = async (req: VercelRequest, res: VercelResponse) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Origin",
@@ -39,3 +39,5 @@ export const config: PageConfig = {
     bodyParser: false,
   },
 };
+
+export default handler;

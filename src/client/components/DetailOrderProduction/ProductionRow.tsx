@@ -1,4 +1,4 @@
-/* eslint-disable  @typescript-eslint/camelcase */
+
 import React, { useState } from 'react';
 import { Row, Col, Button, Input } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';

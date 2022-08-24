@@ -1,4 +1,3 @@
-/* eslint-disable  @typescript-eslint/camelcase */
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RightCircleOutlined } from "@ant-design/icons";

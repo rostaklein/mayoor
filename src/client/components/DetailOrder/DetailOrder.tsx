@@ -45,7 +45,7 @@ export const DetailOrder: React.FC<{ orderNumber: number }> = ({
 
   useEffect(() => {
     document.title = `${orderTitle} | mayoor`;
-  }, [data?.getOrderByNumber?.number]);
+  }, [data.getOrderByNumber.number, orderTitle]);
 
   const initialValues = mapToOrderFormValues(data);
 
