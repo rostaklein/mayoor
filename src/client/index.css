@@ -1,0 +1,27 @@
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+:focus {
+  outline: none;
+}
+
+#root .ant-form-explain {
+  font-size: 12px;
+}
+
+#root h1,
+#root h2,
+#root h3 {
+  font-weight: 700;
+}
+
+#root .ant-form label {
+  font-size: 12px;
+}
+
+#root .ant-col {
+  flex-grow: 1;
+}
