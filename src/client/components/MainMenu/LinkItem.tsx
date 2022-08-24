@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Colors } from "../../themeVariables";
 import Link from "next/link";
 
-const MenuLinkItem = styled(Link)`
+const MenuLinkItem = styled.a`
   width: 100%;
   display: flex;
   align-items: center;
@@ -38,9 +38,11 @@ interface Props {
 
 export const LinkItem: React.FC<Props> = ({ icon, name, to }) => {
   return (
-    <MenuLinkItem href={to} data-test-id={`menu-link-item-${to}`}>
-      {icon}
-      {name}
-    </MenuLinkItem>
+    <Link href={to} passHref>
+      <MenuLinkItem href={to} data-test-id={`menu-link-item-${to}`}>
+        {icon}
+        {name}
+      </MenuLinkItem>
+    </Link>
   );
 };

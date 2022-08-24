@@ -17,6 +17,6 @@ export interface Context {
   user: UserContext;
 }
 
-export function createContext(req: VercelRequest): Context {
+export function createContext({ req }: { req: VercelRequest }): Context {
   return { prisma, user: getUserContext(req) };
 }

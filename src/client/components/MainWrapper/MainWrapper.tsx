@@ -30,9 +30,9 @@ type Props = {
   children?: React.ReactNode;
 };
 
-export const MainWrapper: React.FC<Props> = () => {
+export const MainWrapper: React.FC<Props> = ({ children }) => {
   const { t, i18n } = useTranslation();
-  const location = useLocation();
+  // const location = useLocation();
 
   const routes: RouteConfig[] = [
     { path: "/orders/inprogress", title: t("In Progress") },
@@ -112,16 +112,6 @@ export const MainWrapper: React.FC<Props> = () => {
     },
   ];
 
-  useEffect(() => {
-    const currentRoute = routes.find(
-      (route) => route.path === location.pathname
-    );
-
-    if (currentRoute) {
-      document.title = `${currentRoute.title} | mayoor`;
-    }
-  }, [location, i18n.language]);
-
   return (
     <S.BodyWrapper data-test-id="main-body-wrapper">
       <S.Aside>
@@ -136,16 +126,7 @@ export const MainWrapper: React.FC<Props> = () => {
           <LanguageSwitch />
           <Logout />
         </S.StyledNavbar>
-        <S.Content>
-          {/* <Switch>
-            {routes.map(({ path, title, Component }) => (
-              <Route path={path} key={path}>
-                {Component ? Component : <S.PageTitle>{title}</S.PageTitle>}
-              </Route>
-            ))}
-            <Redirect from="/" to="/orders/list" />
-          </Switch> */}
-        </S.Content>
+        <S.Content>{children}</S.Content>
       </S.Main>
     </S.BodyWrapper>
   );
