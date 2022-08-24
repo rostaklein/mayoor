@@ -11,22 +11,19 @@ import * as Queries from "./queries";
 import * as Types from "./types";
 
 export const schema = makeSchema({
-  sourceTypes: {
-    modules: [
-      {
-        module: require.resolve(".prisma/client/index.d.ts"),
-        alias: "prisma",
-      },
-    ],
-  },
-  types: [],
+  types: [Types, Queries, Mutations, dateTimeScalar],
   outputs: {
-    schema: path.resolve("./backend/src/generated/schema.graphql"),
-    typegen: path.resolve("./backend/src/generated/nexus.ts"),
+    typegen: path.join(
+      process.cwd(),
+      "node_modules",
+      "@types",
+      "nexus-typegen",
+      "index.d.ts"
+    ),
+    schema: path.join(process.cwd(), "graphql", "schema.graphql"),
   },
   contextType: {
-    module: require.resolve("./context"),
-    alias: "Context",
+    module: path.join(process.cwd(), "graphql", "context.ts"),
     export: "Context",
   },
 });

@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { MicroRequest } from 'apollo-server-micro/dist/types';
-import { getUserContext } from './auth';
+import { PrismaClient } from "@prisma/client";
+import { VercelRequest } from "@vercel/node";
+import { getUserContext } from "./auth";
 
-const prisma = new PrismaClient({ log: ['query', 'info', 'warn'] });
+const prisma = new PrismaClient({ log: ["query", "info", "warn"] });
 
 export type UserDetails = {
   id: string;
@@ -17,6 +17,6 @@ export interface Context {
   user: UserContext;
 }
 
-export function createContext(contextParameters: MicroRequest): Context {
-  return { prisma, user: getUserContext(contextParameters) };
+export function createContext(req: VercelRequest): Context {
+  return { prisma, user: getUserContext(req) };
 }

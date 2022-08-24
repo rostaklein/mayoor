@@ -1,10 +1,10 @@
-import * as jwt from 'jsonwebtoken';
-import { UserContext, UserDetails } from './context';
-import { MicroRequest } from 'apollo-server-micro/dist/types';
+import * as jwt from "jsonwebtoken";
+import { UserContext, UserDetails } from "./context";
+import { VercelRequest } from "@vercel/node";
 
 export const issueToken = (userDetails: UserDetails): string => {
   if (!process.env.CLIENT_SECRET) {
-    throw new Error('No client secret provided in ENV.');
+    throw new Error("No client secret provided in ENV.");
   }
   return jwt.sign(userDetails, process.env.CLIENT_SECRET, {
     expiresIn: 43200, // expires in 12 hours
@@ -14,10 +14,10 @@ export const issueToken = (userDetails: UserDetails): string => {
 const getCurrentUserByToken = (token: string | undefined) =>
   new Promise<UserDetails>((resolve, reject) => {
     if (!process.env.CLIENT_SECRET) {
-      throw new Error('No client secret provided in ENV.');
+      throw new Error("No client secret provided in ENV.");
     }
     if (!token) {
-      throw new Error('No token provided');
+      throw new Error("No token provided");
     }
     jwt.verify(token, process.env.CLIENT_SECRET, (err, decoded) => {
       if (err || !decoded) {
@@ -29,8 +29,8 @@ const getCurrentUserByToken = (token: string | undefined) =>
     });
   });
 
-export const getUserContext = (req: MicroRequest): UserContext => {
-  const token = req.headers.authorization?.replace('Bearer ', '');
+export const getUserContext = (req: VercelRequest): UserContext => {
+  const token = req.headers?.authorization?.replace("Bearer ", "");
 
   return { getCurrentUser: () => getCurrentUserByToken(token) };
 };
