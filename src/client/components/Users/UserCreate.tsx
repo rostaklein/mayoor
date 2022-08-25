@@ -43,19 +43,7 @@ export const UserCreate: React.FC = () => {
       onCompleted: () => {
         message.success(t("User created"));
       },
-      update: (cache, { data }) => {
-        const cached = cache.readQuery<GetAllUsers>({ query: GET_ALL_USERS });
-        if (cached === null || !data) {
-          return;
-        }
-        const { getAllUsers } = cached;
-        cache.writeQuery<GetAllUsers>({
-          query: GET_ALL_USERS,
-          data: {
-            getAllUsers: [...getAllUsers, data.addUser],
-          },
-        });
-      },
+      refetchQueries: [{ query: GET_ALL_USERS }],
     }
   );
 
@@ -84,8 +72,8 @@ export const UserCreate: React.FC = () => {
           email: "",
           role: UserRole.FACTORY,
         }}
-        onSubmit={(values) =>
-          createUser({
+        onSubmit={async (values) =>
+          await createUser({
             variables: {
               input: {
                 email: values.email,
@@ -99,36 +87,34 @@ export const UserCreate: React.FC = () => {
         validationSchema={getUserValidationSchema(t)}
       >
         {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <Row gutter={18}>
-              <Col sm={4}>
-                <FormInput label={t("Login email")} name="email"></FormInput>
-              </Col>
-              <Col sm={4}>
-                <FormInput
-                  label={t("Password")}
-                  name="password"
-                  type="password"
-                ></FormInput>
-              </Col>
-              <Col sm={6}>
-                <FormInput label={t("User Name")} name="name"></FormInput>
-              </Col>
-              <Col sm={4}>
-                <UserRoleSelect />
-              </Col>
-              <Col sm={3}>
-                <Button
-                  icon={<SaveOutlined />}
-                  htmlType="submit"
-                  style={{ width: "100%" }}
-                  type="primary"
-                >
-                  {t("Add")}
-                </Button>
-              </Col>
-            </Row>
-          </form>
+          <Row gutter={18}>
+            <Col sm={4}>
+              <FormInput label={t("Login email")} name="email"></FormInput>
+            </Col>
+            <Col sm={4}>
+              <FormInput
+                label={t("Password")}
+                name="password"
+                type="password"
+              ></FormInput>
+            </Col>
+            <Col sm={6}>
+              <FormInput label={t("User Name")} name="name"></FormInput>
+            </Col>
+            <Col sm={4}>
+              <UserRoleSelect />
+            </Col>
+            <Col sm={3}>
+              <Button
+                icon={<SaveOutlined />}
+                onClick={() => handleSubmit()}
+                style={{ width: "100%" }}
+                type="primary"
+              >
+                {t("Add")}
+              </Button>
+            </Col>
+          </Row>
         )}
       </Formik>
     </>

@@ -22,21 +22,7 @@ export const MaterialCreate: React.FC = () => {
     CreateMaterial,
     CreateMaterialVariables
   >(CREATE_MATERIAL, {
-    update: (cache, { data }) => {
-      const cached = cache.readQuery<GetAllMaterials>({
-        query: GET_ALL_MATERIALS,
-      });
-      if (cached === null || !data) {
-        return;
-      }
-      const { getAllMaterials } = cached;
-      cache.writeQuery<GetAllMaterials>({
-        query: GET_ALL_MATERIALS,
-        data: {
-          getAllMaterials: [...getAllMaterials, data.createMaterial],
-        },
-      });
-    },
+    refetchQueries: [{ query: GET_ALL_MATERIALS }],
   });
 
   return (

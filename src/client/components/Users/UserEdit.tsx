@@ -53,21 +53,11 @@ export const UserEdit: React.FC = () => {
       onCompleted: () => {
         message.success(t("User deleted"));
       },
-      update: (cache, { data }) => {
-        const cached = cache.readQuery<GetAllUsers>({ query: GET_ALL_USERS });
-        if (cached === null) {
-          return;
-        }
-        const { getAllUsers } = cached;
-        cache.writeQuery<GetAllUsers>({
+      refetchQueries: [
+        {
           query: GET_ALL_USERS,
-          data: {
-            getAllUsers: getAllUsers.filter(
-              ({ id }) => id !== data?.deleteUser.id
-            ),
-          },
-        });
-      },
+        },
+      ],
     }
   );
 

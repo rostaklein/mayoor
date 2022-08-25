@@ -54,23 +54,11 @@ export const MaterialEdit: React.FC = () => {
       onCompleted: () => {
         message.success(t("Material deleted"));
       },
-      update: (cache, { data }) => {
-        const cached = cache.readQuery<GetAllMaterials>({
+      refetchQueries: [
+        {
           query: GET_ALL_MATERIALS,
-        });
-        if (cached === null) {
-          return;
-        }
-        const { getAllMaterials } = cached;
-        cache.writeQuery<GetAllMaterials>({
-          query: GET_ALL_MATERIALS,
-          data: {
-            getAllMaterials: getAllMaterials.filter(
-              ({ id }) => id !== data?.deleteMaterial.id
-            ),
-          },
-        });
-      },
+        },
+      ],
     }
   );
 
