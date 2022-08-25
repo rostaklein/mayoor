@@ -250,6 +250,7 @@ input UpdateUserInput {
 }
 
 type User {
+  canBeEdited: Boolean!
   email: String!
   id: ID!
   name: String

@@ -33,6 +33,7 @@ export const UserType = objectType({
     t.field(User.name);
     t.field(User.email);
     t.field(User.role);
+    t.field(User.canBeEdited);
   },
 });
 
