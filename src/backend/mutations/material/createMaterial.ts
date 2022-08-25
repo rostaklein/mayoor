@@ -1,10 +1,10 @@
-import { mutationField, stringArg, floatArg } from "nexus";
+import { mutationField, stringArg, floatArg, nonNull } from "nexus";
 
 export const CreateMaterial = mutationField("createMaterial", {
   type: "Material",
   args: {
-    name: stringArg({ nullable: false }),
-    price: floatArg({ nullable: false }),
+    name: nonNull(stringArg()),
+    price: nonNull(floatArg()),
   },
   resolve: async (_, { name, price }, ctx) => {
     const user = await ctx.user.getCurrentUser();

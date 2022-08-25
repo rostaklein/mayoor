@@ -1,4 +1,4 @@
-import { objectType, arg, inputObjectType, intArg } from "nexus";
+import { objectType, arg, inputObjectType, intArg, nonNull } from "nexus";
 import { ApolloError } from "apollo-server-micro";
 import { mapOrderItemInputToCreateOrderItem } from "../../mappers/mapOrderItem";
 import { OrderStatus } from "../../types";
@@ -7,8 +7,8 @@ export const OrderItemInput = inputObjectType({
   name: "OrderItemInput",
   definition(t) {
     t.string("name");
-    t.float("totalPrice", { nullable: false });
-    t.float("totalTax", { nullable: false });
+    t.nonNull.float("totalPrice");
+    t.nonNull.float("totalTax");
     t.float("width");
     t.float("height");
     t.int("pieces");
@@ -19,11 +19,11 @@ export const OrderItemInput = inputObjectType({
 export const OrderInput = inputObjectType({
   name: "OrderInput",
   definition(t) {
-    t.float("totalPrice", { nullable: false });
-    t.float("totalTax", { nullable: false });
+    t.nonNull.float("totalPrice");
+    t.nonNull.float("totalTax");
     t.string("note");
     t.id("customerId");
-    t.field("items", { type: OrderItemInput, list: true, nullable: false });
+    t.nonNull.list.field("items", { type: OrderItemInput });
     t.field("status", { type: OrderStatus });
     t.int("urgency");
   },
@@ -35,13 +35,13 @@ export const CreateOrder = objectType({
     t.field("createOrder", {
       type: "Order",
       args: {
-        number: intArg({ nullable: false }),
-        input: arg({ type: OrderInput, nullable: false }),
+        number: nonNull(intArg()),
+        input: nonNull(arg({ type: OrderInput })),
       },
       resolve: async (_, { number, input }, ctx) => {
         const user = await ctx.user.getCurrentUser();
 
-        const existingOrder = await ctx.prisma.order.findOne({
+        const existingOrder = await ctx.prisma.order.findUnique({
           where: { number },
         });
 

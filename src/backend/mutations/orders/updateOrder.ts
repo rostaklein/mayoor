@@ -1,4 +1,4 @@
-import { arg, inputObjectType, idArg, mutationField } from "nexus";
+import { arg, inputObjectType, idArg, mutationField, nonNull } from "nexus";
 import { ApolloError } from "apollo-server-micro";
 import { OrderStatus } from "../../types";
 import { mapOrderItemInputToCreateOrderItem } from "../../mappers/mapOrderItem";
@@ -6,14 +6,14 @@ import { mapOrderItemInputToCreateOrderItem } from "../../mappers/mapOrderItem";
 export const UpdateOrderItemInput = inputObjectType({
   name: "UpdateOrderItemInput",
   definition(t) {
-    t.id("id");
+    t.nonNull.id("id");
     t.string("name");
-    t.float("totalPrice", { nullable: false });
-    t.float("totalTax", { nullable: false });
+    t.nonNull.float("totalPrice");
+    t.nonNull.float("totalTax");
     t.float("width");
     t.float("height");
     t.int("pieces");
-    t.id("materialId", { nullable: false });
+    t.nonNull.id("materialId");
   },
 });
 
@@ -24,9 +24,8 @@ export const UpdateOrderInput = inputObjectType({
     t.float("totalTax");
     t.string("note");
     t.id("customerId");
-    t.field("items", {
+    t.list.field("items", {
       type: UpdateOrderItemInput,
-      list: true,
     });
     t.field("status", { type: OrderStatus });
     t.int("urgency");
@@ -36,13 +35,13 @@ export const UpdateOrderInput = inputObjectType({
 export const UpdateOrder = mutationField("updateOrder", {
   type: "Order",
   args: {
-    id: idArg({ nullable: false }),
-    input: arg({ type: UpdateOrderInput, nullable: false }),
+    id: nonNull(idArg()),
+    input: nonNull(arg({ type: UpdateOrderInput })),
   },
   resolve: async (_, { id, input }, ctx) => {
     const user = await ctx.user.getCurrentUser();
 
-    const order = await ctx.prisma.order.findOne({ where: { id } });
+    const order = await ctx.prisma.order.findUnique({ where: { id } });
 
     if (!order) {
       throw new ApolloError(`Order not found`, "NOT_FOUND");

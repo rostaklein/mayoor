@@ -60,7 +60,7 @@ export const DetailCustomer: React.FC<{ customerId: string }> = ({
       await updateCustomer({
         variables: {
           input: {
-            id: routeParams.id,
+            id: customerId,
             name,
             identificationNumber,
             taxIdentificationNumber,
@@ -157,7 +157,7 @@ export const DetailCustomer: React.FC<{ customerId: string }> = ({
       <ListOrders
         title={t("Customers orders")}
         pageSize={5}
-        customerId={data.getCustomer.id}
+        customerId={customerId}
       />
     </>
   );

@@ -1,13 +1,13 @@
-import { arg, mutationField, idArg, intArg } from "nexus";
-import { ProductionLogType } from "../../types";
+import { arg, mutationField, idArg, intArg, nonNull } from "nexus";
 import { ApolloError } from "apollo-server-micro";
+import { ProductionLogActionEnum } from "../../types";
 
 export const AddProductionLog = mutationField("addProductionLog", {
   type: "OrderItem",
   args: {
-    orderItemId: idArg({ nullable: false }),
-    action: arg({ type: ProductionLogType, nullable: false }),
-    pieces: intArg({ nullable: false }),
+    orderItemId: nonNull(idArg()),
+    action: nonNull(arg({ type: ProductionLogActionEnum })),
+    pieces: nonNull(intArg()),
   },
   resolve: async (_, { orderItemId, action, pieces }, ctx) => {
     const user = await ctx.user.getCurrentUser();
@@ -29,7 +29,7 @@ export const AddProductionLog = mutationField("addProductionLog", {
       },
     });
 
-    const updatedOrderItem = await ctx.prisma.orderItem.findOne({
+    const updatedOrderItem = await ctx.prisma.orderItem.findUnique({
       where: { id: orderItemId },
     });
 

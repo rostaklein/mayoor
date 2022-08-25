@@ -1,4 +1,4 @@
-import { arg, mutationField, inputObjectType } from "nexus";
+import { arg, mutationField, inputObjectType, nonNull } from "nexus";
 import { UserInputError, ApolloError } from "apollo-server-micro";
 import { UpdateAddressInput } from "../../types";
 
@@ -14,18 +14,18 @@ export const UpdateCustomerInput = inputObjectType({
     t.string("taxIdentificationNumber");
     t.boolean("allowedBankPayments");
     t.string("note");
-    t.field("addresses", { type: UpdateAddressInput, list: true });
+    t.list.field("addresses", { type: UpdateAddressInput });
   },
 });
 
 export const UpdateCustomer = mutationField("updateCustomer", {
   type: "Customer",
   args: {
-    input: arg({ type: UpdateCustomerInput, nullable: false }),
+    input: nonNull(arg({ type: UpdateCustomerInput })),
   },
   resolve: async (_, { input }, ctx) => {
-    const customer = await ctx.prisma.customer.findOne({
-      where: { id: input.id ?? undefined },
+    const customer = await ctx.prisma.customer.findUnique({
+      where: { id: input.id },
     });
 
     if (customer === null) {
@@ -35,21 +35,21 @@ export const UpdateCustomer = mutationField("updateCustomer", {
       );
     }
 
-    const { addresses } = input;
+    const { id, allowedBankPayments, addresses, ...otherArgs } = input;
     const primaryAddresses = addresses?.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
       throw new UserInputError("Only one address can be primary.");
     }
 
-    addresses?.map(async ({ id, ...address }) => {
+    for (const { id: addressId, ...address } of addresses) {
       await ctx.prisma.address.update({
-        where: { id: id ?? undefined },
-        data: { ...address, isPrimary: address.isPrimary ?? undefined },
+        data: address,
+        where: {
+          id: addressId,
+        },
       });
-    });
-
-    const { id, allowedBankPayments, ...otherArgs } = input;
+    }
 
     return await ctx.prisma.customer.update({
       where: {

@@ -1,7 +1,7 @@
-import { arg, mutationField, inputObjectType } from "nexus";
+import { arg, mutationField, inputObjectType, nonNull } from "nexus";
 import { AddressInput } from "../../types";
-import { AddressCreateManyWithoutCustomerInput } from "@prisma/client";
 import { UserInputError } from "apollo-server-micro";
+import { Prisma } from "@prisma/client";
 
 export const CreateCustomerInput = inputObjectType({
   name: "CreateCustomerInput",
@@ -14,14 +14,14 @@ export const CreateCustomerInput = inputObjectType({
     t.string("taxIdentificationNumber");
     t.boolean("allowedBankPayments");
     t.string("note");
-    t.field("addresses", { type: AddressInput, list: true });
+    t.list.field("addresses", { type: AddressInput });
   },
 });
 
 export const CreateCustomer = mutationField("createCustomer", {
   type: "Customer",
   args: {
-    input: arg({ type: CreateCustomerInput, nullable: false }),
+    input: nonNull(arg({ type: CreateCustomerInput })),
   },
   resolve: async (_, { input }, ctx) => {
     const user = await ctx.user.getCurrentUser();
@@ -33,12 +33,14 @@ export const CreateCustomer = mutationField("createCustomer", {
       throw new UserInputError("Only one address can be primary.");
     }
 
-    const newAddresses: AddressCreateManyWithoutCustomerInput = {
-      create: addresses?.map((addressInput) => ({
-        ...addressInput,
-        isPrimary: addressInput.isPrimary ?? undefined,
-        createdBy: { connect: { id: user.id } },
-      })),
+    const newAddresses: Prisma.AddressCreateNestedManyWithoutCustomerInput = {
+      createMany: {
+        data: addresses?.map((addressInput) => ({
+          ...addressInput,
+          isPrimary: addressInput.isPrimary ?? undefined,
+          createdByUserId: user.id,
+        })),
+      },
     };
 
     return ctx.prisma.customer.create({

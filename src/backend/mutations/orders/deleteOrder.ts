@@ -1,9 +1,9 @@
-import { mutationField, idArg } from "nexus";
+import { mutationField, idArg, nonNull } from "nexus";
 
 export const DeleteOrder = mutationField("deleteOrder", {
   type: "Order",
   args: {
-    id: idArg({ nullable: false }),
+    id: nonNull(idArg()),
   },
   resolve: async (_, { id }, ctx) => {
     return ctx.prisma.order.update({

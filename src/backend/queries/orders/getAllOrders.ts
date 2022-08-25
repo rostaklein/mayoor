@@ -28,13 +28,16 @@ export const GetAllOrders = queryField("getAllOrders", {
         : { createdAt: "desc" },
     });
 
-    const allMatchingOrdersCount = await ctx.prisma.order.count({
-      where: {
-        status: status ?? undefined,
-        customerId,
-        deleted: false,
-      },
-    });
+    const allMatchingOrdersCount =
+      orders.length > 0
+        ? await ctx.prisma.order.count({
+            where: {
+              status: status ?? undefined,
+              customerId,
+              deleted: false,
+            },
+          })
+        : 0;
 
     return {
       totalCount: allMatchingOrdersCount,

@@ -65,7 +65,21 @@ export const CustomerType = objectType({
     t.field(Customer.createdBy);
     t.field(Customer.createdAt);
     t.field(Customer.updatedAt);
-    t.field("address", { type: AddressType });
+    t.list.nonNull.field("addresses", {
+      type: "Address",
+      resolve: async (customer, _, ctx) => {
+        return (
+          (await ctx.prisma.address.findMany({
+            where: {
+              customerId: customer.id,
+            },
+            orderBy: {
+              isPrimary: "desc",
+            },
+          })) ?? []
+        );
+      },
+    });
   },
 });
 

@@ -1,9 +1,9 @@
-import { mutationField, stringArg, floatArg, idArg } from "nexus";
+import { mutationField, stringArg, floatArg, idArg, nonNull } from "nexus";
 
 export const UpdateMaterial = mutationField("updateMaterial", {
   type: "Material",
   args: {
-    id: idArg({ nullable: false }),
+    id: nonNull(idArg()),
     name: stringArg(),
     price: floatArg(),
   },

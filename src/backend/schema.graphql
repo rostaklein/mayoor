@@ -25,6 +25,18 @@ type AuthPayload {
   user: User
 }
 
+input CreateCustomerInput {
+  addresses: [AddressInput]
+  allowedBankPayments: Boolean
+  email: String
+  identificationNumber: String
+  name: String
+  note: String
+  personName: String
+  phone: String
+  taxIdentificationNumber: String
+}
+
 input CreateUserInput {
   email: String!
   name: String
@@ -33,7 +45,7 @@ input CreateUserInput {
 }
 
 type Customer {
-  address: Address
+  addresses: [Address!]
   allowedBankPayments: Boolean!
   createdAt: DateTime!
   createdBy: User!
@@ -68,10 +80,22 @@ type Material {
 }
 
 type Mutation {
+  addProductionLog(action: ProductionLogAction!, orderItemId: ID!, pieces: Int!): OrderItem
   addUser(input: CreateUserInput!): User
   changePassword(newPassword: String!, oldPassword: String!): User
+  createCustomer(input: CreateCustomerInput!): Customer
+  createMaterial(name: String!, price: Float!): Material
+  createOrder(input: OrderInput!, number: Int!): Order
+  deleteCustomer(id: ID!): Customer
+  deleteMaterial(id: ID!): Material
+  deleteOrder(id: ID!): Order
   deleteUser(id: ID!): User
   login(email: String!, password: String!): AuthPayload
+  updateCustomer(input: UpdateCustomerInput!): Customer
+  updateMaterial(id: ID!, name: String, price: Float): Material
+  updateOrder(id: ID!, input: UpdateOrderInput!): Order
+  updateOrderNote(id: ID!, note: String): Order
+  updateOrderStatus(id: ID!, status: OrderStatus!): Order
   updateUser(id: ID!, input: UpdateUserInput!): User
 }
 
@@ -97,6 +121,16 @@ enum OrderByArg {
   desc
 }
 
+input OrderInput {
+  customerId: ID
+  items: [OrderItemInput]!
+  note: String
+  status: OrderStatus
+  totalPrice: Float!
+  totalTax: Float!
+  urgency: Int
+}
+
 type OrderItem {
   createdAt: DateTime!
   createdBy: User!
@@ -111,6 +145,16 @@ type OrderItem {
   totalPrice: Float!
   totalTax: Float!
   updatedAt: DateTime!
+  width: Float
+}
+
+input OrderItemInput {
+  height: Float
+  materialId: ID
+  name: String
+  pieces: Int
+  totalPrice: Float!
+  totalTax: Float!
   width: Float
 }
 
@@ -162,6 +206,40 @@ input UpdateAddressInput {
   postNumber: String
   state: String
   street: String
+}
+
+input UpdateCustomerInput {
+  addresses: [UpdateAddressInput]
+  allowedBankPayments: Boolean
+  email: String
+  id: ID
+  identificationNumber: String
+  name: String
+  note: String
+  personName: String
+  phone: String
+  taxIdentificationNumber: String
+}
+
+input UpdateOrderInput {
+  customerId: ID
+  items: [UpdateOrderItemInput]
+  note: String
+  status: OrderStatus
+  totalPrice: Float
+  totalTax: Float
+  urgency: Int
+}
+
+input UpdateOrderItemInput {
+  height: Float
+  id: ID!
+  materialId: ID!
+  name: String
+  pieces: Int
+  totalPrice: Float!
+  totalTax: Float!
+  width: Float
 }
 
 input UpdateUserInput {

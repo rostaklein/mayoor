@@ -1,9 +1,9 @@
-import { idArg, mutationField, stringArg } from "nexus";
+import { idArg, mutationField, nonNull, stringArg } from "nexus";
 
 export const UpdateOrderNote = mutationField("updateOrderNote", {
   type: "Order",
   args: {
-    id: idArg({ nullable: false }),
+    id: nonNull(idArg()),
     note: stringArg(),
   },
   resolve: async (_, { id, note }, ctx) => {
