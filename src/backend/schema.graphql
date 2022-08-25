@@ -80,7 +80,7 @@ type Order {
   createdBy: User!
   customer: Customer
   id: ID!
-  items: [OrderItem!]!
+  items(orderByCreatedAt: OrderByArg): [OrderItem]
   note: String
   number: Int!
   shippedAt: DateTime

@@ -55,7 +55,8 @@ export const StyledNavbar = styled.header`
 
 export const PageTitle = styled.h1`
   font-size: 18px;
+  font-weight: bold;
   color: ${Colors.DARK_GRAY3};
   margin: 0;
-  padding: 15px 35px;
+  padding: 16px 28px;
 `;
