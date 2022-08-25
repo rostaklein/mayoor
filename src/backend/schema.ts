@@ -20,10 +20,10 @@ export const schema = makeSchema({
       "nexus-typegen",
       "index.d.ts"
     ),
-    schema: path.join(process.cwd(), "graphql", "schema.graphql"),
+    schema: path.join(process.cwd(), "src", "backend", "schema.graphql"),
   },
   contextType: {
-    module: path.join(process.cwd(), "graphql", "context.ts"),
+    module: path.join(process.cwd(), "src", "backend", "context.ts"),
     export: "Context",
   },
 });

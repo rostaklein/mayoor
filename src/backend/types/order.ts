@@ -1,5 +1,5 @@
 import { objectType } from "nexus";
-import { Order, OrderStatus } from "nexus-prisma";
+import { Order } from "nexus-prisma";
 
 export const OrderType = objectType({
   name: Order.$name,
@@ -11,13 +11,7 @@ export const OrderType = objectType({
     t.field(Order.status);
     t.field(Order.urgency);
     t.field(Order.customer);
-    t.field(Order.items, {
-      resolve: (source, args, ctx) =>
-        ctx.prisma.orderItem.findMany({
-          where: { orderId: source.id },
-          orderBy: { createdAt: "desc" },
-        }),
-    });
+    t.field(Order.items);
     t.field(Order.totalPrice);
     t.field(Order.totalTax);
     t.float("totalSize", {

@@ -11,8 +11,9 @@
     "lint": "next lint",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "postinstall": "npm -s run generate",
-    "generate": "npm -s run generate:prisma",
+    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --project tsconfig.nexus.json --transpile-only src/backend/schema.ts",
     "database:push": "prisma db push",
     "database:seed": "ts-node ./prisma/seed.ts",
     "start:full": "npm run database:migrate && npm run database:seed && npm run start"
