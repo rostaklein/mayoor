@@ -35,6 +35,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+          <link rel="icon" type="image/png" href="/favicon.png" />
         </Head>
         <body>
           <Main />
