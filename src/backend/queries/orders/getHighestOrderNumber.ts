@@ -2,7 +2,6 @@ import { queryField } from "nexus";
 
 export const GetHighestOrderNumber = queryField("getHighestOrderNumber", {
   type: "Int",
-  nullable: true,
   resolve: async (_parent, _args, ctx) => {
     const orders = await ctx.prisma.order.findMany({
       orderBy: { number: "desc" },

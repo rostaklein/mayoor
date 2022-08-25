@@ -1,8 +1,8 @@
 export * from "./me";
 
-// export * from './orders/getOrder';
-// export * from './orders/getOrderByNumber';
-// export * from './orders/getAllOrders';
+export * from "./orders/getOrder";
+export * from "./orders/getOrderByNumber";
+export * from "./orders/getAllOrders";
 // export * from './orders/getHighestOrderNumber';
 
 export * from "./customers/getAllCustomers";

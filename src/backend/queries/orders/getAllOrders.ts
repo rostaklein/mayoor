@@ -10,7 +10,6 @@ export const GetAllOrders = queryField("getAllOrders", {
     customerId: idArg(),
     orderByUrgency: enumType({ name: "OrderByArg", members: ["asc", "desc"] }),
   },
-  nullable: false,
   resolve: async (
     _parent,
     { status, orderByUrgency, customerId, ...args },
