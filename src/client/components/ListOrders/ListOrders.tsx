@@ -30,7 +30,7 @@ const getColumns = (
     dataIndex: "number",
     width: 80,
     render: (_, record) => {
-      return <Link to={`/orders/${record.number}`}>{record.number}</Link>;
+      return <Link href={`/orders/${record.number}`}>{record.number}</Link>;
     },
   },
   {
