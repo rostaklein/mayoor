@@ -24,11 +24,8 @@ export const UpdateUser = mutationField("updateUser", {
 
     const user = await ctx.prisma.user.findUnique({ where: { id } });
 
-    if (!user?.canBeDeleted) {
-      throw new ApolloError(
-        "You cant change this users password.",
-        "INVALID_OPERATION"
-      );
+    if (!user?.canBeEdited) {
+      throw new ApolloError("You cant change this user.", "INVALID_OPERATION");
     }
 
     if (password) {

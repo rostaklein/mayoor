@@ -22,7 +22,7 @@ export const ChangePassword = mutationField("changePassword", {
       throw new ApolloError("Incorrect old password", "INVALID_PASSWORD");
     }
 
-    if (!user.canBeDeleted) {
+    if (!user.canBeEdited) {
       throw new ApolloError(
         "You cant change this users password.",
         "INVALID_OPERATION"

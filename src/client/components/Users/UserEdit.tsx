@@ -35,18 +35,20 @@ type FormikValues = GetAllUsers_getAllUsers & { password?: string };
 
 export const UserEdit: React.FC = () => {
   const { t } = useTranslation();
-  const [currentlyLoading, setCurrentlyLoading] = useState<string | null>(null);
 
   const { data } = useQuery<GetAllUsers>(GET_ALL_USERS);
 
-  const [updateUser] = useMutation<UpdateUser, UpdateUserVariables>(
-    UPDATE_USER,
-    {
-      onCompleted: () => {
-        message.success(t("User updated"));
-      },
-    }
-  );
+  const [updateUser, { loading }] = useMutation<
+    UpdateUser,
+    UpdateUserVariables
+  >(UPDATE_USER, {
+    onCompleted: () => {
+      message.success(t("User updated"));
+    },
+    onError: (err) => {
+      message.error(t(err.message));
+    },
+  });
   const [deleteUser] = useMutation<DeleteUser, DeleteUserVariables>(
     DELETE_USER,
     {
@@ -87,7 +89,6 @@ export const UserEdit: React.FC = () => {
                 key={user.id}
                 initialValues={{ ...user, password: undefined }}
                 onSubmit={async (values) => {
-                  setCurrentlyLoading(user.id);
                   await updateUser({
                     variables: {
                       id: user.id,
@@ -99,7 +100,6 @@ export const UserEdit: React.FC = () => {
                       },
                     },
                   });
-                  setCurrentlyLoading(null);
                 }}
                 validationSchema={getUserValidationSchema(t)}
               >
@@ -127,7 +127,7 @@ export const UserEdit: React.FC = () => {
                     <Col sm={3}>
                       <Button
                         onClick={() => handleSubmit()}
-                        loading={currentlyLoading === user.id}
+                        loading={loading}
                         icon={<SaveOutlined />}
                         style={{ width: "100%" }}
                       >

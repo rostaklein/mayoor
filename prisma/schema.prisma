@@ -24,7 +24,7 @@ model User {
   customers      Customer[]
   addresses      Address[]
   deleted        Boolean         @default(false)
-  canBeDeleted   Boolean         @default(true)
+  canBeEdited    Boolean         @default(true)
 }
 
 model Material {

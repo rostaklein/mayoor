@@ -15,7 +15,7 @@
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --project tsconfig.nexus.json --transpile-only src/backend/schema.ts",
     "database:push": "prisma db push",
-    "database:seed": "ts-node ./prisma/seed.ts",
+    "database:seed": "ts-node --project tsconfig.nexus.json --transpile-only ./prisma/seed.ts",
     "start:full": "npm run database:migrate && npm run database:seed && npm run start"
   },
   "devDependencies": {

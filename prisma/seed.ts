@@ -1,20 +1,21 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function seed() {
   const createdAdminUser = await prisma.user.create({
     data: {
-      email: 'admin',
-      password: '$2b$10$LwzufdvFedsTXeHz122DxuqKv/X6GEs48dtErdW1FD0V0I/ZwUrKe', // decoded password: admin
-      role: 'EXECUTIVE', // highest permission role
-      name: 'John Doe',
+      email: "admin",
+      password: "$2b$10$LwzufdvFedsTXeHz122DxuqKv/X6GEs48dtErdW1FD0V0I/ZwUrKe", // decoded password: admin
+      role: "EXECUTIVE", // highest permission role
+      name: "John Doe",
+      canBeEdited: false,
     },
   });
 
   const material = await prisma.material.create({
     data: {
-      name: 'Banner 510',
+      name: "Banner 510",
       price: 150,
       createdBy: {
         connect: {
@@ -25,14 +26,14 @@ async function seed() {
   });
 
   await Promise.all(
-    ['John Black', 'Jane Blue', 'Robert Gillbert'].map(
+    ["John Black", "Jane Blue", "Robert Gillbert"].map(
       async (personName, i) => {
         await prisma.order.create({
           data: {
             number: i + 1,
             totalPrice: 890,
             totalTax: 120,
-            status: 'NEW',
+            status: "NEW",
             createdBy: {
               connect: {
                 id: createdAdminUser.id,
@@ -40,8 +41,8 @@ async function seed() {
             },
             customer: {
               create: {
-                name: 'Company Inc.',
-                identificationNumber: '1567984511',
+                name: "Company Inc.",
+                identificationNumber: "1567984511",
                 personName,
                 createdBy: {
                   connect: { id: createdAdminUser.id },
@@ -66,11 +67,11 @@ async function seed() {
             },
           },
         });
-      },
-    ),
+      }
+    )
   );
 
-  console.log('Prisma seed - Created EXECUTIVE user (all permissions)');
+  console.log("Prisma seed - Created EXECUTIVE user (all permissions)");
   console.log(createdAdminUser);
 }
 

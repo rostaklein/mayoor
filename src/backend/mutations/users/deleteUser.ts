@@ -9,7 +9,7 @@ export const DeleteUser = mutationField("deleteUser", {
   resolve: async (_, { id }, ctx) => {
     const user = await ctx.prisma.user.findUnique({ where: { id } });
 
-    if (!user?.canBeDeleted) {
+    if (!user?.canBeEdited) {
       throw new ApolloError("You cant delete this user.", "INVALID_OPERATION");
     }
 
