@@ -8,7 +8,7 @@ import {
   CreateCustomerMutationVariables,
 } from "../../__generated__/types";
 import { UserFormValues, CustomerForm } from "../CustomerForm/CustomerForm";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 
 import { CREATE_CUSTOMER_MUTATION } from "./queries";
 

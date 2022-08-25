@@ -6,7 +6,7 @@ import { Row, Col, Button, Popconfirm, message } from "antd";
 import { Formik, FormikErrors } from "formik";
 import { TFunction } from "i18next";
 
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import {
   GetAllMaterials,
   GetAllMaterials_getAllMaterials,

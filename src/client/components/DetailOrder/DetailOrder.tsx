@@ -17,7 +17,7 @@ import {
   DeleteOrder,
   DeleteOrderVariables,
 } from "../../__generated__/types";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import { OrderForm, OrderFormValues } from "../OrderForm/OrderForm";
 import { CenteredSpinner } from "../SharedStyles/CenteredSpinner";
 import { DetailDescription } from "../DetailDescription/DetailDescription";

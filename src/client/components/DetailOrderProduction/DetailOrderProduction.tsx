@@ -13,7 +13,7 @@ import {
   AddProductionLogVariables,
   ProductionLogType,
 } from "../../__generated__/types";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { GET_ORDER } from "../DetailOrder/queries";
 import { StyledLabel, StyledFormItem } from "../FormItem/Form.styles";

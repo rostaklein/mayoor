@@ -13,7 +13,7 @@ import {
   DeleteCustomerVariables,
 } from "../../__generated__/types";
 import { UserFormValues, CustomerForm } from "../CustomerForm/CustomerForm";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { OrderActionsWrapper } from "../SharedStyles/OrderActions";
 import { ListOrders } from "../ListOrders/ListOrders";

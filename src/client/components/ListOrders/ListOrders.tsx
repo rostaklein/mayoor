@@ -12,7 +12,7 @@ import {
   GetAllOrders_getAllOrders_items,
   OrderStatus,
 } from "../../__generated__/types";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getOrderStatuses } from "../OrderForm/OrderStatusSelect";
@@ -136,7 +136,9 @@ export const ListOrders: React.FC<Props> = ({
     <>
       <Row>
         <Col md={18}>
-          <PageTitle>{title || t("List orders")}</PageTitle>
+          <PageTitle doNotUseAsTitle={!!title}>
+            {title || t("List orders")}
+          </PageTitle>
         </Col>
         <Col xs={24} md={6}>
           <StyledFormItem style={{ marginTop: 10, marginRight: 25 }}>

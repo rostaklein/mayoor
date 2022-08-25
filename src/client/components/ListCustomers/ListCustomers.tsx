@@ -11,7 +11,7 @@ import {
   GetAllCustomersVariables,
   GetAllCustomers_getAllCustomers_items,
 } from "../../__generated__/types";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 
 import { GET_ALL_CUSTOMERS_QUERY } from "./queries";

@@ -4,7 +4,7 @@ import { Button, message } from "antd";
 import { useQuery, useMutation } from "@apollo/client";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import {
   OrderForm,
   OrderFormValues,

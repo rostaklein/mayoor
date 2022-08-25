@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import { TFunction } from "i18next";
 import * as Yup from "yup";
 
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import {
   UpdateUser,
   UpdateUserVariables,

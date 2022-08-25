@@ -14,7 +14,7 @@ import {
   GetAllOrders_getAllOrders_items,
   OrderByArg,
 } from "../../__generated__/types";
-import { PageTitle } from "../MainWrapper/MainWrapper.styles";
+import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getUrgentOptions } from "../OrderForm/UrgentSlider";
