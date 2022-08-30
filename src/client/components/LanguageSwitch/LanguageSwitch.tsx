@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GlobalOutlined } from "@ant-design/icons";
 import { Popover, Button } from "antd";
 import { useTranslation } from "next-i18next";
+import { setCookie } from "cookies-next";
 
 export const LanguageSwitch: React.FC = () => {
   const { i18n } = useTranslation();
@@ -12,6 +13,7 @@ export const LanguageSwitch: React.FC = () => {
     localStorage.setItem("default-language", language);
     i18n.changeLanguage(language);
     i18n.reloadResources(language, "common");
+    setCookie("language", language);
   };
   return (
     <Popover
