@@ -1,6 +1,6 @@
 import React, { useReducer, useContext } from "react";
-
-import { UserRole } from "../__generated__/types";
+import { UserDataFragment } from "../components/Users/__generated__/queries.generated";
+import { UserRole } from "../generated/gql-types";
 
 import { reducer, Action } from "./reducer";
 
@@ -12,7 +12,7 @@ export type User = {
 };
 
 export type AppState = {
-  currentUser: User | null;
+  currentUser: UserDataFragment | null;
 };
 
 type Context = {

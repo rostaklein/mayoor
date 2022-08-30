@@ -4,27 +4,22 @@ import { useQuery, useMutation } from "@apollo/client";
 import { Button, message, Row, Col, Skeleton, Input } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 
-import {
-  GetOrder,
-  GetOrderVariables,
-  UpdateOrderNote,
-  UpdateOrderNoteVariables,
-  AddProductionLog,
-  AddProductionLogVariables,
-  ProductionLogType,
-} from "../../__generated__/types";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
-import { GET_ORDER } from "../DetailOrder/queries";
 import { StyledLabel, StyledFormItem } from "../FormItem/Form.styles";
 
 import { OrderWrapper } from "./DetailOrderProduction.styles";
-import { ADD_PRODUCTION_LOG_MUTATION, UPDATE_ORDER_NOTE } from "./queries";
 import { ProductionRow } from "./ProductionRow";
 import { UpdateStatusButton } from "./UpdateStatusButton";
+import { ProductionLogAction } from "../../generated/gql-types";
+import { useGetOrderQuery } from "../DetailOrder/__generated__/queries.generated";
+import {
+  useAddProductionLogMutation,
+  useUpdateOrderNoteMutation,
+} from "./__generated__/queries.generated";
 
 type Props = {
-  productionLogType: ProductionLogType;
+  productionLogType: ProductionLogAction;
   productionButtonText: string;
   orderNumber: number | null;
 };
@@ -37,21 +32,15 @@ export const DetailOrderProduction: React.FC<Props> = ({
   const { t } = useTranslation();
   const [noteValue, setNoteValue] = useState<string | undefined | null>();
 
-  const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
+  const { data } = useGetOrderQuery({
     variables: { number: orderNumber },
     onCompleted: (data) => {
       setNoteValue(data.getOrderByNumber?.note);
     },
   });
 
-  const [updateOrderNote] = useMutation<
-    UpdateOrderNote,
-    UpdateOrderNoteVariables
-  >(UPDATE_ORDER_NOTE);
-  const [addProductionLog] = useMutation<
-    AddProductionLog,
-    AddProductionLogVariables
-  >(ADD_PRODUCTION_LOG_MUTATION);
+  const [updateOrderNote] = useUpdateOrderNoteMutation();
+  const [addProductionLog] = useAddProductionLogMutation();
 
   const updateNoteHandler = async () => {
     const id = data?.getOrderByNumber?.id;

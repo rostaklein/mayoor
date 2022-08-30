@@ -1,0 +1,10 @@
+query GetHighestOrderNumber {
+  getHighestOrderNumber
+}
+
+mutation CreateOrder($number: Int!, $input: OrderInput!) {
+  createOrder(number: $number, input: $input) {
+    id
+    number
+  }
+}

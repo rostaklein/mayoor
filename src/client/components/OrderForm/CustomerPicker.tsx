@@ -7,13 +7,8 @@ import { useQuery } from "@apollo/client";
 import debounce from "lodash/debounce";
 import { useField } from "formik";
 
-import {
-  FindCustomerQuery,
-  FindCustomerQueryVariables,
-} from "../../__generated__/types";
 import { StyledFormItem, StyledLabel } from "../FormItem/Form.styles";
-
-import { FIND_CUSTOMER_QUERY } from "./queries";
+import { useFindCustomerQuery } from "./__generated__/queries.generated";
 
 const StyledSubName = styled.span`
   &:before {
@@ -37,10 +32,7 @@ export const CustomerPicker: React.FC<{
   const errorMessage = touched && error;
   const status = errorMessage ? "error" : "";
 
-  const { data, loading, refetch } = useQuery<
-    FindCustomerQuery,
-    FindCustomerQueryVariables
-  >(FIND_CUSTOMER_QUERY, {
+  const { data, loading, refetch } = useFindCustomerQuery({
     fetchPolicy: "network-only",
   });
 

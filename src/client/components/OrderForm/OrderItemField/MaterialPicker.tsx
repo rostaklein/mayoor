@@ -6,21 +6,20 @@ import { useField } from "formik";
 
 import { StyledFormItem } from "../../FormItem/Form.styles";
 import {
-  GetAllMaterials,
-  GetAllMaterials_getAllMaterials,
-} from "../../../__generated__/types";
-import { GET_ALL_MATERIALS } from "../../Material/queries";
+  GetAllMaterialsQuery,
+  useGetAllMaterialsQuery,
+} from "../../Material/__generated__/queries.generated";
 
 export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
   const { t } = useTranslation();
   const [filteredItems, setFilteredItems] = useState<
-    GetAllMaterials_getAllMaterials[]
+    GetAllMaterialsQuery["getAllMaterials"]
   >([]);
   const [{ value }, { touched, error }, { setValue }] = useField(name);
   const errorMessage = touched && error;
   const status = errorMessage ? "error" : "";
 
-  const { data, loading } = useQuery<GetAllMaterials>(GET_ALL_MATERIALS, {
+  const { data, loading } = useGetAllMaterialsQuery({
     onCompleted: (data) => {
       if (value === null) {
         setValue(data.getAllMaterials[0].id);

@@ -14,3 +14,5 @@ tests-e2e/cypress/videos/
 
 .next
 .vercel
+
+__generated__

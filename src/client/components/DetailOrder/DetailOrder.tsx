@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import { useQuery, useMutation } from "@apollo/client";
 import { Button, message, Row, Col, Popconfirm, Skeleton } from "antd";
 import {
   DeleteOutlined,
@@ -9,24 +8,20 @@ import {
 } from "@ant-design/icons";
 import ButtonGroup from "antd/lib/button/button-group";
 
-import {
-  GetOrder,
-  GetOrderVariables,
-  UpdateOrder,
-  UpdateOrderVariables,
-  DeleteOrder,
-  DeleteOrderVariables,
-} from "../../__generated__/types";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { OrderForm, OrderFormValues } from "../OrderForm/OrderForm";
 import { CenteredSpinner } from "../SharedStyles/CenteredSpinner";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { OrderActionsWrapper } from "../SharedStyles/OrderActions";
 
-import { GET_ORDER, UPDATE_ORDER, DELETE_ORDER } from "./queries";
 import { mapToOrderFormValues } from "./mapToOrderFormValues";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {
+  useDeleteOrderMutation,
+  useGetOrderQuery,
+  useUpdateOrderMutation,
+} from "./__generated__/queries.generated";
 
 export const DetailOrder: React.FC<{ orderNumber: number }> = ({
   orderNumber,
@@ -34,7 +29,7 @@ export const DetailOrder: React.FC<{ orderNumber: number }> = ({
   const { push } = useRouter();
   const { t } = useTranslation();
 
-  const { data } = useQuery<GetOrder, GetOrderVariables>(GET_ORDER, {
+  const { data } = useGetOrderQuery({
     variables: { number: orderNumber },
   });
 
@@ -49,14 +44,8 @@ export const DetailOrder: React.FC<{ orderNumber: number }> = ({
 
   const initialValues = mapToOrderFormValues(data);
 
-  const [updateOrder, { loading }] = useMutation<
-    UpdateOrder,
-    UpdateOrderVariables
-  >(UPDATE_ORDER);
-  const [deleteOrder, { loading: deleteLoading }] = useMutation<
-    DeleteOrder,
-    DeleteOrderVariables
-  >(DELETE_ORDER);
+  const [updateOrder, { loading }] = useUpdateOrderMutation();
+  const [deleteOrder, { loading: deleteLoading }] = useDeleteOrderMutation();
 
   const submitHandler = async (orderValues: OrderFormValues) => {
     const { urgency, status, customerId, totalPrice, totalTax, note } =

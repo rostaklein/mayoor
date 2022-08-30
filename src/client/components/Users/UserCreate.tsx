@@ -7,17 +7,15 @@ import { Formik } from "formik";
 import { TFunction } from "i18next";
 import * as Yup from "yup";
 
-import {
-  CreateUser,
-  CreateUserVariables,
-  UserRole,
-  GetAllUsers,
-} from "../../__generated__/types";
 import { StyledLabel, StyledDivider } from "../FormItem/Form.styles";
 import { FormInput } from "../FormItem/FormInput";
 
-import { CREATE_USER, GET_ALL_USERS } from "./queries";
 import { UserRoleSelect } from "./UserRoleSelect";
+import { UserRole } from "../../generated/gql-types";
+import {
+  GetAllUsersDocument,
+  useCreateUserMutation,
+} from "./__generated__/queries.generated";
 
 export const getUserValidationSchema = (t: TFunction) =>
   Yup.object().shape({
@@ -37,15 +35,12 @@ type FormValue = {
 export const UserCreate: React.FC = () => {
   const { t } = useTranslation();
 
-  const [createUser] = useMutation<CreateUser, CreateUserVariables>(
-    CREATE_USER,
-    {
-      onCompleted: () => {
-        message.success(t("User created"));
-      },
-      refetchQueries: [{ query: GET_ALL_USERS }],
-    }
-  );
+  const [createUser] = useCreateUserMutation({
+    onCompleted: () => {
+      message.success(t("User created"));
+    },
+    refetchQueries: [{ query: GetAllUsersDocument }],
+  });
 
   return (
     <>
@@ -70,7 +65,7 @@ export const UserCreate: React.FC = () => {
           name: "",
           password: "",
           email: "",
-          role: UserRole.FACTORY,
+          role: UserRole.Factory,
         }}
         onSubmit={async (values) =>
           await createUser({

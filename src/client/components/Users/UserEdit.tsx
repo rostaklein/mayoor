@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "next-i18next";
-import { useQuery, useMutation } from "@apollo/client";
 import { DeleteOutlined, SaveOutlined } from "@ant-design/icons";
 import { Row, Col, Button, Popconfirm, message } from "antd";
 import { Formik } from "formik";
@@ -8,21 +7,19 @@ import { TFunction } from "i18next";
 import * as Yup from "yup";
 
 import { PageTitle } from "../MainWrapper/PageTitle";
-import {
-  UpdateUser,
-  UpdateUserVariables,
-  GetAllUsers,
-  GetAllUsers_getAllUsers,
-  DeleteUser,
-  DeleteUserVariables,
-} from "../../__generated__/types";
 import { StyledForm, StyledLabel } from "../FormItem/Form.styles";
 import { FormInput } from "../FormItem/FormInput";
 import { MaterialEditWrapper } from "../Material/MaterialEdit.styles";
 
-import { GET_ALL_USERS, UPDATE_USER, DELETE_USER } from "./queries";
 import { UserRoleSelect } from "./UserRoleSelect";
 import { UserCreate } from "./UserCreate";
+import {
+  GetAllUsersDocument,
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+  UserDataFragment,
+  useUpdateUserMutation,
+} from "./__generated__/queries.generated";
 
 export const getUserValidationSchema = (t: TFunction) =>
   Yup.object().shape({
@@ -31,17 +28,14 @@ export const getUserValidationSchema = (t: TFunction) =>
     role: Yup.string().required(t("field_required")),
   });
 
-type FormikValues = GetAllUsers_getAllUsers & { password?: string };
+type FormikValues = UserDataFragment & { password?: string };
 
 export const UserEdit: React.FC = () => {
   const { t } = useTranslation();
 
-  const { data } = useQuery<GetAllUsers>(GET_ALL_USERS);
+  const { data } = useGetAllUsersQuery();
 
-  const [updateUser, { loading }] = useMutation<
-    UpdateUser,
-    UpdateUserVariables
-  >(UPDATE_USER, {
+  const [updateUser, { loading }] = useUpdateUserMutation({
     onCompleted: () => {
       message.success(t("User updated"));
     },
@@ -49,19 +43,16 @@ export const UserEdit: React.FC = () => {
       message.error(t(err.message));
     },
   });
-  const [deleteUser] = useMutation<DeleteUser, DeleteUserVariables>(
-    DELETE_USER,
-    {
-      onCompleted: () => {
-        message.success(t("User deleted"));
+  const [deleteUser] = useDeleteUserMutation({
+    onCompleted: () => {
+      message.success(t("User deleted"));
+    },
+    refetchQueries: [
+      {
+        query: GetAllUsersDocument,
       },
-      refetchQueries: [
-        {
-          query: GET_ALL_USERS,
-        },
-      ],
-    }
-  );
+    ],
+  });
 
   return (
     <>

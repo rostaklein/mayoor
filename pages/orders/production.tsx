@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "next-i18next";
 import { ListOrdersProduction } from "../../src/client/components/ListOrdersProduction/ListOrdersProduction";
-import { OrderStatus } from "../../src/client/__generated__/types";
 import { getStaticTranslations } from "../../src/client/i18n";
+import { OrderStatus } from "../../src/client/generated/gql-types";
 
 type Props = {};
 
@@ -11,7 +11,7 @@ export default function OrdersToProducePage({}: Props) {
 
   return (
     <ListOrdersProduction
-      status={OrderStatus.WAITING_FOR_PRODUCTION}
+      status={OrderStatus.WaitingForProduction}
       title={t("Waiting for production")}
       linkSuffix="production"
     />

@@ -2,25 +2,22 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import { RightCircleOutlined } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
-import { useQuery } from "@apollo/client";
 import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
 import styled from "styled-components";
 
-import {
-  OrderStatus,
-  GetAllOrdersVariables,
-  GetAllOrders,
-  GetAllOrders_getAllOrders_items,
-  OrderByArg,
-} from "../../__generated__/types";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getUrgentOptions } from "../OrderForm/UrgentSlider";
 import { ItemsInfoRow } from "../ListOrders/ItemsInfoRow";
-import { GET_ALL_ORDERS_QUERY } from "../ListOrders/queries";
 import Link from "next/link";
+import {
+  GetAllOrdersQueryVariables,
+  OrderDataFragment,
+  useGetAllOrdersQuery,
+} from "../ListOrders/__generated__/queries.generated";
+import { OrderByArg, OrderStatus } from "../../generated/gql-types";
 
 const PAGE_SIZE = 10;
 
@@ -34,7 +31,7 @@ const UrgentDot = styled.div<{ color: string | undefined }>`
 const getColumns = (
   t: TFunction,
   linkSuffix: "production" | "print"
-): ColumnProps<GetAllOrders_getAllOrders_items>[] => [
+): ColumnProps<OrderDataFragment>[] => [
   {
     width: 25,
     ellipsis: true,
@@ -92,22 +89,19 @@ const getColumns = (
 ];
 
 export const ListOrdersProduction: React.FC<{
-  status: OrderStatus.READY_TO_PRINT | OrderStatus.WAITING_FOR_PRODUCTION;
+  status: OrderStatus.ReadyToPrint | OrderStatus.WaitingForProduction;
   title: string;
   linkSuffix: "production" | "print";
 }> = ({ status, title, linkSuffix }) => {
   const { t } = useTranslation();
 
-  const commonVariables: GetAllOrdersVariables = {
+  const commonVariables: GetAllOrdersQueryVariables = {
     first: PAGE_SIZE,
     status,
-    orderByUrgency: OrderByArg.desc,
+    orderByUrgency: OrderByArg.Desc,
   };
 
-  const { data, loading, fetchMore } = useQuery<
-    GetAllOrders,
-    GetAllOrdersVariables
-  >(GET_ALL_ORDERS_QUERY, {
+  const { data, loading, fetchMore } = useGetAllOrdersQuery({
     variables: commonVariables,
     fetchPolicy: "network-only",
   });
@@ -129,7 +123,7 @@ export const ListOrdersProduction: React.FC<{
   return (
     <>
       <PageTitle>{title}</PageTitle>
-      <PaginatedTable<GetAllOrders_getAllOrders_items>
+      <PaginatedTable<OrderDataFragment>
         pageSize={PAGE_SIZE}
         columns={getColumns(t, linkSuffix)}
         records={items}

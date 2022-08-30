@@ -1,0 +1,18 @@
+overwrite: true
+schema: "src/backend/schema.graphql"
+documents: "src/client/**/*.graphql"
+generates:
+  src/client/generated/gql-types.ts:
+    plugins:
+      - "typescript"
+  src/client/:
+    preset: near-operation-file
+    presetConfig:
+      folder: __generated__
+      extension: .generated.ts
+      baseTypesPath: gql-types.ts
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withHooks: true

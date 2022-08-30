@@ -7,20 +7,18 @@ import { Formik, FormikErrors } from "formik";
 import { TFunction } from "i18next";
 
 import { PageTitle } from "../MainWrapper/PageTitle";
-import {
-  GetAllMaterials,
-  GetAllMaterials_getAllMaterials,
-  UpdateMaterial,
-  UpdateMaterialVariables,
-  DeleteMaterial,
-  DeleteMaterialVariables,
-} from "../../__generated__/types";
 import { StyledForm, StyledLabel } from "../FormItem/Form.styles";
 import { FormInput } from "../FormItem/FormInput";
 
-import { GET_ALL_MATERIALS, UPDATE_MATERIAL, DELETE_MATERIAL } from "./queries";
 import { MaterialEditWrapper } from "./MaterialEdit.styles";
 import { MaterialCreate } from "./MaterialCreate";
+import {
+  GetAllMaterialsDocument,
+  GetAllMaterialsQuery,
+  useDeleteMaterialMutation,
+  useGetAllMaterialsQuery,
+  useUpdateMaterialMutation,
+} from "./__generated__/queries.generated";
 
 export const getFormikValidate =
   (t: TFunction) => (values: { name: string; price: number }) => {
@@ -38,29 +36,23 @@ export const MaterialEdit: React.FC = () => {
   const { t } = useTranslation();
   const [currentlyLoading, setCurrentlyLoading] = useState<string | null>(null);
 
-  const { data } = useQuery<GetAllMaterials>(GET_ALL_MATERIALS);
+  const { data } = useGetAllMaterialsQuery();
 
-  const [updateMaterial] = useMutation<UpdateMaterial, UpdateMaterialVariables>(
-    UPDATE_MATERIAL,
-    {
-      onCompleted: () => {
-        message.success(t("Material updated"));
+  const [updateMaterial] = useUpdateMaterialMutation({
+    onCompleted: () => {
+      message.success(t("Material updated"));
+    },
+  });
+  const [deleteMaterial] = useDeleteMaterialMutation({
+    onCompleted: () => {
+      message.success(t("Material deleted"));
+    },
+    refetchQueries: [
+      {
+        query: GetAllMaterialsDocument,
       },
-    }
-  );
-  const [deleteMaterial] = useMutation<DeleteMaterial, DeleteMaterialVariables>(
-    DELETE_MATERIAL,
-    {
-      onCompleted: () => {
-        message.success(t("Material deleted"));
-      },
-      refetchQueries: [
-        {
-          query: GET_ALL_MATERIALS,
-        },
-      ],
-    }
-  );
+    ],
+  });
 
   return (
     <>
@@ -78,7 +70,7 @@ export const MaterialEdit: React.FC = () => {
               <Col sm={4}></Col>
             </Row>
             {data?.getAllMaterials.map((material) => (
-              <Formik<GetAllMaterials_getAllMaterials>
+              <Formik<GetAllMaterialsQuery["getAllMaterials"][0]>
                 key={material.id}
                 initialValues={material}
                 onSubmit={async (values) => {

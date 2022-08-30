@@ -18,7 +18,6 @@ import { FormInput } from "../FormItem/FormInput";
 import { dummyMaterialItem } from "../NewOrder/NewOrder";
 import { CURRENCY_SUFFIX } from "../../config";
 import { useCurrencyFormatter } from "../../hooks/useCurrencyFormatter";
-import { OrderStatus } from "../../__generated__/types";
 
 import { CustomerPicker, CustomerOption } from "./CustomerPicker";
 import { OrderItemField } from "./OrderItemField/OrderItemField";
@@ -33,6 +32,7 @@ import {
 } from "./calculateSummary";
 import { OrderStatusSelect } from "./OrderStatusSelect";
 import { UrgentSlider } from "./UrgentSlider";
+import { OrderStatus } from "../../generated/gql-types";
 
 export type OrderFormItem = {
   id?: string;

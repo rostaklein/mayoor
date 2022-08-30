@@ -4,8 +4,8 @@ import { TFunction } from "i18next";
 import { Select } from "antd";
 import { useField } from "formik";
 
-import { UserRole } from "../../__generated__/types";
 import { StyledFormItem } from "../FormItem/Form.styles";
+import { UserRole } from "../../generated/gql-types";
 
 export const getUserRoleNames = (
   t: TFunction

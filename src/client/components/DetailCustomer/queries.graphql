@@ -1,0 +1,41 @@
+fragment CustomerDetails on Customer {
+  id
+  name
+  identificationNumber
+  taxIdentificationNumber
+  personName
+  email
+  phone
+  note
+  allowedBankPayments
+  createdBy {
+    name
+  }
+  createdAt
+  updatedAt
+  addresses {
+    id
+    isPrimary
+    street
+    city
+    postNumber
+  }
+}
+
+query GetCustomer($id: ID!) {
+  getCustomer(id: $id) {
+    ...CustomerDetails
+  }
+}
+
+mutation UpdateCustomer($input: UpdateCustomerInput!) {
+  updateCustomer(input: $input) {
+    ...CustomerDetails
+  }
+}
+
+mutation DeleteCustomer($id: ID!) {
+  deleteCustomer(id: $id) {
+    id
+  }
+}

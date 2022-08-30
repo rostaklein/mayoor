@@ -6,16 +6,12 @@ import { useTranslation } from "next-i18next";
 import { LockFilled, LoginOutlined, UserOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
 
-import {
-  LoginMutation,
-  LoginMutationVariables,
-} from "../../__generated__/types";
 import { CenteredWrapper } from "../CenteredWrapper/CenteredWrapper";
 import { useAppDispatch } from "../../appContext/context";
 import { LanguageSwitch } from "../LanguageSwitch/LanguageSwitch";
 
-import { LOGIN_MUTATION } from "./queries";
 import * as S from "./LoginForm.styles";
+import { useLoginMutation } from "./__generated__/queries.generated";
 
 type FormValues = {
   username: string;
@@ -25,10 +21,7 @@ type FormValues = {
 export const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const [login, { loading }] = useMutation<
-    LoginMutation,
-    LoginMutationVariables
-  >(LOGIN_MUTATION);
+  const [login, { loading }] = useLoginMutation();
 
   const {
     errors,

@@ -8,8 +8,6 @@ import { OrderFormItem } from "../OrderForm";
 import { FormInput } from "../../FormItem/FormInput";
 import { CURRENCY_SUFFIX } from "../../../config";
 import { client } from "../../../ApolloClient";
-import { GET_ALL_MATERIALS } from "../../Material/queries";
-import { GetAllMaterials } from "../../../__generated__/types";
 import { calculateRow } from "../calculateRow";
 
 import { MaterialPicker } from "./MaterialPicker";
@@ -20,6 +18,10 @@ import {
   StyledOrderRow,
   HiddenDeleteButton,
 } from "./OrderItemField.styles";
+import {
+  GetAllMaterialsDocument,
+  GetAllMaterialsQuery,
+} from "../../Material/__generated__/queries.generated";
 
 type FieldProps = {
   index: number;
@@ -34,8 +36,8 @@ export const OrderItemField: React.FC<FieldProps> = ({
   const itemName = `items.${index}`;
   const [{ value }, , { setValue }] = useField<OrderFormItem>(itemName);
   const calculateClickHandler = () => {
-    const allMaterials = client.readQuery<GetAllMaterials>({
-      query: GET_ALL_MATERIALS,
+    const allMaterials = client.readQuery<GetAllMaterialsQuery>({
+      query: GetAllMaterialsDocument,
     });
     const material = allMaterials?.getAllMaterials.find(
       ({ id }) => id === value.materialId

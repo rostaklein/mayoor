@@ -10,16 +10,14 @@ import {
   OrderFormValues,
   OrderFormItem,
 } from "../OrderForm/OrderForm";
-import {
-  GetHighestOrderNumber,
-  CreateOrder,
-  CreateOrderVariables,
-  OrderStatus,
-} from "../../__generated__/types";
 import { ValidatedOrder } from "../OrderForm/validateOrder";
 
-import { GET_HIGHEST_ORDER_NUMBER, CREATE_ORDER } from "./queries";
 import { useRouter } from "next/router";
+import { OrderStatus } from "../../generated/gql-types";
+import {
+  useCreateOrderMutation,
+  useGetHighestOrderNumberQuery,
+} from "./__generated__/queries.generated";
 
 export const dummyMaterialItem: OrderFormItem = {
   materialId: undefined,
@@ -34,7 +32,7 @@ export const dummyMaterialItem: OrderFormItem = {
 const getInitialValues = (orderNumber: number | null): OrderFormValues => ({
   number: orderNumber,
   urgency: 1,
-  status: OrderStatus.NEW,
+  status: OrderStatus.New,
   customerId: undefined,
   totalPrice: 200,
   totalTax: 20,
@@ -46,13 +44,8 @@ export const NewOrder: React.FC = () => {
   const { t } = useTranslation();
   const { push } = useRouter();
 
-  const highestOrderNumberQuery = useQuery<GetHighestOrderNumber>(
-    GET_HIGHEST_ORDER_NUMBER
-  );
-  const [createOrder, { loading }] = useMutation<
-    CreateOrder,
-    CreateOrderVariables
-  >(CREATE_ORDER, {
+  const highestOrderNumberQuery = useGetHighestOrderNumberQuery();
+  const [createOrder, { loading }] = useCreateOrderMutation({
     onError: (err) => {
       if (err.graphQLErrors[0].extensions?.code === "ORDER_NUMBER_EXISTS") {
         message.error(t("order_number_exists"));

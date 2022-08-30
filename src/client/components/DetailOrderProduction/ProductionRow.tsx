@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Row, Col, Button, Input } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { useTranslation } from "next-i18next";
-
-import { GetOrder_getOrderByNumber_items } from "../../__generated__/types";
+import { OrderItemDataFragment } from "../DetailOrder/__generated__/queries.generated";
 
 interface Props {
-  item: GetOrder_getOrderByNumber_items;
+  item: OrderItemDataFragment;
   onProductionClick: (pieces: number, orderItemId: string) => void;
   productionButtonText: string;
 }

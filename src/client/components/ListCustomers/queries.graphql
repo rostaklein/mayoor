@@ -1,0 +1,17 @@
+fragment CustomerFragment on Customer {
+  id
+  name
+  identificationNumber
+  personName
+  email
+  phone
+}
+
+query GetAllCustomers($first: Int, $skip: Int, $search: String) {
+  getAllCustomers(first: $first, skip: $skip, search: $search) {
+    totalCount
+    items {
+      ...CustomerFragment
+    }
+  }
+}

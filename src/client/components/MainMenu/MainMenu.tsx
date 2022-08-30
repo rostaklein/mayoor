@@ -13,9 +13,9 @@ import {
 
 import { Colors } from "../../themeVariables";
 import { useAppState } from "../../appContext/context";
-import { UserRole } from "../../__generated__/types";
 
 import { LinkItem } from "./LinkItem";
+import { UserRole } from "../../generated/gql-types";
 
 const StyledMenu = styled.ul`
   list-style: none;
@@ -78,7 +78,7 @@ export const MainMenu: React.FC = () => {
           to={"/customers/list"}
         />
       </li>
-      {currentUser?.role === UserRole.EXECUTIVE && (
+      {currentUser?.role === UserRole.Executive && (
         <li>
           <CategoryName>{t("Administration")}</CategoryName>
           <LinkItem

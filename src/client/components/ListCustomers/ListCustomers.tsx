@@ -2,26 +2,22 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import { RightCircleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { useQuery } from "@apollo/client";
 import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
 
-import {
-  GetAllCustomers,
-  GetAllCustomersVariables,
-  GetAllCustomers_getAllCustomers_items,
-} from "../../__generated__/types";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 
-import { GET_ALL_CUSTOMERS_QUERY } from "./queries";
 import Link from "next/link";
+import { CustomerDetailsFragment } from "../DetailCustomer/__generated__/queries.generated";
+import {
+  GetAllCustomersQuery,
+  useGetAllCustomersQuery,
+} from "./__generated__/queries.generated";
 
 const PAGE_SIZE = 10;
 
-const getColumns = (
-  t: TFunction
-): ColumnProps<GetAllCustomers_getAllCustomers_items>[] => [
+const getColumns = (t: TFunction): ColumnProps<CustomerDetailsFragment>[] => [
   {
     title: t("Company name"),
     ellipsis: true,
@@ -70,12 +66,9 @@ const getColumns = (
 export const ListCustomers: React.FC = () => {
   const { t } = useTranslation();
 
-  const { data, loading, fetchMore, refetch } = useQuery<
-    GetAllCustomers,
-    GetAllCustomersVariables
-  >(GET_ALL_CUSTOMERS_QUERY, {
+  const { data, loading, fetchMore, refetch } = useGetAllCustomersQuery({
     variables: { first: PAGE_SIZE },
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
   });
 
   const searchHandler = (searchValue: string) => {
@@ -99,7 +92,7 @@ export const ListCustomers: React.FC = () => {
   return (
     <>
       <PageTitle>{t("Customers")}</PageTitle>
-      <PaginatedTable<GetAllCustomers_getAllCustomers_items>
+      <PaginatedTable<GetAllCustomersQuery["getAllCustomers"]["items"][0]>
         pageSize={PAGE_SIZE}
         columns={getColumns(t)}
         records={items}

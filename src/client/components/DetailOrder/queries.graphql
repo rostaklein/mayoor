@@ -1,0 +1,57 @@
+fragment OrderFragment on Order {
+  id
+  number
+  customer {
+    id
+    name
+    identificationNumber
+  }
+  status
+  note
+  urgency
+  totalPrice
+  totalTax
+  createdAt
+  updatedAt
+  createdBy {
+    id
+    name
+  }
+  items(orderByCreatedAt: asc) {
+    ...OrderItemData
+  }
+}
+
+fragment OrderItemData on OrderItem {
+  id
+  material {
+    id
+    name
+  }
+  name
+  width
+  height
+  pieces
+  printedPieces
+  producedPieces
+  totalPrice
+  totalTax
+}
+
+query GetOrder($number: Int!) {
+  getOrderByNumber(number: $number) {
+    ...OrderFragment
+  }
+}
+
+mutation UpdateOrder($id: ID!, $input: UpdateOrderInput!) {
+  updateOrder(id: $id, input: $input) {
+    ...OrderFragment
+  }
+}
+
+mutation DeleteOrder($id: ID!) {
+  deleteOrder(id: $id) {
+    id
+  }
+}

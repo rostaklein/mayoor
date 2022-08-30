@@ -2,8 +2,8 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 
-import { GetAllOrders_getAllOrders_items_items as Item } from "../../__generated__/types";
 import { Colors } from "../../themeVariables";
+import { OrderItemDataFragment } from "../DetailOrder/__generated__/queries.generated";
 
 const Divider = styled.span`
   color: ${Colors.LIGHT_GRAY1};
@@ -11,7 +11,7 @@ const Divider = styled.span`
 `;
 
 interface Props {
-  items: Item[];
+  items: OrderItemDataFragment[];
   totalSize: number;
 }
 

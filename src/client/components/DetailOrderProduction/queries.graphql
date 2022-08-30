@@ -1,0 +1,41 @@
+fragment ProductionLogFragment on ProductionLog {
+  id
+  action
+  pieces
+  createdAt
+  createdBy {
+    id
+    name
+  }
+}
+
+mutation AddProductionLog(
+  $orderItemId: ID!
+  $action: ProductionLogAction!
+  $pieces: Int!
+) {
+  addProductionLog(
+    orderItemId: $orderItemId
+    action: $action
+    pieces: $pieces
+  ) {
+    id
+    printedPieces
+    producedPieces
+    productionLogs {
+      ...ProductionLogFragment
+    }
+  }
+}
+
+mutation UpdateOrderNote($id: ID!, $note: String) {
+  updateOrderNote(id: $id, note: $note) {
+    ...OrderFragment
+  }
+}
+
+mutation UpdateOrderStatus($id: ID!, $status: OrderStatus!) {
+  updateOrderStatus(id: $id, status: $status) {
+    ...OrderFragment
+  }
+}

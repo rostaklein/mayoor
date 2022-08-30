@@ -2,29 +2,24 @@ import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { RightCircleOutlined } from "@ant-design/icons";
 import { Button, Select, Col, Row } from "antd";
-import { useQuery } from "@apollo/client";
 import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
 
-import {
-  GetAllOrders,
-  GetAllOrdersVariables,
-  GetAllOrders_getAllOrders_items,
-  OrderStatus,
-} from "../../__generated__/types";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getOrderStatuses } from "../OrderForm/OrderStatusSelect";
 import { StyledFormItem, StyledLabel } from "../FormItem/Form.styles";
 
-import { GET_ALL_ORDERS_QUERY } from "./queries";
 import { ItemsInfoRow } from "./ItemsInfoRow";
 import Link from "next/link";
+import {
+  OrderDataFragment,
+  useGetAllOrdersQuery,
+} from "./__generated__/queries.generated";
+import { OrderStatus } from "../../generated/gql-types";
 
-const getColumns = (
-  t: TFunction
-): ColumnProps<GetAllOrders_getAllOrders_items>[] => [
+const getColumns = (t: TFunction): ColumnProps<OrderDataFragment>[] => [
   {
     title: t("Order nr"),
     dataIndex: "number",
@@ -99,12 +94,9 @@ export const ListOrders: React.FC<Props> = ({
   const { t } = useTranslation();
   const [hasFilterActive, setHasFilterActive] = useState(false);
 
-  const { data, loading, fetchMore, refetch } = useQuery<
-    GetAllOrders,
-    GetAllOrdersVariables
-  >(GET_ALL_ORDERS_QUERY, {
+  const { data, loading, fetchMore, refetch } = useGetAllOrdersQuery({
     variables: { first: pageSize, customerId },
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
   });
 
   const paginationChangedHandler = (newPageNumber: number) => {
@@ -160,7 +152,7 @@ export const ListOrders: React.FC<Props> = ({
           </StyledFormItem>
         </Col>
       </Row>
-      <PaginatedTable<GetAllOrders_getAllOrders_items>
+      <PaginatedTable<OrderDataFragment>
         columns={getColumns(t)}
         records={items}
         totalCount={data?.getAllOrders.totalCount ?? 0}

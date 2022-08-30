@@ -1,0 +1,8 @@
+query FindCustomer($search: String) {
+  getAllCustomers(first: 5, search: $search) {
+    totalCount
+    items {
+      ...CustomerFragment
+    }
+  }
+}

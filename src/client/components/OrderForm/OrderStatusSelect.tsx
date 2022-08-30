@@ -5,7 +5,7 @@ import { useField } from "formik";
 import { TFunction } from "i18next";
 
 import { StyledFormItem, StyledLabel } from "../FormItem/Form.styles";
-import { OrderStatus } from "../../__generated__/types";
+import { OrderStatus } from "../../generated/gql-types";
 
 export const getOrderStatuses = (
   t: TFunction

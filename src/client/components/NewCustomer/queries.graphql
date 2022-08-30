@@ -1,0 +1,18 @@
+mutation CreateCustomer($input: CreateCustomerInput!) {
+  createCustomer(input: $input) {
+    ...CustomerFragment
+  }
+}
+
+# query GetCustomerHelperInfo($partialIdentificationNumber: String!) {
+#   getCustomerHelperInfo(
+#     partialIdentificationNumber: $partialIdentificationNumber
+#   ) {
+#     identificationNumber
+#     taxIdentificationNumber
+#     name
+#     city
+#     street
+#     postNumber
+#   }
+# }

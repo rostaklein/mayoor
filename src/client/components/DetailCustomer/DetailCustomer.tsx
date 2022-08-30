@@ -1,43 +1,33 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "next-i18next";
-import { useQuery, useMutation } from "@apollo/client";
 import { Button, message, Skeleton, Row, Col, Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
-import {
-  GetCustomer,
-  GetCustomerVariables,
-  UpdateCustomer,
-  UpdateCustomerVariables,
-  DeleteCustomer,
-  DeleteCustomerVariables,
-} from "../../__generated__/types";
 import { UserFormValues, CustomerForm } from "../CustomerForm/CustomerForm";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { OrderActionsWrapper } from "../SharedStyles/OrderActions";
 import { ListOrders } from "../ListOrders/ListOrders";
 
-import { GET_CUSTOMER, UPDATE_CUSTOMER, DELETE_CUSTOMER } from "./queries";
 import { useRouter } from "next/router";
+import {
+  useDeleteCustomerMutation,
+  useGetCustomerQuery,
+  useUpdateCustomerMutation,
+} from "./__generated__/queries.generated";
 
 export const DetailCustomer: React.FC<{ customerId: string }> = ({
   customerId,
 }) => {
   const { push } = useRouter();
   const { t } = useTranslation();
-  const { data } = useQuery<GetCustomer, GetCustomerVariables>(GET_CUSTOMER, {
+  const { data } = useGetCustomerQuery({
     variables: { id: customerId },
   });
 
-  const [updateCustomer, { loading }] = useMutation<
-    UpdateCustomer,
-    UpdateCustomerVariables
-  >(UPDATE_CUSTOMER);
-  const [deleteCustomer, { loading: deleteLoading }] = useMutation<
-    DeleteCustomer,
-    DeleteCustomerVariables
-  >(DELETE_CUSTOMER);
+  const [updateCustomer, { loading }] = useUpdateCustomerMutation();
+  const [deleteCustomer, { loading: deleteLoading }] =
+    useDeleteCustomerMutation();
 
   useEffect(() => {
     document.title = `${data?.getCustomer?.name} | mayoor`;

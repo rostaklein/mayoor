@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect } from "react";
-import { useQuery, ApolloProvider } from "@apollo/client";
-import { i18n, useTranslation } from "next-i18next";
+import { ApolloProvider } from "@apollo/client";
+import { useTranslation } from "next-i18next";
 import { Alert, message } from "antd";
 import { appWithTranslation } from "next-i18next";
 import nextI18nConfig from "../next-i18next.config";
@@ -15,17 +15,15 @@ import {
   AppContextProvider,
 } from "../src/client/appContext/context";
 import { LoginForm } from "../src/client/components/Login/LoginForm";
-import { ME_QUERY } from "../src/client/components/Login/queries";
 import { MainWrapper } from "../src/client/components/MainWrapper/MainWrapper";
 import { CenteredSpinner } from "../src/client/components/SharedStyles/CenteredSpinner";
-import { MeQuery } from "../src/client/__generated__/types";
 import { AppProps } from "next/app";
-import { getStaticTranslations } from "../src/client/i18n";
+import { useMeQuery } from "../src/client/components/Login/__generated__/queries.generated";
 
 const App: React.FC<AppProps> = ({ Component }) => {
   const dispatch = useAppDispatch();
   const { currentUser } = useAppState();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const language =
     typeof window !== "undefined"
@@ -35,7 +33,7 @@ const App: React.FC<AppProps> = ({ Component }) => {
     // i18n.changeLanguage(language || "en");
   }, [language]);
 
-  const { called, loading, error } = useQuery<MeQuery>(ME_QUERY, {
+  const { called, loading, error } = useMeQuery({
     onError: (err) => {
       const token = localStorage.getItem("auth-token");
       if (

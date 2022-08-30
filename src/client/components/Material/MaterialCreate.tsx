@@ -2,27 +2,20 @@ import React from "react";
 import { Row, Col, Button } from "antd";
 import { Formik } from "formik";
 import { useTranslation } from "next-i18next";
-import { useMutation } from "@apollo/client";
 
 import { StyledLabel, StyledDivider } from "../FormItem/Form.styles";
-import {
-  GetAllMaterials,
-  CreateMaterial,
-  CreateMaterialVariables,
-} from "../../__generated__/types";
 import { FormInput } from "../FormItem/FormInput";
-
-import { CREATE_MATERIAL, GET_ALL_MATERIALS } from "./queries";
 import { getFormikValidate } from "./MaterialEdit";
+import {
+  GetAllMaterialsDocument,
+  useCreateMaterialMutation,
+} from "./__generated__/queries.generated";
 
 export const MaterialCreate: React.FC = () => {
   const { t } = useTranslation();
 
-  const [createMaterial, { loading }] = useMutation<
-    CreateMaterial,
-    CreateMaterialVariables
-  >(CREATE_MATERIAL, {
-    refetchQueries: [{ query: GET_ALL_MATERIALS }],
+  const [createMaterial, { loading }] = useCreateMaterialMutation({
+    refetchQueries: [{ query: GetAllMaterialsDocument }],
   });
 
   return (

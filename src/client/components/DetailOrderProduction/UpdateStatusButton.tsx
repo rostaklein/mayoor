@@ -3,18 +3,11 @@ import { Button, message } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "next-i18next";
 import { useMutation } from "@apollo/client";
-
-import {
-  OrderStatus,
-  ProductionLogType,
-  UpdateOrderStatus,
-  UpdateOrderStatusVariables,
-} from "../../__generated__/types";
-
-import { UPDATE_ORDER_STATUS } from "./queries";
+import { useUpdateOrderStatusMutation } from "./__generated__/queries.generated";
+import { OrderStatus, ProductionLogAction } from "../../generated/gql-types";
 
 interface Props {
-  productionLogType: ProductionLogType;
+  productionLogType: ProductionLogAction;
   orderStatus: OrderStatus;
   orderId: string;
 }
@@ -26,21 +19,18 @@ export const UpdateStatusButton: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [updateOrderStatus] = useMutation<
-    UpdateOrderStatus,
-    UpdateOrderStatusVariables
-  >(UPDATE_ORDER_STATUS);
+  const [updateOrderStatus] = useUpdateOrderStatusMutation();
 
   const getIsButtonDisabled = () => {
     if (
-      productionLogType === ProductionLogType.PRINT &&
-      orderStatus === OrderStatus.READY_TO_PRINT
+      productionLogType === ProductionLogAction.Print &&
+      orderStatus === OrderStatus.ReadyToPrint
     ) {
       return false;
     }
     if (
-      productionLogType === ProductionLogType.PRODUCTION &&
-      orderStatus === OrderStatus.WAITING_FOR_PRODUCTION
+      productionLogType === ProductionLogAction.Production &&
+      orderStatus === OrderStatus.WaitingForProduction
     ) {
       return false;
     }
@@ -48,11 +38,11 @@ export const UpdateStatusButton: React.FC<Props> = ({
   };
 
   const getNextStatus = (): OrderStatus | undefined => {
-    if (productionLogType === ProductionLogType.PRINT) {
-      return OrderStatus.WAITING_FOR_PRODUCTION;
+    if (productionLogType === ProductionLogAction.Print) {
+      return OrderStatus.WaitingForProduction;
     }
-    if (productionLogType === ProductionLogType.PRODUCTION) {
-      return OrderStatus.TO_BE_SHIPPED;
+    if (productionLogType === ProductionLogAction.Production) {
+      return OrderStatus.ToBeShipped;
     }
   };
 

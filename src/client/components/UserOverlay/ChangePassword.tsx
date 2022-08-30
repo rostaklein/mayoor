@@ -7,13 +7,7 @@ import { LockFilled } from "@ant-design/icons";
 import { Form } from "antd";
 import { message, Row, Col, Button, Input } from "antd";
 import styled from "styled-components";
-
-import {
-  ChangePasswordMutation,
-  ChangePasswordMutationVariables,
-} from "../../__generated__/types";
-
-import { CHANGE_PASSWORD_MUTATION } from "./queries";
+import { useChangePasswordMutation } from "./__generated__/queries.generated";
 
 type FormValues = {
   oldPassword: string;
@@ -27,10 +21,7 @@ const FormItemStyled = styled(Form.Item)`
 
 export const ChangePassword: React.FC = () => {
   const { t } = useTranslation();
-  const [changePassword, { loading }] = useMutation<
-    ChangePasswordMutation,
-    ChangePasswordMutationVariables
-  >(CHANGE_PASSWORD_MUTATION);
+  const [changePassword, { loading }] = useChangePasswordMutation();
 
   const formik = useFormik<FormValues>({
     initialValues: {

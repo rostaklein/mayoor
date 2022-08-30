@@ -1,0 +1,32 @@
+query GetAllMaterials {
+  getAllMaterials {
+    id
+    name
+    price
+    updatedAt
+  }
+}
+
+mutation UpdateMaterial($id: ID!, $name: String, $price: Float) {
+  updateMaterial(id: $id, name: $name, price: $price) {
+    id
+    name
+    price
+    updatedAt
+  }
+}
+
+mutation DeleteMaterial($id: ID!) {
+  deleteMaterial(id: $id) {
+    id
+  }
+}
+
+mutation CreateMaterial($name: String!, $price: Float!) {
+  createMaterial(name: $name, price: $price) {
+    id
+    name
+    price
+    updatedAt
+  }
+}
