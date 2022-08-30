@@ -1,6 +1,4 @@
 {
-  "inactivity_logged_out": "We have logged you out for security reasons.",
-  "Could not connect to the backend server": "Could not connect to the backend server",
   "missing_company_name": "Company name is required",
   "Company name": "Company name",
   "Tax identification number": "Tax identification number",
@@ -26,6 +24,7 @@
   "Are you sure want to remove this customer?": "Are you sure want to remove this customer?",
   "Delete": "Delete",
   "Save customer": "Save customer",
+  "Customers orders": "Customers orders",
   "Created By": "Created By",
   "Created At": "Created At",
   "Last Updated At": "Last Updated At",
@@ -57,7 +56,8 @@
   "Customers list is empty": "Customers list is empty",
   "Search customers": "Search customers",
   "{{count}} pcs": {
-    "_plural": "{{count}} pcs."
+    "_one": "{{count}} pcs.",
+    "_other": "{{count}} pcs."
   },
   "Order nr": "Order nr",
   "Status": "Status",
@@ -85,13 +85,6 @@
   "Add customer": "Add customer",
   "Administration": "Administration",
   "Users": "Users",
-  "In Progress": "In Progress",
-  "Orders to be printed": "Orders to be printed",
-  "Order detail": "Order detail",
-  "Printed": "Printed",
-  "Finished": "Finished",
-  "Customer detail": "Customer detail",
-  "Users administration": "Users administration",
   "Add new material": "Add new material",
   "Material name": "Material name",
   "Price": "Price",

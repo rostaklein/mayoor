@@ -1,6 +1,4 @@
 {
-  "inactivity_logged_out": "Z bezpečnostních důvodů jsme Vás odhlásili.",
-  "Could not connect to the backend server": "Nepodařilo se připojit k serveru.",
   "missing_company_name": "Název firmy musí být vyplněn",
   "Company name": "Název firmy",
   "Tax identification number": "DIČ",
@@ -26,6 +24,7 @@
   "Are you sure want to remove this customer?": "Opravdu chcete tohoto zákazníka odstranit?",
   "Delete": "Smazat",
   "Save customer": "Uložit změny",
+  "Customers orders": "Objednávky zákazníka",
   "Created By": "Vytvořil",
   "Created At": "Vytvořeno",
   "Last Updated At": "Naposledy změněno",
@@ -57,9 +56,10 @@
   "Customers list is empty": "List zákazníků je prázdný",
   "Search customers": "Vyhledat zákazníka",
   "{{count}} pcs": {
-    "_0": "{{count}} ks.",
-    "_1": "{{count}} ks.",
-    "_2": "{{count}} ks."
+    "_one": "{{count}} ks",
+    "_few": "{{count}} ks",
+    "_many": "{{count}} ks",
+    "_other": "{{count}} ks"
   },
   "Order nr": "Obj č.",
   "Status": "Stav",
@@ -87,13 +87,6 @@
   "Add customer": "Přidat zákazníka",
   "Administration": "Administrace",
   "Users": "Uživatelé",
-  "In Progress": "Rozpracované",
-  "Orders to be printed": "Objednávky k vytištění",
-  "Order detail": "Detail objednávky",
-  "Printed": "Vytištěno",
-  "Finished": "Zpracováno",
-  "Customer detail": "Detail zákazníka",
-  "Users administration": "Administrace uživatelů",
   "Add new material": "Přidat nový materiál",
   "Material name": "Název materiálu",
   "Price": "Cena bez DPH",

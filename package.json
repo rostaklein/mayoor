@@ -16,7 +16,8 @@
     "generate:nexus": "ts-node --project tsconfig.nexus.json --transpile-only src/backend/schema.ts",
     "database:push": "prisma db push",
     "database:seed": "ts-node --project tsconfig.nexus.json --transpile-only ./prisma/seed.ts",
-    "start:full": "npm run database:migrate && npm run database:seed && npm run start"
+    "start:full": "npm run database:migrate && npm run database:seed && npm run start",
+    "extract:translations": "i18next"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -26,6 +27,7 @@
     "@vercel/node": "^1.15.2",
     "eslint": "^8.22.0",
     "eslint-config-next": "12.2.5",
+    "i18next-parser": "^6.5.0",
     "prisma": "^3.15.2"
   },
   "dependencies": {
