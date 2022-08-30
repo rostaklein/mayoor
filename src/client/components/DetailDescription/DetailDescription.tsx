@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Descriptions } from "antd";
 import { UserOutlined, CalendarOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
-
-import { useDateFormatter } from "../../locales/useDateFormatter";
+import { useTranslation } from "next-i18next";
+import { useDateFormatter } from "../../hooks/useDateFormatter";
 
 const StyledDescriptions = styled(Descriptions)`
   padding: 0 35px;

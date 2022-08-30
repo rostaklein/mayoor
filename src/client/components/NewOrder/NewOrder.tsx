@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { Button, message } from "antd";
 import { useQuery, useMutation } from "@apollo/client";
 import { ArrowRightOutlined } from "@ant-design/icons";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { Select } from "antd";
 import { useQuery } from "@apollo/client";
 import { useField } from "formik";

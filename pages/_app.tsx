@@ -1,7 +1,9 @@
 import React, { Suspense, useEffect } from "react";
 import { useQuery, ApolloProvider } from "@apollo/client";
-import { useTranslation } from "react-i18next";
+import { i18n, useTranslation } from "next-i18next";
 import { Alert, message } from "antd";
+import { appWithTranslation } from "next-i18next";
+import nextI18nConfig from "../next-i18next.config";
 
 import "antd/dist/antd.css";
 import "../src/client/index.css";
@@ -18,6 +20,7 @@ import { MainWrapper } from "../src/client/components/MainWrapper/MainWrapper";
 import { CenteredSpinner } from "../src/client/components/SharedStyles/CenteredSpinner";
 import { MeQuery } from "../src/client/__generated__/types";
 import { AppProps } from "next/app";
+import { getStaticTranslations } from "../src/client/i18n";
 
 const App: React.FC<AppProps> = ({ Component }) => {
   const dispatch = useAppDispatch();
@@ -101,4 +104,4 @@ const AppWithProviders: React.FC<AppProps> = (props) => (
   </ApolloProvider>
 );
 
-export default AppWithProviders;
+export default appWithTranslation(AppWithProviders, nextI18nConfig);

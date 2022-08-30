@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useQuery, useMutation } from "@apollo/client";
 import { Button, message, Skeleton, Row, Col, Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";

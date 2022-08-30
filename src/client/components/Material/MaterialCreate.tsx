@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Button } from "antd";
 import { Formik } from "formik";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useMutation } from "@apollo/client";
 
 import { StyledLabel, StyledDivider } from "../FormItem/Form.styles";

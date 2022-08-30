@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { Slider } from "antd";
 import { useField } from "formik";
 import { TFunction } from "i18next";

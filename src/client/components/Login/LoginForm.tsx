@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation } from "@apollo/client";
 import { useFormik, FormikErrors } from "formik";
 import { ApolloError } from "@apollo/client";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { LockFilled, LoginOutlined, UserOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
 
