@@ -1,12 +1,12 @@
-import { OrderItemCreateWithoutOrderInput, Enumerable } from '@prisma/client';
-import { NexusGenInputs } from '../generated/nexus';
+import { OrderItemCreateWithoutOrderInput, Enumerable } from "@prisma/client";
+import { NexusGenInputs } from "../generated/nexus";
 
 export const mapOrderItemInputToCreateOrderItem = (
   items:
-    | NexusGenInputs['OrderItemInput' | 'UpdateOrderItemInput'][]
+    | NexusGenInputs["OrderItemInput" | "UpdateOrderItemInput"][]
     | null
     | undefined,
-  createdByUserId: string,
+  createdByUserId: string
 ): Enumerable<OrderItemCreateWithoutOrderInput> | undefined => {
   if (!items) {
     return;

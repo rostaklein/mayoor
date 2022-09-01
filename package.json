@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier ./src -w",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "postinstall": "npm -s run generate",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus && npm -s run generate:apollo",
