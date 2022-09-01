@@ -1,4 +1,4 @@
-import { objectType, inputObjectType, enumType } from "nexus";
+import { objectType, inputObjectType, enumType, nonNull } from "nexus";
 import {
   Address,
   Customer,
@@ -67,7 +67,7 @@ export const CustomerType = objectType({
     t.field(Customer.createdAt);
     t.field(Customer.updatedAt);
     t.list.nonNull.field("addresses", {
-      type: "Address",
+      type: nonNull("Address"),
       resolve: async (customer, _, ctx) => {
         return (
           (await ctx.prisma.address.findMany({
@@ -155,7 +155,7 @@ export const AddressInput = inputObjectType({
 export const UpdateAddressInput = inputObjectType({
   name: "UpdateAddressInput",
   definition(t) {
-    t.id("id");
+    t.nonNull.id("id");
     t.string("street");
     t.string("number");
     t.string("city");

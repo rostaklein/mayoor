@@ -14,16 +14,17 @@ export const mapToOrderFormValues = (
   const { items, customer, ...rest } = order;
   return {
     customerId: customer?.id,
-    items: items.map((item) => ({
-      id: item.id,
-      materialId: item.material?.id,
-      name: item.name ?? undefined,
-      width: item.width ?? undefined,
-      height: item.height ?? undefined,
-      pieces: item.pieces ?? undefined,
-      totalPrice: item.totalPrice ?? undefined,
-      totalTax: item.totalTax ?? undefined,
-    })),
+    items:
+      items?.map((item) => ({
+        id: item?.id,
+        materialId: item.material?.id,
+        name: item?.name ?? undefined,
+        width: item?.width ?? undefined,
+        height: item?.height ?? undefined,
+        pieces: item?.pieces ?? undefined,
+        totalPrice: item?.totalPrice ?? undefined,
+        totalTax: item?.totalTax ?? undefined,
+      })) ?? [],
     ...rest,
     note: rest.note ?? undefined,
   };

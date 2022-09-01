@@ -24,8 +24,8 @@ export const OrderInput = inputObjectType({
     t.nonNull.float("totalPrice");
     t.nonNull.float("totalTax");
     t.string("note");
-    t.id("customerId");
-    t.nonNull.list.field("items", { type: OrderItemInput });
+    t.nonNull.id("customerId");
+    t.nonNull.list.field("items", { type: nonNull(OrderItemInput) });
     t.field("status", { type: OrderStatus });
     t.int("urgency");
   },
@@ -38,7 +38,7 @@ export const CreateOrder = objectType({
       type: "Order",
       args: {
         number: nonNull(intArg()),
-        input: nonNull(arg({ type: OrderInput })),
+        input: nonNull(arg({ type: nonNull(OrderInput) })),
       },
       resolve: async (_, { number, input }, ctx) => {
         const user = await ctx.user.getCurrentUser();

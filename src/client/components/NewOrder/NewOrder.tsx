@@ -19,8 +19,7 @@ import {
 
 import { OrderStatus } from "@client/generated/gql-types";
 
-export const dummyMaterialItem: OrderFormItem = {
-  materialId: undefined,
+export const dummyMaterialItem: Omit<OrderFormItem, "id" | "materialId"> = {
   name: "test",
   pieces: 1,
   width: 2,
@@ -55,12 +54,12 @@ export const NewOrder: React.FC = () => {
       message.success(
         <>
           {t("Order number {{number}} created", {
-            number: data.createOrder.number,
+            number: data.createOrder?.number,
           })}{" "}
           <Button
             type="link"
             icon={<ArrowRightOutlined />}
-            onClick={() => push(`/orders/${data.createOrder.number}`)}
+            onClick={() => push(`/orders/${data.createOrder?.number}`)}
           ></Button>
         </>
       );
@@ -68,11 +67,14 @@ export const NewOrder: React.FC = () => {
   });
 
   const submitHandler = async (rawValues: OrderFormValues) => {
-    const { number, ...rest } = rawValues as ValidatedOrder; // gets triggered only when form is valid
+    const { number, ...rest } = rawValues as unknown as ValidatedOrder; // gets triggered only when form is valid
     await createOrder({
       variables: {
         number,
-        input: rest,
+        input: {
+          ...rest,
+          items: rest.items ?? [],
+        },
       },
     });
     highestOrderNumberQuery.refetch();

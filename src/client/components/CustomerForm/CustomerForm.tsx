@@ -31,16 +31,16 @@ export type UserFormValues = {
   email: string | null;
   note: string | null;
   allowedBankPayments: boolean;
-  addresses: {
-    isPrimary: boolean;
+  addresses: Partial<{
+    isPrimary: boolean | null;
     street: string | null;
     city: string | null;
     postNumber: string | null;
-  }[];
+  }>[];
 };
 
 type Props = {
-  initialValues: UserFormValues;
+  initialValues: Partial<UserFormValues>;
   onSubmit: (values: UserFormValues, resetForm: () => void) => Promise<void>;
   submitButton: React.ReactNode;
 };
@@ -50,7 +50,7 @@ export const CustomerForm: React.FC<Props> = (props) => {
 
   return (
     <Formik<UserFormValues>
-      initialValues={props.initialValues}
+      initialValues={props.initialValues as unknown as UserFormValues}
       onSubmit={async (values, { resetForm }) => {
         await props.onSubmit(values, resetForm);
       }}

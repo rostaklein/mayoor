@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { Table, Row, Col, Empty } from "antd";
-import { ColumnProps } from "antd/lib/table";
-import { PaginationConfig } from "antd/lib/pagination";
+import { ColumnProps, TablePaginationConfig } from "antd/lib/table";
 
 import { StyledTableWrapper, StyledSearch } from "../SharedStyles/Table.styles";
 
@@ -30,7 +29,7 @@ export function PaginatedTable<T extends Record>(props: Props<T>) {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
-  const pagination: PaginationConfig = {
+  const pagination: TablePaginationConfig = {
     current: currentPageNumber,
     total: props.totalCount,
     pageSize: props.pageSize,

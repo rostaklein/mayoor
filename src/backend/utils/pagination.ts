@@ -1,11 +1,11 @@
-import { intArg, AllOutputTypes, objectType, list } from "nexus";
+import { intArg, AllOutputTypes, objectType, list, nonNull } from "nexus";
 
 export const getPaginatedObjectType = (type: AllOutputTypes) =>
   objectType({
     name: `${type}Paginated`,
     definition(t) {
       t.int("totalCount");
-      t.field("items", { type: list(type) });
+      t.field("items", { type: list(nonNull(type)) });
     },
   });
 

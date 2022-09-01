@@ -6,7 +6,7 @@ import { useTranslation } from "next-i18next";
 import { OrderItemDataFragment } from "../DetailOrder/__generated__/queries.generated";
 
 interface Props {
-  item: OrderItemDataFragment;
+  item: OrderItemDataFragment | null;
   onProductionClick: (pieces: number, orderItemId: string) => void;
   productionButtonText: string;
 }
@@ -18,6 +18,10 @@ export const ProductionRow: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const [pieces, setPieces] = useState<number>();
+
+  if (!item) {
+    return null;
+  }
 
   const productionButtonClickHandler = () => {
     if (pieces) {

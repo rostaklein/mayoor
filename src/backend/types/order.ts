@@ -1,6 +1,5 @@
-import { objectType } from "nexus";
+import { nonNull, objectType } from "nexus";
 import { Order } from "nexus-prisma";
-
 
 export const OrderType = objectType({
   name: Order.$name,
@@ -12,8 +11,8 @@ export const OrderType = objectType({
     t.field(Order.status);
     t.field(Order.urgency);
     t.field(Order.customer);
-    t.list.field("items", {
-      type: "OrderItem",
+    t.nonNull.list.field("items", {
+      type: nonNull("OrderItem"),
       args: {
         orderByCreatedAt: "OrderByArg",
       },

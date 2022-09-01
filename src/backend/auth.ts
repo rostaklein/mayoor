@@ -23,7 +23,12 @@ const getCurrentUserByToken = (token: string | undefined) =>
     }
     jwt.verify(token, process.env.CLIENT_SECRET, (err, decoded) => {
       if (err || !decoded) {
-        return reject(new ApolloError(err.message, "UNAUTHORIZED"));
+        return reject(
+          new ApolloError(
+            err?.message ?? "Something wrong happened",
+            "UNAUTHORIZED"
+          )
+        );
       }
 
       const userDetails = decoded as UserDetails;

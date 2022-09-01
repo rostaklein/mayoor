@@ -28,7 +28,7 @@ export const CreateCustomer = mutationField("createCustomer", {
     const user = await ctx.user.getCurrentUser();
 
     const { addresses, allowedBankPayments, ...otherArgs } = input;
-    const primaryAddresses = addresses?.filter((address) => address.isPrimary);
+    const primaryAddresses = addresses?.filter((address) => address?.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
       throw new UserInputError("Only one address can be primary.");
@@ -36,11 +36,12 @@ export const CreateCustomer = mutationField("createCustomer", {
 
     const newAddresses: Prisma.AddressCreateNestedManyWithoutCustomerInput = {
       createMany: {
-        data: addresses?.map((addressInput) => ({
-          ...addressInput,
-          isPrimary: addressInput.isPrimary ?? undefined,
-          createdByUserId: user.id,
-        })),
+        data:
+          addresses?.map((addressInput) => ({
+            ...addressInput,
+            isPrimary: addressInput?.isPrimary ?? false,
+            createdByUserId: user.id,
+          })) ?? [],
       },
     };
 

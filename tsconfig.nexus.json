@@ -1,12 +1,20 @@
 {
+  "ts-node": {
+    // Do not forget to `npm i -D tsconfig-paths`
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "ES2018",
     "module": "commonjs",
     "lib": ["esnext"],
     "strict": true,
-    "rootDir": ".",
+    "rootDir": "./src/backend/",
     "outDir": "dist",
     "sourceMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@client/*": ["src/client/*"],
+      "@backend/*": ["src/backend/*"]
+    }
   }
 }

@@ -62,3 +62,5 @@
 //     fallbackError: new ApolloError("Not Authorized!", "NOT_AUTHORIZED"),
 //   }
 // );
+
+export {};

@@ -21,7 +21,7 @@ import { ProductionLogAction } from "@client/generated/gql-types";
 type Props = {
   productionLogType: ProductionLogAction;
   productionButtonText: string;
-  orderNumber: number | null;
+  orderNumber: number;
 };
 
 export const DetailOrderProduction: React.FC<Props> = ({
@@ -112,9 +112,9 @@ export const DetailOrderProduction: React.FC<Props> = ({
           </Col>
           <Col sm={5}></Col>
         </Row>
-        {data.getOrderByNumber.items.map((item) => (
+        {data.getOrderByNumber.items?.map((item) => (
           <ProductionRow
-            key={item.id}
+            key={item?.id}
             item={item}
             onProductionClick={productionButtonHandler}
             productionButtonText={productionButtonText}

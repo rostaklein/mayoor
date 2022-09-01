@@ -77,7 +77,7 @@ export type Customer = {
 
 export type CustomerPaginated = {
   __typename?: 'CustomerPaginated';
-  items?: Maybe<Array<Maybe<Customer>>>;
+  items?: Maybe<Array<Customer>>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
@@ -215,7 +215,7 @@ export type Order = {
   createdBy: User;
   customer?: Maybe<Customer>;
   id: Scalars['ID'];
-  items?: Maybe<Array<Maybe<OrderItem>>>;
+  items: Array<OrderItem>;
   note?: Maybe<Scalars['String']>;
   number: Scalars['Int'];
   shippedAt?: Maybe<Scalars['DateTime']>;
@@ -238,8 +238,8 @@ export enum OrderByArg {
 }
 
 export type OrderInput = {
-  customerId?: InputMaybe<Scalars['ID']>;
-  items: Array<InputMaybe<OrderItemInput>>;
+  customerId: Scalars['ID'];
+  items: Array<OrderItemInput>;
   note?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<OrderStatus>;
   totalPrice: Scalars['Float'];
@@ -277,7 +277,7 @@ export type OrderItemInput = {
 
 export type OrderPaginated = {
   __typename?: 'OrderPaginated';
-  items?: Maybe<Array<Maybe<Order>>>;
+  items?: Maybe<Array<Order>>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
@@ -308,9 +308,9 @@ export enum ProductionLogAction {
 export type Query = {
   __typename?: 'Query';
   getAllCustomers?: Maybe<CustomerPaginated>;
-  getAllMaterials?: Maybe<Array<Maybe<Material>>>;
+  getAllMaterials?: Maybe<Array<Material>>;
   getAllOrders?: Maybe<OrderPaginated>;
-  getAllUsers?: Maybe<Array<Maybe<User>>>;
+  getAllUsers?: Maybe<Array<User>>;
   getCustomer?: Maybe<Customer>;
   getHighestOrderNumber?: Maybe<Scalars['Int']>;
   getOrder?: Maybe<Order>;
@@ -356,7 +356,7 @@ export type QueryGetOrderByNumberArgs = {
 
 export type UpdateAddressInput = {
   city?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['ID']>;
+  id: Scalars['ID'];
   isPrimary?: InputMaybe<Scalars['Boolean']>;
   number?: InputMaybe<Scalars['String']>;
   postNumber?: InputMaybe<Scalars['String']>;
@@ -365,10 +365,10 @@ export type UpdateAddressInput = {
 };
 
 export type UpdateCustomerInput = {
-  addresses?: InputMaybe<Array<InputMaybe<UpdateAddressInput>>>;
+  addresses: Array<UpdateAddressInput>;
   allowedBankPayments?: InputMaybe<Scalars['Boolean']>;
   email?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['ID']>;
+  id: Scalars['ID'];
   identificationNumber?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   note?: InputMaybe<Scalars['String']>;
@@ -378,8 +378,8 @@ export type UpdateCustomerInput = {
 };
 
 export type UpdateOrderInput = {
-  customerId?: InputMaybe<Scalars['ID']>;
-  items?: InputMaybe<Array<InputMaybe<UpdateOrderItemInput>>>;
+  customerId: Scalars['ID'];
+  items?: InputMaybe<Array<UpdateOrderItemInput>>;
   note?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<OrderStatus>;
   totalPrice?: InputMaybe<Scalars['Float']>;
@@ -389,7 +389,7 @@ export type UpdateOrderInput = {
 
 export type UpdateOrderItemInput = {
   height?: InputMaybe<Scalars['Float']>;
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
   materialId: Scalars['ID'];
   name?: InputMaybe<Scalars['String']>;
   pieces?: InputMaybe<Scalars['Int']>;

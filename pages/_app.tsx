@@ -49,7 +49,7 @@ const App: React.FC<AppProps> = ({ Component }) => {
       if (data) {
         dispatch({
           type: "SET_CURRENT_USER",
-          user: data.me,
+          user: data.me ?? null,
         });
       }
     },

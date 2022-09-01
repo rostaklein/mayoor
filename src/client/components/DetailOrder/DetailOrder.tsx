@@ -15,6 +15,7 @@ import { OrderForm, OrderFormValues } from "../OrderForm/OrderForm";
 import { CenteredSpinner } from "../SharedStyles/CenteredSpinner";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { OrderActionsWrapper } from "../SharedStyles/OrderActions";
+import { ValidatedOrder } from "../OrderForm/validateOrder";
 
 import { mapToOrderFormValues } from "./mapToOrderFormValues";
 import {
@@ -48,8 +49,7 @@ export const DetailOrder: React.FC<{ orderNumber: number }> = ({
   const [deleteOrder, { loading: deleteLoading }] = useDeleteOrderMutation();
 
   const submitHandler = async (orderValues: OrderFormValues) => {
-    const { urgency, status, customerId, totalPrice, totalTax, note } =
-      orderValues;
+    const { number, ...rest } = orderValues as unknown as ValidatedOrder; // gets triggered only when form is valid
 
     const id = data?.getOrderByNumber?.id;
     if (!id) {
@@ -59,19 +59,7 @@ export const DetailOrder: React.FC<{ orderNumber: number }> = ({
       await updateOrder({
         variables: {
           id,
-          input: {
-            urgency,
-            status,
-            customerId,
-            totalPrice: totalPrice || 0,
-            totalTax: totalTax || 0,
-            note,
-            items: orderValues.items.map((item) => ({
-              ...item,
-              totalTax: item.totalTax || 0,
-              totalPrice: item.totalPrice || 0,
-            })),
-          },
+          input: rest,
         },
       });
       message.success(t("order_updated"));

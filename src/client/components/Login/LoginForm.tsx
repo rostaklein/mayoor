@@ -50,7 +50,7 @@ export const LoginForm: React.FC = () => {
         const result = await login({
           variables: { email: username, password },
         });
-        if (result.data?.login) {
+        if (result.data?.login?.user && result?.data?.login?.token) {
           dispatch({
             type: "SET_CURRENT_USER",
             user: result.data.login.user,

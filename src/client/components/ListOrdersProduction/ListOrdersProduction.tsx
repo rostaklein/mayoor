@@ -50,7 +50,7 @@ const getColumns = (
     },
   },
   {
-    title: t("Order nr"),
+    title: t("Order nr") as string,
     dataIndex: "number",
     width: 80,
     render: (_, record) => {
@@ -62,15 +62,15 @@ const getColumns = (
     },
   },
   {
-    title: t("Items info"),
+    title: t("Items info") as string,
     ellipsis: true,
     dataIndex: "items",
     render: (_, { items, totalSize }) => (
-      <ItemsInfoRow items={items} totalSize={totalSize} />
+      <ItemsInfoRow items={items} totalSize={totalSize ?? 0} />
     ),
   },
   {
-    title: t("Created at"),
+    title: t("Created at") as string,
     width: 200,
     ellipsis: true,
     dataIndex: "createdAt",
@@ -119,7 +119,7 @@ export const ListOrdersProduction: React.FC<{
     });
   };
 
-  const items = data?.getAllOrders.items ?? [];
+  const items = data?.getAllOrders?.items ?? [];
 
   return (
     <>
@@ -128,7 +128,7 @@ export const ListOrdersProduction: React.FC<{
         pageSize={PAGE_SIZE}
         columns={getColumns(t, linkSuffix)}
         records={items}
-        totalCount={data?.getAllOrders.totalCount ?? 0}
+        totalCount={data?.getAllOrders?.totalCount ?? 0}
         onPaginationChange={paginationChangedHandler}
         loading={loading}
         translations={{

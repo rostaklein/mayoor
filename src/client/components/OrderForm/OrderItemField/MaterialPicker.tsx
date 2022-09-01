@@ -20,7 +20,7 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
 
   const { data, loading } = useGetAllMaterialsQuery({
     onCompleted: (data) => {
-      if (value === null) {
+      if (value === null && data.getAllMaterials) {
         setValue(data.getAllMaterials[0].id);
       }
     },
@@ -36,7 +36,7 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
     );
   };
 
-  const hasFilteredItems = filteredItems.length > 0;
+  const hasFilteredItems = (filteredItems?.length ?? 0) > 0;
   return (
     <StyledFormItem validateStatus={status} help={errorMessage}>
       <Select
@@ -51,11 +51,13 @@ export const MaterialPicker: React.FC<{ name: string }> = ({ name }) => {
         notFoundContent={t("No material found")}
         data-test-id={name}
       >
-        {(hasFilteredItems ? filteredItems : materials).map((material) => (
-          <Select.Option key={material.id} value={material.id}>
-            {material.name}
-          </Select.Option>
-        ))}
+        {(hasFilteredItems ? filteredItems ?? [] : materials).map(
+          (material) => (
+            <Select.Option key={material.id} value={material.id}>
+              {material.name}
+            </Select.Option>
+          )
+        )}
       </Select>
     </StyledFormItem>
   );

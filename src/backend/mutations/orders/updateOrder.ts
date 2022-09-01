@@ -8,7 +8,7 @@ import { OrderStatus } from "@backend/types";
 export const UpdateOrderItemInput = inputObjectType({
   name: "UpdateOrderItemInput",
   definition(t) {
-    t.nonNull.id("id");
+    t.id("id");
     t.string("name");
     t.nonNull.float("totalPrice");
     t.nonNull.float("totalTax");
@@ -25,9 +25,9 @@ export const UpdateOrderInput = inputObjectType({
     t.float("totalPrice");
     t.float("totalTax");
     t.string("note");
-    t.id("customerId");
+    t.nonNull.id("customerId");
     t.list.field("items", {
-      type: UpdateOrderItemInput,
+      type: nonNull(UpdateOrderItemInput),
     });
     t.field("status", { type: OrderStatus });
     t.int("urgency");
@@ -38,7 +38,7 @@ export const UpdateOrder = mutationField("updateOrder", {
   type: "Order",
   args: {
     id: nonNull(idArg()),
-    input: nonNull(arg({ type: UpdateOrderInput })),
+    input: nonNull(arg({ type: nonNull(UpdateOrderInput) })),
   },
   resolve: async (_, { id, input }, ctx) => {
     const user = await ctx.user.getCurrentUser();
@@ -75,7 +75,7 @@ export const UpdateOrder = mutationField("updateOrder", {
       }
     });
 
-    const itemsToCreate = input.items?.filter(({ id }) => !id);
+    const itemsToCreate = input.items?.filter(({ id }) => !id) ?? [];
 
     return ctx.prisma.order.update({
       where: {

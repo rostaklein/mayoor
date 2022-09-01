@@ -1,8 +1,7 @@
 import React from "react";
-import { useTranslation } from "next-i18next";
+import { useTranslation, TFunction } from "next-i18next";
 import { RightCircleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
 import Link from "next/link";
 
@@ -11,7 +10,7 @@ import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { CustomerDetailsFragment } from "../DetailCustomer/__generated__/queries.generated";
 
 import {
-  GetAllCustomersQuery,
+  CustomerFragmentFragment,
   useGetAllCustomersQuery,
 } from "./__generated__/queries.generated";
 
@@ -19,7 +18,7 @@ const PAGE_SIZE = 10;
 
 const getColumns = (t: TFunction): ColumnProps<CustomerDetailsFragment>[] => [
   {
-    title: t("Company name"),
+    title: t("Company name") as string,
     ellipsis: true,
     dataIndex: "name",
     render: (_, record) => {
@@ -27,25 +26,25 @@ const getColumns = (t: TFunction): ColumnProps<CustomerDetailsFragment>[] => [
     },
   },
   {
-    title: t("Identification number"),
+    title: t("Identification number") as string,
     width: 150,
     ellipsis: true,
     dataIndex: "identificationNumber",
   },
   {
-    title: t("Contact person name"),
+    title: t("Contact person name") as string,
     width: 250,
     ellipsis: true,
     dataIndex: "personName",
   },
   {
-    title: t("Email"),
+    title: t("Email") as string,
     width: 150,
     ellipsis: true,
     dataIndex: "email",
   },
   {
-    title: t("Phone"),
+    title: t("Phone") as string,
     width: 150,
     ellipsis: true,
     dataIndex: "phone",
@@ -87,16 +86,18 @@ export const ListCustomers: React.FC = () => {
     });
   };
 
-  const items = data?.getAllCustomers.items ?? [];
+  const items = (data?.getAllCustomers?.items ?? []).filter(
+    (item): item is CustomerFragmentFragment => item !== null
+  );
 
   return (
     <>
       <PageTitle>{t("Customers")}</PageTitle>
-      <PaginatedTable<GetAllCustomersQuery["getAllCustomers"]["items"][0]>
+      <PaginatedTable<CustomerFragmentFragment>
         pageSize={PAGE_SIZE}
         columns={getColumns(t)}
         records={items}
-        totalCount={data?.getAllCustomers.totalCount ?? 0}
+        totalCount={data?.getAllCustomers?.totalCount ?? 0}
         onPaginationChange={paginationChangedHandler}
         onSearch={searchHandler}
         loading={loading}

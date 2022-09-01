@@ -6,7 +6,11 @@ import { getStaticTranslations } from "@client/i18n";
 
 export default function OrderDetail() {
   const { query } = useRouter();
-  return <DetailOrder orderNumber={Number(query.orderNumber) ?? null} />;
+
+  if (typeof query.orderNumber !== "string") {
+    return null;
+  }
+  return <DetailOrder orderNumber={Number(query.orderNumber)} />;
 }
 
 export const getServerSideProps = getStaticTranslations;

@@ -1,12 +1,13 @@
 export const mapOrderItemInputToCreateOrderItem = (
   items: {
-    height?: number;
-    materialId?: string;
-    name?: string;
-    pieces?: number;
-    totalPrice: number;
-    totalTax: number;
-    width?: number;
+    // input type
+    height?: number | null; // Float
+    materialId?: string | null; // ID
+    name?: string | null; // String
+    pieces?: number | null; // Int
+    totalPrice: number; // Float!
+    totalTax: number; // Float!
+    width?: number | null; // Float
   }[],
   createdByUserId: string
 ) => {

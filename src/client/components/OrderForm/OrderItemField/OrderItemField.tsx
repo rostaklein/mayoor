@@ -39,7 +39,7 @@ export const OrderItemField: React.FC<FieldProps> = ({
     const allMaterials = client.readQuery<GetAllMaterialsQuery>({
       query: GetAllMaterialsDocument,
     });
-    const material = allMaterials?.getAllMaterials.find(
+    const material = allMaterials?.getAllMaterials?.find(
       ({ id }) => id === value.materialId
     );
 
@@ -88,7 +88,7 @@ export const OrderItemField: React.FC<FieldProps> = ({
         <Tooltip title={t("Calculate row")}>
           <Button
             icon={<CalculatorOutlined />}
-            shape="circle-outline"
+            shape="circle"
             type="link"
             data-test-id={`${itemName}-calculate-button`}
             disabled={!calculationEnabled}
@@ -121,7 +121,7 @@ export const OrderItemField: React.FC<FieldProps> = ({
           >
             <Button
               icon={<DeleteOutlined />}
-              shape="circle-outline"
+              shape="circle"
               type="link"
             ></Button>
           </Popconfirm>

@@ -75,7 +75,7 @@ export const UserEdit: React.FC = () => {
               </Col>
               <Col sm={4}></Col>
             </Row>
-            {data?.getAllUsers.map((user) => (
+            {data?.getAllUsers?.map((user) => (
               <Formik<FormikValues>
                 key={user.id}
                 initialValues={{ ...user, password: undefined }}

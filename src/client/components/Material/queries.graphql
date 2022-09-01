@@ -1,18 +1,12 @@
 query GetAllMaterials {
   getAllMaterials {
-    id
-    name
-    price
-    updatedAt
+    ...MaterialData
   }
 }
 
 mutation UpdateMaterial($id: ID!, $name: String, $price: Float) {
   updateMaterial(id: $id, name: $name, price: $price) {
-    id
-    name
-    price
-    updatedAt
+    ...MaterialData
   }
 }
 
@@ -24,9 +18,13 @@ mutation DeleteMaterial($id: ID!) {
 
 mutation CreateMaterial($name: String!, $price: Float!) {
   createMaterial(name: $name, price: $price) {
-    id
-    name
-    price
-    updatedAt
+    ...MaterialData
   }
+}
+
+fragment MaterialData on Material {
+  id
+  name
+  price
+  updatedAt
 }

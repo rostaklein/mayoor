@@ -13,7 +13,7 @@ import { MaterialEditWrapper } from "./MaterialEdit.styles";
 import { MaterialCreate } from "./MaterialCreate";
 import {
   GetAllMaterialsDocument,
-  GetAllMaterialsQuery,
+  MaterialDataFragment,
   useDeleteMaterialMutation,
   useGetAllMaterialsQuery,
   useUpdateMaterialMutation,
@@ -68,8 +68,8 @@ export const MaterialEdit: React.FC = () => {
               </Col>
               <Col sm={4}></Col>
             </Row>
-            {data?.getAllMaterials.map((material) => (
-              <Formik<GetAllMaterialsQuery["getAllMaterials"][0]>
+            {data?.getAllMaterials?.map((material) => (
+              <Formik<MaterialDataFragment>
                 key={material.id}
                 initialValues={material}
                 onSubmit={async (values) => {

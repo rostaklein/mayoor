@@ -59,10 +59,11 @@ export const DetailCustomer: React.FC<{ customerId: string }> = ({
             phone,
             note,
             allowedBankPayments,
-            addresses: data?.getCustomer?.addresses.map((addr, i) => {
-              const { street, city, postNumber, isPrimary } = addresses[i];
-              return { id: addr.id, street, city, postNumber, isPrimary };
-            }),
+            addresses:
+              data?.getCustomer?.addresses?.map((addr, i) => {
+                const { street, city, postNumber, isPrimary } = addresses[i];
+                return { id: addr.id, street, city, postNumber, isPrimary };
+              }) ?? [],
           },
         },
       });
@@ -142,7 +143,10 @@ export const DetailCustomer: React.FC<{ customerId: string }> = ({
             {t("Save customer")}
           </Button>
         }
-        initialValues={data.getCustomer}
+        initialValues={{
+          ...data.getCustomer,
+          addresses: data.getCustomer.addresses ?? [],
+        }}
       />
       <ListOrders
         title={t("Customers orders")}

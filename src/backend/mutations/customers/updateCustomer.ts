@@ -6,7 +6,7 @@ import { UpdateAddressInput } from "@backend/types";
 export const UpdateCustomerInput = inputObjectType({
   name: "UpdateCustomerInput",
   definition(t) {
-    t.id("id");
+    t.nonNull.id("id");
     t.string("name");
     t.string("personName");
     t.string("phone");
@@ -15,7 +15,7 @@ export const UpdateCustomerInput = inputObjectType({
     t.string("taxIdentificationNumber");
     t.boolean("allowedBankPayments");
     t.string("note");
-    t.list.field("addresses", { type: UpdateAddressInput });
+    t.nonNull.list.field("addresses", { type: nonNull(UpdateAddressInput) });
   },
 });
 
@@ -37,7 +37,7 @@ export const UpdateCustomer = mutationField("updateCustomer", {
     }
 
     const { id, allowedBankPayments, addresses, ...otherArgs } = input;
-    const primaryAddresses = addresses?.filter((address) => address.isPrimary);
+    const primaryAddresses = addresses.filter((address) => address.isPrimary);
 
     if (primaryAddresses?.length && primaryAddresses.length > 1) {
       throw new UserInputError("Only one address can be primary.");
@@ -45,7 +45,7 @@ export const UpdateCustomer = mutationField("updateCustomer", {
 
     for (const { id: addressId, ...address } of addresses) {
       await ctx.prisma.address.update({
-        data: address,
+        data: { ...address, isPrimary: address.isPrimary ?? false },
         where: {
           id: addressId,
         },

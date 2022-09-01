@@ -61,7 +61,7 @@ type Customer {
 }
 
 type CustomerPaginated {
-  items: [Customer]
+  items: [Customer!]
   totalCount: Int
 }
 
@@ -104,7 +104,7 @@ type Order {
   createdBy: User!
   customer: Customer
   id: ID!
-  items(orderByCreatedAt: OrderByArg): [OrderItem]
+  items(orderByCreatedAt: OrderByArg): [OrderItem!]!
   note: String
   number: Int!
   shippedAt: DateTime
@@ -122,8 +122,8 @@ enum OrderByArg {
 }
 
 input OrderInput {
-  customerId: ID
-  items: [OrderItemInput]!
+  customerId: ID!
+  items: [OrderItemInput!]!
   note: String
   status: OrderStatus
   totalPrice: Float!
@@ -159,7 +159,7 @@ input OrderItemInput {
 }
 
 type OrderPaginated {
-  items: [Order]
+  items: [Order!]
   totalCount: Int
 }
 
@@ -188,9 +188,9 @@ enum ProductionLogAction {
 
 type Query {
   getAllCustomers(first: Int, search: String, skip: Int): CustomerPaginated
-  getAllMaterials(deleted: Boolean = false): [Material]
+  getAllMaterials(deleted: Boolean = false): [Material!]
   getAllOrders(customerId: ID, first: Int, orderByUrgency: OrderByArg, skip: Int, status: OrderStatus): OrderPaginated
-  getAllUsers: [User]
+  getAllUsers: [User!]
   getCustomer(id: ID!): Customer
   getHighestOrderNumber: Int
   getOrder(id: ID!): Order
@@ -200,7 +200,7 @@ type Query {
 
 input UpdateAddressInput {
   city: String
-  id: ID
+  id: ID!
   isPrimary: Boolean
   number: String
   postNumber: String
@@ -209,10 +209,10 @@ input UpdateAddressInput {
 }
 
 input UpdateCustomerInput {
-  addresses: [UpdateAddressInput]
+  addresses: [UpdateAddressInput!]!
   allowedBankPayments: Boolean
   email: String
-  id: ID
+  id: ID!
   identificationNumber: String
   name: String
   note: String
@@ -222,8 +222,8 @@ input UpdateCustomerInput {
 }
 
 input UpdateOrderInput {
-  customerId: ID
-  items: [UpdateOrderItemInput]
+  customerId: ID!
+  items: [UpdateOrderItemInput!]
   note: String
   status: OrderStatus
   totalPrice: Float
@@ -233,7 +233,7 @@ input UpdateOrderInput {
 
 input UpdateOrderItemInput {
   height: Float
-  id: ID!
+  id: ID
   materialId: ID!
   name: String
   pieces: Int

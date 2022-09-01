@@ -37,4 +37,4 @@ export const getOrderValidationSchema = (t: TFunction) =>
 
 export type ValidatedOrder = Yup.InferType<
   ReturnType<typeof getOrderValidationSchema>
->;
+> & { items: ValidatedOrderItem[] };

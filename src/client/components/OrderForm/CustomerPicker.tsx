@@ -20,8 +20,8 @@ const StyledSubName = styled.span`
 
 export type CustomerOption = {
   id: string;
-  name: string | null;
-  identificationNumber: string | null;
+  name?: string | null;
+  identificationNumber?: string | null;
 };
 
 export const CustomerPicker: React.FC<{
@@ -42,7 +42,7 @@ export const CustomerPicker: React.FC<{
 
   const debouncedSearchHandler = debounce(searchHandler, 500);
 
-  const customers = data?.getAllCustomers.items ?? [];
+  const customers = data?.getAllCustomers?.items ?? [];
 
   const renderCustomerOption = (customer: CustomerOption) => {
     return (

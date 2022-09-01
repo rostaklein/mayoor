@@ -33,10 +33,6 @@ fragment OrderData on Order {
   totalTax
   totalSize
   items {
-    material {
-      id
-      name
-    }
-    pieces
+    ...OrderItemData
   }
 }

@@ -22,7 +22,7 @@ import { OrderStatus } from "@client/generated/gql-types";
 
 const getColumns = (t: TFunction): ColumnProps<OrderDataFragment>[] => [
   {
-    title: t("Order nr"),
+    title: t("Order nr") as string,
     dataIndex: "number",
     width: 80,
     render: (_, record) => {
@@ -30,7 +30,7 @@ const getColumns = (t: TFunction): ColumnProps<OrderDataFragment>[] => [
     },
   },
   {
-    title: t("Status"),
+    title: t("Status") as string,
     dataIndex: "status",
     width: 160,
     render: (_, record) => {
@@ -39,7 +39,7 @@ const getColumns = (t: TFunction): ColumnProps<OrderDataFragment>[] => [
     },
   },
   {
-    title: t("Customer"),
+    title: t("Customer") as string,
     width: 150,
     ellipsis: true,
     dataIndex: "customer.name",
@@ -49,15 +49,15 @@ const getColumns = (t: TFunction): ColumnProps<OrderDataFragment>[] => [
       ),
   },
   {
-    title: t("Items info"),
+    title: t("Items info") as string,
     ellipsis: true,
     dataIndex: "items",
     render: (_, { items, totalSize }) => (
-      <ItemsInfoRow items={items} totalSize={totalSize} />
+      <ItemsInfoRow items={items} totalSize={totalSize ?? 0} />
     ),
   },
   {
-    title: t("Created at"),
+    title: t("Created at") as string,
     width: 200,
     ellipsis: true,
     dataIndex: "createdAt",
@@ -121,7 +121,7 @@ export const ListOrders: React.FC<Props> = ({
     refetch({ first: pageSize, status });
   };
 
-  const items = data?.getAllOrders.items ?? [];
+  const items = data?.getAllOrders?.items ?? [];
 
   const statuses = getOrderStatuses(t);
 
@@ -156,7 +156,7 @@ export const ListOrders: React.FC<Props> = ({
       <PaginatedTable<OrderDataFragment>
         columns={getColumns(t)}
         records={items}
-        totalCount={data?.getAllOrders.totalCount ?? 0}
+        totalCount={data?.getAllOrders?.totalCount ?? 0}
         onPaginationChange={paginationChangedHandler}
         loading={loading}
         pageSize={pageSize}
