@@ -131,7 +131,11 @@ export const DetailOrderProduction: React.FC<Props> = ({
                 onChange={(e) => setNoteValue(e.target.value)}
                 value={noteValue || ""}
               />
-              <Button icon={<SaveOutlined />} onClick={updateNoteHandler}>
+              <Button
+                icon={<SaveOutlined />}
+                onClick={updateNoteHandler}
+                style={{ margin: "12px 0" }}
+              >
                 {t("Save note")}
               </Button>
             </StyledFormItem>

@@ -37,6 +37,7 @@ export const LanguageSwitch: React.FC = () => {
       placement="bottom"
       visible={isVisible}
       onVisibleChange={setIsVisible}
+      style={{ marginRight: 16 }}
     >
       <Button icon={<GlobalOutlined />} shape="circle" type="link" />
     </Popover>

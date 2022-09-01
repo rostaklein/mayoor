@@ -6,6 +6,7 @@ export const StyledItemNumber = styled.div`
   font-weight: 600;
   position: absolute;
   right: 100%;
+  color: #d3d3d3;
 `;
 
 export const MaterialColumn = styled.div`

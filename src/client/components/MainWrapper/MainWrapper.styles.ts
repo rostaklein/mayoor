@@ -43,7 +43,7 @@ export const Content = styled.div`
 `;
 
 export const StyledNavbar = styled.header`
-  padding: 5px 15px;
+  padding: 6px 32px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
