@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Descriptions } from "antd";
 import { UserOutlined, CalendarOutlined } from "@ant-design/icons";
 import { useTranslation } from "next-i18next";
+
 import { useDateFormatter } from "../../hooks/useDateFormatter";
 
 const StyledDescriptions = styled(Descriptions)`

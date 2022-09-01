@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Button, Input } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { useTranslation } from "next-i18next";
+
 import { OrderItemDataFragment } from "../DetailOrder/__generated__/queries.generated";
 
 interface Props {

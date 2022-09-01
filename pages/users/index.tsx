@@ -1,6 +1,7 @@
 import React from "react";
-import { UserEdit } from "../../src/client/components/Users/UserEdit";
-import { getStaticTranslations } from "../../src/client/i18n";
+
+import { UserEdit } from "@client/components/Users/UserEdit";
+import { getStaticTranslations } from "@client/i18n";
 
 type Props = {};
 

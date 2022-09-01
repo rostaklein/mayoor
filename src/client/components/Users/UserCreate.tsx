@@ -10,12 +10,14 @@ import * as Yup from "yup";
 import { StyledLabel, StyledDivider } from "../FormItem/Form.styles";
 import { FormInput } from "../FormItem/FormInput";
 
+
 import { UserRoleSelect } from "./UserRoleSelect";
-import { UserRole } from "../../generated/gql-types";
 import {
   GetAllUsersDocument,
   useCreateUserMutation,
 } from "./__generated__/queries.generated";
+
+import { UserRole } from "@client/generated/gql-types";
 
 export const getUserValidationSchema = (t: TFunction) =>
   Yup.object().shape({

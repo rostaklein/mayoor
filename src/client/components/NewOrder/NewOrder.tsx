@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import { Button, message } from "antd";
 import { useQuery, useMutation } from "@apollo/client";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 import { PageTitle } from "../MainWrapper/PageTitle";
 import {
@@ -12,12 +13,12 @@ import {
 } from "../OrderForm/OrderForm";
 import { ValidatedOrder } from "../OrderForm/validateOrder";
 
-import { useRouter } from "next/router";
-import { OrderStatus } from "../../generated/gql-types";
 import {
   useCreateOrderMutation,
   useGetHighestOrderNumberQuery,
 } from "./__generated__/queries.generated";
+
+import { OrderStatus } from "@client/generated/gql-types";
 
 export const dummyMaterialItem: OrderFormItem = {
   materialId: undefined,

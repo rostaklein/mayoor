@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { queryField, stringArg } from "nexus";
+
 import { paginationArgs, getPaginatedObjectType } from "../../utils/pagination";
 
 export const GetAllCustomers = queryField("getAllCustomers", {

@@ -1,5 +1,6 @@
 import { list, queryField } from "nexus";
-import { UserType } from "../../types";
+
+import { UserType } from "@backend/types";
 
 export const GetAllUsers = queryField("getAllUsers", {
   type: list(UserType),

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 import { Colors } from "../../themeVariables";
-import Link from "next/link";
 
 const MenuLinkItem = styled.a`
   width: 100%;

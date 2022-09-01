@@ -1,7 +1,8 @@
 import * as jwt from "jsonwebtoken";
-import { UserContext, UserDetails } from "./context";
 import { VercelRequest } from "@vercel/node";
 import { ApolloError } from "apollo-server-micro";
+
+import { UserContext, UserDetails } from "./context";
 
 export const issueToken = (userDetails: UserDetails): string => {
   if (!process.env.CLIENT_SECRET) {

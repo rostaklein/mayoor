@@ -4,12 +4,12 @@ import { RightCircleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
+import Link from "next/link";
 
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
-
-import Link from "next/link";
 import { CustomerDetailsFragment } from "../DetailCustomer/__generated__/queries.generated";
+
 import {
   GetAllCustomersQuery,
   useGetAllCustomersQuery,

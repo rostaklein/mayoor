@@ -1,7 +1,9 @@
 import { arg, inputObjectType, idArg, mutationField, nonNull } from "nexus";
 import { ApolloError } from "apollo-server-micro";
-import { OrderStatus } from "../../types";
+
 import { mapOrderItemInputToCreateOrderItem } from "../../mappers/mapOrderItem";
+
+import { OrderStatus } from "@backend/types";
 
 export const UpdateOrderItemInput = inputObjectType({
   name: "UpdateOrderItemInput",

@@ -5,7 +5,8 @@ import { Select } from "antd";
 import { useField } from "formik";
 
 import { StyledFormItem } from "../FormItem/Form.styles";
-import { UserRole } from "../../generated/gql-types";
+
+import { UserRole } from "@client/generated/gql-types";
 
 export const getUserRoleNames = (
   t: TFunction

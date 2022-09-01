@@ -2,8 +2,8 @@ import { ApolloServer } from "apollo-server-micro";
 import { PageConfig } from "next";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { createContext } from "../../src/backend/context";
-import { schema } from "../../src/backend/schema";
+import { createContext } from "@backend/context";
+import { schema } from "@backend/schema";
 
 const apolloServer = new ApolloServer({
   context: createContext,

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "next-i18next";
 import { DeleteOutlined, SaveOutlined } from "@ant-design/icons";
-import { Row, Col, Button, Popconfirm, message } from "antd";
+import { Button, Col, Popconfirm, Row, message } from "antd";
 import { Formik } from "formik";
 import { TFunction } from "i18next";
 import * as Yup from "yup";
@@ -15,9 +15,9 @@ import { UserRoleSelect } from "./UserRoleSelect";
 import { UserCreate } from "./UserCreate";
 import {
   GetAllUsersDocument,
+  UserDataFragment,
   useDeleteUserMutation,
   useGetAllUsersQuery,
-  UserDataFragment,
   useUpdateUserMutation,
 } from "./__generated__/queries.generated";
 

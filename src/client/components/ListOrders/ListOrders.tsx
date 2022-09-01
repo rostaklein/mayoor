@@ -4,6 +4,7 @@ import { RightCircleOutlined } from "@ant-design/icons";
 import { Button, Select, Col, Row } from "antd";
 import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
+import Link from "next/link";
 
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
@@ -11,13 +12,14 @@ import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getOrderStatuses } from "../OrderForm/OrderStatusSelect";
 import { StyledFormItem, StyledLabel } from "../FormItem/Form.styles";
 
+
 import { ItemsInfoRow } from "./ItemsInfoRow";
-import Link from "next/link";
 import {
   OrderDataFragment,
   useGetAllOrdersQuery,
 } from "./__generated__/queries.generated";
-import { OrderStatus } from "../../generated/gql-types";
+
+import { OrderStatus } from "@client/generated/gql-types";
 
 const getColumns = (t: TFunction): ColumnProps<OrderDataFragment>[] => [
   {

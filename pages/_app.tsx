@@ -1,24 +1,24 @@
 import React, { Suspense, useEffect } from "react";
 import { ApolloProvider } from "@apollo/client";
-import { useTranslation } from "next-i18next";
+import { useTranslation, appWithTranslation } from "next-i18next";
 import { Alert, message } from "antd";
-import { appWithTranslation } from "next-i18next";
-import nextI18nConfig from "../next-i18next.config";
+import { AppProps } from "next/app";
 
 import "antd/dist/antd.css";
-import "../src/client/index.css";
+import "@client/index.css";
 
-import { client } from "../src/client/ApolloClient";
+import nextI18nConfig from "../next-i18next.config";
+
+import { client } from "@client/ApolloClient";
 import {
   useAppDispatch,
   useAppState,
   AppContextProvider,
-} from "../src/client/appContext/context";
-import { LoginForm } from "../src/client/components/Login/LoginForm";
-import { MainWrapper } from "../src/client/components/MainWrapper/MainWrapper";
-import { CenteredSpinner } from "../src/client/components/SharedStyles/CenteredSpinner";
-import { AppProps } from "next/app";
-import { useMeQuery } from "../src/client/components/Login/__generated__/queries.generated";
+} from "@client/appContext/context";
+import { LoginForm } from "@client/components/Login/LoginForm";
+import { MainWrapper } from "@client/components/MainWrapper/MainWrapper";
+import { CenteredSpinner } from "@client/components/SharedStyles/CenteredSpinner";
+import { useMeQuery } from "@client/components/Login/__generated__/queries.generated";
 
 const App: React.FC<AppProps> = ({ Component }) => {
   const dispatch = useAppDispatch();
@@ -47,15 +47,9 @@ const App: React.FC<AppProps> = ({ Component }) => {
     },
     onCompleted: (data) => {
       if (data) {
-        const { id, name, email, role } = data.me;
         dispatch({
           type: "SET_CURRENT_USER",
-          user: {
-            id,
-            name,
-            email,
-            role,
-          },
+          user: data.me,
         });
       }
     },

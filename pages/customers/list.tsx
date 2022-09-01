@@ -1,6 +1,7 @@
 import React from "react";
-import { ListCustomers } from "../../src/client/components/ListCustomers/ListCustomers";
-import { getStaticTranslations } from "../../src/client/i18n";
+
+import { ListCustomers } from "@client/components/ListCustomers/ListCustomers";
+import { getStaticTranslations } from "@client/i18n";
 
 type Props = {};
 

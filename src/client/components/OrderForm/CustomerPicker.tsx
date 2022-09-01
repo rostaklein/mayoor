@@ -8,6 +8,7 @@ import debounce from "lodash/debounce";
 import { useField } from "formik";
 
 import { StyledFormItem, StyledLabel } from "../FormItem/Form.styles";
+
 import { useFindCustomerQuery } from "./__generated__/queries.generated";
 
 const StyledSubName = styled.span`

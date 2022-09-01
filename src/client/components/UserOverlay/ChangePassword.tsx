@@ -2,11 +2,10 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import { FormikErrors, useFormik } from "formik";
 import { ApolloError } from "@apollo/client";
-import { useMutation } from "@apollo/client";
 import { LockFilled } from "@ant-design/icons";
-import { Form } from "antd";
-import { message, Row, Col, Button, Input } from "antd";
+import { message, Row, Col, Button, Input, Form } from "antd";
 import styled from "styled-components";
+
 import { useChangePasswordMutation } from "./__generated__/queries.generated";
 
 type FormValues = {

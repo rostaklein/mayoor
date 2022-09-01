@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { Colors } from "../../themeVariables";
+import React from "react";
+import Head from "next/head";
+
+import { Colors } from "@client/themeVariables";
 
 export const PageTitleH1 = styled.h1`
   font-size: 18px;
@@ -8,9 +11,6 @@ export const PageTitleH1 = styled.h1`
   margin: 0;
   padding: 16px 28px;
 `;
-
-import React from "react";
-import Head from "next/head";
 
 type Props = {
   children: React.ReactNode;

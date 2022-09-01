@@ -1,7 +1,8 @@
 import { mutationField, arg, inputObjectType, nonNull } from "nexus";
 import { hash } from "bcrypt";
 import { UserRole as UserRolePrisma } from "@prisma/client";
-import { UserRole } from "../../types";
+
+import { UserRole } from "@backend/types";
 
 export const CreateUserInput = inputObjectType({
   name: "CreateUserInput",

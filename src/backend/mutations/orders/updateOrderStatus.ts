@@ -1,5 +1,6 @@
 import { idArg, mutationField, arg, nonNull } from "nexus";
-import { OrderStatus } from "../../types";
+
+import { OrderStatus } from "@backend/types";
 
 export const UpdateOrderStatus = mutationField("updateOrderStatus", {
   type: "Order",

@@ -1,6 +1,7 @@
 import { arg, mutationField, idArg, intArg, nonNull } from "nexus";
 import { ApolloError } from "apollo-server-micro";
-import { ProductionLogActionEnum } from "../../types";
+
+import { ProductionLogActionEnum } from "@backend/types";
 
 export const AddProductionLog = mutationField("addProductionLog", {
   type: "OrderItem",

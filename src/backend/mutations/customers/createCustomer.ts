@@ -1,7 +1,8 @@
 import { arg, mutationField, inputObjectType, nonNull } from "nexus";
-import { AddressInput } from "../../types";
 import { UserInputError } from "apollo-server-micro";
 import { Prisma } from "@prisma/client";
+
+import { AddressInput } from "@backend/types";
 
 export const CreateCustomerInput = inputObjectType({
   name: "CreateCustomerInput",

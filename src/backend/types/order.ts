@@ -1,5 +1,6 @@
 import { list, objectType } from "nexus";
 import { Order, OrderItem } from "nexus-prisma";
+
 import { OrderItemType } from ".";
 
 export const OrderType = objectType({

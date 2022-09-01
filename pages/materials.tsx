@@ -1,6 +1,7 @@
 import React from "react";
-import { MaterialEdit } from "../src/client/components/Material/MaterialEdit";
-import { getStaticTranslations } from "../src/client/i18n";
+
+import { MaterialEdit } from "@client/components/Material/MaterialEdit";
+import { getStaticTranslations } from "@client/i18n";
 
 type Props = {};
 

@@ -15,7 +15,9 @@ import { Colors } from "../../themeVariables";
 import { useAppState } from "../../appContext/context";
 
 import { LinkItem } from "./LinkItem";
-import { UserRole } from "../../generated/gql-types";
+
+import { UserRole } from "@client/generated/gql-types";
+
 
 const StyledMenu = styled.ul`
   list-style: none;

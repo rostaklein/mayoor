@@ -9,6 +9,10 @@ import { FormInput } from "../../FormItem/FormInput";
 import { CURRENCY_SUFFIX } from "../../../config";
 import { client } from "../../../ApolloClient";
 import { calculateRow } from "../calculateRow";
+import {
+  GetAllMaterialsDocument,
+  GetAllMaterialsQuery,
+} from "../../Material/__generated__/queries.generated";
 
 import { MaterialPicker } from "./MaterialPicker";
 import {
@@ -18,10 +22,6 @@ import {
   StyledOrderRow,
   HiddenDeleteButton,
 } from "./OrderItemField.styles";
-import {
-  GetAllMaterialsDocument,
-  GetAllMaterialsQuery,
-} from "../../Material/__generated__/queries.generated";
 
 type FieldProps = {
   index: number;

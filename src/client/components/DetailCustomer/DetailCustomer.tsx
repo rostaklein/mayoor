@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { Button, message, Skeleton, Row, Col, Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 import { UserFormValues, CustomerForm } from "../CustomerForm/CustomerForm";
 import { PageTitle } from "../MainWrapper/PageTitle";
@@ -9,7 +10,6 @@ import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { OrderActionsWrapper } from "../SharedStyles/OrderActions";
 import { ListOrders } from "../ListOrders/ListOrders";
 
-import { useRouter } from "next/router";
 import {
   useDeleteCustomerMutation,
   useGetCustomerQuery,

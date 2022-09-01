@@ -1,0 +1,3 @@
+__generated__
+src/backend/schema.graphql
+src/client/generated/gql-types.ts

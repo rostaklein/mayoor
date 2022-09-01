@@ -5,19 +5,20 @@ import { Button, Tooltip } from "antd";
 import { TFunction } from "i18next";
 import { ColumnProps } from "antd/lib/table";
 import styled from "styled-components";
+import Link from "next/link";
 
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { PaginatedTable } from "../PaginatedTable/PaginatedTable";
 import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getUrgentOptions } from "../OrderForm/UrgentSlider";
 import { ItemsInfoRow } from "../ListOrders/ItemsInfoRow";
-import Link from "next/link";
 import {
   GetAllOrdersQueryVariables,
   OrderDataFragment,
   useGetAllOrdersQuery,
 } from "../ListOrders/__generated__/queries.generated";
-import { OrderByArg, OrderStatus } from "../../generated/gql-types";
+
+import { OrderByArg, OrderStatus } from "@client/generated/gql-types";
 
 const PAGE_SIZE = 10;
 

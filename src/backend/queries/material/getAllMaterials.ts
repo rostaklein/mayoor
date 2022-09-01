@@ -1,5 +1,6 @@
 import { queryField, booleanArg, list } from "nexus";
-import { MaterialType } from "../../types";
+
+import { MaterialType } from "@backend/types";
 
 export const GetAllMaterials = queryField("getAllMaterials", {
   type: list(MaterialType),

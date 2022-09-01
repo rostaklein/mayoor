@@ -1,4 +1,5 @@
 import { UserDataFragment } from "../components/Users/__generated__/queries.generated";
+
 import { AppState } from "./context";
 
 export type ActionTypes = "SET_CURRENT_USER";

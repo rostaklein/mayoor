@@ -1,6 +1,7 @@
 import { arg, mutationField, inputObjectType, nonNull } from "nexus";
 import { UserInputError, ApolloError } from "apollo-server-micro";
-import { UpdateAddressInput } from "../../types";
+
+import { UpdateAddressInput } from "@backend/types";
 
 export const UpdateCustomerInput = inputObjectType({
   name: "UpdateCustomerInput",

@@ -1,6 +1,8 @@
 import { queryField, arg, idArg, enumType } from "nexus";
+
 import { paginationArgs, getPaginatedObjectType } from "../../utils/pagination";
-import { OrderStatus } from "../../types";
+
+import { OrderStatus } from "@backend/types";
 
 export const GetAllOrders = queryField("getAllOrders", {
   type: getPaginatedObjectType("Order"),

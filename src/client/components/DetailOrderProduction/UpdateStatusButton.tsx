@@ -3,8 +3,11 @@ import { Button, message } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "next-i18next";
 import { useMutation } from "@apollo/client";
+
 import { useUpdateOrderStatusMutation } from "./__generated__/queries.generated";
-import { OrderStatus, ProductionLogAction } from "../../generated/gql-types";
+
+import { OrderStatus, ProductionLogAction } from "@client/generated/gql-types";
+
 
 interface Props {
   productionLogType: ProductionLogAction;

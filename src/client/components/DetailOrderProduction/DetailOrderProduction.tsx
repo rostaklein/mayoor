@@ -7,16 +7,17 @@ import { SaveOutlined } from "@ant-design/icons";
 import { PageTitle } from "../MainWrapper/PageTitle";
 import { DetailDescription } from "../DetailDescription/DetailDescription";
 import { StyledLabel, StyledFormItem } from "../FormItem/Form.styles";
+import { useGetOrderQuery } from "../DetailOrder/__generated__/queries.generated";
 
 import { OrderWrapper } from "./DetailOrderProduction.styles";
 import { ProductionRow } from "./ProductionRow";
 import { UpdateStatusButton } from "./UpdateStatusButton";
-import { ProductionLogAction } from "../../generated/gql-types";
-import { useGetOrderQuery } from "../DetailOrder/__generated__/queries.generated";
 import {
   useAddProductionLogMutation,
   useUpdateOrderNoteMutation,
 } from "./__generated__/queries.generated";
+
+import { ProductionLogAction } from "@client/generated/gql-types";
 
 type Props = {
   productionLogType: ProductionLogAction;

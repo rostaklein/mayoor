@@ -1,8 +1,9 @@
 import React from "react";
 import { useTranslation } from "next-i18next";
-import { ListOrdersProduction } from "../../src/client/components/ListOrdersProduction/ListOrdersProduction";
-import { getStaticTranslations } from "../../src/client/i18n";
-import { OrderStatus } from "../../src/client/generated/gql-types";
+
+import { ListOrdersProduction } from "@client/components/ListOrdersProduction/ListOrdersProduction";
+import { getStaticTranslations } from "@client/i18n";
+import { OrderStatus } from "@client/generated/gql-types";
 
 type Props = {};
 

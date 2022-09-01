@@ -1,7 +1,8 @@
 import { mutationField, idArg, arg, inputObjectType, nonNull } from "nexus";
 import { hash } from "bcrypt";
 import { ApolloError } from "apollo-server-micro";
-import { UserRole } from "../../types";
+
+import { UserRole } from "@backend/types";
 
 export const UpdateUserInput = inputObjectType({
   name: "UpdateUserInput",
