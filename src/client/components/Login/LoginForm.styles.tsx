@@ -10,6 +10,13 @@ export const LoginWrapper = styled.form`
 
 export const FormItemStyled = styled(Form.Item)`
   margin-bottom: 5px;
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  input[data-autocompleted] {
+    background-color: transparent !important;
+  }
 `;
 
 export const Logo = styled.img`
