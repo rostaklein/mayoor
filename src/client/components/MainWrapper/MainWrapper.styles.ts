@@ -10,11 +10,15 @@ export const BodyWrapper = styled.main`
 
 export const Aside = styled.aside`
   flex: 1 0 0;
+  max-height: 100%;
+  overflow: hidden;
   max-width: 230px;
   background-color: ${Colors.LIGHT_GRAY5};
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Logo = styled.img`

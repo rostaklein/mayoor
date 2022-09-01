@@ -21,7 +21,9 @@ import { UserRole } from "@client/generated/gql-types";
 const StyledMenu = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 16px 0;
+  overflow-y: scroll;
+  flex: 1;
   > li {
     &:not(:first-of-type) {
       margin-top: 10px;
