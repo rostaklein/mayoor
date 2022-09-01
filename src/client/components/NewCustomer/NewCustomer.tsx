@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "next-i18next";
 import { Button, message } from "antd";
-import { useMutation } from "@apollo/client";
 
 import { UserFormValues, CustomerForm } from "../CustomerForm/CustomerForm";
 import { PageTitle } from "../MainWrapper/PageTitle";

@@ -1,6 +1,6 @@
 import path from "path";
 
-import { asNexusMethod, makeSchema } from "nexus";
+import { makeSchema } from "nexus";
 import { GraphQLScalarType } from "graphql";
 import { DateTimeResolver } from "graphql-scalars";
 

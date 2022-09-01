@@ -12,7 +12,6 @@ import { DisplayTime } from "../DisplayTime/DisplayTime";
 import { getOrderStatuses } from "../OrderForm/OrderStatusSelect";
 import { StyledFormItem, StyledLabel } from "../FormItem/Form.styles";
 
-
 import { ItemsInfoRow } from "./ItemsInfoRow";
 import {
   OrderDataFragment,

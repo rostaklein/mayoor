@@ -18,7 +18,6 @@ import { LinkItem } from "./LinkItem";
 
 import { UserRole } from "@client/generated/gql-types";
 
-
 const StyledMenu = styled.ul`
   list-style: none;
   margin: 0;

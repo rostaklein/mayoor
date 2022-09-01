@@ -1,4 +1,4 @@
-import { objectType, inputObjectType, enumType, extendInputType } from "nexus";
+import { objectType, inputObjectType, enumType } from "nexus";
 import {
   Address,
   Customer,

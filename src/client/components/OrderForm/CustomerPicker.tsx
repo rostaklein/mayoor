@@ -3,7 +3,6 @@ import { useTranslation } from "next-i18next";
 import { Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { useQuery } from "@apollo/client";
 import debounce from "lodash/debounce";
 import { useField } from "formik";
 

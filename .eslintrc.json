@@ -5,8 +5,9 @@
     "plugin:import/recommended",
     "plugin:import/typescript"
   ],
-  "plugins": ["import"],
+  "plugins": ["import", "unused-imports"],
   "rules": {
+    "unused-imports/no-unused-imports": "error",
     "import/order": [
       "error",
       {
