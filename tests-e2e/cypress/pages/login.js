@@ -1,6 +1,6 @@
 export default class Login {
   visit() {
-    cy.visit('/');
+    cy.visit("/");
   }
 
   getLoginUserName() {
@@ -18,8 +18,8 @@ export default class Login {
   fullLogin() {
     this.visit();
 
-    this.getLoginUserName().type('admin');
-    this.getLoginPassword().type('admin');
+    this.getLoginUserName().type("admin");
+    this.getLoginPassword().type("admin");
 
     this.getLoginButton().click();
   }

@@ -1,24 +1,24 @@
-const graphqlUrl = Cypress.env('GRAPHQL_URL') || '/graphql';
-Cypress.Commands.add('login', () => {
+const graphqlUrl = Cypress.env("GRAPHQL_URL") || "/graphql";
+Cypress.Commands.add("login", () => {
   return cy
-    .request('POST', graphqlUrl, {
-      operationName: 'LoginMutation',
-      variables: { email: 'admin', password: 'admin' },
+    .request("POST", graphqlUrl, {
+      operationName: "LoginMutation",
+      variables: { email: "admin", password: "admin" },
       query:
-        'mutation LoginMutation($email: String!, $password: String!) {login(email: $email, password: $password) {  user {    name    id    email    role    __typename  }  token  __typename}}',
+        "mutation LoginMutation($email: String!, $password: String!) {login(email: $email, password: $password) {  user {    name    id    email    role    __typename  }  token  __typename}}",
     })
-    .its('body')
+    .its("body")
     .then((response) => {
-      window.localStorage.setItem('auth-token', response.data.login.token);
-      cy.visit('/');
+      window.localStorage.setItem("auth-token", response.data.login.token);
+      cy.visit("/");
       cy.get('[data-test-id="main-body-wrapper"', { timeout: 3000 });
     });
 });
 
-Cypress.Commands.add('callGraphQL', (body) => {
-  const authToken = window.localStorage.getItem('auth-token');
+Cypress.Commands.add("callGraphQL", (body) => {
+  const authToken = window.localStorage.getItem("auth-token");
   return cy.request({
-    method: 'POST',
+    method: "POST",
     url: graphqlUrl,
     body,
     headers: {
@@ -27,75 +27,75 @@ Cypress.Commands.add('callGraphQL', (body) => {
   });
 });
 
-Cypress.Commands.add('addCustomer', (companyName) => {
+Cypress.Commands.add("addCustomer", (companyName) => {
   return cy.callGraphQL({
-    operationName: 'CreateCustomerMutation',
+    operationName: "CreateCustomerMutation",
     variables: {
       input: {
-        name: companyName || 'Company Inc.',
-        identificationNumber: '49842154',
-        taxIdentificationNumber: '14587458',
-        personName: 'Jack Smith',
-        phone: '741 852 963',
-        email: 'email@somewhere.com',
-        note: 'Long customer note',
+        name: companyName || "Company Inc.",
+        identificationNumber: "49842154",
+        taxIdentificationNumber: "14587458",
+        personName: "Jack Smith",
+        phone: "741 852 963",
+        email: "email@somewhere.com",
+        note: "Long customer note",
         allowedBankPayments: false,
         addresses: [
           {
             isPrimary: true,
-            street: 'Somewhere',
-            city: 'Wherever',
-            postNumber: '123',
+            street: "Somewhere",
+            city: "Wherever",
+            postNumber: "123",
           },
           {
             isPrimary: false,
-            street: 'Somewhere',
-            city: 'Wherever',
-            postNumber: '123',
+            street: "Somewhere",
+            city: "Wherever",
+            postNumber: "123",
           },
         ],
       },
     },
     query:
-      'mutation CreateCustomerMutation($input: CreateCustomerInput!) {  createCustomer(input: $input) {    ...CustomerFragment    __typename  }}fragment CustomerFragment on Customer {  id  name  identificationNumber  personName  email  phone  __typename}',
+      "mutation CreateCustomerMutation($input: CreateCustomerInput!) {  createCustomer(input: $input) {    ...CustomerFragment    __typename  }}fragment CustomerFragment on Customer {  id  name  identificationNumber  personName  email  phone  __typename}",
   });
 });
 
-Cypress.Commands.add('addMaterial', (materialName) => {
+Cypress.Commands.add("addMaterial", (materialName) => {
   return cy.callGraphQL({
-    operationName: 'CreateMaterial',
-    variables: { name: materialName || 'Banner 510', price: 199 },
+    operationName: "CreateMaterial",
+    variables: { name: materialName || "Banner 510", price: 199 },
     query:
-      'mutation CreateMaterial($name: String!, $price: Float!) {  createMaterial(name: $name, price: $price) {    id    name    price    updatedAt    __typename  }}',
+      "mutation CreateMaterial($name: String!, $price: Float!) {  createMaterial(name: $name, price: $price) {    id    name    price    updatedAt    __typename  }}",
   });
 });
 
-Cypress.Commands.add('addOrder', () => {
+Cypress.Commands.add("addOrder", () => {
   return cy.addCustomer().then((response) => {
     const customerId = response.body.data.createCustomer.id;
     cy.addMaterial().then((response) => {
       const materialId = response.body.data.createMaterial.id;
       cy.callGraphQL({
-        operationName: 'GetHighestOrderNumber',
+        operationName: "GetHighestOrderNumber",
         variables: {},
-        query: 'query GetHighestOrderNumber {  getHighestOrderNumber}',
+        query: "query GetHighestOrderNumber {  getHighestOrderNumber}",
       }).then((response) => {
         const newOrderNumber = response.body.data.getHighestOrderNumber;
         cy.callGraphQL({
-          operationName: 'CreateOrder',
+          operationName: "CreateOrder",
           variables: {
             number: newOrderNumber + 1,
             input: {
               urgency: 1,
-              status: 'NEW',
+              status: "NEW",
               customerId,
               totalPrice: 200,
               totalTax: 20,
-              note: '',
+              note: "",
               items: [
                 {
                   materialId,
-                  name: 'test',
+                  name: "test",
                   pieces: 1,
                   width: 2,
                   height: 1,
@@ -106,7 +106,7 @@ Cypress.Commands.add('addOrder', () => {
             },
           },
           query:
-            'mutation CreateOrder($number: Int!, $input: OrderInput!) {  createOrder(number: $number, input: $input) {    id    number    __typename  }}',
+            "mutation CreateOrder($number: Int!, $input: OrderInput!) {  createOrder(number: $number, input: $input) {    id    number    __typename  }}",
         });
       });
     });

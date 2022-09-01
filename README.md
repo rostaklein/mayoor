@@ -1,7 +1,9 @@
 # ⚠️ WIP refactor in progress
+
 ---
 
 Whats changing:
+
 - API to be migrated to serverless
 - FE migration to Next.js
 - database to MongoDB
@@ -9,6 +11,7 @@ Whats changing:
 - dependencies updates
 
 ---
+
 [![mayoor](https://i.imgur.com/9vy73QH.jpg)](https://github.com/rostaklein/mayoor)
 
 Modern order management system built with the latest tech stack.
