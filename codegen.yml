@@ -10,7 +10,7 @@ generates:
     presetConfig:
       folder: __generated__
       extension: .generated.ts
-      baseTypesPath: gql-types.ts
+      baseTypesPath: "~@client/generated/gql-types"
     plugins:
       - typescript-operations
       - typescript-react-apollo
