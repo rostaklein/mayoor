@@ -1,17 +1,3 @@
-# ⚠️ WIP refactor in progress
-
----
-
-Whats changing:
-
-- API to be migrated to serverless
-- FE migration to Next.js
-- database to MongoDB
-- deployment to Vercel
-- dependencies updates
-
----
-
 [![mayoor](https://i.imgur.com/9vy73QH.jpg)](https://github.com/rostaklein/mayoor)
 
 Modern order management system built with the latest tech stack.
@@ -23,30 +9,59 @@ Modern order management system built with the latest tech stack.
   - validations
 - frontend localization
 - deployment setup
-- end to end tests
 
 ## Tech stack
 
 - TypeScript
 - React
 - GraphQL
-- Prisma (latest version 2)
+- Prisma (v3)
 - NexusJS
-- Apollo Server, Apollo Client
+- Apollo Micro Server (serverless)
+- Apollo Client
 - Formik
 - styled-components
-- Ant design
-- ESLint
+- Ant Design
+- ESLint, Prettier
 
 ## Live app demo
 
-🌍 Visit [http://mayoor.herokuapp.com/](http://mayoor.herokuapp.com/) - and log in with username: `admin`, password: `admin`
+🌍 Visit [http://mayoor.vercel.app/](http://mayoor.vercel.app/) - and log in with username: `admin`, password: `admin`
 
-## Screenshots
+## Requirements
 
-![mayoor - Add Customer](https://i.imgur.com/BJvWzLG.png)
-![mayoor - Add Order](https://i.imgur.com/0IJwvBX.png)
-![mayoor - List Orders](https://i.imgur.com/MdJc9eE.png)
+- installed [Node.js v16](https://nodejs.org/en/download/) (includes NPM)
+- basic knowledge of [Git](https://git-scm.com/downloads)
+- [MongoDB](https://www.mongodb.com/atlas) url (recommended hosting on MongoDB Atlas - free tier is enough)
+
+## Getting started
+
+Clone this repository:
+
+`git clone https://github.com/rostaklein/mayoor`
+
+1. Install dependencies
+   `npm i`
+   post install hook will make sure it generates all the necessary types - Prisma and Nexus for backend development + Apollo (graphql-codegen) for FE development
+
+2. Edit environment variables
+
+- copy `.env.example` into `.env` and `prisma/.env.example` into `prisma/.env`
+- fill in with requried info (client secret nad prisma DB url - you can host MongoDB on your own, but strongly recommended to use the hosted Atlas version)
+
+3. Run locally via
+   `npm run dev`
+
+4. Done. Profit 🎉
+
+- frontend should be running at http://localhost:3000
+- GraphQL API running at http://localhost:3000/api/graphql
+
+## Deployment
+
+- this app is ready to be deployed immediately to [Vercel](https://vercel.com/)
+- GraphQL server works via serverless functions
+- just link your GitHub repo with Vercel and let them do all the necessary stuff (dont forget to add environment variables via Vercel project settings)
 
 ## Why does it exist?
 
@@ -56,42 +71,11 @@ The main motivation is to provide a codebase for an order management system that
 
 > Also this project is a result of my masters thesis on the University of Economics in 2020 👨‍🎓
 
-## Requirements
+## Screenshots
 
-- [Node.js v12](https://nodejs.org/en/download/) (includes NPM)
-- [Git](https://git-scm.com/downloads)
-- (optional, see below) [Docker Desktop](https://www.docker.com/products/docker-desktop)
-
-You will need to provide a PostgreSQL database URL to have this app running. It is pretty much up to you where do you want to host this database.
-The recommended way is to spin it up **using Docker**. To do so:
-
-1. install [Docker Desktop](https://www.docker.com/products/docker-desktop) (follow all the steps there, restart might be required)
-2. run
-   `make dev-db` (works on MacOS and Linux),
-   or manually by (for Windows):
-   `docker-compose -f docker-compose.dev-db.yml up -d`
-3. the database is now up and running as deamon (the `-d` flag), you can verify this by running
-   `docker ps -a | grep 54320`
-   (check that postgres is running)
-4. check that the database is running by logging into Adminer [http://localhost:8089/?pgsql=db&username=mayoor-user&db=mayoor-db](http://localhost:8089/?pgsql=db&username=mayoor-user&db=mayoor-db) password is `developer1`
-
-Later on, you can turn off the docker deamon by running:
-`docker-compose -f docker-compose.dev-db.yml down` (in the root folder of this project)
-
-> If you dont want to use Docker, you can use a remote hosted database for dev env as well (not recommended, though!). Free plans for postgre e.g. here - [https://www.elephantsql.com/](https://www.elephantsql.com/plans.html) are ok for this kind of app. You will need to provide the connection URL to the ENV variables in [backend setup](./backend/README.md).
-
-## Getting started
-
-To get the up and running in development mode, you need to follow these two:
-
-Clone this repository:
-
-`git clone https://github.com/rostaklein/mayoor`
-
-🏃‍♂️Get both parts running:
-
-- [backend](./backend/README.md)
-- [frontend](./frontend/README.md)
+![mayoor - Add Customer](https://i.imgur.com/BJvWzLG.png)
+![mayoor - Add Order](https://i.imgur.com/0IJwvBX.png)
+![mayoor - List Orders](https://i.imgur.com/MdJc9eE.png)
 
 ## License
 
