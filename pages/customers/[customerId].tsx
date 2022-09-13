@@ -7,7 +7,7 @@ import { getStaticTranslations } from "@client/i18n";
 export default function CustomerDetail() {
   const { query } = useRouter();
 
-  if (query.customerId !== "string") {
+  if (typeof query.customerId !== "string") {
     return null;
   }
 
