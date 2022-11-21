@@ -49,9 +49,9 @@ export const DetailOrder: React.FC<{ orderNumber: number }> = ({
   const [deleteOrder, { loading: deleteLoading }] = useDeleteOrderMutation();
 
   const submitHandler = async (orderValues: OrderFormValues) => {
-    const { number, ...rest } = orderValues as unknown as ValidatedOrder; // gets triggered only when form is valid
+    const { number, __typename, createdAt, updatedAt, createdBy, id, ...rest } =
+      orderValues as unknown as ValidatedOrder; // gets triggered only when form is valid
 
-    const id = data?.getOrderByNumber?.id;
     if (!id) {
       return;
     }
