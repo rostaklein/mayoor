@@ -28,6 +28,6 @@ describe("Customers CRUD", function () {
 
     cy.contains("Customer To Get Deleted").click();
     cy.get('[data-test-id="customer-delete-button"]').click();
-    cy.get(".ant-popover-buttons button:nth-child(2)").click();
+    cy.get(".ant-popconfirm-buttons button:nth-child(2)").click();
   });
 });

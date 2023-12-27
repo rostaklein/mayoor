@@ -16,8 +16,7 @@ describe("Orders CRUD", function () {
     //assign customer
     cy.get('[data-test-id="menu-link-item-/orders/new"]').click();
     cy.get('[data-test-id="customer-picker"]').click();
-    cy.wait(500);
-    cy.contains("Test Order Customer Company 1").click();
+    cy.get('[data-test-id="customer-option-0"]').click();
 
     //configure an item
     cy.get('[data-test-id="items.0.materialId"]').click();
@@ -57,6 +56,6 @@ describe("Orders CRUD", function () {
     cy.get('[data-test-id="order-list-go-to-button-0"]').click();
 
     cy.get('[data-test-id="order-delete-button"]').click();
-    cy.get(".ant-popover-buttons button:nth-child(2)").click();
+    cy.get(".ant-popconfirm-buttons button:nth-child(2)").click();
   });
 });

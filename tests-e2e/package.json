@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "cypress": "^4.3.0"
-  },
   "scripts": {
-    "dev": "npx cypress open -P . --env GRAPHQL_URL=http://localhost:4444/graphql"
+    "dev": "npx cypress open -P . --env GRAPHQL_URL=http://localhost:3000/api/graphql"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.2"
+  }
 }

@@ -17,6 +17,9 @@ export const GetAllCustomers = queryField("getAllCustomers", {
       skip: skip ?? undefined,
       take: first ?? undefined,
       where,
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return {

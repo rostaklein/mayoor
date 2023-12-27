@@ -44,9 +44,16 @@ export const CustomerPicker: React.FC<{
 
   const customers = data?.getAllCustomers?.items ?? [];
 
-  const renderCustomerOption = (customer: CustomerOption) => {
+  const renderCustomerOption = (
+    customer: CustomerOption,
+    idx: number | null
+  ) => {
     return (
-      <Select.Option key={customer.id} value={customer.id}>
+      <Select.Option
+        key={customer.id}
+        value={customer.id}
+        data-test-id={`customer-option-${idx}`}
+      >
         <UserOutlined style={{ marginRight: 5 }}></UserOutlined>
         <span>{customer.name}</span>{" "}
         {customer.identificationNumber && (
@@ -71,7 +78,7 @@ export const CustomerPicker: React.FC<{
         notFoundContent={t("Not found")}
         data-test-id="customer-picker"
       >
-        {extraCustomer && renderCustomerOption(extraCustomer)}
+        {extraCustomer && renderCustomerOption(extraCustomer, null)}
         {customers.map(renderCustomerOption)}
       </Select>
     </StyledFormItem>
