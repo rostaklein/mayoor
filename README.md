@@ -30,7 +30,7 @@ Modern order management system built with the latest tech stack.
 
 ## Requirements
 
-- installed [Node.js v16](https://nodejs.org/en/download/) (includes NPM)
+- installed [Node.js v20](https://nodejs.org/en/download/) (includes NPM)
 - basic knowledge of [Git](https://git-scm.com/downloads)
 - [MongoDB](https://www.mongodb.com/atlas) url (recommended hosting on MongoDB Atlas - free tier is enough)
 

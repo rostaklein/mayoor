@@ -4,7 +4,7 @@ import { useTranslation, appWithTranslation } from "next-i18next";
 import { Alert, message } from "antd";
 import { AppProps } from "next/app";
 
-import "antd/dist/antd.css";
+import "antd/dist/reset.css";
 import "@client/index.css";
 
 import nextI18nConfig from "../next-i18next.config";

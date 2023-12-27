@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Colors } from "../../themeVariables";
 
-const MenuLinkItem = styled.a`
+const MenuLinkItem = styled(Link)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -16,6 +16,7 @@ const MenuLinkItem = styled.a`
   border-right: solid transparent 5px;
   transition: all 0.2s;
   color: ${Colors.DARK_GRAY3};
+  font-size: 14px;
   &.active {
     background: ${Colors.LIGHT_GRAY4};
     border-color: ${Colors.BLUE4};
@@ -38,11 +39,9 @@ interface Props {
 
 export const LinkItem: React.FC<Props> = ({ icon, name, to }) => {
   return (
-    <Link href={to} passHref>
-      <MenuLinkItem href={to} data-test-id={`menu-link-item-${to}`}>
-        {icon}
-        {name}
-      </MenuLinkItem>
-    </Link>
+    <MenuLinkItem href={to} data-test-id={`menu-link-item-${to}`}>
+      {icon}
+      {name}
+    </MenuLinkItem>
   );
 };
