@@ -14,8 +14,6 @@
   "Street": "Ulice",
   "City": "Město",
   "Post Number": "PSČ",
-  "Identification number required for the search": "K vyhledávání je třeba vyplnit IČO",
-  "company_not_found_in_ares": "Firma nenelazena v ARES.",
   "Identification number": "IČO",
   "customer_updated": "Změny zákazníka uloženy.",
   "customer_update_fail": "Nepodařilo se uložit změny zákazníka.",
