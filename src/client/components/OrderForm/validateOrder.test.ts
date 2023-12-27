@@ -1,9 +1,10 @@
 import { validateYupSchema, yupToFormErrors } from "formik";
+import { TFunction } from "next-i18next";
 
 import { getOrderValidationSchema } from "./validateOrder";
 import { OrderFormValues } from "./OrderForm";
 
-const mockedTFunction = (t: string) => t;
+const mockedTFunction = jest.genMockFromModule<TFunction>("next-i18next");
 
 const getFormikErrors = async (formValues: any) => {
   try {
