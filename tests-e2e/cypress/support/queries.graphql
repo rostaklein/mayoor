@@ -1,0 +1,51 @@
+mutation LoginMutation($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    user {
+      name
+      id
+      email
+      role
+      __typename
+    }
+    token
+    __typename
+  }
+}
+
+mutation CreateCustomerMutation($input: CreateCustomerInput!) {
+  createCustomer(input: $input) {
+    ...CustomerFragment
+    __typename
+  }
+}
+fragment CustomerFragment on Customer {
+  id
+  name
+  identificationNumber
+  personName
+  email
+  phone
+  __typename
+}
+
+mutation CreateMaterial($name: String!, $price: Float!) {
+  createMaterial(name: $name, price: $price) {
+    id
+    name
+    price
+    updatedAt
+    __typename
+  }
+}
+
+mutation CreateOrder($number: Int!, $input: OrderInput!) {
+  createOrder(number: $number, input: $input) {
+    id
+    number
+    __typename
+  }
+}
+
+query GetHighestOrderNumber {
+  getHighestOrderNumber
+}

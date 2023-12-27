@@ -1,0 +1,16 @@
+overwrite: true
+schema: "../src/backend/schema.graphql"
+documents: "cypress/**/*.graphql"
+generates:
+  cypress/client/generated/gql-types.ts:
+    plugins:
+      - "typescript"
+  cypress/:
+    preset: near-operation-file
+    presetConfig:
+      folder: __generated__
+      extension: .generated.ts
+      baseTypesPath: "client/generated/gql-types"
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
