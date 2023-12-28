@@ -1,3 +1,4 @@
 __generated__
 src/backend/schema.graphql
 src/client/generated/gql-types.ts
+tests-e2e/cypress/client/generated/gql-types.ts
