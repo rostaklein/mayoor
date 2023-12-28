@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { useTranslation, appWithTranslation } from "next-i18next";
-import { Alert, message } from "antd";
+import { Alert, ConfigProvider, message } from "antd";
 import { AppProps } from "next/app";
 
 import "antd/dist/reset.css";
@@ -19,6 +19,7 @@ import { LoginForm } from "@client/components/Login/LoginForm";
 import { MainWrapper } from "@client/components/MainWrapper/MainWrapper";
 import { CenteredSpinner } from "@client/components/SharedStyles/CenteredSpinner";
 import { useMeQuery } from "@client/components/Login/__generated__/queries.generated";
+import { theme } from "@client/theme/themeConfig";
 
 const App: React.FC<AppProps> = ({ Component }) => {
   const dispatch = useAppDispatch();
@@ -91,7 +92,9 @@ const App: React.FC<AppProps> = ({ Component }) => {
 const AppWithProviders: React.FC<AppProps> = (props) => (
   <ApolloProvider client={client}>
     <AppContextProvider>
-      <App {...props} />
+      <ConfigProvider theme={theme}>
+        <App {...props} />
+      </ConfigProvider>
     </AppContextProvider>
   </ApolloProvider>
 );
